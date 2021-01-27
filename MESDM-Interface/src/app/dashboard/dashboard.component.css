@@ -11,6 +11,7 @@ body {
     position: fixed;
     height: 100%;
     overflow: auto;
+    margin-top: 53px;
   }
   
   .sidebar a {
@@ -32,8 +33,9 @@ body {
   
   div.content {
     margin-left: 200px;
-    padding: 1px 16px;
+    padding: 53px 16px;
     height: 1000px;
+
   }
   
   @media screen and (max-width: 700px) {
@@ -41,6 +43,7 @@ body {
       width: 100%;
       height: auto;
       position: relative;
+      margin-top: 0;
     }
     .sidebar a {float: left;}
     div.content {margin-left: 0;}
@@ -59,8 +62,44 @@ body {
     padding: 5px;
   }
   @media screen and (max-width: 700px){
+    #header{
+      display: none;
+    }
     img{
       display: none
     }
+   
+    h1{
+      font-size: large;
+    }
+    h3{
+      font-size: medium;
+    }
+
+  }
+  .box {
+    width: 30%;
+    height: 20%;  
+    padding: 50px;
+    float: left;
+    border: 1px solid #007bff;
+    margin-left: 5%;
+    margin-top: 2%;
+    
+    
+  }
+  .box:hover {
+    transform: scale(1.02);
+    /* text-align: center; */
+    transition: .5s;
+  }
+
+  #header {
+    padding: 10px ;
+    background: #007bff;
+    color: #f1f1f1;
+    position: fixed;
+    top: 0;
+    width: 100%;
   }
  
