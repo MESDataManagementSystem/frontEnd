@@ -1,0 +1,19 @@
+div.content {
+    margin-left: 200px;
+    padding: 53px 16px;
+    height: 1000px;
+  }
+input[name="searchStudent"] {
+    width: 80%;
+    float: left;
+    
+  }
+#search {
+    /* margin-left: 25%; */
+    margin-top: 1%;
+    position: fixed;
+}
+button{
+    margin-left: 5px;
+}
+
