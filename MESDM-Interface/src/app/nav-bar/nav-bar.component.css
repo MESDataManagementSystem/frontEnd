@@ -11,7 +11,7 @@ body {
     position: fixed;
     height: 100%;
     overflow: auto;
-    margin-top: 53px;
+    margin-top: 45px;
   }
   
   .sidebar a {
@@ -37,7 +37,7 @@ body {
     height: 1000px;
 
   }
-  
+/*   
   @media screen and (max-width: 700px) {
     .sidebar {
       width: 100%;
@@ -48,7 +48,7 @@ body {
     .sidebar a {float: left;}
     div.content {margin-left: 0;}
    
-  }
+  } */
   
   @media screen and (max-width: 400px) {
     .sidebar a {
@@ -68,6 +68,14 @@ body {
     img{
       display: none
     }
+    .notShown{
+      margin-top:0
+    }
+    .sidebar{
+      margin-top:0
+    }
+
+    
   }
   
   #header {
@@ -88,5 +96,26 @@ body {
     width: 100%;
     left: 0;
   }
-   
+  
+  /* close button */
+#close{
+  margin-left:83%;
+  /* color: #007bff; */
+  /* outline: none; */
+  border: none;
+  /* font-size: 50px; */
+  margin-top:0
+}
+#close:hover{
+  color : #007bff;
+  cursor: pointer;
+}
+.notShown{
+    margin-top: 53px;
+    position: fixed;
 
+}
+.notShown:hover{
+  color : #007bff;
+  cursor: pointer;
+}
