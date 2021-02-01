@@ -1,0 +1,49 @@
+.content{
+    margin-left: 16%;
+    padding: 53px 16px;
+}
+
+.box {
+    width: 20%;
+    height: 10%;  
+    background-color: pink;
+    padding: 50px;
+    float: left;
+    border: 1px solid black;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 2%;
+    margin-bottom: 5%;
+  }
+
+  .box:hover {
+    transform: scale(1.02); 
+    transition: .5s;
+  }
+
+  .btn{
+      color: white;
+      background-color: blue;
+      text-align: center;
+    
+     
+      
+  }
+
+  h1{
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
+      margin-top: 2%;
+    
+
+    
+  }
+
+  h2{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    text-align: center;
+
+  }
