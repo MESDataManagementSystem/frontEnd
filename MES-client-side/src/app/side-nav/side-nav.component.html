@@ -1,0 +1,30 @@
+<header></header>
+<mat-sidenav-container>
+    <mat-sidenav mode = "side" [(opened)]='showSideNav'>
+        <mat-icon aria-hidden="false" aria-label="Example home icon" (click)='showSideNav = !showSideNav'>close</mat-icon>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/How_to_use_icon.svg/1200px-How_to_use_icon.svg.png" alt="">
+        <hr>
+        <!-- <h3>Administrator</h3>
+        <hr> -->
+        <mat-list role="list" *ngFor="let content of navContent" >
+            <mat-list-item id='{{content}}' [ngClass]="{active: lateActive == content}"  (click)=" childRoutes(content)"  role="listitem">{{content}}</mat-list-item>
+        </mat-list>
+        <button class='logout' mat-raised-button
+        matTooltip="Log-out administrator account."
+        aria-label="Button that displays a tooltip when focused or hovered over">
+             <!-- <h4>LOG-OUT</h4> -->
+             <mat-icon class='home'>home</mat-icon>
+        </button>
+     
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" [(hidden)]='showSideNav'  (click)='showSideNav = !showSideNav'>
+            <mat-icon class='menuIcon'>menu</mat-icon>
+        </button>
+        <router-outlet></router-outlet> 
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<footer >
+    
+</footer>
