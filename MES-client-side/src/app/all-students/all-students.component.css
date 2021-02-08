@@ -1,12 +1,10 @@
-div{
-    margin-left: 2%;
+mat-form-field {
+  width: 200px;
+  padding-left: 20px;
 }
-.example-full-width {
-    width: 20%;
-  }
-  .mat-sort-header-container {
-    align-items: center;
-  }
-  table {
-    width: 100%;
-  }
+button{
+  float: left;
+}
+.content{
+  padding-left: 20px;
+}
