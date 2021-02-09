@@ -1,9 +1,65 @@
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  .example-full-width {
-    width: 100%;
-  }
+body {    
+    /* background: url('../../assets/images/backgroundWallpaper.jpg') no-repeat center fixed;     
+    background-size: cover; */
+    background-color: black;
+}
+.user_card {
+  height: 330px;
+  width: 350px;
+  margin-top: auto;
+  margin-bottom: auto;
+  position: relative;
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 15px 35px;
+  opacity: 0.5;
+}
+.user_card:hover{
+  opacity: 1.0;
+}
+.brand_logo_container {
+  position: absolute;
+  height: 170px;
+  width: 170px;
+  top: -75px;
+  border-radius: 50%;
+  background-color: black;
+  padding: 10px;
+  text-align: center;
+}
+.brand_logo {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+.form_container {
+  margin-top: 100px;
+}
+.loginBtn {
+  width: 100%;
+  border-radius: 15px;
+  background: #2080FF !important;
+  color: white !important;
+}
+.loginBtn:focus {
+  box-shadow: none !important;
+  outline: 0px !important;
+}
+.login_container {
+  padding: 0 2rem;
+}
+.input-group-text {
+  background: #2080FF !important;
+  color: white !important;
+  border: 0 !important;
+  border-radius: 0.25rem 0 0 0.25rem !important;
+}
+.input_user,
+.input_pass:focus {
+  box-shadow: none !important;
+  outline: 0px !important;
+}
