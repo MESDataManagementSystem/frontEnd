@@ -8,3 +8,59 @@ button{
 .content{
   padding-left: 20px;
 }
+
+
+mat-table{
+  width: 900px;
+  height: 500px;
+  overflow-y: auto;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
+
+
+
+.mat-table {
+  overflow-y: scroll;
+}
+
+.mat-cell,
+.mat-header-cell {
+  word-wrap: initial;
+  display: table-cell;
+  padding: 0px 10px;
+  line-break: unset;
+  width: 47%;
+  white-space: nowrap;
+  /* overflow: hidden; */
+  vertical-align: middle;
+}
+/* .mat-cell:hover{
+  background-color: gray;
+} */
+.mat-row:hover {
+  background-color: #dcdedc;
+  color: black;
+}
+.mat-header-cell{
+  color: green;
+  text-align: justify;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0; /* required */
+  background-color: white;
+  font-size: medium;
+}
+/* .searchIcon{
+  margin-left: 20%;
+} */
+
+/* mat-header-cell{
+  position: fixed;
+} */
+
+/* .mat-row,
+.mat-header-row {
+  display: table-row;
+} */

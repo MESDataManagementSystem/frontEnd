@@ -25,6 +25,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 
+import { StudentServiceService } from './services/student-service.service';
+
 
 @NgModule({
   declarations: [
@@ -49,9 +51,10 @@ import { SideNavComponent } from './side-nav/side-nav.component';
     MatFormFieldModule,
     MatTooltipModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule
   ],
-  providers: [],
+  providers: [StudentServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
