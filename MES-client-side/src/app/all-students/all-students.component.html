@@ -1,0 +1,13 @@
+<div class="content">
+    <h2>Student's Information</h2>
+    <mat-form-field >
+        <mat-label>LRN</mat-label>
+        <input matInput type="text" [(ngModel)]="value">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+        </button>
+        <!-- <button mat-button>
+        <mat-icon matSuffix mat-icon-button aria-label="Clear">search</mat-icon>
+        </button> -->
+    </mat-form-field>
+</div>
