@@ -10,35 +10,20 @@ button{
 }
 
 
-mat-table{
-  width: 900px;
-  height: 500px;
-  overflow-y: auto;
-  margin-right: auto;
-  margin-left: auto;
-  display: block;
-}
-
-
-
 .mat-table {
-  overflow-y: scroll;
+  margin-top: 3%;
 }
 
 .mat-cell,
 .mat-header-cell {
   word-wrap: initial;
   display: table-cell;
-  padding: 0px 10px;
   line-break: unset;
   width: 47%;
   white-space: nowrap;
-  /* overflow: hidden; */
   vertical-align: middle;
 }
-/* .mat-cell:hover{
-  background-color: gray;
-} */
+
 .mat-row:hover {
   background-color: #dcdedc;
   color: black;
@@ -48,9 +33,15 @@ mat-table{
   text-align: justify;
   position: sticky;
   position: -webkit-sticky;
-  top: 0; /* required */
+  top: 0;
   background-color: white;
   font-size: medium;
+}
+.mat-elevation-z8{
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
 }
 /* .searchIcon{
   margin-left: 20%;
