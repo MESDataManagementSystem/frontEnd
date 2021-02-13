@@ -9,7 +9,6 @@
             </button>
         </mat-form-field>
         <mat-icon matSuffix mat-icon-button aria-label="Search">search</mat-icon>
-        <input class="ng-hide" id="input-file-id" multiple type="file" />
     </div>
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
@@ -31,7 +30,7 @@
         <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
     </div>
     <div>
-        <button mat-icon-button class="addIcon" matTooltip="Add Student Form 10"  >
+        <button mat-icon-button class="addIcon" matTooltip="Add Student Form 10" (click) = "openDialog()" >
             <mat-icon class='menuIcon'>add_circle</mat-icon>
         </button>
     </div>

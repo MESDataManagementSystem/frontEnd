@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Add student form</h1>
+<div>
+    <div>
+        <label for='firstName'>First name: </label>
+        <input type="text" name = 'firstName' matInput value = '{{firstName}}'>
+    </div>
+    <div>
+        <label for='middleName'>Middle name: </label>
+        <input type="text" name = 'middleName' matInput value = '{{middleName}}'>
+    </div>
+    <div>
+        <label for='lastName'>Last name: </label>
+        <input type="text" name = 'lastName' matInput value = '{{lastName}}'> 
+    </div>
+    <div>
+        <label for='lrn'>LRN: </label>
+        <input type="text" name = 'lrn' matInput value = '{{lrn}}'>
+    </div>
+    <input class="ng-hide" id="input-file-id" multiple type="file" />
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)= 'close()'>Close</button>
+</div>
