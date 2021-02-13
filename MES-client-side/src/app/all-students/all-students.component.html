@@ -1,39 +1,19 @@
 <div class="content">
     <h2>Student's Information</h2>
-    <mat-form-field >
-        <mat-label>LRN</mat-label>
-        <input matInput type="text" [(ngModel)]="value" autocomplete="off">
-        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-        <mat-icon>close</mat-icon>
-        </button>
-    </mat-form-field>
-    <mat-icon matSuffix mat-icon-button aria-label="Search">search</mat-icon>
-    <input class="ng-hide" id="input-file-id" multiple type="file" />
-    <!-- <div class="mat-elevation-z8">
-        <mat-table #table [dataSource]="dataSource">
-                <ng-container matColumnDef="lrn" >
-                    <th mat-header-cell *matHeaderCellDef   mat-sort-header> Name </th>
-                    <td mat-cell *matCellDef="let student"> {{student.name}} </td>
-                </ng-container>
-                <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef  mat-sort-header> LRN </th>
-                    <td mat-cell *matCellDef="let student"> {{student.lrn}} </td>
-                </ng-container>
-                <ng-container matColumnDef="view"> 
-                    <th mat-header-cell *matHeaderCellDef  mat-sort-header>  View </th>
-                    <td mat-cell *matCellDef="let student"> <mat-icon>visibility</mat-icon> </td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-                <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
-        </mat-table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-    </div> -->
-
+    <div>
+        <mat-form-field >
+            <mat-label>LRN</mat-label>
+            <input matInput type="text" [(ngModel)]="value" autocomplete="off">
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-icon matSuffix mat-icon-button aria-label="Search">search</mat-icon>
+        <input class="ng-hide" id="input-file-id" multiple type="file" />
+    </div>
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
-      
-          <!-- Position Column -->
-            <ng-container matColumnDef="lrn" >
+            <ng-container matColumnDef="lrn">
                 <th mat-header-cell *matHeaderCellDef   mat-sort-header> Name </th>
                 <td mat-cell *matCellDef="let student"> {{student.name}} </td>
             </ng-container>
@@ -48,6 +28,11 @@
             <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
             <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
         </table>
-        <mat-paginator [pageSizeOptions]="[5,10]" showFirstLastButtons></mat-paginator>
-      </div>
+        <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
+    </div>
+    <div>
+        <button mat-icon-button class="addIcon" matTooltip="Add Student Form 10"  >
+            <mat-icon class='menuIcon'>add_circle</mat-icon>
+        </button>
+    </div>
 </div>
