@@ -19,6 +19,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
 
 import { AllStudentsComponent } from './all-students/all-students.component';
 import { AllTeachersComponent } from './all-teachers/all-teachers.component';
@@ -26,8 +27,10 @@ import { ClassesComponent } from './classes/classes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
+import { AddFormDialogComponent } from './Modals/modal-add-form.component';
 
 import { StudentServiceService } from './services/student-service.service';
+// import { ModalAddFormComponent } from './Modals/modal-add-form/modal-add-form.component';
 
 
 @NgModule({
@@ -39,6 +42,8 @@ import { StudentServiceService } from './services/student-service.service';
     DashboardComponent,
     LoginComponent,
     SideNavComponent,
+    // ModalAddFormComponent,
+    AddFormDialogComponent
   ],
   imports: [
     FormsModule,
@@ -56,7 +61,8 @@ import { StudentServiceService } from './services/student-service.service';
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [StudentServiceService],
   bootstrap: [AppComponent]

@@ -1,14 +1,16 @@
 <div class="content">
     <h2>Student's Information</h2>
     <div>
-        <mat-form-field >
-            <mat-label>LRN</mat-label>
-            <input matInput type="text" [(ngModel)]="value" autocomplete="off">
-            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-            <mat-icon>close</mat-icon>
-            </button>
-        </mat-form-field>
-        <mat-icon matSuffix mat-icon-button aria-label="Search">search</mat-icon>
+        <mat-form-field>
+            <mat-label>Search by {{typeSearch}}</mat-label>
+            <mat-select>
+              <mat-option (click)="typeSearch = 'LRN'" >LRN</mat-option>
+              <mat-option (click)="typeSearch = 'Family name'"  >Family name</mat-option>
+            </mat-select>
+            <mat-hint align="end">Search using LRN or family name.</mat-hint>
+          </mat-form-field>
+
+        <!-- <mat-icon matSuffix mat-icon-button aria-label="Search">search</mat-icon> -->
     </div>
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">

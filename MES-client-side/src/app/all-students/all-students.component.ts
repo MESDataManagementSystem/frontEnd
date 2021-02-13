@@ -4,7 +4,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { AddFormDialog } from './AddFormDialog';
+import { AddFormDialogComponent } from '../Modals/modal-add-form.component';
 
 
 
@@ -15,11 +15,11 @@ import { AddFormDialog } from './AddFormDialog';
   styleUrls: ['./all-students.component.css']
 })
 export class AllStudentsComponent implements AfterViewInit {
-  displayedColumns: string[] = ['name', 'lrn', 'view'];
+  // displayedColumns: string[] = ['name', 'lrn', 'view'];
   dataSource = new MatTableDataSource<Information>(studentData);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-
+  typeSearch: string;
   value: string;
   students: any;
   selectedFiles: File;
@@ -28,6 +28,7 @@ export class AllStudentsComponent implements AfterViewInit {
 
   constructor( private service: StudentServiceService, private dialog: MatDialog) {
        this.value = '';
+       this.typeSearch = 'LRN';
   }
 
   ngAfterViewInit(): void {
@@ -36,7 +37,8 @@ export class AllStudentsComponent implements AfterViewInit {
     console.log(this.students);
   }
   openDialog(): void {
-    this.dialog.open(AddFormDialog);
+    this.dialog.open(AddFormDialogComponent,  { disableClose: true });
+    console.log(this.typeSearch);
   }
   // tslint:disable-next-line:member-ordering
 
