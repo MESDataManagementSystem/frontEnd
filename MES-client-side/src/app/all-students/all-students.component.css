@@ -8,3 +8,58 @@ button{
 .content{
   padding-left: 20px;
 }
+
+
+.mat-table {
+  margin-top: 3%;
+}
+
+.mat-cell,
+.mat-header-cell {
+  word-wrap: initial;
+  display: table-cell;
+  line-break: unset;
+  width: 47%;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.mat-row:hover {
+  background-color: #dcdedc;
+  color: black;
+}
+.mat-header-cell{
+  color: green;
+  text-align: justify;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  background-color: white;
+  font-size: medium;
+}
+.mat-elevation-z8{
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
+.addIcon{
+  margin-left: 85%;
+  /* height: 100px;
+  width: */
+  transform: scale(2);
+  margin-top: 3%;
+  color: green
+}
+/* .searchIcon{
+  margin-left: 20%;
+} */
+
+/* mat-header-cell{
+  position: fixed;
+} */
+
+/* .mat-row,
+.mat-header-row {
+  display: table-row;
+} */

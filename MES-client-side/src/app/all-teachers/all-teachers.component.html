@@ -1,0 +1,48 @@
+<div class="content">
+    <h2>Teacher's Information</h2>
+    <div>
+        <mat-form-field>
+            <mat-label>Search Teacher's Information</mat-label>
+            <input type="text" matInput [(ngModel)]="searchFilter" autocomplete="off">
+            <mat-icon *ngIf="searchFilter" mat-button matSuffix mat-icon-button aria-label="Clear"
+                (click)="searchFilter=''">close</mat-icon>
+            <mat-icon mat-button matSuffix mat-icon-button aria-label="Search">search</mat-icon>
+        </mat-form-field>
+    </div>
+    <div>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="employeeNumber">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Employee Number </th>
+                    <td mat-cell *matCellDef="let teacher"> {{ teacher.employeeNumber }} </td>
+                </ng-container>
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+                    <td mat-cell *matCellDef="let teacher"> {{ teacher.lastName }} </td>
+                </ng-container>
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+                    <td mat-cell *matCellDef="let teacher"> {{ teacher.firstName }} </td>
+                </ng-container>
+                <ng-container matColumnDef="middleName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Middle Name </th>
+                    <td mat-cell *matCellDef="let teacher"> {{ teacher.middleName }} </td>
+                </ng-container>
+                <ng-container matColumnDef="view">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> View </th>
+                    <td mat-cell *matCellDef="let teacher">
+                        <mat-icon>visibility</mat-icon>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+    <div>
+        <button mat-icon-button class="addIcon" matTooltip="Add Teacher">
+            <mat-icon class='menuIcon'>add_circle</mat-icon>
+        </button>
+    </div>
+</div>

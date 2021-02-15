@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-// import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-side-nav',
@@ -21,8 +20,6 @@ export class SideNavComponent implements OnInit {
   childRoutes(content): void{
     const routes = content.toLowerCase();
     this.router.navigate([routes], {relativeTo: this.route});
-
-    // }
     this.lateActive = content;
   }
 

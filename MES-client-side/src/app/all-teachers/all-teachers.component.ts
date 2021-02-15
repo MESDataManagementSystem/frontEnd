@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { OnInit, Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Teacher } from './teacher.model';
+import { TeacherServiceService } from '../services/teacher-service.service';
 
 @Component({
   selector: 'app-all-teachers',
@@ -7,9 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllTeachersComponent implements OnInit {
 
-  constructor() { }
+  searchFilter: string;
+  teacherData: any = [];
+  dataSource: MatTableDataSource<Teacher>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  displayedColumns: string[] = ['employeeNumber', 'lastName', 'firstName', 'middleName', 'view'];
 
-  ngOnInit(): void {
+  constructor(private teacherService: TeacherServiceService) {
+    this.searchFilter = '';
+    this.teacherService.getAllTheTeachersList().subscribe(data => {
+      this.teacherData = data;
+      this.dataSource = new MatTableDataSource<Teacher>(this.teacherData.data);
+      setTimeout(() => {
+        this.dataSource.paginator = this.paginator;
+      }, 0);
+    })
   }
+
+  ngOnInit() { }
 
 }
