@@ -1,0 +1,27 @@
+.container {
+    margin: 3%;
+    /* margin-left: 100%; */
+}
+.card {
+    margin: 3%;
+}
+mat-grid-list {
+    text-align: left;
+}
+img {
+    height: auto;
+    width: 150px;
+    margin-right: 60%;
+}
+.button1 {
+    float: right;
+    margin-top:-5%;
+    margin-right: 7%;
+    background-color: orange;
+}
+.grid1 {
+    margin-left: -10%;
+}
+.grid {
+    margin-left: -30%;
+}

@@ -1,1 +1,34 @@
-<p>settings works!</p>
+<mat-card class = "container">
+   <h1>Manage Your Account</h1>
+   <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile>
+         <mat-list>
+            <mat-list-item> <h2>Username: {{username}} </h2> </mat-list-item>
+            <mat-list-item> <h2 >Password: {{password}}</h2> </mat-list-item>
+            <mat-list-item> <h2>Email: {{email}}</h2> </mat-list-item>
+           </mat-list>
+      </mat-grid-tile>
+      <mat-grid-tile>
+         <img  src="https://lh3.googleusercontent.com/-xGs5HBal37Q/YBz83h7Re4I/AAAAAAAAJvk/PepwKgfbmzgJSjrfi10yXiVJLkVo95fwACK8BGAsYHg/s0/2021-02-05.jpg " alt="">
+      </mat-grid-tile>
+    </mat-grid-list>
+    <button class ="button1" mat-button color="primary">Edit Account</button> 
+</mat-card>
+<mat-card class = "container">
+   <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile class = "grid1">
+         <mat-card>
+            <h2>Add Account</h2>
+            <mat-form-field appearance="fill">
+               <mat-label>Username</mat-label>
+               <input matInput>
+            </mat-form-field>
+         </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile class = "grid">
+         <mat-card>
+            <h2>List of Account</h2>
+         </mat-card>
+      </mat-grid-tile>
+   </mat-grid-list>
+</mat-card>

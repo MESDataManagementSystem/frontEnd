@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  username: string;
+  email: string
+  password: string;
+
+  constructor() { 
+    this.username = "Admin1"
+    this.password = "***********"
+    this.email = "admin@gmail.com"
+  }
 
   ngOnInit(): void {
   }
-
 }
+
