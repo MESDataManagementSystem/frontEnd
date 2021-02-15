@@ -28,6 +28,7 @@ import { LoginComponent } from './login/login.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 
 import { StudentServiceService } from './services/student-service.service';
+import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { StudentServiceService } from './services/student-service.service';
     DashboardComponent,
     LoginComponent,
     SideNavComponent,
+    SettingsComponent,
   ],
   imports: [
     FormsModule,
