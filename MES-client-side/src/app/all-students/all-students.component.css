@@ -1,6 +1,7 @@
 mat-form-field {
   width: 200px;
   padding-left: 20px;
+  float: left;
 }
 button{
   float: left;
@@ -11,7 +12,7 @@ button{
 
 
 .mat-table {
-  margin-top: 3%;
+  margin-top: 12%;
 }
 
 .mat-cell,
@@ -51,6 +52,14 @@ button{
   margin-top: 3%;
   color: green
 }
+.menuIcon{
+  margin-left:0;
+  float: left;
+}
+/* ::ng-deep .mat-input-underline { display: none; }  */
+/* mat-select  {
+  display: none;
+} */
 /* .searchIcon{
   margin-left: 20%;
 } */
