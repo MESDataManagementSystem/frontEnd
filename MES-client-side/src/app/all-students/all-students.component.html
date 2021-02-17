@@ -3,7 +3,8 @@
     <div>
         <mat-form-field class="example-full-width">
             <mat-label>Search by {{typeSearch}}</mat-label>
-            <input matInput />
+            <input matInput *ngIf='lrn == true' (click)='lrn = true' [(ngModel)]="searchLrn" autocomplete="off" (keyup)="searchByLrn(searchLrn)"  >
+            <input matInput *ngIf='lrn == false' (click)='lrn = false' [(ngModel)]="searchFamilyName" autocomplete="off" (keyup)="searchbyFamilyName(searchFamilyName)"  >
             <mat-hint align="end">Search using LRN or family name.</mat-hint>
         </mat-form-field>
         <button mat-button [matMenuTriggerFor]="menu" class= 'menuIcon'><mat-icon>keyboard_arrow_down</mat-icon></button>
@@ -11,6 +12,7 @@
             <button mat-menu-item (click) = ' typeSearch = "LRN"'>LRN</button>
             <button mat-menu-item (click) = ' typeSearch = "Family name"'>Family name</button>
         </mat-menu>
+        <!-- <button (click) = ' searchByLrn(searchLrn)'>search</button> -->
     </div>
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
@@ -37,3 +39,13 @@
         </button>
     </div>
 </div>
+<script>
+    /* In this example, we use a cross-browser solution, because the keyCode property does not work on the onkeypress event in Firefox. However, the which property does.
+    
+    Explanation of the first line in the function below: if the browser supports event.which, then use event.which, otherwise use event.keyCode */
+    
+    function myFunction(event) {
+      var x = event.which || event.keyCode;
+      document.getElementById("demo").innerHTML = "The Unicode value is: " + x;
+    }
+</script>

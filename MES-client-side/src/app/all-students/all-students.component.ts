@@ -1,9 +1,9 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import { StudentServiceService} from '../services/student-service.service';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatDialog} from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { StudentServiceService } from '../services/student-service.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { AddFormDialogComponent } from '../Modals/modal-add-form.component';
 
 
@@ -16,7 +16,7 @@ import { AddFormDialogComponent } from '../Modals/modal-add-form.component';
 })
 export class AllStudentsComponent implements AfterViewInit {
   // displayedColumns: string[] = ['name', 'lrn', 'view'];
-  dataSource = new MatTableDataSource<Information>(studentData);
+  dataSource: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   typeSearch: string;
@@ -24,36 +24,57 @@ export class AllStudentsComponent implements AfterViewInit {
   students: any;
   selectedFiles: File;
   columnsToDisplay: string[] = ['name', 'lrn', 'view'];
+  searchLrn = '';
+  searchFamilyName = '';
+  lrn = true;
 
 
-  constructor( private service: StudentServiceService, private dialog: MatDialog) {
-       this.value = '';
-       this.typeSearch = 'LRN';
+  constructor(private service: StudentServiceService, private dialog: MatDialog) {
+    this.value = '';
+    this.typeSearch = 'LRN';
+    this.dataSource = new MatTableDataSource<any>(this.students);
   }
 
+
   ngAfterViewInit(): void {
+    this.service.retrieveData().subscribe(student => { this.students = student; });
+    this.dataSource = new MatTableDataSource<any>(this.students);
+
     this.dataSource.paginator = this.paginator;
-    this.service.retrieveData().subscribe( student => { this.students = student; });
     console.log(this.students);
   }
   openDialog(): void {
-    this.dialog.open(AddFormDialogComponent,  { disableClose: true });
+    this.dialog.open(AddFormDialogComponent, { disableClose: true });
     console.log(this.typeSearch);
   }
-  // tslint:disable-next-line:member-ordering
 
   selectFile(event): void {
     this.selectedFiles = event.target.files;
-}
+  }
   csvInputChange(fileInputEvent: any): void {
     console.log(fileInputEvent.target.files[0]);
   }
+  myFunction(event): void {
+    alert(event);
+  }
+
+  searchByLrn(searchLrn): void {
+    console.log('searchLrn');
+    this.service.searchbyLRN(this.searchLrn).subscribe( info => {this.dataSource = new MatTableDataSource<any>(info); });
+    console.log(this.students);
+  }
+  searchbyFamilyName(searchFamilyName): void{
+    console.log('searchFamilyName');
+    this.service.searchbyFamilyName(this.searchFamilyName).subscribe( info => {this.dataSource = new MatTableDataSource<any>(info); });
+    console.log(this.students);
+  }
 }
 
-export interface Information {
-  name: string;
-  lrn: string;
-}
-const studentData: Information[] = [ {name: 'Irish Rufo', lrn: '18106242'}, {name: 'Ma. Theresa Amaquin', lrn: '123456'}, {name: 'Yubert Mariscal', lrn: '456788'}, {name: 'Annabelle Belcina', lrn: '45678'}, {name: 'Irish Rufo', lrn: '18106242'}, {name: 'Ma. Theresa Amaquin', lrn: '123456'}, {name: 'Yubert Mariscal', lrn: '456788'}, {name: 'Annabelle Belcina', lrn: '45678'}, {name: 'Irish Rufo', lrn: '18106242'}, {name: 'Ma. Theresa Amaquin', lrn: '123456'}, {name: 'Yubert Mariscal', lrn: '456788'}, {name: 'Annabelle Belcina', lrn: '45678'}, {name: 'Irish Rufo', lrn: '18106242'}, {name: 'Ma. Theresa Amaquin', lrn: '123456'}, {name: 'Yubert Mariscal', lrn: '456788'}, {name: 'Annabelle Belcina', lrn: '45678'}];
+
+// export interface Information {
+//   name: string;
+//   lrn: string;
+// }
+// const studentData: Information[] = [{ name: 'Yubert Mariscal', lrn: '456788' }, { name: 'Annabelle Belcina', lrn: '45678' }];
 
 

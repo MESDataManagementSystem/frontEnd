@@ -24,7 +24,10 @@ export class AddFormDialogComponent implements OnInit {
   }
   close(): void {
     this.dialogRef.close();
-    console.log(this.firstName);
+    console.log(this.firstName, this.middleName, this.lastName, this.lrn);
+  }
+  addStudent(): void {
+    console.log('submitted');
   }
 
 }
