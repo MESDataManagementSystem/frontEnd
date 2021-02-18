@@ -1,6 +1,8 @@
 import { OnInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from './dialog.component';
 import { Teacher } from './teacher.model';
 import { TeacherServiceService } from '../services/teacher-service.service';
 
@@ -17,7 +19,7 @@ export class AllTeachersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['employeeNumber', 'lastName', 'firstName', 'middleName', 'view'];
 
-  constructor(private teacherService: TeacherServiceService) {
+  constructor(private teacherService: TeacherServiceService, private dialog: MatDialog) {
     this.searchFilter = '';
     this.teacherService.getAllTheTeachersList().subscribe(data => {
       this.teacherData = data;
@@ -29,5 +31,9 @@ export class AllTeachersComponent implements OnInit {
   }
 
   ngOnInit() { }
+
+  openDialog(): void {
+    this.dialog.open(DialogComponent, { disableClose: true });
+  }
 
 }

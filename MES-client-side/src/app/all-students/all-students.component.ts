@@ -2,7 +2,9 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import { StudentServiceService} from '../services/student-service.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatDialog} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { AddFormDialogComponent } from '../Modals/modal-add-form.component';
 
 
 
@@ -13,25 +15,29 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   styleUrls: ['./all-students.component.css']
 })
 export class AllStudentsComponent implements AfterViewInit {
-  displayedColumns: string[] = ['name', 'lrn', 'view'];
   dataSource = new MatTableDataSource<Information>(studentData);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-
+  typeSearch: string;
   value: string;
   students: any;
   selectedFiles: File;
   columnsToDisplay: string[] = ['name', 'lrn', 'view'];
 
 
-  constructor( private service: StudentServiceService) {
+  constructor( private service: StudentServiceService, private dialog: MatDialog) {
        this.value = '';
+       this.typeSearch = 'LRN';
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.service.retrieveData().subscribe( student => { this.students = student; });
     console.log(this.students);
+  }
+  openDialog(): void {
+    this.dialog.open(AddFormDialogComponent,  { disableClose: true });
+    console.log(this.typeSearch);
   }
   // tslint:disable-next-line:member-ordering
 
@@ -48,5 +54,4 @@ export interface Information {
   lrn: string;
 }
 const studentData: Information[] = [ {name: 'Irish Rufo', lrn: '18106242'}, {name: 'Ma. Theresa Amaquin', lrn: '123456'}, {name: 'Yubert Mariscal', lrn: '456788'}, {name: 'Annabelle Belcina', lrn: '45678'}, {name: 'Irish Rufo', lrn: '18106242'}, {name: 'Ma. Theresa Amaquin', lrn: '123456'}, {name: 'Yubert Mariscal', lrn: '456788'}, {name: 'Annabelle Belcina', lrn: '45678'}, {name: 'Irish Rufo', lrn: '18106242'}, {name: 'Ma. Theresa Amaquin', lrn: '123456'}, {name: 'Yubert Mariscal', lrn: '456788'}, {name: 'Annabelle Belcina', lrn: '45678'}, {name: 'Irish Rufo', lrn: '18106242'}, {name: 'Ma. Theresa Amaquin', lrn: '123456'}, {name: 'Yubert Mariscal', lrn: '456788'}, {name: 'Annabelle Belcina', lrn: '45678'}];
-
 

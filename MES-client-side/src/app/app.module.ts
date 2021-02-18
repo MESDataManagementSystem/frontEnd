@@ -19,6 +19,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { AllStudentsComponent } from './all-students/all-students.component';
 import { AllTeachersComponent } from './all-teachers/all-teachers.component';
@@ -26,7 +29,8 @@ import { ClassesComponent } from './classes/classes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
-
+import { AddFormDialogComponent } from './Modals/modal-add-form.component';
+import { DialogComponent } from './all-teachers/dialog.component';
 import { StudentServiceService } from './services/student-service.service';
 import { TeacherServiceService } from './services/teacher-service.service';
 
@@ -40,6 +44,8 @@ import { TeacherServiceService } from './services/teacher-service.service';
     DashboardComponent,
     LoginComponent,
     SideNavComponent,
+    AddFormDialogComponent,
+    DialogComponent
   ],
   imports: [
     HttpClientModule,
@@ -60,7 +66,10 @@ import { TeacherServiceService } from './services/teacher-service.service';
     MatTableModule,
     MatPaginatorModule,
     MatAutocompleteModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     HttpClient,
