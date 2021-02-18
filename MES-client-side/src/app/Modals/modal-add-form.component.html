@@ -1,0 +1,18 @@
+<mat-icon matSuffix mat-icon-button aria-label="close" mat-dialog-close matTooltip="Exit form.">clear</mat-icon>
+<h1 mat-dialog-title>Add old form of student</h1>
+<div class = "form">
+  <mat-form-field appearance="fill" >
+    <mat-label>LRN: </mat-label>
+    <input matInput [(ngModel)]="lrn" autocomplete="off">
+  </mat-form-field> <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Full Name: LastName, FirstName Middle Initial  Extn. </mat-label>
+    <input matInput [(ngModel)]="fullName" autocomplete="off">
+  </mat-form-field> <br>
+  <input #fileInput type="file"  />
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)= 'addStudent()'>Add Student</button>
+  <button mat-button mat-dialog-close class = 'cancel' (click)= 'close()'>Cancel</button>
+</div>
+

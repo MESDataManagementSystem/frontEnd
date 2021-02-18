@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AllStudentsComponent } from './all-students.component';
+import { AddFormDialogComponent } from './modal-add-form.component';
 
-describe('AllStudentsComponent', () => {
-  let component: AllStudentsComponent;
-  let fixture: ComponentFixture<AllStudentsComponent>;
+describe('AddFormDialogComponent', () => {
+  let component: AddFormDialogComponent;
+  let fixture: ComponentFixture<AddFormDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AllStudentsComponent ]
+      declarations: [ AddFormDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AllStudentsComponent);
+    fixture = TestBed.createComponent(AddFormDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -23,5 +23,3 @@ describe('AllStudentsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-
-

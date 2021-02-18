@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +16,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTableModule} from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
+import {MatMenuModule} from '@angular/material/menu';
+// import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AllStudentsComponent } from './all-students/all-students.component';
 import { AllTeachersComponent } from './all-teachers/all-teachers.component';
@@ -21,6 +29,10 @@ import { ClassesComponent } from './classes/classes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
+import { AddFormDialogComponent } from './Modals/modal-add-form.component';
+
+import { StudentServiceService } from './services/student-service.service';
+// import { ModalAddFormComponent } from './Modals/modal-add-form/modal-add-form.component';
 
 
 @NgModule({
@@ -32,8 +44,12 @@ import { SideNavComponent } from './side-nav/side-nav.component';
     DashboardComponent,
     LoginComponent,
     SideNavComponent,
+    // ModalAddFormComponent,
+    AddFormDialogComponent
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -44,10 +60,15 @@ import { SideNavComponent } from './side-nav/side-nav.component';
     MatInputModule,
     MatFormFieldModule,
     MatTooltipModule,
-    MatCardModule
-
+    MatCardModule,
+    MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatMenuModule
   ],
-  providers: [],
+  providers: [StudentServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
