@@ -1,4 +1,4 @@
-<mat-card class = "container">
+<!-- <mat-card class = "container">
    <h1>Manage Your Account</h1>
    <mat-grid-list cols="2" rowHeight="2:1">
       <mat-grid-tile>
@@ -6,13 +6,12 @@
             <mat-list-item> <h2>Username: {{username}} </h2> </mat-list-item>
             <mat-list-item> <h2 >Password: {{password}}</h2> </mat-list-item>
             <mat-list-item> <h2>Email: {{email}}</h2> </mat-list-item>
-           </mat-list>
-      </mat-grid-tile>
-      <mat-grid-tile>
+         </mat-list>
          <img  src="https://lh3.googleusercontent.com/-xGs5HBal37Q/YBz83h7Re4I/AAAAAAAAJvk/PepwKgfbmzgJSjrfi10yXiVJLkVo95fwACK8BGAsYHg/s0/2021-02-05.jpg " alt="">
+         <button class ="button1" mat-button color="primary">Edit Account</button> 
       </mat-grid-tile>
     </mat-grid-list>
-    <button class ="button1" mat-button color="primary">Edit Account</button> 
+    
 </mat-card>
 <mat-card class = "container">
    <mat-grid-list cols="2" rowHeight="2:1">
@@ -31,4 +30,42 @@
          </mat-card>
       </mat-grid-tile>
    </mat-grid-list>
-</mat-card>
+</mat-card> -->
+<div class = "div1">
+   <mat-card class= "card1">
+      <div class = "div2">
+         <h1>Manage Your Account</h1>
+         <label for='userName'>Username: </label>
+         <input type="text" name = 'userName' matInput value = '{{username}}'>
+         <br>
+         <label for='pass'>Password: </label>
+         <input type="password" name = 'pass' matInput value = '{{password}}'>
+         <br>
+         <label for='email'>Email: </label>
+         <input type="email" name = 'email' matInput value = '{{email}}'>
+         <button class ="button2"  mat-button >Update Account</button>
+      </div>
+      <div class="div2">
+         <div class="profile">
+            <img  src="https://lh3.googleusercontent.com/-xGs5HBal37Q/YBz83h7Re4I/AAAAAAAAJvk/PepwKgfbmzgJSjrfi10yXiVJLkVo95fwACK8BGAsYHg/s0/2021-02-05.jpg " alt="">
+            <button class ="button1" mat-button >Update Profile</button>
+         </div>
+      </div>
+   </mat-card>
+   <br>
+   <mat-card class = "card1">
+      <h1>Add Account</h1>
+      <label for='userName'>Username: </label>
+      <input type="text" name = 'userName' matInput>
+      <br>
+      <label for='pass'>Password: </label>
+      <input type="password" name = 'pass' matInput >
+      <button class ="button2"  mat-button >Add Account</button>
+   </mat-card>
+</div>
+<div class="div1">
+   <mat-card class = "card2">
+      <h1>List of Accounts</h1>
+      <input class="input" type="text" name = 'userName' matInput placeholder="Search"> <button class ="button2"  mat-button >Search</button>
+   </mat-card>
+</div>

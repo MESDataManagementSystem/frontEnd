@@ -1,27 +1,57 @@
-.container {
-    margin: 3%;
-    /* margin-left: 100%; */
-}
-.card {
-    margin: 3%;
-}
-mat-grid-list {
-    text-align: left;
-}
 img {
     height: auto;
     width: 150px;
-    margin-right: 60%;
+    margin-top: -20%;
+    margin-left: 30%;
 }
-.button1 {
-    float: right;
-    margin-top:-5%;
-    margin-right: 7%;
-    background-color: orange;
+.button1:hover {
+    background-color: rgba(255, 187, 0, 0.945);
 }
-.grid1 {
-    margin-left: -10%;
+.button1{
+    background-color: orange; 
+    width: 200%;
 }
-.grid {
-    margin-left: -30%;
+.button2:hover {
+    background-color: rgba(0, 162, 255, 0.945);
 }
+.button2{
+    background-color: #0275d8; 
+    
+}
+.card2 {
+    padding: 30px;
+    height: 800px;
+    width: 750px;
+   }
+.div1{
+   float: left;
+   /* padding: 20px 50px; */
+   padding-left: 2%;
+   padding-top: 20px;
+}
+.div2{
+    float: left;
+    /* padding: 20px 50px; */
+ }
+ input{
+    width: 100%;
+    padding: 10px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    /* margin-right: 0; */
+  }
+  .profile{
+      margin: 30%;
+  }
+ .image {
+     background-color: lightblue;
+ }
+ .card1 {
+    padding: 30px;
+    height: 350px;
+    width: 750px;
+ }
+ .input { 
+    width: 88%;
+} 
+ 
