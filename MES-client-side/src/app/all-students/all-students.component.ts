@@ -15,7 +15,6 @@ import { AddFormDialogComponent } from '../Modals/modal-add-form.component';
   styleUrls: ['./all-students.component.css']
 })
 export class AllStudentsComponent implements AfterViewInit {
-  // displayedColumns: string[] = ['name', 'lrn', 'view'];
   dataSource: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -64,29 +63,8 @@ export class AllStudentsComponent implements AfterViewInit {
     console.log(this.students);
   }
   searchbyFamilyName(name): void {
-    // console.log('name', this.lrn);
-    // let searchName = '';
-    // // tslint:disable-next-line:prefer-for-of
-    // for (let i = 0; i < this.name.length; i++ ){
-    //   if (this.name[i].match(/[a-z]/i)) {
-    //       console.log(searchName);
-    //       searchName += this.name[i];
-    //    }else{
-    //      continue;
-    //    }
-    // }
-    // {
     this.service.searchbyFamilyName(this.name.toLowerCase()).subscribe(info => { this.dataSource = new MatTableDataSource<any>(info); });
-    // }
     console.log(this.students);
   }
 }
-
-
-// export interface Information {
-//   name: string;
-//   lrn: string;
-// }
-// const studentData: Information[] = [{ name: 'Yubert Mariscal', lrn: '456788' }, { name: 'Annabelle Belcina', lrn: '45678' }];
-
 

@@ -21,6 +21,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatGridListModule} from '@angular/material/grid-list';
 // import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AllStudentsComponent } from './all-students/all-students.component';
@@ -66,7 +67,8 @@ import { StudentServiceService } from './services/student-service.service';
     MatPaginatorModule,
     MatDialogModule,
     MatSelectModule,
-    MatMenuModule
+    MatMenuModule,
+    MatGridListModule
   ],
   providers: [StudentServiceService],
   bootstrap: [AppComponent]
