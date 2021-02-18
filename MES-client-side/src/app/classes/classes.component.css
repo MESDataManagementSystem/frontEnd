@@ -1,0 +1,26 @@
+.card{
+    height: 50%;
+    width: 20%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 5%;
+    background-color: pink;
+    font-size: 24px;
+    font-weight: normal;
+    
+}
+
+.gradelevel{
+    margin-bottom: 15%;
+    font-size: 30px;
+    font-family: fantasy;
+    font-weight: normal;
+    text-align: center;
+    
+
+}
+
+.sections{
+     color: black;     
+     text-align: center;
+}
