@@ -25,7 +25,7 @@ export class AllStudentsComponent implements AfterViewInit {
   selectedFiles: File;
   columnsToDisplay: string[] = ['name', 'lrn', 'view'];
   searchLrn = '';
-  searchFamilyName = '';
+  name = '';
   lrn = true;
 
 
@@ -59,13 +59,25 @@ export class AllStudentsComponent implements AfterViewInit {
   }
 
   searchByLrn(searchLrn): void {
-    console.log('searchLrn');
-    this.service.searchbyLRN(this.searchLrn).subscribe( info => {this.dataSource = new MatTableDataSource<any>(info); });
+    console.log('searchLrn', this.lrn);
+    this.service.searchbyLRN(this.searchLrn).subscribe(info => { this.dataSource = new MatTableDataSource<any>(info); });
     console.log(this.students);
   }
-  searchbyFamilyName(searchFamilyName): void{
-    console.log('searchFamilyName');
-    this.service.searchbyFamilyName(this.searchFamilyName).subscribe( info => {this.dataSource = new MatTableDataSource<any>(info); });
+  searchbyFamilyName(name): void {
+    // console.log('name', this.lrn);
+    // let searchName = '';
+    // // tslint:disable-next-line:prefer-for-of
+    // for (let i = 0; i < this.name.length; i++ ){
+    //   if (this.name[i].match(/[a-z]/i)) {
+    //       console.log(searchName);
+    //       searchName += this.name[i];
+    //    }else{
+    //      continue;
+    //    }
+    // }
+    // {
+    this.service.searchbyFamilyName(this.name.toLowerCase()).subscribe(info => { this.dataSource = new MatTableDataSource<any>(info); });
+    // }
     console.log(this.students);
   }
 }

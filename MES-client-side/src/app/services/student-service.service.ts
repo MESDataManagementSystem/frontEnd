@@ -19,7 +19,7 @@ export class StudentServiceService {
     console.log(data);
     if (data !== ''){
       this.studentData.forEach(student => {
-        if (student.lrn.includes(data)){
+        if (student.lrn.includes(data.trim())){
           this.returnSearch.push(student);
           console.log('okii naa sya');
         }else{
@@ -38,7 +38,7 @@ export class StudentServiceService {
     console.log(data);
     if (data !== ''){
       this.studentData.forEach(student => {
-        if (student.name.includes(data)){
+        if (student.name.toLowerCase().includes(data.trim())){
           this.returnSearch.push(student);
           console.log('okii naa sya');
         }else{

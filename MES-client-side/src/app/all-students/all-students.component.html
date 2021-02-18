@@ -3,14 +3,14 @@
     <div>
         <mat-form-field class="example-full-width">
             <mat-label>Search by {{typeSearch}}</mat-label>
-            <input matInput *ngIf='lrn == true' (click)='lrn = true' [(ngModel)]="searchLrn" autocomplete="off" (keyup)="searchByLrn(searchLrn)"  >
-            <input matInput *ngIf='lrn == false' (click)='lrn = false' [(ngModel)]="searchFamilyName" autocomplete="off" (keyup)="searchbyFamilyName(searchFamilyName)"  >
-            <mat-hint align="end">Search using LRN or family name.</mat-hint>
+            <input matInput *ngIf='lrn === true' (click)='lrn = true' [(ngModel)]="searchLrn" autocomplete="off" (keyup)="searchByLrn(searchLrn)"  >
+            <input matInput *ngIf='lrn === false'  [(ngModel)]="name" autocomplete="off" (keyup)="searchbyFamilyName(name)"  >
+            <mat-hint align="end">Search using LRN or Name.</mat-hint>
         </mat-form-field>
         <button mat-button [matMenuTriggerFor]="menu" class= 'menuIcon'><mat-icon>keyboard_arrow_down</mat-icon></button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item (click) = ' typeSearch = "LRN"'>LRN</button>
-            <button mat-menu-item (click) = ' typeSearch = "Family name"'>Family name</button>
+            <button mat-menu-item (click) = ' typeSearch = "LRN"; lrn= true'>LRN</button>
+            <button mat-menu-item (click) = ' typeSearch = "Name (Last Name, First name)"; lrn= false'>Name</button>
         </mat-menu>
         <!-- <button (click) = ' searchByLrn(searchLrn)'>search</button> -->
     </div>

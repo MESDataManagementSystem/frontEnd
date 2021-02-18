@@ -9,14 +9,10 @@ import {MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./modal-add-form.component.css']
 })
 export class AddFormDialogComponent implements OnInit {
-  firstName: string;
-  middleName: string;
-  lastName: string;
+  fullName: string;
   lrn: string;
   constructor( private dialogRef: MatDialogRef<AddFormDialogComponent>) {
-    this.firstName = '';
-    this.middleName = '';
-    this.lastName = '';
+    this.fullName = '';
     this.lrn = '';
   }
 
@@ -24,7 +20,7 @@ export class AddFormDialogComponent implements OnInit {
   }
   close(): void {
     this.dialogRef.close();
-    console.log(this.firstName, this.middleName, this.lastName, this.lrn);
+    console.log(this.fullName, this.lrn);
   }
   addStudent(): void {
     console.log('submitted');
