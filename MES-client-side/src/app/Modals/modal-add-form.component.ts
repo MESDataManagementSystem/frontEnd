@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { StudentServiceService } from '../../../services/auth-service.service';
+import { StudentServiceService } from '../services/student-service.service';
 import {MatDialogRef} from '@angular/material/dialog';
 
 
@@ -11,7 +11,8 @@ import {MatDialogRef} from '@angular/material/dialog';
 export class AddFormDialogComponent implements OnInit {
   fullName: string;
   lrn: string;
-  constructor( private dialogRef: MatDialogRef<AddFormDialogComponent>) {
+  fileToUpload: File = null;
+  constructor( private dialogRef: MatDialogRef<AddFormDialogComponent>, private service: StudentServiceService) {
     this.fullName = '';
     this.lrn = '';
   }
@@ -24,6 +25,10 @@ export class AddFormDialogComponent implements OnInit {
   }
   addStudent(): void {
     console.log('submitted');
+  }
+  handleFileInput(files: FileList): void  {
+    this.fileToUpload = files.item(0);
+    // this.service.studentForm(this.fileToUpload);
   }
 
 }
