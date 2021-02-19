@@ -13,8 +13,6 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class DialogComponent implements OnInit {
 
-
-
   maxDate = new Date();
   error = new FormControl('', [Validators.required]);
 
@@ -25,6 +23,7 @@ export class DialogComponent implements OnInit {
   }
 
   teachersForm = {
+    // _id:"",
     lastName: "",
     firstName: "",
     middleName: "",
@@ -56,41 +55,43 @@ export class DialogComponent implements OnInit {
     availableServiceCredits: "",
   }
 
-  // public dateOfBirth: Date;
   public age: number;
 
-  myControl = new FormControl();
+
+  optionsControl = new FormControl();
   options: string[] = ['M', 'F'];
   filteredOptions: Observable<string[]>;
+
+
 
   constructor(public dialog: MatDialog, private teacherService: TeacherServiceService) { }
 
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+    this.filteredOptions = this.optionsControl.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value))
+      map(value => this.gender(value))
     );
+
   }
 
   public CalculateAge(): void {
     if (this.teachersForm.dateOfBirth) {
       var timeDiff = Math.abs(Date.now() - new Date(this.teachersForm.dateOfBirth).getTime());
       this.age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
-      console.log(this.age)
-        }
-      }
+      this.teachersForm.age = String(this.age);
+      console.log(this.teachersForm.age)
+    }
+  }
 
-  private _filter(value: string): string[] {
+  private gender(value: string): string[] {
     const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0)
   }
 
   addTeacher() {
     console.log(this.teachersForm)
     this.teacherService.addTeacher(this.teachersForm).subscribe((data) => {
       if (data) {
-        this.CalculateAge();
         this.succesAlert();
         this.dialog.closeAll();
         window.location.reload();

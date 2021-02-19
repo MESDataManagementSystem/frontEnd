@@ -1,8 +1,9 @@
-import { OnInit, Component, ViewChild } from '@angular/core';
+import { OnInit, Component, ViewChild, Output, EventEmitter } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog.component';
+import { ViewComponent } from './view.component';
 import { Teacher } from './teacher.model';
 import { TeacherServiceService } from '../services/teacher-service.service';
 
@@ -12,6 +13,38 @@ import { TeacherServiceService } from '../services/teacher-service.service';
   styleUrls: ['./all-teachers.component.css']
 })
 export class AllTeachersComponent implements OnInit {
+  teachersForm = {
+    _id: "",
+    lastName: "",
+    firstName: "",
+    middleName: "",
+    nameExt: "",
+    employeeNumber: "",
+    itemNumber: "",
+    dateOfBirth: "",
+    placeOfBirth: "",
+    age: "",
+    gender: "",
+    maritalStatus: "",
+    homeAddress: "",
+    schoolAssignment: "",
+    district: "",
+    currentPosition: "",
+    employeeStatus: "",
+    designation: "",
+    firstDayOfService: "",
+    dateOfLastPromotion: "",
+    salaryGrade: "",
+    stepIncrement: "",
+    eligibility: "",
+    contactNumber: "",
+    depEdEmailAddress: "",
+    tin: "",
+    philHealthNumber: "",
+    gsisBPNumber: "",
+    pagIbigNumber: "",
+    availableServiceCredits: "",
+  }
 
   searchFilter: string;
   teacherData: any = [];
@@ -30,10 +63,18 @@ export class AllTeachersComponent implements OnInit {
     })
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   openDialog(): void {
     this.dialog.open(DialogComponent, { disableClose: true });
+  }
+
+  openDialogView(teacher: Teacher): void {
+    this.dialog.open(ViewComponent, {
+      disableClose: false,
+      data: teacher
+    });
   }
 
 }

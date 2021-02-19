@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,28 @@ import Swal from 'sweetalert2';
 
 export class TeacherServiceService {
 
+  id: string
   url = 'http://localhost:5000'
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private actRoute: ActivatedRoute) { }
+
+  ngOnit() { }
 
   // Get All The List Of Teachers
   getAllTheTeachersList() {
     return this.http.get(`${this.url}/api/viewListOfTeacher`);
+  }
+
+  // View The Information Of A Specific Teacher
+  viewTeacher(id) {
+    return this.http.get(`${this.url}/api/viewTeachersInfo/${id}`)
+      .pipe(
+        catchError(e => {
+          this.errorAlert2();
+          throw new Error(e)
+        })
+      )
   }
 
   // Add Teachers
@@ -29,6 +44,17 @@ export class TeacherServiceService {
         throw new Error(e)
       })
     )
+  }
+
+  // Update Teacher's Information
+  updateTeacher(teacher: Teacher) {
+    return this.http.put(`${this.url}/api/updateTeachersInfo/${teacher._id}`, teacher)
+      .pipe(
+        catchError(e => {
+          this.errorAlert2();
+          throw new Error(e)
+        })
+      )
   }
 
   errorHandling(error: HttpErrorResponse) {
@@ -49,6 +75,14 @@ export class TeacherServiceService {
       icon: 'error',
       title: 'Oops...',
       text: 'All Fields Are Required!'
+    })
+  }
+
+  errorAlert2() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Something Went Wrong'
     })
   }
 

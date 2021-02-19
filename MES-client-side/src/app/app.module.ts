@@ -18,7 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -31,6 +31,7 @@ import { LoginComponent } from './login/login.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { AddFormDialogComponent } from './Modals/modal-add-form.component';
 import { DialogComponent } from './all-teachers/dialog.component';
+import { ViewComponent } from './all-teachers/view.component';
 import { StudentServiceService } from './services/student-service.service';
 import { TeacherServiceService } from './services/teacher-service.service';
 
@@ -45,7 +46,8 @@ import { TeacherServiceService } from './services/teacher-service.service';
     LoginComponent,
     SideNavComponent,
     AddFormDialogComponent,
-    DialogComponent
+    DialogComponent,
+    ViewComponent
   ],
   imports: [
     HttpClientModule,
@@ -74,7 +76,14 @@ import { TeacherServiceService } from './services/teacher-service.service';
   providers: [
     HttpClient,
     StudentServiceService,
-    TeacherServiceService
+    TeacherServiceService,
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    }, {
+      provide: MAT_DIALOG_DATA,
+      useValue: {} // Add any data you wish to test if it is passed/used correctly
+    }
   ],
   bootstrap: [AppComponent]
 })
