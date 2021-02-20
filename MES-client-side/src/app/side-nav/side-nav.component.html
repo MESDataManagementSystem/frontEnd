@@ -11,13 +11,7 @@
         <mat-list role="list" *ngFor="let content of navContent" >
             <mat-list-item id='{{content}}' [ngClass]="{active: lateActive == content}"  (click)=" childRoutes(content)"  role="listitem">{{content}}</mat-list-item>
         </mat-list>
-        <!-- <button class='logout' mat-raised-button
-        matTooltip="Log-out administrator account."
-        aria-label="Button that displays a tooltip when focused or hovered over">
-             <mat-icon class='home'>home</mat-icon>
-        </button> -->
-     
-    </mat-sidenav>
+        </mat-sidenav>
     <mat-sidenav-content>
         <div [(hidden)]='showSideNav'>
             <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"   (click)='showSideNav = !showSideNav'>
@@ -27,7 +21,5 @@
         <router-outlet></router-outlet> 
     </mat-sidenav-content>
 </mat-sidenav-container>
-
 <footer >
-    
 </footer>

@@ -3,10 +3,10 @@
     <div>
         <mat-form-field>
             <mat-label>Search Teacher's Information</mat-label>
-            <input type="text" matInput [(ngModel)]="searchFilter" autocomplete="off">
+            <input type="text" matInput [(ngModel)]="searchFilter" autocomplete="off"
+                (keyup)="filter($event.target.value)">
             <mat-icon *ngIf="searchFilter" mat-button matSuffix mat-icon-button aria-label="Clear"
                 (click)="searchFilter=''">close</mat-icon>
-            <mat-icon mat-button matSuffix mat-icon-button aria-label="Search">search</mat-icon>
         </mat-form-field>
     </div>
     <div>

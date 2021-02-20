@@ -22,6 +22,9 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatGridListModule } from '@angular/material/grid-list';
+// import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AllStudentsComponent } from './all-students/all-students.component';
 import { AllTeachersComponent } from './all-teachers/all-teachers.component';
@@ -53,6 +56,7 @@ import { TeacherServiceService } from './services/teacher-service.service';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -72,6 +76,8 @@ import { TeacherServiceService } from './services/teacher-service.service';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatMenuModule,
+    MatGridListModule
   ],
   providers: [
     HttpClient,
@@ -84,6 +90,7 @@ import { TeacherServiceService } from './services/teacher-service.service';
       provide: MAT_DIALOG_DATA,
       useValue: {} // Add any data you wish to test if it is passed/used correctly
     }
+
   ],
   bootstrap: [AppComponent]
 })

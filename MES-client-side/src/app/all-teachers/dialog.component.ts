@@ -13,17 +13,13 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class DialogComponent implements OnInit {
 
+  public age: number;
   maxDate = new Date();
   error = new FormControl('', [Validators.required]);
-
-  getErrorMessage() {
-    if (this.error.hasError('required')) {
-      return 'You must enter a value';
-    }
-  }
-
+  optionsControl = new FormControl();
+  options: string[] = ['M', 'F'];
+  filteredOptions: Observable<string[]>;
   teachersForm = {
-    // _id:"",
     lastName: "",
     firstName: "",
     middleName: "",
@@ -55,16 +51,10 @@ export class DialogComponent implements OnInit {
     availableServiceCredits: "",
   }
 
-  public age: number;
-
-
-  optionsControl = new FormControl();
-  options: string[] = ['M', 'F'];
-  filteredOptions: Observable<string[]>;
-
-
-
-  constructor(public dialog: MatDialog, private teacherService: TeacherServiceService) { }
+  constructor(
+    public dialog: MatDialog,
+    private teacherService: TeacherServiceService
+  ) { }
 
   ngOnInit() {
     this.filteredOptions = this.optionsControl.valueChanges.pipe(
@@ -74,6 +64,7 @@ export class DialogComponent implements OnInit {
 
   }
 
+  // Automatic Calculate The Age After Inputing The Birth Date
   public CalculateAge(): void {
     if (this.teachersForm.dateOfBirth) {
       var timeDiff = Math.abs(Date.now() - new Date(this.teachersForm.dateOfBirth).getTime());
@@ -83,11 +74,20 @@ export class DialogComponent implements OnInit {
     }
   }
 
+  // For Gender Options
   private gender(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0)
   }
 
+  // All Fields Are Required 
+  getErrorMessage() {
+    if (this.error.hasError('required')) {
+      return 'You must enter a value';
+    }
+  }
+
+  // Add Teacher
   addTeacher() {
     console.log(this.teachersForm)
     this.teacherService.addTeacher(this.teachersForm).subscribe((data) => {
@@ -99,11 +99,13 @@ export class DialogComponent implements OnInit {
     })
   }
 
+  // Alert After Successful Adding Teacher's Info
   succesAlert() {
     Swal.fire({
       icon: 'success',
       title: 'Success',
-      text: 'Your Work Has Been Saved'
+      text: 'Your Work Has Been Saved',
     })
   }
+  
 }

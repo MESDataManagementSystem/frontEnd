@@ -6,20 +6,13 @@
     <input matInput [(ngModel)]="lrn" autocomplete="off">
   </mat-form-field> <br>
   <mat-form-field appearance="fill">
-    <mat-label>First Name: </mat-label>
-    <input matInput [(ngModel)]="firstName" autocomplete="off">
+    <mat-label>Full Name: LastName, FirstName Middle Initial  Extn. </mat-label>
+    <input matInput [(ngModel)]="fullName" autocomplete="off">
   </mat-form-field> <br>
-  <mat-form-field appearance="fill">
-    <mat-label>Middle Name: </mat-label>
-    <input matInput [(ngModel)]="middleName" autocomplete="off">
-  </mat-form-field> <br>
-  <mat-form-field appearance="fill">
-    <mat-label>Last Name: </mat-label>
-    <input matInput [(ngModel)]="lastName" autocomplete="off">
-  </mat-form-field> <br>
-  <input #fileInput type="file"  />
+  <input #fileInput type="file"  (change)="handleFileInput($event.target.files)" />
 </div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)= 'close()'>Submit</button>
+  <button mat-button mat-dialog-close (click)= 'addStudent()'>Add Student</button>
   <button mat-button mat-dialog-close class = 'cancel' (click)= 'close()'>Cancel</button>
 </div>
+

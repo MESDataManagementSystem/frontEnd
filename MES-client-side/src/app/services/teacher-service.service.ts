@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Teacher } from '../all-teachers/teacher.model';
-import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
-import { ActivatedRoute, Params } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class TeacherServiceService {
-
+  teacher: Array<any> = []
+  returnSearch: Array<any> = [];
   id: string
   url = 'http://localhost:5000'
   headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -57,19 +57,6 @@ export class TeacherServiceService {
       )
   }
 
-  errorHandling(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // getting the client-side error
-      errorMessage = error.error.message;
-    } else {
-      // getting the server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    // console.log(errorMessage);
-    return throwError(errorMessage);
-  }
-
   errorAlert() {
     Swal.fire({
       icon: 'error',
@@ -87,3 +74,31 @@ export class TeacherServiceService {
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

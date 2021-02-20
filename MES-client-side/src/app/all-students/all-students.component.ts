@@ -1,9 +1,9 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import { StudentServiceService} from '../services/student-service.service';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatDialog} from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { StudentServiceService } from '../services/student-service.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { AddFormDialogComponent } from '../Modals/modal-add-form.component';
 
 
@@ -15,7 +15,7 @@ import { AddFormDialogComponent } from '../Modals/modal-add-form.component';
   styleUrls: ['./all-students.component.css']
 })
 export class AllStudentsComponent implements AfterViewInit {
-  dataSource = new MatTableDataSource<Information>(studentData);
+  dataSource: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   typeSearch: string;
@@ -23,35 +23,49 @@ export class AllStudentsComponent implements AfterViewInit {
   students: any;
   selectedFiles: File;
   columnsToDisplay: string[] = ['name', 'lrn', 'view'];
+  searchLrn = '';
+  name = '';
+  lrn = true;
 
 
-  constructor( private service: StudentServiceService, private dialog: MatDialog) {
-       this.value = '';
-       this.typeSearch = 'LRN';
+  constructor(private service: StudentServiceService, private dialog: MatDialog) {
+    this.value = '';
+    this.typeSearch = 'LRN';
+    this.dataSource = new MatTableDataSource<any>(this.students);
   }
 
+
   ngAfterViewInit(): void {
+    this.service.retrieveData().subscribe(student => { this.students = student; });
+    this.dataSource = new MatTableDataSource<any>(this.students);
+
     this.dataSource.paginator = this.paginator;
-    this.service.retrieveData().subscribe( student => { this.students = student; });
     console.log(this.students);
   }
   openDialog(): void {
-    this.dialog.open(AddFormDialogComponent,  { disableClose: true });
+    this.dialog.open(AddFormDialogComponent, { disableClose: true });
     console.log(this.typeSearch);
   }
-  // tslint:disable-next-line:member-ordering
 
   selectFile(event): void {
     this.selectedFiles = event.target.files;
-}
+  }
   csvInputChange(fileInputEvent: any): void {
     console.log(fileInputEvent.target.files[0]);
   }
-}
+  myFunction(event): void {
+    alert(event);
+  }
 
-export interface Information {
-  name: string;
-  lrn: string;
+  searchByLrn(searchLrn): void {
+    console.log('searchLrn', this.lrn);
+    this.service.searchbyLRN(this.searchLrn).subscribe(info => { this.dataSource = new MatTableDataSource<any>(info); });
+    console.log(this.students);
+  }
+  searchbyFamilyName(name): void {
+    this.service.searchbyFamilyName(this.name.toLowerCase()).subscribe(info => { this.dataSource = new MatTableDataSource<any>(info); });
+    console.log(this.students);
+  }
+
 }
-const studentData: Information[] = [ {name: 'Irish Rufo', lrn: '18106242'}, {name: 'Ma. Theresa Amaquin', lrn: '123456'}, {name: 'Yubert Mariscal', lrn: '456788'}, {name: 'Annabelle Belcina', lrn: '45678'}, {name: 'Irish Rufo', lrn: '18106242'}, {name: 'Ma. Theresa Amaquin', lrn: '123456'}, {name: 'Yubert Mariscal', lrn: '456788'}, {name: 'Annabelle Belcina', lrn: '45678'}, {name: 'Irish Rufo', lrn: '18106242'}, {name: 'Ma. Theresa Amaquin', lrn: '123456'}, {name: 'Yubert Mariscal', lrn: '456788'}, {name: 'Annabelle Belcina', lrn: '45678'}, {name: 'Irish Rufo', lrn: '18106242'}, {name: 'Ma. Theresa Amaquin', lrn: '123456'}, {name: 'Yubert Mariscal', lrn: '456788'}, {name: 'Annabelle Belcina', lrn: '45678'}];
 

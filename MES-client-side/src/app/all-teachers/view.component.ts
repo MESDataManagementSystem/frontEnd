@@ -13,16 +13,17 @@ import { Teacher } from './teacher.model';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
+
   public teacher: any;
   public age: number;
+  disabled: boolean;
+  teachersForm: Teacher;
   maxDate = new Date();
   error = new FormControl('', [Validators.required]);
   optionsControl = new FormControl();
   options: string[] = ['M', 'F'];
   filteredOptions: Observable<string[]>;
-  teachersForm: Teacher;
-  disabled: boolean;
-  closeUpdateBtn: boolean;
+
   constructor(
     public dialogRef: MatDialogRef<ViewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Teacher,
@@ -68,69 +69,63 @@ export class ViewComponent implements OnInit {
     this.filteredOptions = this.optionsControl.valueChanges.pipe(
       startWith(''),
       map(value => this.gender(value))
-    );
-
+    )
   }
 
-  getErrorMessage() {
-    if (this.error.hasError('required')) {
-      return 'You must enter a value';
-    }
-  }
+  // All Fields Are Required 
+  // getErrorMessage() {
+  //   if (this.error.hasError('required')) {
+  //     return 'You must enter a value';
+  //   }
+  // }
 
+  // Automatic Calculate The Age After Inputing The Birth Date
   public CalculateAge(): void {
     if (this.data.dateOfBirth) {
       var timeDiff = Math.abs(Date.now() - new Date(this.data.dateOfBirth).getTime());
       this.age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
       this.data.age = String(this.age);
-      console.log(this.data.age)
     }
   }
 
+  // For Gender Options
   private gender(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0)
   }
 
-  succesAlert() {
-    Swal.fire({
-      icon: 'success',
-      title: 'Success',
-      text: 'Your Work Has Been Saved'
-    })
-  }
-
+  // For Confirmation Before Updating
   warningAlert() {
     Swal.fire({
       icon: 'warning',
       title: 'Do you want to save the changes?',
       showDenyButton: true,
-      showCancelButton: true,
       confirmButtonText: `Save`,
       denyButtonText: `Don't save`,
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire('Saved!', '', 'success')
+        this.updateTeacherInfo();
       } else if (result.isDenied) {
         Swal.fire('Changes are not saved', '', 'info')
+        Swal.close()
+        window.location.reload()
       }
     })
   }
 
+  // For Clicking The Update Button
   updateClick() {
-    this.updateTeacherInfo();
+    this.warningAlert();
   }
 
+  // Update Teacher's Information
   updateTeacherInfo() {
     this.teacherService.updateTeacher(this.data).subscribe(data => {
       if (data) {
-        this.succesAlert();
         this.dialog.closeAll();
-        window.location.reload();
       }
     })
   }
-
 
 }
