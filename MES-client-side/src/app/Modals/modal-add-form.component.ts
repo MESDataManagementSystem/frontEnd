@@ -23,12 +23,22 @@ export class AddFormDialogComponent implements OnInit {
     this.dialogRef.close();
     console.log(this.fullName, this.lrn);
   }
-  addStudent(): void {
-    console.log('submitted');
+
+  addStudent(file): void {
+    console.log('submitted', this.fileToUpload);
+    const formData = new FormData();
+    // formData.append('file', this.fileToUpload, this.fileToUpload.name);
+    formData.append('files', this.fileToUpload, this.fileToUpload.name);
+    formData.append('name', this.fullName);
+    formData.append('lrn', this.lrn);
+    formData.forEach(data => {
+        console.log('data sa formdata : ', data);
+    });
+    this.service.studentForm(formData).subscribe(data => console.log('mao ni return nitya', data));
   }
   handleFileInput(files: FileList): void  {
     this.fileToUpload = files.item(0);
-    // this.service.studentForm(this.fileToUpload);
+    console.log(this.fileToUpload);
   }
 
 }

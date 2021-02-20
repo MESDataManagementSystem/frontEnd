@@ -12,7 +12,7 @@
   <input #fileInput type="file"  (change)="handleFileInput($event.target.files)" />
 </div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)= 'addStudent()'>Add Student</button>
+  <button mat-button mat-dialog-close (click)= 'addStudent(fileToUpload)'>Add Student</button>
   <button mat-button mat-dialog-close class = 'cancel' (click)= 'close()'>Cancel</button>
 </div>
 

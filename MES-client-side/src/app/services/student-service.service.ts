@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 // import 'rxjs/Rx';
@@ -12,7 +12,7 @@ export class StudentServiceService {
   studentData = [{ name: 'Irish Rufo', lrn: '18106242' }, { name: 'Ma. Theresa Amaquin', lrn: '123456' }, { name: 'Yubert Mariscal', lrn: '456788' }, { name: 'Annabelle Belcina', lrn: '45678' }];
   returnSearch: Array<any> = [];
   constructor(
-    // private httpClient: HttpClient
+    private httpClient: HttpClient
     ) { }
 
   retrieveData(): Observable<any> {
@@ -61,11 +61,19 @@ export class StudentServiceService {
     return e;
   }
 
-  // studentForm(fileToUpload: File): any {
-  //   const endpoint = 'http://localhost:5000/uploadSingleFile';
-  //   const formData: FormData = new FormData();
-  //   formData.append('fileKey', fileToUpload, fileToUpload.name);
-  //   return this.httpClient.post(endpoint, formData).pipe(map(() => true), catchError((e) => this.handleError(e)));
-  // }
+  studentForm(fileToUpload: FormData): Observable<any> {
+    // console.log('nisulod', fileToUpload);
+    // tslint:disable-next-line:prefer-const
+    // const formData = new FormData();
+    // formData.append('image', fileToUpload, fileToUpload.name);
+    // formData.append('test', 'testing yeah');
+    // console.log('image', fileToUpload);
+    // tslint:disable-next-line:max-line-length
+    console.log('adto nis services : ', fileToUpload);
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.post('http://localhost:5000/uploadSingleFile', fileToUpload);
+    // .pipe(map(() => true), catchError((e) => this.handleError(e)));
+    // return of(formData);
+  }
 
 }
