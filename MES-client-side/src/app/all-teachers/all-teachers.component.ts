@@ -46,7 +46,7 @@ export class AllTeachersComponent implements OnInit {
     pagIbigNumber: "",
     availableServiceCredits: "",
   }
-  searchFilter: string;
+
   teacherData: any = [];
   dataSource: MatTableDataSource<Teacher>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -56,15 +56,17 @@ export class AllTeachersComponent implements OnInit {
     private teacherService: TeacherServiceService,
     private dialog: MatDialog
   ) {
-    this.searchFilter = '';
     this.teacherService.getAllTheTeachersList().subscribe(data => {
       this.teacherData = data;
       this.dataSource = new MatTableDataSource<Teacher>(this.teacherData.data);
-      console.log(this.teacherData.data)
       setTimeout(() => {
         this.dataSource.paginator = this.paginator;
-      }, 0);
+      }, 0)
+      this.dataSource.filterPredicate = function (data, filter: string): boolean {
+        return data.lastName.toLocaleLowerCase().includes(filter)
+      }
     })
+
   }
 
   ngOnInit() {
@@ -87,5 +89,6 @@ export class AllTeachersComponent implements OnInit {
   filter(value: string) {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
+
 
 }

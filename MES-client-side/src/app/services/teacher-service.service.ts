@@ -10,13 +10,13 @@ import Swal from 'sweetalert2';
 })
 
 export class TeacherServiceService {
-  teacher: Array<any> = []
-  returnSearch: Array<any> = [];
-  id: string
+
   url = 'http://localhost:5000'
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(private http: HttpClient, private actRoute: ActivatedRoute) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   ngOnit() { }
 
@@ -61,7 +61,7 @@ export class TeacherServiceService {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'All Fields Are Required!'
+      text: 'All Fields Are Required! Or The Inputted Age Is Not Correct'
     })
   }
 

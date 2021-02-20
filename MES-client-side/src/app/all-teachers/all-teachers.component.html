@@ -2,11 +2,9 @@
     <h2>Teacher's Information</h2>
     <div>
         <mat-form-field>
-            <mat-label>Search Teacher's Information</mat-label>
-            <input type="text" matInput [(ngModel)]="searchFilter" autocomplete="off"
+            <mat-label>Search Teacher's Last Name</mat-label>
+            <input type="text" matInput autocomplete="off"
                 (keyup)="filter($event.target.value)">
-            <mat-icon *ngIf="searchFilter" mat-button matSuffix mat-icon-button aria-label="Clear"
-                (click)="searchFilter=''">close</mat-icon>
         </mat-form-field>
     </div>
     <div>

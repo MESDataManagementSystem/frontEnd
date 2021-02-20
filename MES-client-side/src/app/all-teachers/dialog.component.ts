@@ -105,7 +105,9 @@ export class DialogComponent implements OnInit {
       icon: 'success',
       title: 'Success',
       text: 'Your Work Has Been Saved',
+      showConfirmButton: false,
+      timer: 1500
     })
   }
-  
+
 }

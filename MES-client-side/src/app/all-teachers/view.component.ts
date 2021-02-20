@@ -73,11 +73,11 @@ export class ViewComponent implements OnInit {
   }
 
   // All Fields Are Required 
-  // getErrorMessage() {
-  //   if (this.error.hasError('required')) {
-  //     return 'You must enter a value';
-  //   }
-  // }
+  getErrorMessage() {
+    if (this.error.hasError('required')) {
+      return 'You must enter a value';
+    }
+  }
 
   // Automatic Calculate The Age After Inputing The Birth Date
   public CalculateAge(): void {
