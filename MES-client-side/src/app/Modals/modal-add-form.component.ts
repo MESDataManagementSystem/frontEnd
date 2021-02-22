@@ -12,9 +12,11 @@ export class AddFormDialogComponent implements OnInit {
   fullName: string;
   lrn: string;
   fileToUpload: File = null;
+  fileUrl: string;
   constructor( private dialogRef: MatDialogRef<AddFormDialogComponent>, private service: StudentServiceService) {
     this.fullName = '';
     this.lrn = '';
+    this.fileUrl = 'http://localhost:5000/uploads/';
   }
 
   ngOnInit(): void {
@@ -27,10 +29,10 @@ export class AddFormDialogComponent implements OnInit {
   addStudent(file): void {
     console.log('submitted', this.fileToUpload);
     const formData = new FormData();
-    // formData.append('file', this.fileToUpload, this.fileToUpload.name);
     formData.append('files', this.fileToUpload, this.fileToUpload.name);
-    formData.append('name', this.fullName);
+    formData.append('fullName', this.fullName);
     formData.append('lrn', this.lrn);
+    formData.append('fileUrl', this.fileUrl);
     formData.forEach(data => {
         console.log('data sa formdata : ', data);
     });
@@ -42,5 +44,6 @@ export class AddFormDialogComponent implements OnInit {
   }
 
 }
+
 
 

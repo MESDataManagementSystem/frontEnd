@@ -3,16 +3,15 @@
 <div class = "form">
   <mat-form-field appearance="fill" >
     <mat-label>LRN: </mat-label>
-    <input matInput [(ngModel)]="lrn" autocomplete="off">
+    <input matInput [(ngModel)]="lrn" autocomplete="off" required>
   </mat-form-field> <br>
   <mat-form-field appearance="fill">
     <mat-label>Full Name: LastName, FirstName Middle Initial  Extn. </mat-label>
-    <input matInput [(ngModel)]="fullName" autocomplete="off">
+    <input matInput [(ngModel)]="fullName" autocomplete="off" required>
   </mat-form-field> <br>
-  <input #fileInput type="file"  (change)="handleFileInput($event.target.files)" />
+  <input #fileInput type="file"  (change)="handleFileInput($event.target.files)" required/>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close (click)= 'addStudent(fileToUpload)'>Add Student</button>
   <button mat-button mat-dialog-close class = 'cancel' (click)= 'close()'>Cancel</button>
 </div>
-

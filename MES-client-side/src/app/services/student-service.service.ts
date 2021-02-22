@@ -62,18 +62,8 @@ export class StudentServiceService {
   }
 
   studentForm(fileToUpload: FormData): Observable<any> {
-    // console.log('nisulod', fileToUpload);
-    // tslint:disable-next-line:prefer-const
-    // const formData = new FormData();
-    // formData.append('image', fileToUpload, fileToUpload.name);
-    // formData.append('test', 'testing yeah');
-    // console.log('image', fileToUpload);
-    // tslint:disable-next-line:max-line-length
     console.log('adto nis services : ', fileToUpload);
-    // tslint:disable-next-line:max-line-length
     return this.httpClient.post('http://localhost:5000/uploadSingleFile', fileToUpload);
-    // .pipe(map(() => true), catchError((e) => this.handleError(e)));
-    // return of(formData);
   }
 
 }
