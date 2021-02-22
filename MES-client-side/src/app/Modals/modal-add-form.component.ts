@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { StudentServiceService } from '../../../services/auth-service.service';
+import { StudentServiceService } from '../services/student-service.service';
 import {MatDialogRef} from '@angular/material/dialog';
 
 
@@ -11,7 +11,8 @@ import {MatDialogRef} from '@angular/material/dialog';
 export class AddFormDialogComponent implements OnInit {
   fullName: string;
   lrn: string;
-  constructor( private dialogRef: MatDialogRef<AddFormDialogComponent>) {
+  fileToUpload: File = null;
+  constructor( private dialogRef: MatDialogRef<AddFormDialogComponent>, private service: StudentServiceService) {
     this.fullName = '';
     this.lrn = '';
   }
@@ -22,8 +23,22 @@ export class AddFormDialogComponent implements OnInit {
     this.dialogRef.close();
     console.log(this.fullName, this.lrn);
   }
-  addStudent(): void {
-    console.log('submitted');
+
+  addStudent(file): void {
+    console.log('submitted', this.fileToUpload);
+    const formData = new FormData();
+    // formData.append('file', this.fileToUpload, this.fileToUpload.name);
+    formData.append('files', this.fileToUpload, this.fileToUpload.name);
+    formData.append('name', this.fullName);
+    formData.append('lrn', this.lrn);
+    formData.forEach(data => {
+        console.log('data sa formdata : ', data);
+    });
+    this.service.studentForm(formData).subscribe(data => console.log('mao ni return nitya', data));
+  }
+  handleFileInput(files: FileList): void  {
+    this.fileToUpload = files.item(0);
+    console.log(this.fileToUpload);
   }
 
 }
