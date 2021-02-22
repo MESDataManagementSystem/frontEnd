@@ -1,26 +1,15 @@
-.card{
-    height: 50%;
-    width: 20%;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    margin-left: 5%;
-    background-color: pink;
-    font-size: 24px;
-    font-weight: normal;
+mat-card {
+    width: 200px;
+    height: 230px;
     
+   }
+
+img {
+    height: 150px;
+    width: 233px;
 }
-
-.gradelevel{
-    margin-bottom: 15%;
-    font-size: 30px;
-    font-family: fantasy;
-    font-weight: normal;
-    text-align: center;
-    
-
-}
-
-.sections{
-     color: black;     
-     text-align: center;
+div{
+    float: left;
+    padding-left: 5%;
+    padding-top: 20px;
 }
