@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Teacher } from '../all-teachers/teacher.model';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Injectable({

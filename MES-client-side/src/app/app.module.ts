@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -24,7 +25,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
-// import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { AllStudentsComponent } from './all-students/all-students.component';
 import { AllTeachersComponent } from './all-teachers/all-teachers.component';
@@ -37,6 +38,7 @@ import { DialogComponent } from './all-teachers/dialog.component';
 import { ViewComponent } from './all-teachers/view.component';
 import { StudentServiceService } from './services/student-service.service';
 import { TeacherServiceService } from './services/teacher-service.service';
+import { AddSectionComponent } from './classes/add-section.component';
 
 
 @NgModule({
@@ -50,7 +52,8 @@ import { TeacherServiceService } from './services/teacher-service.service';
     SideNavComponent,
     AddFormDialogComponent,
     DialogComponent,
-    ViewComponent
+    ViewComponent,
+    AddSectionComponent
   ],
   imports: [
     HttpClientModule,
@@ -59,12 +62,14 @@ import { TeacherServiceService } from './services/teacher-service.service';
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
+    MatButtonToggleModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
     MatToolbarModule,
     MatInputModule,
+    MatTabsModule,
     MatFormFieldModule,
     MatTooltipModule,
     MatCardModule,
@@ -88,7 +93,7 @@ import { TeacherServiceService } from './services/teacher-service.service';
       useValue: {}
     }, {
       provide: MAT_DIALOG_DATA,
-      useValue: {} // Add any data you wish to test if it is passed/used correctly
+      useValue: {}
     }
 
   ],

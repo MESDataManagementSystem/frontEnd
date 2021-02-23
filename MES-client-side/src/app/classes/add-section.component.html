@@ -1,0 +1,65 @@
+<div class="card">
+    <div class="card-header">
+        <h2 mat-dialog-title>Add Section</h2>
+    </div>
+    <div class="card-body">
+        <mat-dialog-content class="mat-typography">
+            <form #teacherForm="ngForm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Grade Level</mat-label>
+                                <input matInput type="text" [(ngModel)]="classesForm.gradeLevel" name="gradeLevel"
+                                    #gradeLevel="ngModel" required [matAutocomplete]="auto">
+                                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                        {{option}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                                <mat-icon *ngIf="classesForm.gradeLevel" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="classesForm.gradeLevel=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Section Name</mat-label>
+                                <input matInput type="text" [(ngModel)]="classesForm.sectionName" name="sectionName"
+                                    #sectionName="ngModel" required>
+                                <mat-icon *ngIf="classesForm.sectionName" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="classesForm.sectionName=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Adviser</mat-label>
+                                <input matInput type="text" [(ngModel)]="classesForm.adviser" name="adviser"
+                                    #adviser="ngModel" required [matAutocomplete]="list" >
+                                    <mat-autocomplete autoActiveFirstOption #list="matAutocomplete" >
+                                        <mat-option  *ngFor="let option of otherList" value="{{option.lastName}}, {{option.firstName}}, {{option.middleName}} ">
+                                            {{option.lastName}}, {{option.firstName}}, {{option.middleName}} 
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                <mat-icon *ngIf="classesForm.adviser" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="classesForm.adviser=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-button mat-dialog-close class="cancel">Cancel</button>
+            <button mat-button (click)="addSection()">Save</button>
+        </mat-dialog-actions>
+    </div>
+</div>

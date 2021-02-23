@@ -1,90 +1,46 @@
-<h2>Grade levels</h2>
-<div>
-<div><!-- <div *ngFor="let item of list"> -->
-    <mat-card >
-        <mat-grid-list cols="4" rowHeight="75px">
-            <mat-grid-tile
-                *ngFor="let grade of grade1"
-                [colspan]="grade.cols"
-                [rowspan]="grade.rows"
-                [style.background]="grade.color"
-                [style.font-size]="grade.fontsize">
-                {{grade.text}}
-            </mat-grid-tile>
-        </mat-grid-list>
-    </mat-card>
+<div style="padding-left: 5%; padding-top: 1em;">
+    <h2>Mantalongon Elementary School Grades And Sections
+        <button mat-icon-button class="addIcon" matTooltip="Add Section" (click)="openDialog()">
+            <mat-icon class='menuIcon'>add_circle</mat-icon>
+        </button>
+    </h2>
 </div>
-<div><!-- <div *ngFor="let item of list"> -->
-    <mat-card >
-        <mat-grid-list cols="4" rowHeight="75px">
-            <mat-grid-tile
-                *ngFor="let grade of grade2"
-                [colspan]="grade.cols"
-                [rowspan]="grade.rows"
-                [style.background]="grade.color"
-                [style.font-size]="grade.fontsize">
-                {{grade.text}}
-            </mat-grid-tile>
-        </mat-grid-list>
-    </mat-card>
+<div style="padding-top: 2em; margin-left: 5%;  margin-right: 5%;">
+    <mat-tab-group [backgroundColor]="'primary'" [color]="'accent'" mat-stretch-tabs>
+        <mat-tab [label]="'Kindegarten'">
+            <!-- <div class="card" *ngFor="let card of kinder">
+                <div class="container">
+                    <div class="row">
+                        <p class="gradeLevel">{{card.gradeLevel}}</p>
+                        <div class="col-sm">
+                            <p class="otherDetails">Total Sections: {{card.totalSections}}</p>
+                            <br>
+                            <p class="otherDetails">Total Students: {{card.totalStudents}}</p>
+                        </div>
+                    </div>
+                    <div align=center>
+                        <button class="btn btn-primary">View</button>
+                    </div>
+                </div>
+            </div> -->
+        </mat-tab>
+        <mat-tab [label]="'Grade 1'">
+            <h1>Content 1</h1>
+        </mat-tab>
+        <mat-tab [label]="'Grade 2'">
+            <h1>Content 2</h1>
+        </mat-tab>
+        <mat-tab [label]="'Grade 3'">
+            <h1>Content 3</h1>
+        </mat-tab>
+        <mat-tab [label]="'Grade 4'">
+            <h1>Content 4</h1>
+        </mat-tab>
+        <mat-tab [label]="'Grade 5'">
+            <h1>Content 5</h1>
+        </mat-tab>
+        <mat-tab [label]="'Grade 6'">
+            <h1>Content 6</h1>
+        </mat-tab>
+    </mat-tab-group>
 </div>
-<div><!-- <div *ngFor="let item of list"> -->
-    <mat-card >
-        <mat-grid-list cols="4" rowHeight="75px">
-            <mat-grid-tile
-                *ngFor="let grade of grade3"
-                [colspan]="grade.cols"
-                [rowspan]="grade.rows"
-                [style.background]="grade.color"
-                [style.font-size]="grade.fontsize">
-                {{grade.text}}
-            </mat-grid-tile>
-        </mat-grid-list>
-    </mat-card>
-</div>
-<div><!-- <div *ngFor="let item of list"> -->
-    <mat-card >
-        <mat-grid-list cols="4" rowHeight="75px">
-            <mat-grid-tile
-                *ngFor="let grade of grade4"
-                [colspan]="grade.cols"
-                [rowspan]="grade.rows"
-                [style.background]="grade.color"
-                [style.font-size]="grade.fontsize">
-                {{grade.text}}
-            </mat-grid-tile>
-        </mat-grid-list>
-    </mat-card>
-</div>
-<div><!-- <div *ngFor="let item of list"> -->
-    <mat-card >
-        <mat-grid-list cols="4" rowHeight="75px">
-            <mat-grid-tile
-                *ngFor="let grade of grade5"
-                [colspan]="grade.cols"
-                [rowspan]="grade.rows"
-                [style.background]="grade.color"
-                [style.font-size]="grade.fontsize">
-                {{grade.text}}
-            </mat-grid-tile>
-        </mat-grid-list>
-    </mat-card>
-</div>
-<div><!-- <div *ngFor="let item of list"> -->
-    <mat-card >
-        <mat-grid-list cols="4" rowHeight="75px">
-            <mat-grid-tile
-                *ngFor="let grade of grade6"
-                [colspan]="grade.cols"
-                [rowspan]="grade.rows"
-                [style.background]="grade.color"
-                [style.font-size]="grade.fontsize">
-                {{grade.text}}
-            </mat-grid-tile>
-        </mat-grid-list>
-    </mat-card>
-</div>
-</div>
-
-
-<!-- nested for loop for grades -->
