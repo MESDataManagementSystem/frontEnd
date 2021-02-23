@@ -4,7 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { AddFormDialogComponent } from '../Modals/modal-add-form.component';
+import { AddFormDialogComponent } from './modal-add-form.component';
+import { ModalViewFormComponent } from './modal-view-form.component';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 
 
@@ -18,6 +21,7 @@ export class AllStudentsComponent implements AfterViewInit {
   dataSource: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  viewFile = false;
   typeSearch: string;
   value: string;
   students: any;
@@ -36,10 +40,14 @@ export class AllStudentsComponent implements AfterViewInit {
 
 
   ngAfterViewInit(): void {
-    this.service.retrieveData().subscribe(student => { this.students = student; });
-    this.dataSource = new MatTableDataSource<any>(this.students);
+    this.service.retrieveData().subscribe(student => {
+      this.students = student.data;
+      this.dataSource = new MatTableDataSource<any>(this.students);
+      this.dataSource.paginator = this.paginator;
 
-    this.dataSource.paginator = this.paginator;
+
+    });
+
     console.log(this.students);
   }
   openDialog(): void {
@@ -66,5 +74,11 @@ export class AllStudentsComponent implements AfterViewInit {
     this.service.searchbyFamilyName(this.name.toLowerCase()).subscribe(info => { this.dataSource = new MatTableDataSource<any>(info); });
     console.log(this.students);
   }
+  showFile(url): void{
+    console.log(url);
+    this.dialog.open(ModalViewFormComponent, { disableClose: true });
+    console.log(this.typeSearch);
+  }
+
 }
 

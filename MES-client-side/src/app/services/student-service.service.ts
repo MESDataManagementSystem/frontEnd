@@ -9,14 +9,16 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class StudentServiceService {
   // tslint:disable-next-line:max-line-length
-  studentData = [{ name: 'Irish Rufo', lrn: '18106242' }, { name: 'Ma. Theresa Amaquin', lrn: '123456' }, { name: 'Yubert Mariscal', lrn: '456788' }, { name: 'Annabelle Belcina', lrn: '45678' }];
+  studentData = [];
   returnSearch: Array<any> = [];
   constructor(
     private httpClient: HttpClient
-    ) { }
+    ) {    }
 
   retrieveData(): Observable<any> {
-    return of(this.studentData);
+    // return of(this.studentData);
+    return this.httpClient.get('http://localhost:5000/api/viewListOfOldFiles');
+
   }
 
   searchbyLRN(data): Observable<any> {
@@ -51,7 +53,7 @@ export class StudentServiceService {
         }
       });
     } else {
-      this.returnSearch = this.studentData;
+      return this.retrieveData();
     }
     console.log(this.returnSearch);
     return of(this.returnSearch);
@@ -65,5 +67,11 @@ export class StudentServiceService {
     console.log('adto nis services : ', fileToUpload);
     return this.httpClient.post('http://localhost:5000/uploadSingleFile', fileToUpload);
   }
+
+   viewFile(url): Observable<any>{
+     console.log(url);
+     return this.httpClient.post('http://localhost:5000/api/viewFile', url);
+   }
+
 
 }

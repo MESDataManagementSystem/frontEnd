@@ -4,7 +4,7 @@
         <mat-form-field class="example-full-width">
             <mat-label>Search by {{typeSearch}}</mat-label>
             <input matInput *ngIf='lrn === true' (click)='lrn = true' [(ngModel)]="searchLrn" autocomplete="off" (keyup)="searchByLrn(searchLrn)"  >
-            <input matInput *ngIf='lrn === false'  [(ngModel)]="name" autocomplete="off" (keyup)="searchbyFamilyName(name)"  >
+            <input matInput *ngIf='lrn === false'  [(ngModel)]="fullName" autocomplete="off" (keyup)="searchbyFamilyName(name)"  >
             <mat-hint align="end">Search using LRN or Name.</mat-hint>
         </mat-form-field>
         <button mat-button [matMenuTriggerFor]="menu" class= 'menuIcon'><mat-icon>keyboard_arrow_down</mat-icon></button>
@@ -17,7 +17,7 @@
         <table mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="lrn">
                 <th mat-header-cell *matHeaderCellDef   mat-sort-header> Name </th>
-                <td mat-cell *matCellDef="let student"> {{student.name}} </td>
+                <td mat-cell *matCellDef="let student"> {{student.fullName}} </td>
             </ng-container>
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef  mat-sort-header> LRN </th>
@@ -25,7 +25,7 @@
             </ng-container>
             <ng-container matColumnDef="view"> 
                 <th mat-header-cell *matHeaderCellDef  mat-sort-header>  View </th>
-                <td mat-cell *matCellDef="let student"> <mat-icon>visibility</mat-icon> </td>
+                <td mat-cell *matCellDef="let student"><span >{{student.fileUrl}}</span><mat-icon (click)='showFile(student.fileUrl)'>visibility </mat-icon> </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
             <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
@@ -38,4 +38,6 @@
         </button>
     </div>
 </div>
+
+
 

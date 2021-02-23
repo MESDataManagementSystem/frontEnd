@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {  PdfViewerModule  } from 'ng2-pdf-viewer';
+
 // import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
@@ -32,9 +34,11 @@ import { ClassesComponent } from './classes/classes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
-import { AddFormDialogComponent } from './Modals/modal-add-form.component';
+import { AddFormDialogComponent } from './all-students/modal-add-form.component';
 
 import { StudentServiceService } from './services/student-service.service';
+import { ModalViewFormComponent } from './all-students/modal-view-form.component';
+
 // import { ModalAddFormComponent } from './Modals/modal-add-form/modal-add-form.component';
 
 
@@ -48,7 +52,8 @@ import { StudentServiceService } from './services/student-service.service';
     LoginComponent,
     SideNavComponent,
     // ModalAddFormComponent,
-    AddFormDialogComponent
+    AddFormDialogComponent,
+    ModalViewFormComponent
   ],
   imports: [
     FormsModule,
@@ -71,7 +76,8 @@ import { StudentServiceService } from './services/student-service.service';
     MatSelectModule,
     MatMenuModule,
     MatGridListModule,
-    HttpClientModule
+    HttpClientModule,
+    PdfViewerModule
   ],
   providers: [StudentServiceService],
   bootstrap: [AppComponent]

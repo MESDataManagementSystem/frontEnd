@@ -56,6 +56,11 @@ button{
   margin-left:0;
   float: left;
 }
+.form{
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
 /* ::ng-deep .mat-input-underline { display: none; }  */
 /* mat-select  {
   display: none;
