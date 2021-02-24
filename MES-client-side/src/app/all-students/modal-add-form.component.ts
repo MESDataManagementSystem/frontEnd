@@ -27,16 +27,22 @@ export class AddFormDialogComponent implements OnInit {
   }
 
   addStudent(file): void {
-    console.log('submitted', this.fileToUpload);
-    const formData = new FormData();
-    formData.append('files', this.fileToUpload, this.fileToUpload.name);
-    formData.append('fullName', this.fullName);
-    formData.append('lrn', this.lrn);
-    formData.append('fileUrl', this.fileUrl);
-    formData.forEach(data => {
-        console.log('data sa formdata : ', data);
-    });
-    this.service.studentForm(formData).subscribe(data => console.log('mao ni return nitya', data));
+    if (this.fullName.trim() && this.lrn.trim()){
+      console.log('submitted', this.fileToUpload);
+      const formData = new FormData();
+      formData.append('files', this.fileToUpload, this.fileToUpload.name);
+      formData.append('fullName', this.fullName);
+      formData.append('lrn', this.lrn);
+      formData.append('fileUrl', this.fileUrl);
+      formData.forEach(data => {
+          console.log('data sa formdata : ', data);
+      });
+      this.service.studentForm(formData).subscribe(data => console.log('mao ni return nitya', data));
+      this.close();
+    }else{
+      alert('please Fill in all the data needed.');
+    }
+
   }
   handleFileInput(files: FileList): void  {
     this.fileToUpload = files.item(0);

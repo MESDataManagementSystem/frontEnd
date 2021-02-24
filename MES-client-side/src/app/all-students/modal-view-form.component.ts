@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentServiceService } from '../services/student-service.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { PDFSource } from 'ng2-pdf-viewer';
+import { Inject } from '@angular/core';
 
 @Component({
   selector: 'app-modal-view-form',
   templateUrl: './modal-view-form.component.html',
   styleUrls: ['./modal-view-form.component.css']
 })
+
+
 export class ModalViewFormComponent implements OnInit {
   pdfSource: string;
-  constructor(private service: StudentServiceService) {
-    this.pdfSource = 'http://localhost:5000/uploads/1614084713839.pdf';
+  constructor(private service: StudentServiceService, @Inject(MAT_DIALOG_DATA) public data: Url) {
+    this.pdfSource = this.data + '';
   }
 
   ngOnInit(): void {
@@ -25,4 +30,8 @@ export class ModalViewFormComponent implements OnInit {
     });
   }
 
+}
+
+export interface Url{
+  url: string;
 }

@@ -41,8 +41,12 @@ export class StudentServiceService {
   }
 
   searchbyFamilyName(data): Observable<any> {
+    const datas = this.retrieveData();
+    datas.forEach(datum => {
+      console.log(datum);
+    });
     this.returnSearch = [];
-    console.log(data);
+    // console.log(data);
     if (data !== '') {
       this.studentData.forEach(student => {
         if (student.name.toLowerCase().includes(data.trim())) {

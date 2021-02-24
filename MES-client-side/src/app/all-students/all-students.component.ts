@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AddFormDialogComponent } from './modal-add-form.component';
 import { ModalViewFormComponent } from './modal-view-form.component';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 
@@ -36,20 +36,18 @@ export class AllStudentsComponent implements AfterViewInit {
     this.value = '';
     this.typeSearch = 'LRN';
     this.dataSource = new MatTableDataSource<any>(this.students);
-  }
-
-
-  ngAfterViewInit(): void {
     this.service.retrieveData().subscribe(student => {
       this.students = student.data;
       this.dataSource = new MatTableDataSource<any>(this.students);
-      this.dataSource.paginator = this.paginator;
-
-
+      setTimeout(() => {
+        this.dataSource.paginator = this.paginator;
+      }, 0);
+      // tslint:disable-next-line:only-arrow-functions
     });
-
-    console.log(this.students);
   }
+
+
+  ngAfterViewInit(): void {}
   openDialog(): void {
     this.dialog.open(AddFormDialogComponent, { disableClose: true });
     console.log(this.typeSearch);
@@ -65,19 +63,26 @@ export class AllStudentsComponent implements AfterViewInit {
     alert(event);
   }
 
-  searchByLrn(searchLrn): void {
-    console.log('searchLrn', this.lrn);
-    this.service.searchbyLRN(this.searchLrn).subscribe(info => { this.dataSource = new MatTableDataSource<any>(info); });
-    console.log(this.students);
-  }
-  searchbyFamilyName(name): void {
-    this.service.searchbyFamilyName(this.name.toLowerCase()).subscribe(info => { this.dataSource = new MatTableDataSource<any>(info); });
-    console.log(this.students);
-  }
-  showFile(url): void{
+  showFile(url): void {
     console.log(url);
-    this.dialog.open(ModalViewFormComponent, { disableClose: true });
+    // tslint:disable-next-line:max-line-length
+    this.dialog.open(ModalViewFormComponent, { disableClose: true, data: url , width: '100vw !important',  height: '100% !important'});
     console.log(this.typeSearch);
+  }
+
+  filterFullName(value: string): void {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
+    // tslint:disable-next-line:only-arrow-functions
+    this.dataSource.filterPredicate = function(data, filter: string): boolean {
+      return data.fullName.toLocaleLowerCase().includes(filter);
+    };
+  }
+  filterLrn(value: string): void {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
+    // tslint:disable-next-line:only-arrow-functions
+    this.dataSource.filterPredicate = function(data, filter: string): boolean {
+      return data.lrn.toLocaleLowerCase().includes(filter);
+    };
   }
 
 }
