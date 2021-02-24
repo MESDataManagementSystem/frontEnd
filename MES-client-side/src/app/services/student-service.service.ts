@@ -21,48 +21,6 @@ export class StudentServiceService {
 
   }
 
-  searchbyLRN(data): Observable<any> {
-    this.returnSearch = [];
-    console.log(data);
-    if (data !== '') {
-      this.studentData.forEach(student => {
-        if (student.lrn.includes(data.trim())) {
-          this.returnSearch.push(student);
-          console.log('okii naa sya');
-        } else {
-          console.log('no no');
-        }
-      });
-    } else {
-      this.returnSearch = this.studentData;
-    }
-    console.log(this.returnSearch);
-    return of(this.returnSearch);
-  }
-
-  searchbyFamilyName(data): Observable<any> {
-    const datas = this.retrieveData();
-    datas.forEach(datum => {
-      console.log(datum);
-    });
-    this.returnSearch = [];
-    // console.log(data);
-    if (data !== '') {
-      this.studentData.forEach(student => {
-        if (student.name.toLowerCase().includes(data.trim())) {
-          this.returnSearch.push(student);
-          console.log('okii naa sya');
-        } else {
-          console.log('no no');
-        }
-      });
-    } else {
-      return this.retrieveData();
-    }
-    console.log(this.returnSearch);
-    return of(this.returnSearch);
-  }
-
   handleError(e): any{
     return e;
   }
