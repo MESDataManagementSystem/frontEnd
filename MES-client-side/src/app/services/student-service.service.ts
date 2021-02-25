@@ -35,5 +35,12 @@ export class StudentServiceService {
      return this.httpClient.post('http://localhost:5000/api/viewFile', url);
    }
 
+  //  getPdf(url): Observable<any> {
+
+  //   let headers = new HttpHeaders();
+  //   headers = headers.set('Accept', 'application/pdf');
+  //   return this.httpClient.get(url, { headers: headers, responseType: 'blob' });
+  // }
+
 
 }

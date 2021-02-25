@@ -63,10 +63,14 @@ export class AllStudentsComponent implements AfterViewInit {
     alert(event);
   }
 
-  showFile(url): void {
+  showFile(url, name): void {
     console.log(url);
+    const datas = [];
+    datas.push(url);
+    datas.push(name);
     // tslint:disable-next-line:max-line-length
-    this.dialog.open(ModalViewFormComponent, { disableClose: true, data: url , width: '100vw !important',  height: '100% !important'});
+    console.log('daataaa :::: ', datas);
+    this.dialog.open(ModalViewFormComponent, { disableClose: true, data: datas , width: '100vw !important',  height: '100% !important'});
     console.log(this.typeSearch);
   }
 
