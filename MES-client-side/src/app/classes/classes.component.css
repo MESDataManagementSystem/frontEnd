@@ -1,18 +1,38 @@
-mat-card {
-    width: 200px;
-    height: 230px;
-   }
-
-img {
-    height: 150px;
-    width: 233px;
-}
-div{
+/* .card {
+    width: 100%;
+    max-width: 230px;
+    margin-left: 3%;
+    margin-right: 3%;
+    padding-top: 5%;
+    padding-bottom: 3%;
+    background: #F08080 !important;
+    border-radius: 5%;
     float: left;
-    /* padding: 20px 50px; */
-    padding-left: 5%;
-    padding-top: 20px;
+    margin-top: 5%;
+} */
+/* .gradeLevel {
+    font-size: 400%;
+    font-family: 'Lucida Sans Unicode';
+    margin-top: 15%;
+    margin-bottom: 17%;
+    margin-left: 5%;
 }
-.font{
-    font-size: large;
+
+.otherDetails {
+    font-size: 100%;
+    font-family: 'Lucida Sans Unicode';
+} */
+
+.addIcon{
+    margin-right: 5%;
+    float: right;
+    transform: scale(2);
+    color: green
+}
+.mat-tab-label {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    color: green;
 }

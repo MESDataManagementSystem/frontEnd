@@ -1,0 +1,444 @@
+<div class="card">
+    <div class="card-header">
+        <h2 mat-dialog-title>Teacher Information</h2>
+    </div>
+    <div class="card-body">
+        <mat-dialog-content class="mat-typography">
+            <form #teacherForm="ngForm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Last Name</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.lastName" name="lastName"
+                                    #lastName="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="teachersForm.lastName" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="teachersForm.lastName=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>First Name</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.firstName" name="firstName"
+                                    #firstName="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.firstName" mat-button matSuffix mat-icon-button aria-label="Clear"
+                                    (click)="data.firstName=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Middle Name</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.middleName" name="middleName"
+                                    #middleName="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.middleName" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.middleName=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Name Ext</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.nameExt" name="nameExt" #nameExt="ngModel"
+                                    [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.nameExt" mat-button matSuffix mat-icon-button aria-label="Clear"
+                                    (click)="data.nameExt=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Employee Number</mat-label>
+                                <input matInput type="number" [(ngModel)]="data.employeeNumber" name="employeeNumber"
+                                    #employeeNumber="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.employeeNumber" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.employeeNumber=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Item Number</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.itemNumber" name="itemNumber"
+                                    #itemNumber="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.itemNumber" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.itemNumber=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Date Of Birth</mat-label>
+                                <input matInput [(ngModel)]="data.dateOfBirth" name="dateOfBirth" #dateOfBirth="ngModel"
+                                    [max]="maxDate" [matDatepicker]="picker" [attr.disabled]="disabled?'':null">
+                                <mat-datepicker-toggle matSuffix [for]="picker">
+                                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Age</mat-label>
+                                <input matInput [(ngModel)]="data.age" name="age" #age="ngModel"
+                                    (click)="CalculateAge()" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.age" mat-button matSuffix mat-icon-button aria-label="Clear"
+                                    (click)="data.age=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-5">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Place Of Birth</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.placeOfBirth" name="placeOfBirth"
+                                    #placeOfBirth="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.placeOfBirth" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.placeOfBirth=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Gender</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.gender" name="gender" #gender="ngModel"
+                                    [matAutocomplete]="auto" [attr.disabled]="disabled?'':null">
+                                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                        {{option}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                                <!-- <mat-icon *ngIf="data.gender" mat-button matSuffix mat-icon-button aria-label="Clear"
+                                    (click)="data.gender=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Marital Status</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.maritalStatus" name="maritalStatus"
+                                    #maritalStatus="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.maritalStatus" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.maritalStatus=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-5">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Home Address</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.homeAddress" name="homeAddress"
+                                    #homeAddress="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.homeAddress" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.homeAddress=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>School Assignment</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.schoolAssignment" name="schoolAssignment"
+                                    #schoolAssignment="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.schoolAssignment" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.schoolAssignment=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>District</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.district" name="district"
+                                    #district="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.district" mat-button matSuffix mat-icon-button aria-label="Clear"
+                                    (click)="data.district=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Current Position</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.currentPosition" name="currentPosition"
+                                    #currentPosition="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.currentPosition" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.currentPosition=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Employment Status</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.employeeStatus" name="employeeStatus"
+                                    #employeeStatus="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.employeeStatus" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.employeeStatus=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-8">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Designation</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.designation" name="designation"
+                                    #designation="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.designation" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.designation=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>First Day Of Service - Original Appt</mat-label>
+                                <input matInput [(ngModel)]="data.firstDayOfService" name="firstDayOfService"
+                                    #firstDayOfService="ngModel" [max]="maxDate" [matDatepicker]="picker1"
+                                    [attr.disabled]="disabled?'':null">
+                                <mat-datepicker-toggle matSuffix [for]="picker1">
+                                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Date Of Last Promotion</mat-label>
+                                <input matInput [(ngModel)]="data.dateOfLastPromotion" name="dateOfLastPromotion"
+                                    #dateOfLastPromotion="ngModel" [max]="maxDate" [matDatepicker]="picker2"
+                                    [attr.disabled]="disabled?'':null">
+                                <mat-datepicker-toggle matSuffix [for]="picker2">
+                                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-2">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Salary Grade</mat-label>
+                                <input matInput type="number" [(ngModel)]="data.salaryGrade" name="salaryGrade"
+                                    #salaryGrade="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.salaryGrade" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.salaryGrade=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-2">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>STEP Increment</mat-label>
+                                <input matInput type="number" [(ngModel)]="data.stepIncrement" name="stepIncrement"
+                                    #stepIncrement="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.stepIncrement" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.stepIncrement=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Eligibility</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.eligibility" name="eligibility"
+                                    #eligibility="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.eligibility" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.eligibility=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Contact Number</mat-label>
+                                <input matInput type="tel" [(ngModel)]="data.contactNumber" name="contactNumber"
+                                    #contactNumber="ngModel" pattern="((^(\+)(\d){12}$)|(^\d{11}$))"
+                                    [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.contactNumber" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.contactNumber=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}} with a correct phone # pattern
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-5">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>DepEd Email Address</mat-label>
+                                <input matInput type="email" [(ngModel)]="data.depEdEmailAddress"
+                                    name="depEdEmailAddress" #depEdEmailAddress="ngModel"
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                    [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.depEdEmailAddress" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.depEdEmailAddress=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}} with a correct email pattern
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>TIN</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.tin" name="tin" #tin="ngModel"
+                                    [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.tin" mat-button matSuffix mat-icon-button aria-label="Clear"
+                                    (click)="data.tin=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Available Service Credits</mat-label>
+                                <input matInput type="number" [(ngModel)]="data.availableServiceCredits"
+                                    name="availableServiceCredits" #availableServiceCredits="ngModel"
+                                    [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.availableServiceCredits" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.availableServiceCredits=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-5">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>PhilHealth Number</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.philHealthNumber" name="philHealthNumber"
+                                    #philHealthNumber="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.philHealthNumber" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.philHealthNumber=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>Pag-IBIG Number</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.pagIbigNumber" name="pagIbigNumber"
+                                    #pagIbigNumber="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.pagIbigNumber" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.pagIbigNumber=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6">
+                            <mat-form-field appearance="outline" class="inputField" (click)="disabled=false"
+                                (mouseout)="disabled=true">
+                                <mat-label>GSIS (BP) Number</mat-label>
+                                <input matInput type="text" [(ngModel)]="data.gsisBPNumber" name="gsisBPNumber"
+                                    #gsisBPNumber="ngModel" [attr.disabled]="disabled?'':null">
+                                <!-- <mat-icon *ngIf="data.gsisBPNumber" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="data.gsisBPNumber=''">
+                                    close
+                                </mat-icon> -->
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-button mat-dialog-close class="cancel">Cancel</button>
+            <button mat-button (click)="updateClick()">Update</button>
+        </mat-dialog-actions>
+    </div>
+</div>

@@ -3,13 +3,14 @@ mat-form-field {
   padding-left: 20px;
   float: left;
 }
+
 button{
   float: left;
 }
+
 .content{
   padding-left: 20px;
 }
-
 
 .mat-table {
   margin-top: 12%;
@@ -29,6 +30,7 @@ button{
   background-color: #dcdedc;
   color: black;
 }
+
 .mat-header-cell{
   color: green;
   text-align: justify;
@@ -38,20 +40,21 @@ button{
   background-color: white;
   font-size: medium;
 }
+
 .mat-elevation-z8{
   width: 80%;
   margin-right: auto;
   margin-left: auto;
   display: block;
 }
+
 .addIcon{
   margin-left: 85%;
-  /* height: 100px;
-  width: */
   transform: scale(2);
   margin-top: 3%;
   color: green
 }
+
 .menuIcon{
   margin-left:0;
   float: left;
@@ -73,7 +76,3 @@ button{
   position: fixed;
 } */
 
-/* .mat-row,
-.mat-header-row {
-  display: table-row;
-} */

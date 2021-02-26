@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-// import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-side-nav',
