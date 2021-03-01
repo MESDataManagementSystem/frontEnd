@@ -18,7 +18,10 @@ export class DialogComponent implements OnInit {
   error = new FormControl('', [Validators.required]);
   optionsControl = new FormControl();
   options: string[] = ['M', 'F'];
+  options1: string[] = ['Single', 'Married', 'Divorced', 'Separated', 'Widowed'];
   filteredOptions: Observable<string[]>;
+  filteredOptions1: Observable<string[]>;
+
   teachersForm = {
     lastName: "",
     firstName: "",
@@ -59,8 +62,16 @@ export class DialogComponent implements OnInit {
   ngOnInit() {
     this.filteredOptions = this.optionsControl.valueChanges.pipe(
       startWith(''),
-      map(value => this.gender(value))
+      map(
+        value => this.gender(value)
+        )
     );
+    this.filteredOptions1 = this.optionsControl.valueChanges.pipe(
+      startWith(''),
+      map(
+        value => this.status(value)
+      )
+    )
 
   }
 
@@ -78,6 +89,12 @@ export class DialogComponent implements OnInit {
   private gender(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0)
+  }
+
+  // For Marital Status
+  private status(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options1.filter(option => option.toLowerCase().indexOf(filterValue) === 0)
   }
 
   // All Fields Are Required 

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddSectionComponent } from './add-section.component';
+import { SectionService } from '../services/section.service';
 
 export interface Card {
   totalSections, totalStudents: number;
@@ -16,7 +17,9 @@ export interface Card {
 
 
 export class ClassesComponent implements OnInit {
-
+  grade: string;
+  sections: any;
+  gradeLevel: any;
   kinder: Card[] = [
     {
       totalSections: 2,
@@ -57,9 +60,11 @@ export class ClassesComponent implements OnInit {
 
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog, private service : SectionService
   ) {
-    this.kinder
+    this.grade = "";
+    this.kinder;
+    this.gradeLevel = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6',]
   }
 
   ngOnInit(): void { }
@@ -68,6 +73,25 @@ export class ClassesComponent implements OnInit {
   openDialog(): void {
     this.dialog.open(AddSectionComponent, { disableClose: true });
   }
+
+  selectedGrade(grade){
+    this.sections=[];
+    console.log(grade.index);
+    this.grade = grade.index;
+    if(grade.index === 0){
+      this.grade = "Kindergarten"
+    }else{
+      this.grade = "Grade " + grade.index;
+    }
+    this.viewSections();
+    console.log(this.grade);
+  }
+
+  viewSections(){
+    alert(this.grade)
+    this.service.viewSections(this.grade).subscribe(data=> {this.sections =  data; this.sections = this.sections.data; console.log( this.sections, "service data")})
+  }
+
 }
 
 

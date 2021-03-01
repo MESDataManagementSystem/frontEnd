@@ -27,6 +27,13 @@
     margin-right: 5%;
     float: right;
     transform: scale(2);
-    color: green
+    color: #5CB85C
 }
-
+.card{
+    width: 150px;
+    height: 150px;
+    padding: 15px 20px 5px ;
+    float: left;
+    margin-top: 20px;
+    margin-left: 20px
+   }

@@ -42,7 +42,7 @@
                                 <input matInput type="text" [(ngModel)]="classesForm.adviser" name="adviser"
                                     #adviser="ngModel" required [matAutocomplete]="list" >
                                     <mat-autocomplete autoActiveFirstOption #list="matAutocomplete" >
-                                        <mat-option  *ngFor="let option of otherList" value="{{option.lastName}}, {{option.firstName}}, {{option.middleName}} ">
+                                        <mat-option (click)="teacherId = option._id"  *ngFor="let option of otherList" value="{{option.lastName}}, {{option.firstName}}, {{option.middleName}} ">
                                             {{option.lastName}}, {{option.firstName}}, {{option.middleName}} 
                                         </mat-option>
                                     </mat-autocomplete>

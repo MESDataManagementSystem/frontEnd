@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h2 mat-dialog-title>Add Teacher</h2>
+        <h1>Add Teacher</h1>
     </div>
     <div class="card-body">
         <mat-dialog-content class="mat-typography">
@@ -148,7 +148,12 @@
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Marital Status</mat-label>
                                 <input matInput type="text" [(ngModel)]="teachersForm.maritalStatus"
-                                    name="maritalStatus" #maritalStatus="ngModel" required>
+                                    name="maritalStatus" #maritalStatus="ngModel" required [matAutocomplete]="auto1"> 
+                                    <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredOptions1 | async" [value]="option">
+                                            {{option}}
+                                        </mat-option>
+                                    </mat-autocomplete>
                                 <mat-icon *ngIf="teachersForm.maritalStatus" mat-button matSuffix mat-icon-button
                                     aria-label="Clear" (click)="teachersForm.maritalStatus=''">
                                     close

@@ -1,12 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { SectionService } from '../services/section.service';
 import { TeacherServiceService } from '../services/teacher-service.service';
-import { Teacher } from '../all-teachers/teacher.model';
 
 @Component({
   selector: 'app-add-section',
@@ -19,6 +18,7 @@ export class AddSectionComponent implements OnInit {
   options: string[] = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
   teacherList: any
   otherList = []
+  teacherId = "";
   filteredOptions: Observable<string[]>;
   error = new FormControl('', [Validators.required]);
   classesForm = {
@@ -57,12 +57,13 @@ export class AddSectionComponent implements OnInit {
 
   // Add Section
   addSection() {
-    // console.log(this.classesForm)
-    this.sectionService.addTeacher(this.classesForm).subscribe((data) => {
+    const data = { ...this.classesForm, adviser: this.teacherId }
+    console.log(data)
+    this.sectionService.addTeacher(data).subscribe((data) => {
       if (data) {
         this.succesAlert();
         this.dialog.closeAll();
-        window.location.reload();
+        // window.location.reload();
       }
     })
   }
