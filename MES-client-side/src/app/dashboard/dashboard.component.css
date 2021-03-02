@@ -9,7 +9,7 @@ mat-card {
   }
   div{
       float: left;
-      /* padding: 20px 50px; */
-      padding-left: 5%;
+      padding: 20px 50px;
+      /* padding-left: 5%; */
       padding-top: 20px;
   }

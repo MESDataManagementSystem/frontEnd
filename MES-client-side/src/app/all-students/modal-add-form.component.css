@@ -9,12 +9,12 @@
     cursor: pointer;
     background-color: white; 
     color: black; 
-    border: 2px solid #008CBA;
+    border: 2px solid #5CB85C;
 
   }
 
   button:hover {
-    background-color: #008CBA; /* Green */
+    background-color: #5CB85C;
     color: white;
   }
   .cancel{
@@ -42,3 +42,11 @@
     margin-left: auto;
     display: block;
   }
+
+  *,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}

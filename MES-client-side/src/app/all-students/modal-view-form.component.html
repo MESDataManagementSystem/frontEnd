@@ -1,0 +1,13 @@
+<!-- <h1 mat-dialog-title>Dialog with elements</h1> -->
+<div mat-dialog-content>
+  <pdf-viewer [src]="pdfSource"
+    [original-size]="false"
+    ></pdf-viewer>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button (click)='printPdf()' >Print</button>
+  <button mat-button (click)='downloadPdf()'>Download</button>
+</div>
+
+

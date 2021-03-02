@@ -2,6 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {  PdfViewerModule  } from 'ng2-pdf-viewer';
+
+// import { HttpClientModule, HttpClient } from '@angular/common/http';
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,12 +38,17 @@ import { ClassesComponent } from './classes/classes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
-import { AddFormDialogComponent } from './Modals/modal-add-form.component';
+import { AddFormDialogComponent } from './all-students/modal-add-form.component';
+
+import { StudentServiceService } from './services/student-service.service';
+import { ModalViewFormComponent } from './all-students/modal-view-form.component';
+
+// import { ModalAddFormComponent } from './Modals/modal-add-form/modal-add-form.component';
 import { DialogComponent } from './all-teachers/dialog.component';
 import { ViewComponent } from './all-teachers/view.component';
-import { StudentServiceService } from './services/student-service.service';
 import { TeacherServiceService } from './services/teacher-service.service';
 import { AddSectionComponent } from './classes/add-section.component';
+import { ViewStudentsComponent } from './classes/view-students.component';
 
 
 @NgModule({
@@ -50,10 +60,13 @@ import { AddSectionComponent } from './classes/add-section.component';
     DashboardComponent,
     LoginComponent,
     SideNavComponent,
+    // ModalAddFormComponent,
+    ModalViewFormComponent,
     AddFormDialogComponent,
     DialogComponent,
     ViewComponent,
-    AddSectionComponent
+    AddSectionComponent,
+    ViewStudentsComponent
   ],
   imports: [
     HttpClientModule,
@@ -82,7 +95,9 @@ import { AddSectionComponent } from './classes/add-section.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
-    MatGridListModule
+    MatGridListModule,
+    HttpClientModule,
+    PdfViewerModule
   ],
   providers: [
     HttpClient,

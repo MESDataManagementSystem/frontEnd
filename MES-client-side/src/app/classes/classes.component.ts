@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddSectionComponent } from './add-section.component';
 import { SectionService } from '../services/section.service';
+import {Router} from '@angular/router';
 
 export interface Card {
   totalSections, totalStudents: number;
@@ -23,38 +24,42 @@ export class ClassesComponent implements OnInit {
 
 
   constructor(
-    private dialog: MatDialog, private service: SectionService
+    private dialog: MatDialog, private service: SectionService, private router: Router
   ) {
-    this.grade = "";
-    this.gradeLevel = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6',]
+    this.grade = 'Kindergarten';
+    this.gradeLevel = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.viewSections();
+  }
 
   // Dialog For Adding Teacher
   openDialog(): void {
     this.dialog.open(AddSectionComponent, { disableClose: true });
   }
 
-  selectedGrade(grade) {
+  selectedGrade(grade): void {
     this.sections = [];
     console.log(grade.index);
     this.grade = grade.index;
     if (grade.index === 0) {
-      this.grade = "Kindergarten"
+      this.grade = 'Kindergarten';
     } else {
-      this.grade = "Grade " + grade.index;
+      this.grade = 'Grade ' + grade.index;
     }
     this.viewSections();
     console.log(this.grade);
-  }
+  }   
 
-  viewSections() {
-    alert(this.grade)
+  viewSections(): void {
     this.service.viewSections(this.grade).subscribe(data => {
       this.sections = data; this.sections = this.sections.data;
-      console.log(this.sections, "service data")
-    })
+      console.log(this.sections, 'service data');
+    });
+  }
+  viewStudents(){
+    this.router.navigateByUrl('/MES/classes/student');
   }
 
 }

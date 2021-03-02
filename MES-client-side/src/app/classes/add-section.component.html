@@ -53,6 +53,18 @@
                                 <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                             </mat-form-field>
                         </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Year</mat-label>
+                                <input matInput type="text" [(ngModel)]="classesForm.year" name="year"
+                                    #year="ngModel" required>
+                                <mat-icon *ngIf="classesForm.year" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="classesForm.year=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
                     </div>
                 </div>
             </form>

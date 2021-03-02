@@ -29,9 +29,16 @@
     transform: scale(2);
     color: #5CB85C
 }
+.mat-tab-label {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    color: green;
+}
 .box{
     width: 150px;
-    height: 150px;
+    height: 200px;
     padding: 15px 20px 5px ;
     float: left;
     margin-top: 20px;
