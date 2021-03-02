@@ -50,7 +50,7 @@ export class TeacherServiceService {
     return this.http.put(`${this.url}/api/updateTeachersInfo/${teacher._id}`, teacher)
       .pipe(
         catchError(e => {
-          this.errorAlert2();
+          this.errorAlert();
           throw new Error(e)
         })
       )
@@ -60,7 +60,7 @@ export class TeacherServiceService {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'All Fields Are Required! Or The Inputted Age Is Not Correct'
+      text: 'All Fields Are Required!'
     })
   }
 

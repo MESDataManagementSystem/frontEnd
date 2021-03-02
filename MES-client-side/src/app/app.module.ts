@@ -4,8 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {  PdfViewerModule  } from 'ng2-pdf-viewer';
 
-// import { HttpClientModule, HttpClient } from '@angular/common/http';
-
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,15 +36,15 @@ import { ClassesComponent } from './classes/classes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
-import { AddFormDialogComponent } from './all-students/modal-add-form.component';
 
 import { StudentServiceService } from './services/student-service.service';
 import { ModalViewFormComponent } from './all-students/modal-view-form.component';
+import { AddFormDialogComponent } from './all-students/modal-add-form.component';
 
-// import { ModalAddFormComponent } from './Modals/modal-add-form/modal-add-form.component';
 import { DialogComponent } from './all-teachers/dialog.component';
 import { ViewComponent } from './all-teachers/view.component';
 import { TeacherServiceService } from './services/teacher-service.service';
+
 import { AddSectionComponent } from './classes/add-section.component';
 import { ViewStudentsComponent } from './classes/view-students.component';
 
@@ -60,7 +58,6 @@ import { ViewStudentsComponent } from './classes/view-students.component';
     DashboardComponent,
     LoginComponent,
     SideNavComponent,
-    // ModalAddFormComponent,
     ModalViewFormComponent,
     AddFormDialogComponent,
     DialogComponent,
