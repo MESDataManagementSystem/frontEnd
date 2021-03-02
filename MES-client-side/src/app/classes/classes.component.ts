@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AddSectionComponent } from './add-section.component';
 import { SectionService } from '../services/section.service';
 import {Router} from '@angular/router';
+import { AddStudentInfoComponent } from './add-student-info.component';
+
 
 export interface Card {
   totalSections, totalStudents: number;
@@ -34,9 +35,9 @@ export class ClassesComponent implements OnInit {
     this.viewSections();
   }
 
-  // Dialog For Adding Teacher
+  // Dialog For Adding Student
   openDialog(): void {
-    this.dialog.open(AddSectionComponent, { disableClose: true });
+    this.dialog.open(AddStudentInfoComponent, { disableClose: true });
   }
 
   selectedGrade(grade): void {
@@ -50,7 +51,7 @@ export class ClassesComponent implements OnInit {
     }
     this.viewSections();
     console.log(this.grade);
-  }   
+  }
 
   viewSections(): void {
     this.service.viewSections(this.grade).subscribe(data => {
@@ -58,7 +59,8 @@ export class ClassesComponent implements OnInit {
       console.log(this.sections, 'service data');
     });
   }
-  viewStudents(){
+
+  viewStudents(): void{
     this.router.navigateByUrl('/MES/classes/student');
   }
 

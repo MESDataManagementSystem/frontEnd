@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import {Location} from '@angular/common';
+import { AddStudentInfoComponent } from './add-student-info.component';
+
 
 @Component({
   selector: 'app-view-students',
@@ -25,11 +27,12 @@ export class ViewStudentsComponent implements AfterViewInit {
   searchLrn = '';
   name = '';
   lrn = true;
-  constructor(private service: StudentServiceService, private dialog: MatDialog, private location: Location) { 
+  section: string;
+  constructor(private service: StudentServiceService, private dialog: MatDialog, private location: Location) {
     this.value = '';
     this.typeSearch = 'LRN';
     this.dataSource = new MatTableDataSource<any>(this.students);
-    this.service.retrieveData().subscribe(student => {
+    this.service.viewStudents().subscribe(student => {
       this.students = student.data;
       this.dataSource = new MatTableDataSource<any>(this.students);
       setTimeout(() => {
@@ -37,10 +40,17 @@ export class ViewStudentsComponent implements AfterViewInit {
       }, 0);
       // tslint:disable-next-line:only-arrow-functions
     });
+    this.service.viewStudents().subscribe(data => {console.log(data, 'datasss'); });
+    this.section = '';
   }
 
   ngAfterViewInit(): void {
   }
+  // Dialog For Adding Student
+  openDialog(): void {
+    this.dialog.open(AddStudentInfoComponent, { disableClose: true });
+  }
+
 
   backClicked(): void {
     this.location.back();

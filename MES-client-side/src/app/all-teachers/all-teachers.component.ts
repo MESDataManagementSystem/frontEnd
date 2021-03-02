@@ -15,37 +15,37 @@ import { TeacherServiceService } from '../services/teacher-service.service';
 export class AllTeachersComponent implements OnInit {
 
   teachersForm = {
-    _id: "",
-    lastName: "",
-    firstName: "",
-    middleName: "",
-    nameExt: "",
-    employeeNumber: "",
-    itemNumber: "",
-    dateOfBirth: "",
-    placeOfBirth: "",
-    age: "",
-    gender: "",
-    maritalStatus: "",
-    homeAddress: "",
-    schoolAssignment: "",
-    district: "",
-    currentPosition: "",
-    employeeStatus: "",
-    designation: "",
-    firstDayOfService: "",
-    dateOfLastPromotion: "",
-    salaryGrade: "",
-    stepIncrement: "",
-    eligibility: "",
-    contactNumber: "",
-    depEdEmailAddress: "",
-    tin: "",
-    philHealthNumber: "",
-    gsisBPNumber: "",
-    pagIbigNumber: "",
-    availableServiceCredits: "",
-  }
+    _id: '',
+    lastName: '',
+    firstName: '',
+    middleName: '',
+    nameExt: '',
+    employeeNumber: '',
+    itemNumber: '',
+    dateOfBirth: '',
+    placeOfBirth: '',
+    age: '',
+    gender: '',
+    maritalStatus: '',
+    homeAddress: '',
+    schoolAssignment: '',
+    district: '',
+    currentPosition: '',
+    employeeStatus: '',
+    designation: '',
+    firstDayOfService: '',
+    dateOfLastPromotion: '',
+    salaryGrade: '',
+    stepIncrement: '',
+    eligibility: '',
+    contactNumber: '',
+    depEdEmailAddress: '',
+    tin: '',
+    philHealthNumber: '',
+    gsisBPNumber: '',
+    pagIbigNumber: '',
+    availableServiceCredits: '',
+  };
 
   teacherData: any = [];
   dataSource: MatTableDataSource<Teacher>;
@@ -65,7 +65,7 @@ export class AllTeachersComponent implements OnInit {
       this.dataSource.filterPredicate = function (data, filter: string): boolean {
         return data.lastName.toLocaleLowerCase().includes(filter)
       }
-    })
+    });
 
   }
 

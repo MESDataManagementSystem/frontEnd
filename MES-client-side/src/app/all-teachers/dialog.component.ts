@@ -23,43 +23,43 @@ export class DialogComponent implements OnInit {
   filteredOptions1: Observable<string[]>;
 
   teachersForm = {
-    lastName: "",
-    firstName: "",
-    middleName: "",
-    nameExt: "",
-    employeeNumber: "",
-    itemNumber: "",
-    dateOfBirth: "",
-    placeOfBirth: "",
-    age: "",
-    gender: "",
-    maritalStatus: "",
-    homeAddress: "",
-    schoolAssignment: "",
-    district: "",
-    currentPosition: "",
-    employeeStatus: "",
-    designation: "",
-    firstDayOfService: "",
-    dateOfLastPromotion: "",
-    salaryGrade: "",
-    stepIncrement: "",
-    eligibility: "",
-    contactNumber: "",
-    depEdEmailAddress: "",
-    tin: "",
-    philHealthNumber: "",
-    gsisBPNumber: "",
-    pagIbigNumber: "",
-    availableServiceCredits: "",
-  }
+    lastName: '',
+    firstName: '',
+    middleName: '',
+    nameExt: '',
+    employeeNumber: '',
+    itemNumber: '',
+    dateOfBirth: '',
+    placeOfBirth: '',
+    age: '',
+    gender: '',
+    maritalStatus: '',
+    homeAddress: '',
+    schoolAssignment: '',
+    district: '',
+    currentPosition: '',
+    employeeStatus: '',
+    designation: '',
+    firstDayOfService: '',
+    dateOfLastPromotion: '',
+    salaryGrade: '',
+    stepIncrement: '',
+    eligibility: '',
+    contactNumber: '',
+    depEdEmailAddress: '',
+    tin: '',
+    philHealthNumber: '',
+    gsisBPNumber: '',
+    pagIbigNumber: '',
+    availableServiceCredits: '',
+  };
 
   constructor(
     public dialog: MatDialog,
     private teacherService: TeacherServiceService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.filteredOptions = this.optionsControl.valueChanges.pipe(
       startWith(''),
       map(
@@ -72,7 +72,6 @@ export class DialogComponent implements OnInit {
         value => this.status(value)
       )
     )
-
   }
 
   // Automatic Calculate The Age After Inputing The Birth Date

@@ -15,8 +15,8 @@ export class StudentServiceService {
     private httpClient: HttpClient
     ) {    }
 
+  // return list of old files in all-students component
   retrieveData(): Observable<any> {
-    // return of(this.studentData);
     return this.httpClient.get('http://localhost:5000/api/viewListOfOldFiles');
 
   }
@@ -33,6 +33,14 @@ export class StudentServiceService {
    viewFile(url): Observable<any>{
      console.log(url);
      return this.httpClient.post('http://localhost:5000/api/viewFile', url);
+   }
+
+   addStudent(student): Observable<any>{
+     return this.httpClient.post('http://localhost:5000/api/addStudent', student);
+   }
+
+   viewStudents(): Observable<any>{
+     return this.httpClient.get('http://localhost:5000/api/viewStudents');
    }
 
   //  getPdf(url): Observable<any> {

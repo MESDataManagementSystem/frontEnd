@@ -31,6 +31,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { AllStudentsComponent } from './all-students/all-students.component';
 import { AllTeachersComponent } from './all-teachers/all-teachers.component';
@@ -49,6 +50,7 @@ import { ViewComponent } from './all-teachers/view.component';
 import { TeacherServiceService } from './services/teacher-service.service';
 import { AddSectionComponent } from './classes/add-section.component';
 import { ViewStudentsComponent } from './classes/view-students.component';
+import { AddStudentInfoComponent } from './classes/add-student-info.component';
 
 
 @NgModule({
@@ -66,7 +68,8 @@ import { ViewStudentsComponent } from './classes/view-students.component';
     DialogComponent,
     ViewComponent,
     AddSectionComponent,
-    ViewStudentsComponent
+    ViewStudentsComponent,
+    AddStudentInfoComponent
   ],
   imports: [
     HttpClientModule,
@@ -97,7 +100,8 @@ import { ViewStudentsComponent } from './classes/view-students.component';
     MatMenuModule,
     MatGridListModule,
     HttpClientModule,
-    PdfViewerModule
+    PdfViewerModule,
+    MatCheckboxModule
   ],
   providers: [
     HttpClient,
