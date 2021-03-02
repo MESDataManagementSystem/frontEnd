@@ -34,5 +34,9 @@ export class SectionService {
       text: 'Something Went Wrong! Try To Input Again'
     })
   }
+  
+  viewSections(grade){
+    return this.http.get(`${this.url}/api/viewSection/${grade}`);
+  }
 
 }

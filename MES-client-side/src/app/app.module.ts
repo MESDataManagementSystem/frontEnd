@@ -48,6 +48,7 @@ import { DialogComponent } from './all-teachers/dialog.component';
 import { ViewComponent } from './all-teachers/view.component';
 import { TeacherServiceService } from './services/teacher-service.service';
 import { AddSectionComponent } from './classes/add-section.component';
+import { ViewStudentsComponent } from './classes/view-students.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { AddSectionComponent } from './classes/add-section.component';
     AddFormDialogComponent,
     DialogComponent,
     ViewComponent,
-    AddSectionComponent
+    AddSectionComponent,
+    ViewStudentsComponent
   ],
   imports: [
     HttpClientModule,

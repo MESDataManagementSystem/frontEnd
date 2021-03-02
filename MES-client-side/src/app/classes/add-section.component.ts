@@ -1,12 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, ValueSansProvider } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { SectionService } from '../services/section.service';
 import { TeacherServiceService } from '../services/teacher-service.service';
-import { Teacher } from '../all-teachers/teacher.model';
 
 @Component({
   selector: 'app-add-section',
@@ -17,15 +16,17 @@ export class AddSectionComponent implements OnInit {
 
   optionsControl = new FormControl();
   options: string[] = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
-  teacherList: any
-  otherList = []
+  teacherList: any;
+  otherList = [];
+  teacherId = '';
   filteredOptions: Observable<string[]>;
   error = new FormControl('', [Validators.required]);
   classesForm = {
-    gradeLevel: "",
-    sectionName: "",
-    adviser: ""
-  }
+    gradeLevel: '',
+    sectionName: '',
+    year: '',
+    adviser: ''
+  };
 
   constructor(
     private sectionService: SectionService,
@@ -34,8 +35,8 @@ export class AddSectionComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
-    this.getTeacher()
+  ngOnInit(): void {
+    this.getTeacher();
     this.filteredOptions = this.optionsControl.valueChanges.pipe(
       startWith(''),
       map(value => this.gradeLevel(value))
@@ -45,51 +46,52 @@ export class AddSectionComponent implements OnInit {
   // For gradeLevel Options
   private gradeLevel(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0)
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
   // All Fields Are Required 
-  getErrorMessage() {
+  getErrorMessage(): string {
     if (this.error.hasError('required')) {
       return 'You must enter a value';
     }
   }
 
   // Add Section
-  addSection() {
-    // console.log(this.classesForm)
-    this.sectionService.addTeacher(this.classesForm).subscribe((data) => {
+  addSection(): void {
+    const data = { ...this.classesForm, adviser: this.teacherId };
+    console.log(data);
+    this.sectionService.addTeacher(data).subscribe((data) => {
       if (data) {
         this.succesAlert();
         this.dialog.closeAll();
-        window.location.reload();
+        // window.location.reload();
       }
-    })
+    });
   }
 
   // Get Teacher
-  getTeacher() {
+  getTeacher(): void {
     this.teacherService.getAllTheTeachersList().subscribe(data => {
       if (data) {
         this.teacherList = data;
-        this.teacherList = this.teacherList.data
+        this.teacherList = this.teacherList.data;
         this.teacherList.forEach(data => {
-          this.otherList.push(data)
+          this.otherList.push(data);
         });
 
       }
-    })
+    });
   }
 
   // Alert After Successful Adding Section
-  succesAlert() {
+  succesAlert(): void {
     Swal.fire({
       icon: 'success',
       title: 'Success',
       text: 'Your Work Has Been Saved',
       showConfirmButton: false,
       timer: 1500
-    })
+    });
   }
 
 }

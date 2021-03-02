@@ -7,6 +7,7 @@ import { ClassesComponent } from './classes/classes.component';
 import { AllTeachersComponent } from './all-teachers/all-teachers.component';
 import { AllStudentsComponent } from './all-students/all-students.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
+import { ViewStudentsComponent } from './classes/view-students.component';
 
 
 
@@ -21,9 +22,9 @@ const routes: Routes = [
     children: [
       { path: 'students', component: AllStudentsComponent },
       { path: 'teachers', component: AllTeachersComponent },
-      { path: 'classes', component: ClassesComponent },
-      { path: 'dashboard', component: DashboardComponent}
-      ,
+      { path: 'classes', component: ClassesComponent},
+      { path: 'dashboard', component: DashboardComponent},
+      {path: 'classes/student', component: ViewStudentsComponent},
       {path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },

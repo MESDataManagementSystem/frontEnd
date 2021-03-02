@@ -6,41 +6,77 @@
     </h2>
 </div>
 <div style="padding-top: 2em; margin-left: 5%;  margin-right: 5%;">
-    <mat-tab-group mat-stretch-tabs>
+    <mat-tab-group (selectedTabChange)="selectedGrade($event)" mat-stretch-tabs>
         <mat-tab [label]="'Kindegarten'">
-            <!-- <div class="card" *ngFor="let card of kinder">
-                <div class="container">
-                    <div class="row">
-                        <p class="gradeLevel">{{card.gradeLevel}}</p>
-                        <div class="col-sm">
-                            <p class="otherDetails">Total Sections: {{card.totalSections}}</p>
-                            <br>
-                            <p class="otherDetails">Total Students: {{card.totalStudents}}</p>
-                        </div>
-                    </div>
-                    <div align=center>
-                        <button class="btn btn-primary">View</button>
-                    </div>
-                </div>
-            </div> -->
+            <div>
+                <mat-card class="card box" *ngFor="let section of sections">
+                    <mat-card-content>
+                    <h2>{{section.sectionName}}</h2>
+                    <h2>210 students</h2>
+                    <button  mat-button  (click)="viewStudents()">view students</button>
+                    </mat-card-content>
+                </mat-card>
+            </div>
         </mat-tab>
         <mat-tab [label]="'Grade 1'">
-            <h1>Content 1</h1>
+            <div>
+                <mat-card class="card box" *ngFor="let section of sections" >
+                    <mat-card-content>
+                    <h2>{{section.sectionName}}</h2>
+                    <h2>210 students</h2>
+                    </mat-card-content>
+                </mat-card>
+            </div>
         </mat-tab>
         <mat-tab [label]="'Grade 2'">
-            <h1>Content 2</h1>
+            <div>
+                <mat-card class="card box" *ngFor="let section of sections" >
+                    <mat-card-content>
+                    <h2>{{section.sectionName}}</h2>
+                    <h2>210 students</h2>
+                    </mat-card-content>
+                </mat-card>
+            </div>
         </mat-tab>
         <mat-tab [label]="'Grade 3'">
-            <h1>Content 3</h1>
+            <div>
+                <mat-card class="card box" *ngFor="let section of sections" >
+                    <mat-card-content>
+                    <h2>{{section.sectionName}}</h2>
+                    <h2>210 students</h2>
+                    </mat-card-content>
+                </mat-card>
+            </div>
         </mat-tab>
         <mat-tab [label]="'Grade 4'">
-            <h1>Content 4</h1>
+            <div>
+                <mat-card class="card box" *ngFor="let section of sections" >
+                    <mat-card-content>
+                    <h2>{{section.sectionName}}</h2>
+                    <h2>210 students</h2>
+                    </mat-card-content>
+                </mat-card>
+            </div>
         </mat-tab>
         <mat-tab [label]="'Grade 5'">
-            <h1>Content 5</h1>
+            <div>
+                <mat-card class="card box" *ngFor="let section of sections" >
+                    <mat-card-content>
+                    <h2>{{section.sectionName}}</h2>
+                    <h2>210 students</h2>
+                    </mat-card-content>
+                </mat-card>
+            </div>
         </mat-tab>
         <mat-tab [label]="'Grade 6'">
-            <h1>Content 6</h1>
+            <div>
+                <mat-card class="card box" *ngFor="let section of sections" >
+                    <mat-card-content>
+                    <h2>{{section.sectionName}}</h2>
+                    <h2>210 students</h2>
+                    </mat-card-content>
+                </mat-card>
+            </div>
         </mat-tab>
     </mat-tab-group>
 </div>

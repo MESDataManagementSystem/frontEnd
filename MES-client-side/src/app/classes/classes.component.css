@@ -27,7 +27,7 @@
     margin-right: 5%;
     float: right;
     transform: scale(2);
-    color: green
+    color: #5CB85C
 }
 .mat-tab-label {
     display: inline-flex;
@@ -36,3 +36,11 @@
     white-space: nowrap;
     color: green;
 }
+.box{
+    width: 150px;
+    height: 200px;
+    padding: 15px 20px 5px ;
+    float: left;
+    margin-top: 20px;
+    margin-left: 20px
+   }
