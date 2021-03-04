@@ -39,8 +39,8 @@ export class StudentServiceService {
      return this.httpClient.post('http://localhost:5000/api/addStudent', student);
    }
 
-   viewStudents(): Observable<any>{
-     return this.httpClient.get('http://localhost:5000/api/viewStudents');
+   viewStudents(section): Observable<any>{
+     return this.httpClient.get(`http://localhost:5000/api/viewStudents/${section}`);
    }
 
   //  getPdf(url): Observable<any> {

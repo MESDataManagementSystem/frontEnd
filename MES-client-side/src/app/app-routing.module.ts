@@ -24,7 +24,7 @@ const routes: Routes = [
       { path: 'teachers', component: AllTeachersComponent },
       { path: 'classes', component: ClassesComponent},
       { path: 'dashboard', component: DashboardComponent},
-      {path: 'classes/student', component: ViewStudentsComponent},
+      {path: 'classes/student/:section', component: ViewStudentsComponent},
       {path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },

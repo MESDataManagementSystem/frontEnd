@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { StudentServiceService } from '../services/student-service.service';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
 
@@ -12,6 +13,8 @@ import { StudentServiceService } from '../services/student-service.service';
   templateUrl: './add-student-info.component.html',
   styleUrls: ['./add-student-info.component.css']
 })
+
+
 export class AddStudentInfoComponent implements OnInit {
   maxDate = new Date();
   error = new FormControl('', [Validators.required]);
@@ -35,9 +38,14 @@ export class AddStudentInfoComponent implements OnInit {
     studentOthers: '',
     studentNameAdressOfTestingCenter: '',
     studentRemark: '',
-    studentsection: 'mahogany'
+    studentSection: ''
   };
-  constructor(private service: StudentServiceService) {  }
+  section: any;
+  constructor(private service: StudentServiceService, @Inject(MAT_DIALOG_DATA) public data: Section) {
+    console.log(this.data, '::dataaaa ni siya;;');
+    this.section = this.data;
+    this.studentInfo.studentSection = this.section;
+  }
 
   ngOnInit(): void {
     this.filteredOptions = this.optionsControl.valueChanges.pipe(
@@ -70,7 +78,7 @@ export class AddStudentInfoComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
   addStudent(): void {
-    alert('student added successfully !!');
+    alert('student added successfully !!' + this.studentInfo.studentSection);
     this.service.addStudent(this.studentInfo).subscribe(data => {console.log(data); });
   }
   addCredential(data): void {
@@ -85,4 +93,7 @@ export class AddStudentInfoComponent implements OnInit {
     console.log(this.studentInfo.studentCredentialPresentedForGrade, 'list ni sya');
   }
 
+}
+export interface Section {
+  section: string;
 }

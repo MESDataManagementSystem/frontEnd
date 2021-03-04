@@ -37,6 +37,7 @@ export class AddFormDialogComponent implements OnInit {
       formData.forEach(data => {
           console.log('data sa formdata : ', data);
       });
+
       this.service.studentForm(formData).subscribe(data => console.log('mao ni return nitya', data));
       this.close();
     }else{
