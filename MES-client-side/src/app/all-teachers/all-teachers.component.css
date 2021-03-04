@@ -4,7 +4,7 @@
 
 mat-form-field {
     min-width: 150px;
-    max-width: 500px;
+    max-width: 300px;
     width: 100%;
     padding-left: 20px;
 }
@@ -28,8 +28,9 @@ mat-form-field {
     background-color: #dcdedc;
     color: black;
 }
+
 .mat-header-cell{
-    color: green;
+    color: #5CB85C;
     text-align: justify;
     position: sticky;
     position: -webkit-sticky;
@@ -37,6 +38,7 @@ mat-form-field {
     background-color: white;
     font-size: medium;
 }
+
 .mat-elevation-z8{
     width: 90%;
     margin-right: auto;

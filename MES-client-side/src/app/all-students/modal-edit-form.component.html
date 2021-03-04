@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="card-header">
+        <h1>Update Old Form Of Students</h1>
+    </div>
+    <div class="card-body">
+        <mat-dialog-content class="mat-typography">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="inputField">
+                            <mat-label>LRN</mat-label>
+                            <input matInput type="text" [(ngModel)]="lrn" required>
+                            <mat-icon *ngIf="lrn" mat-button matSuffix mat-icon-button aria-label="Clear"
+                                (click)="lrn=''">
+                                close
+                            </mat-icon>
+                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="inputField">
+                            <mat-label>Full Name</mat-label>
+                            <input matInput type="text" [(ngModel)]="fullName" required>
+                            <mat-icon *ngIf="fullName" mat-button matSuffix mat-icon-button aria-label="Clear"
+                                (click)="fullName=''">
+                                close
+                            </mat-icon>
+                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="inputField">
+                            <mat-label>Attach File</mat-label>
+                            <ngx-mat-file-input #fileInput type="file"  required accept=".pdf">
+                            </ngx-mat-file-input>
+                            <mat-icon matSuffix>folder</mat-icon>
+                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+            </div>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-button mat-dialog-close class='cancel'>Cancel</button>
+            <button mat-button>Save</button>
+        </mat-dialog-actions>
+    </div>
+</div>

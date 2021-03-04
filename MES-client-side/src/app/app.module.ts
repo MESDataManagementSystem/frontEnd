@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import {  PdfViewerModule  } from 'ng2-pdf-viewer';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +29,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { AllStudentsComponent } from './all-students/all-students.component';
 import { AllTeachersComponent } from './all-teachers/all-teachers.component';
 import { ClassesComponent } from './classes/classes.component';
@@ -40,6 +40,8 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { StudentServiceService } from './services/student-service.service';
 import { ModalViewFormComponent } from './all-students/modal-view-form.component';
 import { AddFormDialogComponent } from './all-students/modal-add-form.component';
+import { ModalEditFormComponent } from './all-students/modal-edit-form.component';
+
 
 import { DialogComponent } from './all-teachers/dialog.component';
 import { ViewComponent } from './all-teachers/view.component';
@@ -63,7 +65,8 @@ import { ViewStudentsComponent } from './classes/view-students.component';
     DialogComponent,
     ViewComponent,
     AddSectionComponent,
-    ViewStudentsComponent
+    ViewStudentsComponent,
+    ModalEditFormComponent
   ],
   imports: [
     HttpClientModule,
@@ -94,7 +97,8 @@ import { ViewStudentsComponent } from './classes/view-students.component';
     MatMenuModule,
     MatGridListModule,
     HttpClientModule,
-    PdfViewerModule
+    PdfViewerModule,
+    MaterialFileInputModule
   ],
   providers: [
     HttpClient,

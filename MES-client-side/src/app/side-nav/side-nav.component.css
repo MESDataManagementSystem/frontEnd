@@ -1,27 +1,19 @@
-
-  mat-sidenav-container{
-    height:94%;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
+mat-sidenav-container{
+  height:94%;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
 }
 mat-sidenav{
-    background-color: white ;
-    width: 200px;
+  background-color: white ;
+  width: 250px;
 }
-
 
 /* side bar */
 mat-list-item:hover:not(.active) {
   background-color: #63686b;
   color: white;
   opacity: 0.5;
-}
-
-img{
-  width: 90%;
-  height: auto;
-  padding: 5px;
 }
 
 mat-icon {
@@ -33,10 +25,6 @@ button{
   border:none;
   background-color: white;
 }
-
-/* #Dashboard{
-  background-color: #0b992c;
-} */
 
 .active {
   background-color: #0275d8;
@@ -55,9 +43,37 @@ footer{
 }
 .logout{
     margin-left: 130px;
-    /* margin-top: 30%; */
     border-radius: 50%;
     height: 50px;
     width: 50px;
     
+}
+
+.box1 {
+  width: 249px;
+  height: 250px;
+  left: 0px;
+  top: auto;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #2080FF;
+}
+
+.image {
+  width: 130px;
+  height: 130px;
+  margin-left: 23%;
+  margin-top: 13%;
+  border-top-left-radius: 50% 50%;
+  border-top-right-radius: 50% 50%;
+  border-bottom-right-radius: 50% 50%;
+  border-bottom-left-radius: 50% 50%;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+}
+
+.copyright {
+  float: left;
+  margin-top: 0.5%;
 }

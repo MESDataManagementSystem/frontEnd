@@ -16,7 +16,6 @@ export class StudentServiceService {
     ) {    }
 
   retrieveData(): Observable<any> {
-    // return of(this.studentData);
     return this.httpClient.get('http://localhost:5000/api/viewListOfOldFiles');
 
   }
@@ -26,7 +25,6 @@ export class StudentServiceService {
   }
 
   studentForm(fileToUpload: FormData): Observable<any> {
-    console.log('adto nis services : ', fileToUpload);
     return this.httpClient.post('http://localhost:5000/uploadSingleFile', fileToUpload);
   }
 

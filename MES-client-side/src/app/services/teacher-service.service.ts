@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Teacher } from '../all-teachers/teacher.model';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import Swal from 'sweetalert2';
+import { SwalService } from '../services/swal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,8 @@ export class TeacherServiceService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private swal: SwalService
   ) { }
 
   ngOnit() { }
@@ -29,7 +30,7 @@ export class TeacherServiceService {
     return this.http.get(`${this.url}/api/viewTeachersInfo/${id}`)
       .pipe(
         catchError(e => {
-          this.errorAlert2();
+          this.swal.errorAlertForSomethingWentWrong()
           throw new Error(e)
         })
       )
@@ -39,7 +40,7 @@ export class TeacherServiceService {
   addTeacher(teachersForm) {
     return this.http.post(`${this.url}/api/addTeachersInfo`, teachersForm).pipe(
       catchError(e => {
-        this.errorAlert();
+        this.swal.errorAlertForAllFieldsAreRequired();
         throw new Error(e)
       })
     )
@@ -50,26 +51,10 @@ export class TeacherServiceService {
     return this.http.put(`${this.url}/api/updateTeachersInfo/${teacher._id}`, teacher)
       .pipe(
         catchError(e => {
-          this.errorAlert();
+          this.swal.errorAlertForAllFieldsAreRequired();
           throw new Error(e)
         })
       )
-  }
-
-  errorAlert() {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'All Fields Are Required!'
-    })
-  }
-
-  errorAlert2() {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Something Went Wrong'
-    })
   }
 
 }

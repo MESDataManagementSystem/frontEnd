@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { TeacherServiceService } from '../services/teacher-service.service';
-import Swal from 'sweetalert2';
+import { SwalService } from '../services/swal.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
@@ -56,7 +56,8 @@ export class DialogComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private teacherService: TeacherServiceService
+    private teacherService: TeacherServiceService,
+    private swal: SwalService
   ) { }
 
   ngOnInit() {
@@ -72,7 +73,6 @@ export class DialogComponent implements OnInit {
         value => this.status(value)
       )
     )
-
   }
 
   // Automatic Calculate The Age After Inputing The Birth Date
@@ -81,7 +81,6 @@ export class DialogComponent implements OnInit {
       var timeDiff = Math.abs(Date.now() - new Date(this.teachersForm.dateOfBirth).getTime());
       this.age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
       this.teachersForm.age = String(this.age);
-      console.log(this.teachersForm.age)
     }
   }
 
@@ -109,21 +108,10 @@ export class DialogComponent implements OnInit {
     console.log(this.teachersForm)
     this.teacherService.addTeacher(this.teachersForm).subscribe((data) => {
       if (data) {
-        this.succesAlert();
+        this.swal.succesAlert()
         this.dialog.closeAll();
         window.location.reload();
       }
-    })
-  }
-
-  // Alert After Successful Adding Teacher's Info
-  succesAlert() {
-    Swal.fire({
-      icon: 'success',
-      title: 'Success',
-      text: 'Your Work Has Been Saved',
-      showConfirmButton: false,
-      timer: 1500
     })
   }
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentServiceService } from '../services/student-service.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PDFSource } from 'ng2-pdf-viewer';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import printJS from '../../../node_modules/print-js/src/index';
 declare var require: any;
@@ -15,9 +14,10 @@ const FileSaver = require('file-saver');
 
 
 export class ModalViewFormComponent implements OnInit {
+  
   pdfSource: string;
   require: any;
-  pdfName: string;
+  pdfName: any;
   constructor(private service: StudentServiceService, @Inject(MAT_DIALOG_DATA) public data: Url) {
     this.pdfSource = this.data[0] + '';
     this.pdfName = this.data[1];
@@ -27,8 +27,8 @@ export class ModalViewFormComponent implements OnInit {
     this.viewFile();
   }
 
-  printPdf(): void{
-    printJS ({printable: this.pdfSource, showModal: true});
+  printPdf(): void {
+    printJS({ printable: this.pdfSource, showModal: true });
   }
 
   downloadPdf(): void {
@@ -38,16 +38,14 @@ export class ModalViewFormComponent implements OnInit {
   }
 
   viewFile(): void {
-    const data = {url: this.pdfSource};
-    // tslint:disable-next-line:no-shadowed-variable
+    const data = { url: this.pdfSource };
     this.service.viewFile(data).subscribe(data => {
-      console.log('dataaaa::: ', data);
       this.pdfSource = data.data.url;
     });
   }
 
 }
 
-export interface Url{
+export interface Url {
   url: string;
 }

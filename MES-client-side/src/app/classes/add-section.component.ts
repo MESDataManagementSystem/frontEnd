@@ -1,11 +1,11 @@
-import { Component, OnInit, ValueSansProvider } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import Swal from 'sweetalert2';
 import { SectionService } from '../services/section.service';
 import { TeacherServiceService } from '../services/teacher-service.service';
+import { SwalService } from '../services/swal.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-section',
@@ -31,7 +31,8 @@ export class AddSectionComponent implements OnInit {
   constructor(
     private sectionService: SectionService,
     private dialog: MatDialog,
-    private teacherService: TeacherServiceService
+    private teacherService: TeacherServiceService,
+    private swal: SwalService
   ) {
   }
 
@@ -62,9 +63,8 @@ export class AddSectionComponent implements OnInit {
     console.log(data);
     this.sectionService.addTeacher(data).subscribe((data) => {
       if (data) {
-        this.succesAlert();
+        this.swal.succesAlert()
         this.dialog.closeAll();
-        // window.location.reload();
       }
     });
   }
@@ -80,17 +80,6 @@ export class AddSectionComponent implements OnInit {
         });
 
       }
-    });
-  }
-
-  // Alert After Successful Adding Section
-  succesAlert(): void {
-    Swal.fire({
-      icon: 'success',
-      title: 'Success',
-      text: 'Your Work Has Been Saved',
-      showConfirmButton: false,
-      timer: 1500
     });
   }
 

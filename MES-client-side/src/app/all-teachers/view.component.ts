@@ -2,11 +2,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { TeacherServiceService } from '../services/teacher-service.service';
-import Swal from 'sweetalert2';
+import { SwalService } from '../services/swal.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Teacher } from './teacher.model';
-import { iterator } from 'rxjs/internal-compatibility';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view',
@@ -15,9 +15,11 @@ import { iterator } from 'rxjs/internal-compatibility';
 })
 export class ViewComponent implements OnInit {
 
+
+  hideOverlay = true;
+  public buttonName: any = 'Click Here To Edit';
   public teacher: any;
   public age: number;
-  disabled: boolean;
   teachersForm: Teacher;
   maxDate = new Date();
   error = new FormControl('', [Validators.required]);
@@ -31,7 +33,8 @@ export class ViewComponent implements OnInit {
     public dialogRef: MatDialogRef<ViewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Teacher,
     public dialog: MatDialog,
-    private teacherService: TeacherServiceService
+    private teacherService: TeacherServiceService,
+    private swal: SwalService
   ) {
     this.teachersForm = {
       _id: "",
@@ -68,7 +71,6 @@ export class ViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.disabled = false
     this.filteredOptions = this.optionsControl.valueChanges.pipe(
       startWith(''),
       map(value => this.gender(value))
@@ -123,8 +125,6 @@ export class ViewComponent implements OnInit {
         this.updateTeacherInfo();
       } else if (result.isDenied) {
         Swal.fire('Changes are not saved', '', 'info')
-        // Swal.close()
-        // location.reload()
       }
     })
   }
@@ -173,16 +173,8 @@ export class ViewComponent implements OnInit {
         }
       })
     } else {
-      this.errorAlert();
+      this.swal.errorAlertForTeacherFieldsRequired();
     }
-  }
-
-  errorAlert() {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'All Fields Are Required! Except For Middle Name and Date Of Last Promotion'
-    })
   }
 
 }
