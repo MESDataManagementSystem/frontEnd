@@ -1,71 +1,49 @@
-<!-- <mat-card class = "container">
-   <h1>Manage Your Account</h1>
-   <mat-grid-list cols="2" rowHeight="2:1">
-      <mat-grid-tile>
-         <mat-list>
-            <mat-list-item> <h2>Username: {{username}} </h2> </mat-list-item>
-            <mat-list-item> <h2 >Password: {{password}}</h2> </mat-list-item>
-            <mat-list-item> <h2>Email: {{email}}</h2> </mat-list-item>
-         </mat-list>
-         <img  src="https://lh3.googleusercontent.com/-xGs5HBal37Q/YBz83h7Re4I/AAAAAAAAJvk/PepwKgfbmzgJSjrfi10yXiVJLkVo95fwACK8BGAsYHg/s0/2021-02-05.jpg " alt="">
-         <button class ="button1" mat-button color="primary">Edit Account</button> 
-      </mat-grid-tile>
-    </mat-grid-list>
-    
-</mat-card>
-<mat-card class = "container">
-   <mat-grid-list cols="2" rowHeight="2:1">
-      <mat-grid-tile class = "grid1">
-         <mat-card>
-            <h2>Add Account</h2>
-            <mat-form-field appearance="fill">
-               <mat-label>Username</mat-label>
-               <input matInput>
-            </mat-form-field>
-         </mat-card>
-      </mat-grid-tile>
-      <mat-grid-tile class = "grid">
-         <mat-card>
-            <h2>List of Account</h2>
-         </mat-card>
-      </mat-grid-tile>
-   </mat-grid-list>
-</mat-card> -->
 <div class = "div1">
-   <mat-card class= "card1">
-      <div class = "div2">
+   <div class = "div2">
+      <mat-card class= "card1">   
          <h1>Manage Your Account</h1>
+         <!-- <img src="https://lh3.googleusercontent.com/-xGs5HBal37Q/YBz83h7Re4I/AAAAAAAAJvk/PepwKgfbmzgJSjrfi10yXiVJLkVo95fwACK8BGAsYHg/s0/2021-02-05.jpg " alt="">
+         <br>
+         <button class ="button1" mat-button >Update Profile</button>
+         <br><br> -->
+         <mat-form-field class="input" appearance="outline">
+            <mat-label>Username:</mat-label>
+            <input type="text" name = 'userName' matInput value = '{{username}}' >
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+         </mat-form-field>
+         <mat-form-field class="input" appearance="outline">
+            <mat-label for='pass'>Password: </mat-label>
+            <input type="password" name = 'pass' matInput value = '{{password}}' >
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+         </mat-form-field>
+         <mat-form-field class="input" appearance="outline">
+            <mat-label for='email'>Email: </mat-label>
+            <input type="email" name = 'email' matInput value = '{{email}}' >
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+         </mat-form-field>
+         <button class ="button2"  mat-button >Update Account</button>
+      </mat-card>
+      <br>
+      <mat-card class = "card1">
+         <h1>Add Account</h1>
          <label for='userName'>Username: </label>
-         <input type="text" name = 'userName' matInput value = '{{username}}'>
+         <input type="text" name = 'userName' matInput>
          <br>
          <label for='pass'>Password: </label>
-         <input type="password" name = 'pass' matInput value = '{{password}}'>
-         <br>
-         <label for='email'>Email: </label>
-         <input type="email" name = 'email' matInput value = '{{email}}'>
-         <button class ="button2"  mat-button >Update Account</button>
-      </div>
-      <div class="div2">
-         <div class="profile">
-            <img  src="https://lh3.googleusercontent.com/-xGs5HBal37Q/YBz83h7Re4I/AAAAAAAAJvk/PepwKgfbmzgJSjrfi10yXiVJLkVo95fwACK8BGAsYHg/s0/2021-02-05.jpg " alt="">
-            <button class ="button1" mat-button >Update Profile</button>
-         </div>
-      </div>
-   </mat-card>
-   <br>
-   <mat-card class = "card1">
-      <h1>Add Account</h1>
-      <label for='userName'>Username: </label>
-      <input type="text" name = 'userName' matInput>
-      <br>
-      <label for='pass'>Password: </label>
-      <input type="password" name = 'pass' matInput >
-      <button class ="button2"  mat-button >Add Account</button>
-   </mat-card>
-</div>
-<div class="div1">
+         <input type="password" name = 'pass' matInput >
+         <button class ="button2"  mat-button >Add Account</button>
+      </mat-card>
+   </div>
    <mat-card class = "card2">
       <h1>List of Accounts</h1>
-      <input class="input" type="text" name = 'userName' matInput placeholder="Search"> <button class ="button2"  mat-button >Search</button>
+      <mat-form-field >
+         <mat-label>Search</mat-label>
+         <input matInput type="text" autocomplete="off">
+         <button mat-button matSuffix mat-icon-button aria-label="Clear">
+         </button>
+      </mat-form-field>
+      <mat-icon matSuffix mat-icon-button aria-label="Search">search</mat-icon>
    </mat-card>
 </div>
+
+<!-- <mat-icon>close</mat-icon> -->

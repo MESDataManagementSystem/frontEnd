@@ -1,57 +1,54 @@
 img {
     height: auto;
     width: 150px;
-    margin-top: -20%;
-    margin-left: 30%;
+    margin-left: 10vw;
 }
 .button1:hover {
     background-color: rgba(255, 187, 0, 0.945);
 }
 .button1{
     background-color: orange; 
-    width: 200%;
+    margin-left: 10vw;
 }
 .button2:hover {
     background-color: rgba(0, 162, 255, 0.945);
 }
 .button2{
     background-color: #0275d8; 
-    
+ 
+}
+.card1 {
+  width: 30vw;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  box-shadow: 0 10px 20px 0 rgba(0,0,0,0.2);
 }
 .card2 {
-    padding: 30px;
     height: 800px;
-    width: 750px;
+    width: 40vw;
+    float: left;
+    margin-left: 2%;
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.2);
    }
 .div1{
-   float: left;
-   /* padding: 20px 50px; */
    padding-left: 2%;
    padding-top: 20px;
 }
-.div2{
-    float: left;
-    /* padding: 20px 50px; */
- }
- input{
-    width: 100%;
-    padding: 10px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    /* margin-right: 0; */
-  }
-  .profile{
-      margin: 30%;
-  }
- .image {
-     background-color: lightblue;
- }
- .card1 {
-    padding: 30px;
-    height: 350px;
-    width: 750px;
- }
- .input { 
-    width: 88%;
-} 
+.div2 {
+  float: left;
+}
+input{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  /* margin-right: 0; */
+}
+.input {
+  width: 100%;
+}
+
  
+ 
+  
