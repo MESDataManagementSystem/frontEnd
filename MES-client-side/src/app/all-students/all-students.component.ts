@@ -30,7 +30,6 @@ export class AllStudentsComponent implements AfterViewInit {
   searchLrn = '';
   name = '';
   lrn = true;
- 
 
   constructor(private service: StudentServiceService, private dialog: MatDialog) {
     this.value = '';

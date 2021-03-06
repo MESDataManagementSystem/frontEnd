@@ -247,7 +247,8 @@
         </mat-dialog-content>
         <mat-dialog-actions align="end">
             <button mat-button mat-dialog-close class="cancel">Cancel</button>
-            <button mat-button (click)="addStudent()">Save</button>
+            <button mat-button *ngIf="!update" (click)="addStudent()">Save</button>
+            <button mat-button *ngIf="update" (click)="updateStudent()">Update</button>
         </mat-dialog-actions>
     </div>
 </div>

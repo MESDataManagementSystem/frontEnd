@@ -32,6 +32,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+// import { ChartsModule } from 'ng2-charts';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 
 import { AllStudentsComponent } from './all-students/all-students.component';
 import { AllTeachersComponent } from './all-teachers/all-teachers.component';
@@ -101,7 +104,9 @@ import { AddStudentInfoComponent } from './classes/add-student-info.component';
     MatGridListModule,
     HttpClientModule,
     PdfViewerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MDBBootstrapModule
+    // ChartsModule
   ],
   providers: [
     HttpClient,

@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { StudentServiceService } from '../services/student-service.service';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 
@@ -38,16 +38,36 @@ export class AddStudentInfoComponent implements OnInit {
     studentOthers: '',
     studentNameAdressOfTestingCenter: '',
     studentRemark: '',
-    studentSection: ''
+    studentSection: '',
+    studentGrade: ''
   };
   section: any;
+  grade: any;
+  update = false;
+  returnData: any;
   constructor(private service: StudentServiceService, @Inject(MAT_DIALOG_DATA) public data: Section) {
     console.log(this.data, '::dataaaa ni siya;;');
-    this.section = this.data;
+    this.returnData = data;
+    this.section = this.data[0];
+    this.grade = this.data[2];
+    // this.studentInfo.studentGrade = this.returnData.data[2];
     this.studentInfo.studentSection = this.section;
+    this.studentInfo.studentGrade = this.grade;
   }
 
   ngOnInit(): void {
+    if (this.returnData[1] === 'fake') {
+      alert(this.section);
+      this.update = false;
+    } else {
+      alert(this.section);
+      this.service.findStudent(this.section).subscribe(data => {
+        this.update = true;
+        console.log(data, 'datass:::');
+        this.studentInfo = data.data;
+        console.log(this.studentInfo);
+      });
+    }
     this.filteredOptions = this.optionsControl.valueChanges.pipe(
       startWith(''),
       map(
@@ -79,7 +99,10 @@ export class AddStudentInfoComponent implements OnInit {
   }
   addStudent(): void {
     alert('student added successfully !!' + this.studentInfo.studentSection);
-    this.service.addStudent(this.studentInfo).subscribe(data => {console.log(data); });
+    this.service.addStudent(this.studentInfo).subscribe(data => { console.log(data); });
+  }
+  updateStudent(): void {
+    this.service.updateStudent(this.studentInfo).subscribe(data => { console.log(data, 'return ni siya'); });
   }
   addCredential(data): void {
     if (this.studentInfo.studentCredentialPresentedForGrade.includes(data)) {
@@ -96,4 +119,6 @@ export class AddStudentInfoComponent implements OnInit {
 }
 export interface Section {
   section: string;
+  fake: false;
+  grade: string;
 }

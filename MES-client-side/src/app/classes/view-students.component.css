@@ -64,6 +64,23 @@ mat-form-field {
     margin-left: auto;
     display: block;
   }
+  .dropdown:hover>.dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown>.dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+      pointer-events: none;
+  }
+  .editIcon{
+    margin-left: 50px;
+  }
+  .infoIcon{
+    margin-left: 50px;
+  }
+  /* editIcon{
+
+  } */
   /* ::ng-deep .mat-input-underline { display: none; }  */
   /* mat-select  {
     display: none;

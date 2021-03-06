@@ -73,7 +73,7 @@ export class ClassesComponent implements OnInit {
     const datum = [section];
     this.sectionService.getSection(datum).subscribe(data => { console.log(data, 'section'); });
     // this.router.navigateByUrl('/MES/classes/student');
-    this.router.navigate(['/MES/classes/student', section]);
+    this.router.navigate(['/MES/classes', this.grade, section]);
   }
 
   // send section to child component (students in specific section)
