@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { StudentServiceService } from '../services/student-service.service';
 
 @Component({
@@ -6,15 +6,17 @@ import { StudentServiceService } from '../services/student-service.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements AfterViewInit {
 
   teachers = 15;
   students = 675;
   public chartType = 'horizontalBar';
+  // datas = [];
+  load: boolean;
   datas = ['60', '51', '58', '56', '52', '58', '55'];
 
   public chartDatasets: Array<any> = [
-    { data: this.datas , label: 'Population of Students in each grade Level' }
+    { data: this.datas, label: 'Population of Students in each grade Level' }
   ];
 
   public chartLabels: Array<any> = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
@@ -50,20 +52,30 @@ export class DashboardComponent implements OnInit {
 
   constructor(private studentService: StudentServiceService) {
     this.grade = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
-
+    this.load = false;
   }
 
-  ngOnInit(): void {
-    // this.chartLabels.forEach(element => {
-    //   console.log('element', element);
-    //   this.studentService.findGrade(element).subscribe(data => {
-    //     console.log(data, 'datass:: ');
-    //     this.datas.push(data.data.length);
-    //   });
-    // });
+  ngAfterViewInit(): void {
+    // this.alert().then((value) => console.log(value));
+
   }
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
 
+  // tslint:disable-next-line:arrow-return-shorthand
+  // let hello = async () => { return "Hello" };
 
+  // alert = async () => {
+  //   return this.datas;
+  //   this.chartLabels.forEach(element => {
+  //     console.log('element', element);
+  //     this.studentService.findGrade(element).subscribe(data => {
+  //       this.datas.push(data.data.length + '');
+  //       console.log('' + data.data.length + '');
+  //     });
+  //   });
+  //   if (this.datas.length === 7) {
+  //     // this.load = true;
+  //   }
+  // }
 }
