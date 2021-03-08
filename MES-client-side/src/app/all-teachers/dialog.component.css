@@ -42,3 +42,7 @@ button:hover {
     color: white;
     background-color: #f44336  !important;
 }
+
+.toogle {
+    margin-left: 2%;
+}

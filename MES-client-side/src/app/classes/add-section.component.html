@@ -7,7 +7,7 @@
             <form #teacherForm="ngForm">
                 <div class="container">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-3">
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Grade Level</mat-label>
                                 <input matInput type="text" [(ngModel)]="classesForm.gradeLevel" name="gradeLevel"
@@ -24,7 +24,7 @@
                                 <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                             </mat-form-field>
                         </div>
-                        <div class="col">
+                        <div class="col-3">
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Section Name</mat-label>
                                 <input matInput type="text" [(ngModel)]="classesForm.sectionName" name="sectionName"
@@ -36,16 +36,17 @@
                                 <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                             </mat-form-field>
                         </div>
-                        <div class="col">
+                        <div class="col-3">
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Adviser</mat-label>
                                 <input matInput type="text" [(ngModel)]="classesForm.adviser" name="adviser"
-                                    #adviser="ngModel" required [matAutocomplete]="list" >
-                                    <mat-autocomplete autoActiveFirstOption #list="matAutocomplete" >
-                                        <mat-option (click)="teacherId = option._id"  *ngFor="let option of otherList" value="{{option.lastName}}, {{option.firstName}}, {{option.middleName}} ">
-                                            {{option.lastName}}, {{option.firstName}}, {{option.middleName}} 
-                                        </mat-option>
-                                    </mat-autocomplete>
+                                    #adviser="ngModel" required [matAutocomplete]="list">
+                                <mat-autocomplete autoActiveFirstOption #list="matAutocomplete">
+                                    <mat-option (click)="teacherId = option._id" *ngFor="let option of otherList"
+                                        value="{{option.lastName}}, {{option.firstName}}, {{option.middleName}} ">
+                                        {{option.lastName}}, {{option.firstName}}, {{option.middleName}}
+                                    </mat-option>
+                                </mat-autocomplete>
                                 <mat-icon *ngIf="classesForm.adviser" mat-button matSuffix mat-icon-button
                                     aria-label="Clear" (click)="classesForm.adviser=''">
                                     close
@@ -53,17 +54,51 @@
                                 <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                             </mat-form-field>
                         </div>
-                        <div class="col">
+                        <div class="col-3">
                             <mat-form-field appearance="outline" class="inputField">
-                                <mat-label>Year</mat-label>
-                                <input matInput type="text" [(ngModel)]="classesForm.year" name="year"
-                                    #year="ngModel" required>
-                                <mat-icon *ngIf="classesForm.year" mat-button matSuffix mat-icon-button
-                                    aria-label="Clear" (click)="classesForm.year=''">
-                                    close
-                                </mat-icon>
+                                <mat-label>School Year</mat-label>
+                                <input matInput [(ngModel)]="classesForm.year" name="year"
+                                    #year="ngModel" required value="classesForm.year" disabled>
                                 <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                             </mat-form-field>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <!-- <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>School Year</mat-label>
+                                <mat-date-range-input [rangePicker]="pickeryear" [min]="minDate" [max]="maxDate" >
+                                    <input matStartDate [(ngModel)]="classesForm.startYear" name="startYear"
+                                        #startYear="ngModel">
+                                    <input matEndDate [(ngModel)]="classesForm.endYear" name="endYear"
+                                        #endYear="ngModel">
+                                </mat-date-range-input>
+                                <mat-datepicker-toggle matSuffix [for]="pickeryear"></mat-datepicker-toggle>
+                                <mat-date-range-picker #pickeryear startView="year">
+                                </mat-date-range-picker>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field> -->
+
+                            <!-- <mat-form-field>
+                                <input matInput [matDatepicker]="pickeryear" placeholder="Month and Year"
+                                    [formControl]="date" [min]="minDate" [max]="maxDate">
+                                <mat-datepicker-toggle matSuffix [for]="pickeryear"></mat-datepicker-toggle>
+                                <mat-datepicker #pickeryear startView="multi-year"
+                                    (yearSelected)="chosenYearHandler($event, pickeryear)"
+                                    panelClass="example-month-picker">
+                                </mat-datepicker>
+                            </mat-form-field> -->
+
+
                         </div>
                     </div>
                 </div>

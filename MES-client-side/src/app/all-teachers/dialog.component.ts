@@ -19,8 +19,11 @@ export class DialogComponent implements OnInit {
   optionsControl = new FormControl();
   options: string[] = ['M', 'F'];
   options1: string[] = ['Single', 'Married', 'Divorced', 'Separated', 'Widowed'];
+  options2: string[] = ['Yes', 'No'];
   filteredOptions: Observable<string[]>;
   filteredOptions1: Observable<string[]>;
+  filteredOptions2: Observable<string[]>;
+
 
   teachersForm = {
     lastName: "",
@@ -52,6 +55,7 @@ export class DialogComponent implements OnInit {
     gsisBPNumber: "",
     pagIbigNumber: "",
     availableServiceCredits: "",
+    activeStatus: ""
   }
 
   constructor(
@@ -65,12 +69,18 @@ export class DialogComponent implements OnInit {
       startWith(''),
       map(
         value => this.gender(value)
-        )
+      )
     );
     this.filteredOptions1 = this.optionsControl.valueChanges.pipe(
       startWith(''),
       map(
         value => this.status(value)
+      )
+    );
+    this.filteredOptions2 = this.optionsControl.valueChanges.pipe(
+      startWith(''),
+      map(
+        value => this.activeStatus(value)
       )
     )
   }
@@ -94,6 +104,12 @@ export class DialogComponent implements OnInit {
   private status(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.options1.filter(option => option.toLowerCase().indexOf(filterValue) === 0)
+  }
+
+   // For Active Status
+   private activeStatus(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options2.filter(option => option.toLowerCase().indexOf(filterValue) === 0)
   }
 
   // All Fields Are Required 

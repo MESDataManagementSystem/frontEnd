@@ -30,6 +30,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AllStudentsComponent } from './all-students/all-students.component';
 import { AllTeachersComponent } from './all-teachers/all-teachers.component';
 import { ClassesComponent } from './classes/classes.component';
@@ -98,7 +99,8 @@ import { ViewStudentsComponent } from './classes/view-students.component';
     MatGridListModule,
     HttpClientModule,
     PdfViewerModule,
-    MaterialFileInputModule
+    MaterialFileInputModule,
+    MatSlideToggleModule
   ],
   providers: [
     HttpClient,

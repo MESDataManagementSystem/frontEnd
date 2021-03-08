@@ -12,11 +12,11 @@
             <h1>Administrator</h1>
         </div>
         <mat-list role="list" *ngFor="let content of navContent">
-            <mat-list-item id='{{content.name}}' [ngClass]="{active: lateActive == content.name}" (click)=" childRoutes(content.name)"
-                role="listitem">
+            <mat-list-item id='{{content.name}}' [ngClass]="{active: lateActive == content.name}"
+                (click)=" childRoutes(content.name)" role="listitem">
                 <mat-icon>{{content.icon}}</mat-icon>
-                 &nbsp;&nbsp;&nbsp;{{content.name}}</mat-list-item>
-
+                &nbsp;&nbsp;&nbsp;{{content.name}}
+            </mat-list-item>
         </mat-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -30,5 +30,6 @@
     </mat-sidenav-content>
 </mat-sidenav-container>
 <footer>
-    <mat-icon class="copyright">copyright</mat-icon><h3 class="copyright">mantalongonelementaryschooldalaguetecebu_2021</h3> 
+    <h3 class="copyright">mantalongonelementaryschooldalaguetecebu_2021</h3>
+    <mat-icon class="copyright1">copyright</mat-icon>
 </footer>

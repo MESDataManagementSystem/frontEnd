@@ -25,6 +25,7 @@ export class AllTeachersComponent implements OnInit {
   ) {
     this.teacherService.getAllTheTeachersList().subscribe(data => {
       this.teacherData = data;
+      // console.log(data)
       this.dataSource = new MatTableDataSource<Teacher>(this.teacherData.data);
       setTimeout(() => {
         this.dataSource.paginator = this.paginator;
