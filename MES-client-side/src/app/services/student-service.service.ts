@@ -49,11 +49,11 @@ export class StudentServiceService {
   }
 
   updateStudent(student): Observable<any> {
-    console.log(student);
+    console.log(student._id, 'id sa student service nga iupdate');
     return this.httpClient.post(`http://localhost:5000/api/updateStudent/${student._id}`, student);
   }
   findGrade(grade): Observable<any>{
-    console.log(grade, 'grade in service')
+    console.log(grade, 'grade in service');
     return this.httpClient.get(`http://localhost:5000/api/findGrade/${grade}`);
   }
 

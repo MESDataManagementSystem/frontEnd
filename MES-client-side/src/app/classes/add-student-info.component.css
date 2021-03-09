@@ -26,7 +26,6 @@ button{
     cursor: pointer;
     background-color: white; 
     color: black; 
-    border: 2px solid #2080FF;
 }
 
 button:hover {
@@ -46,4 +45,18 @@ button:hover {
 }
 section{
     margin: 10px;
+}
+.chooseQuarter{
+    width: 100%;
+}
+.closeIcon{
+float: right
+}
+.nextButton{
+    float: right;
+    border: 2px solid grey;
+    padding: 2px 20px;
+}
+.nextButton:hover{
+    border: none;
 }

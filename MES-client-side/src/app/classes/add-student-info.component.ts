@@ -16,6 +16,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 export class AddStudentInfoComponent implements OnInit {
+  quarter: string;
+  studentId: string;
   maxDate = new Date();
   error = new FormControl('', [Validators.required]);
   optionsControl = new FormControl();
@@ -41,18 +43,48 @@ export class AddStudentInfoComponent implements OnInit {
     studentSection: '',
     studentGrade: ''
   };
+  studentSubject = {
+    lrn: '',
+    motherTongue: '',
+    filipino: '',
+    english: '',
+    mathematics: '',
+    science: '',
+    aralingPanlipunan: '',
+    eppTle: '',
+    Mapeh: '',
+    music: '',
+    pe: '',
+    arts: '',
+    health: '',
+    edukasyonSaPagpapakatao: '',
+    arabicLanguage: '',
+    islamicLanguage: '',
+    quarter: ''
+  };
   section: any;
   grade: any;
   update = false;
   returnData: any;
+  disableSelect = new FormControl(false);
+  editStudentInfo = '';
+  addGradesModal = false;
+  addGrades = false;
   constructor(private service: StudentServiceService, @Inject(MAT_DIALOG_DATA) public data: Section) {
     console.log(this.data, '::dataaaa ni siya;;');
+    this.studentId = this.data[0];
+    if (this.data[3] === 'editStudentInfo'){
+      this.editStudentInfo = 'editStudentInfo';
+    }else if (this.data[3] === 'editStudentGrade'){
+      this.editStudentInfo = 'editStudentGrade';
+    }
     this.returnData = data;
     this.section = this.data[0];
     this.grade = this.data[2];
     // this.studentInfo.studentGrade = this.returnData.data[2];
     this.studentInfo.studentSection = this.section;
     this.studentInfo.studentGrade = this.grade;
+    this.quarter = '';
   }
 
   ngOnInit(): void {
@@ -98,7 +130,6 @@ export class AddStudentInfoComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
   addStudent(): void {
-    alert('student added successfully !!' + this.studentInfo.studentSection);
     this.service.addStudent(this.studentInfo).subscribe(data => { console.log(data); });
   }
   updateStudent(): void {
@@ -114,6 +145,18 @@ export class AddStudentInfoComponent implements OnInit {
       alert(' dili equal sila');
     }
     console.log(this.studentInfo.studentCredentialPresentedForGrade, 'list ni sya');
+  }
+
+  chooseQuarter(): void {
+    // this.quarter = option;
+    alert(this.quarter);
+    console.log( this.studentId);
+    this.addGrades = true;
+    this.addGradesModal = true;
+    // this.editStudentInfo = false;
+  }
+  addStudentGrades(): void{
+    alert('added Student!');
   }
 
 }

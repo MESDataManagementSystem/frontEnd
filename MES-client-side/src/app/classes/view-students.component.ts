@@ -18,7 +18,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ViewStudentsComponent implements AfterViewInit {
   dataSource: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
   viewFile = false;
   typeSearch: string;
   value: string;
@@ -55,14 +54,14 @@ export class ViewStudentsComponent implements AfterViewInit {
     });
   }
   // Dialog For Adding Student
-  openDialog(datas): void {
-    console.log(datas, '::: datasss');
+  openDialog(data, datas): void {
+    console.log(datas , '::: datasss');
     let idf = '';
     if (datas === 'fake'){
       datas = this.section;
       idf = 'fake';
     }
-    const datum = [datas, idf, this.grade];
+    const datum = [datas, idf, this.grade, data];
     this.dialog.open(AddStudentInfoComponent, { disableClose: true, data: datum });
   }
 

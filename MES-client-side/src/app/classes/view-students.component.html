@@ -29,8 +29,8 @@
                     <div class="dropdown">
                         <mat-icon class='dropdown-toggle'  id="dropdownMenuButton">edit </mat-icon>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" aria-haspopup="true" >
-                            <a class="dropdown-item"  (click)='openDialog(student._id)'>Student Information</a>
-                            <a class="dropdown-item" (click)='openDialog(student._id)'>Student Grade</a>
+                            <a class="dropdown-item"  (click)='openDialog("editStudentInfo",student._id)'>Student Information</a>
+                            <a class="dropdown-item" (click)='openDialog("editStudentGrade",student._id)'>Student Grade</a>
                         </div>
                     </div>
                  </td>
@@ -41,8 +41,8 @@
                     <div class="dropdown">
                         <mat-icon class='dropdown-toggle'  id="dropdownMenuButton"> info </mat-icon>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" aria-haspopup="true" >
-                            <a class="dropdown-item"  (click)='openDialog(student._id)'>Student Information</a>
-                            <a class="dropdown-item" (click)='openDialog(student._id)'>Form10</a>
+                            <a class="dropdown-item"  (click)='openDialog("viewStudentInfo",student._id)'>Student Information</a>
+                            <a class="dropdown-item" (click)='openDialog("viewStudentGrade",student._id)'>Form10</a>
                         </div>
                     </div>
                 </td>
@@ -53,7 +53,7 @@
         <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
     </div>
     <div>
-        <button mat-icon-button class="addIcon" matTooltip="Add Student Form 10" (click)="openDialog('fake')">
+        <button mat-icon-button class="addIcon" matTooltip="Add Student Form 10" (click)="openDialog('','fake')">
             <mat-icon class='menuIcon'>add_circle</mat-icon>
         </button>
     </div>
