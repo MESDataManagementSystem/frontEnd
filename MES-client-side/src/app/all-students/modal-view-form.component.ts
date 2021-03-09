@@ -14,7 +14,7 @@ const FileSaver = require('file-saver');
 
 
 export class ModalViewFormComponent implements OnInit {
-  
+
   pdfSource: string;
   require: any;
   pdfName: any;
