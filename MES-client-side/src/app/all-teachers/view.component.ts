@@ -26,8 +26,10 @@ export class ViewComponent implements OnInit {
   optionsControl = new FormControl();
   options: string[] = ['M', 'F'];
   options1: string[] = ['Single', 'Married', 'Divorced', 'Separated', 'Widowed'];
+  options2: string[] = ['Yes', 'No'];
   filteredOptions: Observable<string[]>;
   filteredOptions1: Observable<string[]>;
+  filteredOptions2: Observable<string[]>;
 
   constructor(
     public dialogRef: MatDialogRef<ViewComponent>,
@@ -67,6 +69,7 @@ export class ViewComponent implements OnInit {
       gsisBPNumber: "",
       pagIbigNumber: "",
       availableServiceCredits: "",
+      activeStatus: ""
     };
   }
 
@@ -79,6 +82,12 @@ export class ViewComponent implements OnInit {
       startWith(''),
       map(
         value => this.status(value)
+      )
+    );
+    this.filteredOptions2 = this.optionsControl.valueChanges.pipe(
+      startWith(''),
+      map(
+        value => this.activeStatuses(value)
       )
     )
   }
@@ -109,6 +118,12 @@ export class ViewComponent implements OnInit {
   private status(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.options1.filter(option => option.toLowerCase().indexOf(filterValue) === 0)
+  }
+
+  // For Active Status
+  private activeStatuses(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options2.filter(option => option.toLowerCase().indexOf(filterValue) === 0)
   }
 
   // For Confirmation Before Updating
@@ -165,7 +180,8 @@ export class ViewComponent implements OnInit {
       this.data.philHealthNumber !== null && this.data.philHealthNumber !== '' &&
       this.data.gsisBPNumber !== null && this.data.gsisBPNumber !== '' &&
       this.data.pagIbigNumber !== null && this.data.pagIbigNumber !== '' &&
-      this.data.availableServiceCredits !== null && this.data.availableServiceCredits !== ''
+      this.data.availableServiceCredits !== null && this.data.availableServiceCredits !== '' && 
+      this.data.activeStatus !== null && this.data.activeStatus !== ''
     ) {
       this.teacherService.updateTeacher(this.data).subscribe(data => {
         if (data) {

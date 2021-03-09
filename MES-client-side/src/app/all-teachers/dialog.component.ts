@@ -24,37 +24,36 @@ export class DialogComponent implements OnInit {
   filteredOptions1: Observable<string[]>;
   filteredOptions2: Observable<string[]>;
 
-
   teachersForm = {
-    lastName: "",
-    firstName: "",
-    middleName: "",
-    nameExt: "",
-    employeeNumber: "",
-    itemNumber: "",
+    lastName: "Rivas",
+    firstName: "Irish",
+    middleName: "Rufo",
+    nameExt: "None",
+    employeeNumber: "67563456",
+    itemNumber: "asdf34352",
     dateOfBirth: "",
-    placeOfBirth: "",
+    placeOfBirth: "cdga",
     age: "",
-    gender: "",
-    maritalStatus: "",
-    homeAddress: "",
-    schoolAssignment: "",
-    district: "",
-    currentPosition: "",
-    employeeStatus: "",
-    designation: "",
+    gender: "F",
+    maritalStatus: "Single",
+    homeAddress: "fd",
+    schoolAssignment: "dfd",
+    district: "dfd",
+    currentPosition: "dfd",
+    employeeStatus: "dfd",
+    designation: "dfd",
     firstDayOfService: "",
     dateOfLastPromotion: "",
-    salaryGrade: "",
-    stepIncrement: "",
-    eligibility: "",
-    contactNumber: "",
-    depEdEmailAddress: "",
-    tin: "",
-    philHealthNumber: "",
-    gsisBPNumber: "",
-    pagIbigNumber: "",
-    availableServiceCredits: "",
+    salaryGrade: "4",
+    stepIncrement: "5",
+    eligibility: "fd",
+    contactNumber: "09968817703",
+    depEdEmailAddress: "irish@gmail.com",
+    tin: "dfv343",
+    philHealthNumber: "dsfasd34",
+    gsisBPNumber: "afadsfaf",
+    pagIbigNumber: "dsfa",
+    availableServiceCredits: "34",
     activeStatus: ""
   }
 
@@ -62,7 +61,8 @@ export class DialogComponent implements OnInit {
     public dialog: MatDialog,
     private teacherService: TeacherServiceService,
     private swal: SwalService
-  ) { }
+  ) { 
+  }
 
   ngOnInit() {
     this.filteredOptions = this.optionsControl.valueChanges.pipe(
@@ -80,7 +80,7 @@ export class DialogComponent implements OnInit {
     this.filteredOptions2 = this.optionsControl.valueChanges.pipe(
       startWith(''),
       map(
-        value => this.activeStatus(value)
+        value => this.activeStatuses(value)
       )
     )
   }
@@ -107,7 +107,7 @@ export class DialogComponent implements OnInit {
   }
 
    // For Active Status
-   private activeStatus(value: string): string[] {
+   private activeStatuses(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.options2.filter(option => option.toLowerCase().indexOf(filterValue) === 0)
   }
@@ -121,14 +121,20 @@ export class DialogComponent implements OnInit {
 
   // Add Teacher
   addTeacher() {
-    console.log(this.teachersForm)
-    this.teacherService.addTeacher(this.teachersForm).subscribe((data) => {
-      if (data) {
-        this.swal.succesAlert()
-        this.dialog.closeAll();
-        window.location.reload();
-      }
-    })
+    this.teachersForm.activeStatus =  this.teachersForm.activeStatus.toLowerCase()
+    alert(this.teachersForm.activeStatus)
+    if ( this.teachersForm.activeStatus == 'yes' || this.teachersForm.activeStatus == 'no') {
+      this.teacherService.addTeacher(this.teachersForm).subscribe((data) => {
+        if (data) {
+          this.swal.succesAlert()
+          this.dialog.closeAll();
+          window.location.reload();
+        }
+      })
+    } else {
+      alert("error")
+    }
+   
   }
 
 }

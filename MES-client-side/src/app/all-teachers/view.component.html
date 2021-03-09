@@ -292,7 +292,7 @@
                     </div>
                     <div class="container">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-4">
                                 <mat-form-field appearance="outline" class="inputField">
                                     <mat-label>Pag-IBIG Number</mat-label>
                                     <input matInput type="text" [(ngModel)]="data.pagIbigNumber" name="pagIbigNumber"
@@ -300,11 +300,28 @@
                                     <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                                 </mat-form-field>
                             </div>
-                            <div class="col-6">
+                            <div class="col-4">
                                 <mat-form-field appearance="outline" class="inputField">
                                     <mat-label>GSIS (BP) Number</mat-label>
                                     <input matInput type="text" [(ngModel)]="data.gsisBPNumber" name="gsisBPNumber"
                                         #gsisBPNumber="ngModel" required>
+                                    <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-4">
+                                <mat-form-field appearance="outline" class="inputField">
+                                    <mat-label>Is the teacher still teaching in this school?</mat-label>
+                                    <input matInput type="text" [(ngModel)]="data.activeStatus" name="activeStatus"
+                                        #activeStatus="ngModel" required [matAutocomplete]="auto2">
+                                    <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
+                                            {{option}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <mat-icon *ngIf="data.activeStatus" mat-button matSuffix mat-icon-button
+                                        aria-label="Clear" (click)="data.activeStatus=''">
+                                        close
+                                    </mat-icon>
                                     <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                                 </mat-form-field>
                             </div>

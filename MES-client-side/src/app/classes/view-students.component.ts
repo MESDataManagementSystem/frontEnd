@@ -3,9 +3,7 @@ import { StudentServiceService } from '../services/student-service.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatMenuModule } from '@angular/material/menu';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-view-students',
@@ -25,7 +23,7 @@ export class ViewStudentsComponent implements AfterViewInit {
   searchLrn = '';
   name = '';
   lrn = true;
-  constructor(private service: StudentServiceService, private dialog: MatDialog, private location: Location) { 
+  constructor(private service: StudentServiceService, private dialog: MatDialog, private location: Location) {
     this.value = '';
     this.typeSearch = 'LRN';
     this.dataSource = new MatTableDataSource<any>(this.students);
@@ -35,7 +33,6 @@ export class ViewStudentsComponent implements AfterViewInit {
       setTimeout(() => {
         this.dataSource.paginator = this.paginator;
       }, 0);
-      // tslint:disable-next-line:only-arrow-functions
     });
   }
 

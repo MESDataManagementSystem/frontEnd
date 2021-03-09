@@ -21,8 +21,10 @@ export class TeacherServiceService {
   ngOnit() { }
 
   // Get All The List Of Teachers
-  getAllTheTeachersList() {
-    return this.http.get(`${this.url}/api/viewListOfTeacher`);
+  getAllTheTeachersList(status) {
+
+    return this.http.get(`${this.url}/api/viewListOfTeacher/${status}`);
+
   }
 
   // View The Information Of A Specific Teacher

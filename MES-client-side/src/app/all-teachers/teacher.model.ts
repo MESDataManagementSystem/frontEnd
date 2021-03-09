@@ -29,4 +29,5 @@ export interface Teacher {
     gsisBPNumber: string;
     pagIbigNumber: string;
     availableServiceCredits: string;
+    activeStatus: string;
 }

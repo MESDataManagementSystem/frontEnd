@@ -115,7 +115,7 @@ export class AddSectionComponent implements OnInit {
 
   // Get Teacher
   getTeacher(): void {
-    this.teacherService.getAllTheTeachersList().subscribe(data => {
+    this.teacherService.getAllTheTeachersList('yes').subscribe(data => {
       if (data) {
         this.teacherList = data;
         this.teacherList = this.teacherList.data;

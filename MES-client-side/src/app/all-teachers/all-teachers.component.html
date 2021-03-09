@@ -3,11 +3,15 @@
     <div>
         <mat-form-field>
             <mat-label>Search Teacher's Last Name</mat-label>
-            <input type="text" matInput autocomplete="off"
-                (keyup)="filter($event.target.value)">
+            <input type="text" matInput autocomplete="off" (keyup)="filter($event.target.value)">
         </mat-form-field>
     </div>
     <div>
+        <mat-slide-toggle (click)="viewTeacher('no')">Show Teacher</mat-slide-toggle>
+    </div>
+    <div>
+        <h3 *ngIf='showActive'>Active Teacher</h3>
+        <h3 *ngIf='!showActive'>Non Active Teacher</h3>
         <div class="mat-elevation-z8">
             <table mat-table [dataSource]="dataSource">
                 <ng-container matColumnDef="employeeNumber">

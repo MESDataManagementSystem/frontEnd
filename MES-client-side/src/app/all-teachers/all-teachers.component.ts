@@ -14,6 +14,7 @@ import { TeacherServiceService } from '../services/teacher-service.service';
 })
 export class AllTeachersComponent implements OnInit {
 
+  public showActive: boolean = false;
   teacherData: any = [];
   dataSource: MatTableDataSource<Teacher>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -23,18 +24,7 @@ export class AllTeachersComponent implements OnInit {
     private teacherService: TeacherServiceService,
     private dialog: MatDialog
   ) {
-    this.teacherService.getAllTheTeachersList().subscribe(data => {
-      this.teacherData = data;
-      // console.log(data)
-      this.dataSource = new MatTableDataSource<Teacher>(this.teacherData.data);
-      setTimeout(() => {
-        this.dataSource.paginator = this.paginator;
-      }, 0)
-      this.dataSource.filterPredicate = function (data, filter: string): boolean {
-        return data.lastName.toLocaleLowerCase().includes(filter)
-      }
-    })
-
+    this.viewTeacher('yes');
   }
 
   ngOnInit() {
@@ -59,5 +49,35 @@ export class AllTeachersComponent implements OnInit {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
+  viewTeacher(status) {
+    this.hideShow()
+  }
 
+  hideShow() {
+    if (this.showActive) {
+      this.showActive = false
+      this.teacherService.getAllTheTeachersList('no').subscribe(data => {
+        this.teacherData = data;
+        this.dataSource = new MatTableDataSource<Teacher>(this.teacherData.data);
+        setTimeout(() => {
+          this.dataSource.paginator = this.paginator;
+        }, 0)
+        this.dataSource.filterPredicate = function (data, filter: string): boolean {
+          return data.lastName.toLocaleLowerCase().includes(filter)
+        }
+      })
+    } else {
+      this.showActive = true
+      this.teacherService.getAllTheTeachersList('yes').subscribe(data => {
+        this.teacherData = data;
+        this.dataSource = new MatTableDataSource<Teacher>(this.teacherData.data);
+        setTimeout(() => {
+          this.dataSource.paginator = this.paginator;
+        }, 0)
+        this.dataSource.filterPredicate = function (data, filter: string): boolean {
+          return data.lastName.toLocaleLowerCase().includes(filter)
+        }
+      })
+    }
+  }
 }
