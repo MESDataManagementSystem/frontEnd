@@ -10,7 +10,7 @@ export class DashboardComponent implements AfterViewInit {
 
   teachers = 15;
   students = 675;
-  public chartType = 'horizontalBar';
+  public chartType = 'bar';
   // datas = [];
   load: boolean;
   datas = ['60', '51', '58', '56', '52', '58', '55'];
