@@ -18,22 +18,39 @@ img {
     background-color: #0275d8; 
     
 }
+.card1 {
+    padding: 30px;
+    width: 25vw;
+    box-shadow: 5px 10px 18px #888888;
+ }
 .card2 {
     padding: 30px;
-    height: 800px;
-    width: 750px;
+    width: 45vw;
+    box-shadow: 5px 10px 18px #888888;
    }
 .div1{
-   float: left;
    /* padding: 20px 50px; */
    padding-left: 2%;
    padding-top: 20px;
+   width: 30vw;
+   height: 50vw;
+   float: left;
 }
 .div2{
-    float: left;
-    /* padding: 20px 50px; */
+    padding-left: 2%;
+    padding-top: 20px;
+    width: 25vw;
+    height: 50vw;
+    float:left;
  }
- input{
+ table {
+    width: 100%;
+  }
+  .mat-elevation-z8{
+      margin-top: 2%;
+  }
+
+input{
     width: 100%;
     padding: 10px 20px;
     margin: 8px 0;
@@ -46,12 +63,5 @@ img {
  .image {
      background-color: lightblue;
  }
- .card1 {
-    padding: 30px;
-    height: 350px;
-    width: 750px;
- }
- .input { 
-    width: 88%;
-} 
+
  
