@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,8 +18,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatDialogModule} from '@angular/material/dialog';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 
 import { AllStudentsComponent } from './all-students/all-students.component';
 import { AllTeachersComponent } from './all-teachers/all-teachers.component';
@@ -29,9 +30,8 @@ import { LoginComponent } from './login/login.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { SettingsComponent } from './settings/settings.component';
 
-
 import { StudentServiceService } from './services/student-service.service';
-
+import { AccountsService } from './services/accounts.service'
 
 @NgModule({
   declarations: [
@@ -61,9 +61,22 @@ import { StudentServiceService } from './services/student-service.service';
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+ 
+    HttpClientModule
   ],
-  providers: [StudentServiceService],
+  providers: [
+    HttpClient,
+    StudentServiceService,
+    AccountsService,
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    }, {
+      provide: MAT_DIALOG_DATA,
+      useValue: {}
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

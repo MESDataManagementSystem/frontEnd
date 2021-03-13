@@ -1,7 +1,12 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild , Inject} from '@angular/core';
 import { AccountsService} from '../services/accounts.service';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
+import { MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+
+
 
 
 @Component({
@@ -16,22 +21,61 @@ export class SettingsComponent implements AfterViewInit {
   password: string;
   accounts: any;
   value: string;
+  uname: string;
+  pass: string;
+  accountInfo = {
+    uname: '',
+    pass: '',
+    email: '',
+  }
   
-  displayedColumns: string[] = ['name','uname', 'mail', 'test'];
+  displayedColumns: string[] = ['uname',  'test'];
   dataSource = new MatTableDataSource<Info>(accountData);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor( private service: AccountsService ) { 
+
+
+  constructor( private service: AccountsService,  @Inject(MAT_DIALOG_DATA) public data: Info, public dialog: MatDialog) { 
+
     this.username = "Admin1"
     this.password = "***********"
     this.email = "admin@gmail.com"
   }
-
-  addAccount() {
-
+  succesAlert(Text, Icon, Timer): void {
+    Swal.fire({
+      icon: Icon,
+      title: 'Message',
+      text: Text,
+      showConfirmButton: false,
+      timer: Timer
+    });
   }
-  
-  
+
+
+  addAccount(): void {
+    console.log(this.accountInfo);
+    console.log(this.service.addAccount);
+    this.service.addAccount(this.accountInfo).subscribe(data => {
+      // tslint:disable-next-line:no-conditional-assignment
+      if (data.error) {
+        this.succesAlert('Fill in all the fields!', 'error', '');
+      }
+      if (data.msg === 'Username Already exist') {
+        this.succesAlert('Username ' + this.accountInfo.uname + ' already exists!', 'error', 2000);
+        this.accountInfo.uname = '';
+      }
+      if (data.msg === 'Account Added!') {
+        this.succesAlert('Added New Account Successfully', 'success', 1500);
+        this.dialog.closeAll();
+      }
+      // if (data[0] === 'error'){
+
+      // }
+      console.log(data);
+    });
+  }
+
+ 
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -40,30 +84,24 @@ export class SettingsComponent implements AfterViewInit {
   }
 }
 export interface Info {
-  name: string;
   uname: string;
-  mail: string;
-  test: boolean
+  pass: string;
+  email: string;
+  test: boolean;
 }
 const accountData: Info[] = [
-  {name: 'Irish Rufo', uname: 'Irish', mail: 'irish@gmail.com', test: true},
-  {name: 'Annabelle Belcina', uname: 'Annabelle', mail: 'annabelle@gmail.com', test: true},
-  {name: 'John Doe', uname: 'John', mail: 'john@gmail.com', test: false},
-  {name: 'Yubert Mariscal', uname: 'Yubert', mail: 'yubert@gmail.com', test: true},
-  {name: 'Ma Theresa Ammaquin', uname: 'Theresa', mail: 'theresa@gmail.com', test: true},
-  {name: 'Irish Rufo', uname: 'Irish', mail: 'irish@gmail.com', test: true},
-  {name: 'Annabelle Belcina', uname: 'Annabelle', mail: 'annabelle@gmail.com', test: true},
-  {name: 'John Doe', uname: 'John', mail: 'john@gmail.com', test: false},
-  {name: 'Yubert Mariscal', uname: 'Yubert', mail: 'yubert@gmail.com', test: true},
-  {name: 'Irish Rufo', uname: 'Irish', mail: 'irish@gmail.com', test: true},
-  {name: 'Annabelle Belcina', uname: 'Annabelle', mail: 'annabelle@gmail.com', test: true},
-  {name: 'John Doe', uname: 'John', mail: 'john@gmail.com', test: false},
-  {name: 'Yubert Mariscal', uname: 'Yubert', mail: 'yubert@gmail.com', test: true},
-  {name: 'Ma Theresa Ammaquin', uname: 'Theresa', mail: 'theresa@gmail.com', test: true},
-  {name: 'Irish Rufo', uname: 'Irish', mail: 'irish@gmail.com', test: true},
-  {name: 'Annabelle Belcina', uname: 'Annabelle', mail: 'annabelle@gmail.com', test: true},
-  {name: 'John Doe', uname: 'John', mail: 'john@gmail.com', test: false},
-  {name: 'Yubert Mariscal', uname: 'Yubert', mail: 'yubert@gmail.com', test: true},
+  {uname: 'Irish', pass: 'password', email: null,  test: true},
+  { uname: 'Annabelle', pass: 'password', email: null, test: true},
+  {uname: 'John',  pass: 'password', email: null, test: false},
+  {uname: 'Yubert', pass: 'password', email: null,  test: true},
+  {uname: 'Irish', pass: 'password', email: null, test: true},
+  { uname: 'Annabelle', pass: 'password', email: null, test: true},
+  {uname: 'John', pass: 'password', email: null, test: false},
+  {uname: 'Yubert', pass: 'password', email: null, test: true},
+  {uname: 'Irish', pass: 'password', email: null, test: true},
+  { uname: 'Annabelle', pass: 'password', email: null,  test: true},
+  {uname: 'John', pass: 'password', email: null, test: false},
+  {uname: 'Yubert',  pass: 'password', email: null, test: true},
 ];
 
 
