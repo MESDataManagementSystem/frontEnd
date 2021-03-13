@@ -17,6 +17,6 @@ export class AccountsService {
     return of(this.accountData);
   }
   addAccount(account): Observable<any> {
-    return this.httpClient.post('http://localhost:5000/api/addAccount/', account);
+    return this.httpClient.post('http://localhost:5000/api/register', account);
   }
 }

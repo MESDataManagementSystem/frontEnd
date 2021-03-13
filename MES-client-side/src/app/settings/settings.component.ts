@@ -24,8 +24,8 @@ export class SettingsComponent implements AfterViewInit {
   uname: string;
   pass: string;
   accountInfo = {
-    uname: '',
-    pass: '',
+    username: '',
+    password: '',
     email: '',
   }
   
@@ -61,8 +61,8 @@ export class SettingsComponent implements AfterViewInit {
         this.succesAlert('Fill in all the fields!', 'error', '');
       }
       if (data.msg === 'Username Already exist') {
-        this.succesAlert('Username ' + this.accountInfo.uname + ' already exists!', 'error', 2000);
-        this.accountInfo.uname = '';
+        this.succesAlert('Username ' + this.accountInfo.username + ' already exists!', 'error', 2000);
+        this.accountInfo.username = '';
       }
       if (data.msg === 'Account Added!') {
         this.succesAlert('Added New Account Successfully', 'success', 1500);
