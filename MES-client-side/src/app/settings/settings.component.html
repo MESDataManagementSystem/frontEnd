@@ -1,11 +1,5 @@
 <div class = "div1">
    <mat-card class= "card1">
-      <!-- <div>
-          <div class="profile">
-             <img  src="https://lh3.googleusercontent.com/-xGs5HBal37Q/YBz83h7Re4I/AAAAAAAAJvk/PepwKgfbmzgJSjrfi10yXiVJLkVo95fwACK8BGAsYHg/s0/2021-02-05.jpg " alt="">
-             <button class ="button1" mat-button >Update Profile</button>
-          </div>
-       </div> -->
          <h1>Manage Your Account</h1>
          <form class="example-form">
           <mat-form-field class="example-full-width">
@@ -24,14 +18,6 @@
             <mat-icon matSuffix>mode_edit</mat-icon>
           </mat-form-field>
         </form>
-         <!-- <label for='userName'>Username: </label>
-         <input type="text" name = 'userName' matInput value = '{{username}}'>
-         <br>
-         <label for='pass'>Password: </label>
-         <input type="password" name = 'pass' matInput value = '{{password}}'>
-         <br>
-         <label for='email'>Email: </label>
-         <input type="email" name = 'email' matInput value = '{{email}}'> -->
          <button class ="button2"  mat-button >Update Account</button> 
    </mat-card>
    <br>
@@ -47,6 +33,11 @@
           <mat-label>Password</mat-label>
           <input type="password" matInput placeholder="Password" >
           <mat-icon matSuffix>password</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput placeholder="Email" >
+          <mat-icon matSuffix>email</mat-icon>
         </mat-form-field>
         <br>
         <button class ="button2"  mat-button >Add Account</button>
@@ -102,5 +93,3 @@
       </div>
    </mat-card>
 </div>
-
-<!-- <mat-icon>close</mat-icon> -->

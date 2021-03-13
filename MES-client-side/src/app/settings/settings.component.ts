@@ -26,6 +26,10 @@ export class SettingsComponent implements AfterViewInit {
     this.password = "***********"
     this.email = "admin@gmail.com"
   }
+
+  addAccount() {
+    
+  }
   
   
 
