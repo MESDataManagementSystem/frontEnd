@@ -2,24 +2,34 @@
     <!-- <p>Mantalongon Elementary School</p> -->
 </header>
 <mat-sidenav-container>
-    <mat-sidenav mode = "side" [(opened)]='showSideNav'>
-        <mat-icon aria-hidden="false" aria-label="Example home icon" (click)='showSideNav = !showSideNav'>close</mat-icon>
-        <img src="../../assets/images/mesLogo.PNG" alt="">
-        <!-- <hr> -->
-        <!-- <h3>Administrator</h3>
-        <hr> -->
-        <mat-list role="list" *ngFor="let content of navContent" >
-            <mat-list-item id='{{content}}' [ngClass]="{active: lateActive == content}"  (click)=" childRoutes(content)"  role="listitem">{{content}}</mat-list-item>
+    <mat-sidenav mode="side" [(opened)]='showSideNav'>
+        <div class="box1">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" (click)='showSideNav = !showSideNav'>close
+            </mat-icon>
+            <img class="image" src="../../assets/images/mesDbmsLogo.png">
+
+            <br><br>
+            <h1>Administrator</h1>
+        </div>
+        <mat-list role="list" *ngFor="let content of navContent">
+            <mat-list-item id='{{content.name}}' [ngClass]="{active: lateActive == content.name}"
+                (click)=" childRoutes(content.name)" role="listitem">
+                <mat-icon>{{content.icon}}</mat-icon>
+                &nbsp;&nbsp;&nbsp;{{content.name}}
+            </mat-list-item>
         </mat-list>
-        </mat-sidenav>
+    </mat-sidenav>
     <mat-sidenav-content>
         <div [(hidden)]='showSideNav'>
-            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"   (click)='showSideNav = !showSideNav'>
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+                (click)='showSideNav = !showSideNav'>
                 <mat-icon class='menuIcon'>menu</mat-icon>
             </button>
-         </div>
-        <router-outlet></router-outlet> 
+        </div>
+        <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>
-<footer >
+<footer>
+    <h3 class="copyright">mantalongonelementaryschooldalaguetecebu_2021</h3>
+    <mat-icon class="copyright1">copyright</mat-icon>
 </footer>

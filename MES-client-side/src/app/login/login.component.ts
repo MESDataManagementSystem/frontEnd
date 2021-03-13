@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,17 +7,15 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  constructor() {
-    this.loginForm = new FormGroup({
-      username: new FormControl(null, Validators.required),
-      password: new FormControl(null, Validators.required)
-    });
-  }
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
-  isValid(controlName): any{
-    return this.loginForm.get(controlName).invalid && this.loginForm.get(controlName).touched;
+  login(): void{
+    this.router.navigateByUrl('/MES/dashboard');
   }
+
+
+  
 }

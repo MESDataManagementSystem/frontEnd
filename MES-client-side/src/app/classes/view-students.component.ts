@@ -3,9 +3,9 @@ import { StudentServiceService } from '../services/student-service.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { Location } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
-import { Location } from '@angular/common';
 import { AddStudentInfoComponent } from './add-student-info.component';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -27,6 +27,17 @@ export class ViewStudentsComponent implements AfterViewInit {
   searchLrn = '';
   name = '';
   lrn = true;
+  // constructor(private service: StudentServiceService, private dialog: MatDialog, private location: Location) {
+  //   this.value = '';
+  //   this.typeSearch = 'LRN';
+  //   this.dataSource = new MatTableDataSource<any>(this.students);
+  //   this.service.retrieveData().subscribe(student => {
+  //     this.students = student.data;
+  //     this.dataSource = new MatTableDataSource<any>(this.students);
+  //     setTimeout(() => {
+  //       this.dataSource.paginator = this.paginator;
+  //     }, 0);
+  //   });
   section: string;
   grade: string;
   // tslint:disable-next-line:max-line-length

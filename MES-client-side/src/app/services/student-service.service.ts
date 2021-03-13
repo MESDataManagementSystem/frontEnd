@@ -26,7 +26,6 @@ export class StudentServiceService {
   }
 
   studentForm(fileToUpload: FormData): Observable<any> {
-    console.log('adto nis services : ', fileToUpload);
     return this.httpClient.post('http://localhost:5000/uploadSingleFile', fileToUpload);
   }
 
@@ -73,12 +72,6 @@ export class StudentServiceService {
     return this.httpClient.get(`http://localhost:5000/api/findQuarter/ ${id}`);
   }
 
-  //  getPdf(url): Observable<any> {
-
-  //   let headers = new HttpHeaders();
-  //   headers = headers.set('Accept', 'application/pdf');
-  //   return this.httpClient.get(url, { headers: headers, responseType: 'blob' });
-  // }
 
 
 }

@@ -1,17 +1,59 @@
-<h1 mat-dialog-title>Add old form of student</h1>
-<div class = "form">
-  <mat-form-field appearance="outline" class="inputField">
-    <mat-label>LRN: </mat-label>
-    <input matInput [(ngModel)]="lrn" autocomplete="off" required>
-  </mat-form-field> <br>
-  <mat-form-field appearance="outline">
-    <mat-label>Full Name: LastName, FirstName Middle Initial  Extn. </mat-label>
-    <input matInput [(ngModel)]="fullName" autocomplete="off" required>
-  </mat-form-field> <br>
-  <i class="material-icons">attach_file</i><input #fileInput type="file"  (change)="handleFileInput($event.target.files)" required/>
-</div>
-<div mat-dialog-actions>
-  <button mat-button  (click)= 'addStudent(fileToUpload)'>Add Student</button>
-  <button mat-button mat-dialog-close class = 'cancel' >Cancel</button>
-</div>
+<div class="card">
+  <div class="card-header">
+    <h1>Add Old Form Of Students</h1>
+  </div>
+  <div class="card-body">
+    <mat-dialog-content class="mat-typography">
+      <div class="container">
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field appearance="outline" class="inputField">
+              <mat-label>Year Graduated</mat-label>
+              <input matInput [matDatepicker]="dp" [formControl]="date" [max]="maxDate" required autocomplete="off">
+              <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+              <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event, dp)"
+                panelClass="example-month-picker">
+              </mat-datepicker>
+              <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field appearance="outline" class="inputField">
+              <mat-label>LRN</mat-label>
+              <input matInput type="text" [(ngModel)]="lrn" required>
+              <mat-icon *ngIf="lrn" mat-button matSuffix mat-icon-button aria-label="Clear" (click)="lrn=''">
+                close
+              </mat-icon>
+              <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field appearance="outline" class="inputField">
+              <mat-label>Full Name</mat-label>
+              <input matInput type="text" [(ngModel)]="fullName" required>
+              <mat-icon *ngIf="fullName" mat-button matSuffix mat-icon-button aria-label="Clear" (click)="fullName=''">
+                close
+              </mat-icon>
+              <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field appearance="outline" class="inputField">
+              <mat-label>Attach File</mat-label>
+              <ngx-mat-file-input #fileInput type="file" (change)="handleFileInput($event.target.files)" required
+                accept=".pdf">
+              </ngx-mat-file-input>
+              <mat-icon matSuffix>folder</mat-icon>
+              <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
 
+        </div>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close class='cancel'>Cancel</button>
+      <button mat-button (click)='addStudent(fileToUpload)'>Save</button>
+    </mat-dialog-actions>
+  </div>
+</div>

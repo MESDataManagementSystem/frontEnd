@@ -4,12 +4,12 @@
             <div class="user_card">
                 <div class="d-flex justify-content-center">
                     <div class="brand_logo_container">
-                        <img src="../../assets/images/mesLogo.PNG"
+                        <img src="../../assets/images/mesDbmsLogo.png"
                             class="brand_logo" alt="Logo">
                     </div>
                 </div>
                 <div class="d-flex justify-content-center form_container">
-                    <form [formGroup]='loginForm'>
+                    <form >
                         <div class="input-group mb-3">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -24,7 +24,7 @@
                                 placeholder="password">
                         </div>
                         <div class="d-flex justify-content-center mt-3 login_container">
-                            <button type="button" name="button" class="btn loginBtn">Login</button>
+                            <button type="button" name="button" class="btn loginBtn"  (click)='login()'>Login</button>
                         </div>
                     </form>
                 </div>

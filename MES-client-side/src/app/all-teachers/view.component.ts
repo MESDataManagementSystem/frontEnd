@@ -2,10 +2,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 import { TeacherServiceService } from '../services/teacher-service.service';
-import Swal from 'sweetalert2';
+import { SwalService } from '../services/swal.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Teacher } from './teacher.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view',
@@ -14,61 +15,80 @@ import { Teacher } from './teacher.model';
 })
 export class ViewComponent implements OnInit {
 
+
+  hideOverlay = true;
+  public buttonName: any = 'Click Here To Edit';
   public teacher: any;
   public age: number;
-  disabled: boolean;
   teachersForm: Teacher;
   maxDate = new Date();
   error = new FormControl('', [Validators.required]);
   optionsControl = new FormControl();
   options: string[] = ['M', 'F'];
+  options1: string[] = ['Single', 'Married', 'Divorced', 'Separated', 'Widowed'];
+  options2: string[] = ['Yes', 'No'];
   filteredOptions: Observable<string[]>;
+  filteredOptions1: Observable<string[]>;
+  filteredOptions2: Observable<string[]>;
 
   constructor(
     public dialogRef: MatDialogRef<ViewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Teacher,
     public dialog: MatDialog,
-    private teacherService: TeacherServiceService
+    private teacherService: TeacherServiceService,
+    private swal: SwalService
   ) {
     this.teachersForm = {
-      _id: '',
-      lastName: '',
-      firstName: '',
-      middleName: '',
-      nameExt: '',
-      employeeNumber: '',
-      itemNumber: '',
-      dateOfBirth: '',
-      placeOfBirth: '',
-      age: '',
-      gender: '',
-      maritalStatus: '',
-      homeAddress: '',
-      schoolAssignment: '',
-      district: '',
-      currentPosition: '',
-      employeeStatus: '',
-      designation: '',
-      firstDayOfService: '',
-      dateOfLastPromotion: '',
-      salaryGrade: '',
-      stepIncrement: '',
-      eligibility: '',
-      contactNumber: '',
-      depEdEmailAddress: '',
-      tin: '',
-      philHealthNumber: '',
-      gsisBPNumber: '',
-      pagIbigNumber: '',
-      availableServiceCredits: '',
+      _id: "",
+      lastName: "",
+      firstName: "",
+      middleName: "",
+      nameExt: "",
+      employeeNumber: "",
+      itemNumber: "",
+      dateOfBirth: "",
+      placeOfBirth: "",
+      age: "",
+      gender: "",
+      maritalStatus: "",
+      homeAddress: "",
+      schoolAssignment: "",
+      district: "",
+      currentPosition: "",
+      employeeStatus: "",
+      designation: "",
+      firstDayOfService: "",
+      dateOfLastPromotion: "",
+      salaryGrade: "",
+      stepIncrement: "",
+      eligibility: "",
+      contactNumber: "",
+      depEdEmailAddress: "",
+      tin: "",
+      philHealthNumber: "",
+      gsisBPNumber: "",
+      pagIbigNumber: "",
+      availableServiceCredits: "",
+      activeStatus: ""
     };
   }
 
   ngOnInit() {
-    this.disabled = false
     this.filteredOptions = this.optionsControl.valueChanges.pipe(
       startWith(''),
       map(value => this.gender(value))
+    );
+    this.filteredOptions1 = this.optionsControl.valueChanges.pipe(
+      startWith(''),
+      map(
+        value => this.status(value)
+      )
+    );
+    this.filteredOptions2 = this.optionsControl.valueChanges.pipe(
+      startWith(''),
+      map(
+        value => this.activeStatuses(value)
+      )
     )
   }
 
@@ -94,6 +114,18 @@ export class ViewComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0)
   }
 
+  // For Marital Status
+  private status(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options1.filter(option => option.toLowerCase().indexOf(filterValue) === 0)
+  }
+
+  // For Active Status
+  private activeStatuses(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options2.filter(option => option.toLowerCase().indexOf(filterValue) === 0)
+  }
+
   // For Confirmation Before Updating
   warningAlert() {
     Swal.fire({
@@ -108,8 +140,6 @@ export class ViewComponent implements OnInit {
         this.updateTeacherInfo();
       } else if (result.isDenied) {
         Swal.fire('Changes are not saved', '', 'info')
-        Swal.close()
-        window.location.reload()
       }
     })
   }
@@ -121,11 +151,46 @@ export class ViewComponent implements OnInit {
 
   // Update Teacher's Information
   updateTeacherInfo() {
-    this.teacherService.updateTeacher(this.data).subscribe(data => {
-      if (data) {
-        this.dialog.closeAll();
-      }
-    })
+    if (
+      this.data.lastName !== null && this.data.lastName !== '' &&
+      this.data.firstName !== null && this.data.firstName !== '' &&
+      // this.data.middleName !== null && this.data.middleName !== '' &&
+      this.data.nameExt !== null && this.data.nameExt !== '' &&
+      this.data.employeeNumber !== null && this.data.employeeNumber !== '' &&
+      this.data.itemNumber !== null && this.data.itemNumber !== '' &&
+      this.data.dateOfBirth !== null && this.data.dateOfBirth !== '' &&
+      this.data.placeOfBirth !== null && this.data.placeOfBirth !== '' &&
+      this.data.age !== null && this.data.age !== '' &&
+      this.data.gender !== null && this.data.gender !== '' &&
+      this.data.maritalStatus !== null && this.data.maritalStatus !== '' &&
+      this.data.homeAddress !== null && this.data.homeAddress !== '' &&
+      this.data.schoolAssignment !== null && this.data.schoolAssignment !== '' &&
+      this.data.district !== null && this.data.district !== '' &&
+      this.data.currentPosition !== null && this.data.currentPosition !== '' &&
+      this.data.employeeStatus !== null && this.data.employeeStatus !== '' &&
+      this.data.designation !== null && this.data.designation !== '' &&
+      this.data.firstDayOfService !== null && this.data.firstDayOfService !== '' &&
+      // this.data.dateOfLastPromotion !== null && this.data.dateOfLastPromotion !== '' &&
+      this.data.salaryGrade !== null && this.data.salaryGrade !== '' &&
+      this.data.stepIncrement !== null && this.data.stepIncrement !== '' &&
+      this.data.eligibility !== null && this.data.eligibility !== '' &&
+      this.data.contactNumber !== null && this.data.contactNumber !== '' &&
+      this.data.depEdEmailAddress !== null && this.data.depEdEmailAddress !== '' &&
+      this.data.tin !== null && this.data.tin !== '' &&
+      this.data.philHealthNumber !== null && this.data.philHealthNumber !== '' &&
+      this.data.gsisBPNumber !== null && this.data.gsisBPNumber !== '' &&
+      this.data.pagIbigNumber !== null && this.data.pagIbigNumber !== '' &&
+      this.data.availableServiceCredits !== null && this.data.availableServiceCredits !== '' && 
+      this.data.activeStatus !== null && this.data.activeStatus !== ''
+    ) {
+      this.teacherService.updateTeacher(this.data).subscribe(data => {
+        if (data) {
+          this.dialog.closeAll();
+        }
+      })
+    } else {
+      this.swal.errorAlertForTeacherFieldsRequired();
+    }
   }
 
 }
