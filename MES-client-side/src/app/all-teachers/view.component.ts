@@ -26,7 +26,7 @@ export class ViewComponent implements OnInit {
   optionsControl = new FormControl();
   options: string[] = ['M', 'F'];
   options1: string[] = ['Single', 'Married', 'Divorced', 'Separated', 'Widowed'];
-  options2: string[] = ['Yes', 'No'];
+  options2: string[] = ['yes', 'no'];
   filteredOptions: Observable<string[]>;
   filteredOptions1: Observable<string[]>;
   filteredOptions2: Observable<string[]>;
