@@ -31,6 +31,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+// import { ChartsModule } from 'ng2-charts';
+// import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
+
 import { AllStudentsComponent } from './all-students/all-students.component';
 import { AllTeachersComponent } from './all-teachers/all-teachers.component';
 import { ClassesComponent } from './classes/classes.component';
@@ -50,6 +55,7 @@ import { TeacherServiceService } from './services/teacher-service.service';
 
 import { AddSectionComponent } from './classes/add-section.component';
 import { ViewStudentsComponent } from './classes/view-students.component';
+import { AddStudentInfoComponent } from './classes/add-student-info.component';
 
 
 @NgModule({
@@ -67,7 +73,8 @@ import { ViewStudentsComponent } from './classes/view-students.component';
     ViewComponent,
     AddSectionComponent,
     ViewStudentsComponent,
-    ModalEditFormComponent
+    ModalEditFormComponent,
+    AddStudentInfoComponent
   ],
   imports: [
     HttpClientModule,
@@ -100,7 +107,10 @@ import { ViewStudentsComponent } from './classes/view-students.component';
     HttpClientModule,
     PdfViewerModule,
     MaterialFileInputModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatCheckboxModule,
+    // MDBBootstrapModule
+    // ChartsModule
   ],
   providers: [
     HttpClient,

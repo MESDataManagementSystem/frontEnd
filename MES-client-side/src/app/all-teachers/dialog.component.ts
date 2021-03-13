@@ -64,7 +64,7 @@ export class DialogComponent implements OnInit {
   ) { 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.filteredOptions = this.optionsControl.valueChanges.pipe(
       startWith(''),
       map(

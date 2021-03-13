@@ -33,7 +33,7 @@
                 <ng-container matColumnDef="view">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> View </th>
                     <td mat-cell *matCellDef="let teacher">
-                        <mat-icon (click)="openDialogView(teacher)">visibility</mat-icon>
+                        <mat-icon color="primary" (click)="openDialogView(teacher)">visibility</mat-icon>
                     </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -1,0 +1,254 @@
+<div class="card">
+    <div class="card-header">
+        <h1>Add Student</h1>
+    </div>
+    <div class="card-body">
+        <mat-dialog-content class="mat-typography">
+            <form #teacherForm="ngForm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Last Name</mat-label>
+                                <input matInput type="text" [(ngModel)]="studentInfo.studentLastName" name="studentLastName"
+                                    #studentLastName="ngModel" required>
+                                <mat-icon *ngIf="studentInfo.studentLastName" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="studentInfo.studentLastName=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>First Name</mat-label>
+                                <input matInput type="text" [(ngModel)]="studentInfo.studentFirstName" name="studentFirstName"
+                                    #studentFirstName="ngModel" required>
+                                <mat-icon *ngIf="studentInfo.studentFirstName" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="studentInfo.studentFirstName=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Name Ext</mat-label>
+                                <input matInput type="text" [(ngModel)]="studentInfo.studentNameExtn" name="studentNameExtn"
+                                    #studentNameExtn="ngModel" >
+                                <mat-icon *ngIf="studentInfo.studentNameExtn" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="studentInfo.studentNameExtn=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Middle Name</mat-label>
+                                <input matInput type="text" [(ngModel)]="studentInfo.studentMiddleName" name="studentMiddleName"
+                                    #studentMiddleName="ngModel" required>
+                                <mat-icon *ngIf="studentInfo.studentMiddleName" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="studentInfo.studentMiddleName=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                       
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>LRN </mat-label>
+                                <input matInput type="number" [(ngModel)]="studentInfo.studentLRN"
+                                    name="studentLRN" #studentLRN="ngModel" required>
+                                <mat-icon *ngIf="studentInfo.studentLRN" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="studentInfo.studentLRN=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Date Of Birth</mat-label>
+                                <input matInput [(ngModel)]="studentInfo.studentBirthdate" name="studentBirthdate"
+                                    #studentBirthdate="ngModel" required [max]="maxDate" [matDatepicker]="picker">
+                                <mat-datepicker-toggle matSuffix [for]="picker">
+                                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Sex</mat-label>
+                                <input matInput type="text" [(ngModel)]="studentInfo.studentSex" name="studentSex"
+                                    #studentSex="ngModel" required [matAutocomplete]="auto">
+                                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                        {{option}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                                <mat-icon *ngIf="studentInfo.studentSex" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="studentInfo.studentSex=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class= col>
+                            <h4>ELIGIBILITY FOR ELEMENTARY ENROLMENT</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class= col>
+                            <h4>Credential Presented for Grade 1:</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1">
+
+                        </div>
+                        <div class="col">
+                            <section>
+                                <mat-checkbox class="example-margin" (change)='addCredential("Kinder Progress Report")'> Kinder Progress Report </mat-checkbox>
+                            </section>
+                        </div>
+                        <div class="col">
+                            <section>
+                                <mat-checkbox class="example-margin" (change)='addCredential("ECCD Checklist")'>ECCD Checklist</mat-checkbox>
+                            </section>
+                        </div>
+                        <div class="col">
+                            <section>
+                                <mat-checkbox class="example-margin" (change)='addCredential("Kindergaten Certificate of Completion")'>Kindergaten Certificate of Copletion</mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Name of school</mat-label>
+                                <input matInput type="text" [(ngModel)]="studentInfo.studentNameOfSchoolFromKinder"
+                                    name="studentNameOfSchoolFromKinder" #studentNameOfSchoolFromKinder="ngModel" required>
+                                <mat-icon *ngIf="studentInfo.studentNameOfSchoolFromKinder" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="studentInfo.studentNameOfSchoolFromKinder=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>School ID</mat-label>
+                                <input matInput type="number" [(ngModel)]="studentInfo.studentSchoolId" name="studentSchoolId"
+                                    #studentSchoolId="ngModel" required>
+                                <mat-icon *ngIf="studentInfo.studentSchoolId" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="studentInfo.studentSchoolId=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>School Address</mat-label>
+                                <input matInput type="text" [(ngModel)]="studentInfo.studentSchoolAddress"
+                                    name="studentSchoolAddress" #studentSchoolAddress="ngModel" required>
+                                <mat-icon *ngIf="studentInfo.studentSchoolAddress" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="studentInfo.studentSchoolAddress=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h4>Other Credential Presented</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Pept Passer Rating</mat-label>
+                                <input matInput type="number" [(ngModel)]="studentInfo.studentPeptPasserRating"
+                                    name="studentPeptPasserRating" #studentPeptPasserRating="ngModel" required>
+                                <mat-icon *ngIf="studentInfo.studentPeptPasserRating" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="studentInfo.studentPeptPasserRating=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Date Of Examination </mat-label>
+                                <input matInput [(ngModel)]="studentInfo.studentDateOfxamination" name="studentDateOfxamination"
+                                    #studentDateOfxamination="ngModel" required [max]="maxDate" [matDatepicker]="picker1">
+                                <mat-datepicker-toggle matSuffix [for]="picker1">
+                                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Others </mat-label>
+                                <input matInput type = 'text'[(ngModel)]="studentInfo.studentOthers" name="studentOthers"
+                                    #studentOthers="ngModel" required >
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-8">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Name and address of testing center</mat-label>
+                                <input matInput [(ngModel)]="studentInfo.studentNameAdressOfTestingCenter"
+                                    name="studentNameAdressOfTestingCenter" #studentNameAdressOfTestingCenter="ngModel">
+                            
+                                <mat-datepicker #picker2></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Remark</mat-label>
+                                <input matInput type="number" [(ngModel)]="studentInfo.studentRemark" name="studentRemark"
+                                    #studentRemark="ngModel" required>
+                                <mat-icon *ngIf="studentInfo.studentRemark" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="studentInfo.studentRemark=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-button mat-dialog-close class="cancel">Cancel</button>
+            <button mat-button *ngIf="!update" (click)="addStudent()">Save</button>
+            <button mat-button *ngIf="update" (click)="updateStudent()">Update</button>
+        </mat-dialog-actions>
+    </div>
+</div>

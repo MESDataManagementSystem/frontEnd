@@ -15,12 +15,16 @@ export class SideNavComponent implements OnInit {
   constructor( private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if (!this.navContent.includes(this.lateActive)){
+      this.lateActive = 'Classes';
+    }
+    // alert( this.router.url.substring(5, 6).toUpperCase() +  this.router.url.substring(6));
   }
 
   childRoutes(content): void{
-    const routes = content.toLowerCase();
-    this.router.navigate([routes], {relativeTo: this.route});
     this.lateActive = content;
+    const routes = this.lateActive.toLowerCase();
+    this.router.navigate([routes], {relativeTo: this.route});
     console.log();
   }
 }
