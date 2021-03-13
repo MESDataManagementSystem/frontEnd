@@ -48,12 +48,28 @@ export class StudentServiceService {
   }
 
   updateStudent(student): Observable<any> {
-    console.log(student);
+    console.log(student._id, 'id sa student service nga iupdate');
     return this.httpClient.post(`http://localhost:5000/api/updateStudent/${student._id}`, student);
   }
   findGrade(grade): Observable<any>{
-    console.log(grade, 'grade in service')
+    console.log(grade, 'grade in service');
     return this.httpClient.get(`http://localhost:5000/api/findGrade/${grade}`);
+  }
+  // subjects grade
+  findStudentGrades(subject): Observable<any> {
+    console.log(subject);
+    return this.httpClient.post(`http://localhost:5000/api/findStudentGrades/${subject.id}`, subject);
+  }
+  updateStudentGrades(subject): Observable<any> {
+    console.log(subject);
+    return this.httpClient.post(`http://localhost:5000/api/updateStudentGrades/${subject.id}`, subject);
+  }
+  addStudentGrades(grades): Observable<any>{
+    return this.httpClient.post('http://localhost:5000/api/addStudentGrades', grades);
+  }
+  findQuarter(id): Observable<any>{
+    console.log(id);
+    return this.httpClient.get(`http://localhost:5000/api/findQuarter/ ${id}`);
   }
 
 

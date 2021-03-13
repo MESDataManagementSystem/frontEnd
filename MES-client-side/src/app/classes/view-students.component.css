@@ -78,6 +78,11 @@ mat-form-field {
   .infoIcon{
     margin-left: 50px;
   }
+  .medal{
+    float: right;
+    margin-right: 5%;
+    cursor: pointer;
+  }
   /* editIcon{
 
   } */
