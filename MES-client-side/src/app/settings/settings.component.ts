@@ -28,7 +28,7 @@ export class SettingsComponent implements AfterViewInit {
   }
 
   addAccount() {
-    
+
   }
   
   
