@@ -1,9 +1,9 @@
 <div class="content">
-    <h2>Section </h2>
+    <h2>Section :  {{section}}</h2>
     <div class="medal">
       <img src="https://previews.123rf.com/images/nalinn/nalinn1504/nalinn150400921/38748334-gold-silver-and-bronze-medal-with-red-blue-and-green-ribbons.jpg" alt="" width="auto" height="80"  (click)="alert()"  matTooltip="View top students" >
     </div>
-    <div>
+    <!-- <div>
         <mat-form-field class="example-full-width">
             <mat-label>Search by {{typeSearch}}</mat-label>
             <input matInput *ngIf='lrn === true' (click)='lrn = true' [(ngModel)]="searchLrn" autocomplete="off" (keyup)="filterLrn($event.target.value)"  >
@@ -15,7 +15,7 @@
             <button mat-menu-item (click) = ' typeSearch = "LRN"; lrn= true'>LRN</button>
             <button mat-menu-item (click) = ' typeSearch = "Name (Last Name, First name)"; lrn= false'>Name</button>
         </mat-menu>
-    </div>
+    </div> -->
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="lrn">

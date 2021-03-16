@@ -1,3 +1,5 @@
+import { AuthGuardLogInActivateGuard } from './auth-guard-log-in-activate.guard';
+import { AuthGuard } from './auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -12,40 +14,19 @@ import { ViewStudentsComponent } from './classes/view-students.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuardLogInActivateGuard] },
   {
     path: 'MES',
     component: SideNavComponent,
+    canActivate: [AuthGuard],
     children: [
-      {
-        path: 'settings',
-        component: SettingsComponent
-      },
-      {
-        path: 'students',
-        component: AllStudentsComponent
-      },
-      {
-        path: 'teachers',
-        component: AllTeachersComponent
-      },
-      {
-        path: 'classes',
-        component: ClassesComponent
-      },
-      {
-        path: 'dashboard',
-        component: DashboardComponent
-      },
-      {
-        path: 'classes/:grade/:section',
-        component: ViewStudentsComponent
-      },
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
-      }
+      { path: 'settings', component: SettingsComponent },
+      { path: 'students', component: AllStudentsComponent },
+      { path: 'teachers', component: AllTeachersComponent },
+      { path: 'classes', component: ClassesComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'classes/:grade/:section', component: ViewStudentsComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
 ];

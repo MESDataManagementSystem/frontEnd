@@ -10,8 +10,8 @@
                         <div class="col">
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Last Name</mat-label>
-                                <input matInput type="text" [(ngModel)]="studentInfo.studentLastName" name="studentLastName"
-                                    #studentLastName="ngModel" required>
+                                <input matInput type="text" [(ngModel)]="studentInfo.studentLastName"
+                                    name="studentLastName" #studentLastName="ngModel" required>
                                 <mat-icon *ngIf="studentInfo.studentLastName" mat-button matSuffix mat-icon-button
                                     aria-label="Clear" (click)="studentInfo.studentLastName=''">
                                     close
@@ -22,8 +22,8 @@
                         <div class="col">
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>First Name</mat-label>
-                                <input matInput type="text" [(ngModel)]="studentInfo.studentFirstName" name="studentFirstName"
-                                    #studentFirstName="ngModel" required>
+                                <input matInput type="text" [(ngModel)]="studentInfo.studentFirstName"
+                                    name="studentFirstName" #studentFirstName="ngModel" required>
                                 <mat-icon *ngIf="studentInfo.studentFirstName" mat-button matSuffix mat-icon-button
                                     aria-label="Clear" (click)="studentInfo.studentFirstName=''">
                                     close
@@ -34,8 +34,8 @@
                         <div class="col">
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Name Ext</mat-label>
-                                <input matInput type="text" [(ngModel)]="studentInfo.studentNameExtn" name="studentNameExtn"
-                                    #studentNameExtn="ngModel" >
+                                <input matInput type="text" [(ngModel)]="studentInfo.studentNameExtn"
+                                    name="studentNameExtn" #studentNameExtn="ngModel">
                                 <mat-icon *ngIf="studentInfo.studentNameExtn" mat-button matSuffix mat-icon-button
                                     aria-label="Clear" (click)="studentInfo.studentNameExtn=''">
                                     close
@@ -46,8 +46,8 @@
                         <div class="col">
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Middle Name</mat-label>
-                                <input matInput type="text" [(ngModel)]="studentInfo.studentMiddleName" name="studentMiddleName"
-                                    #studentMiddleName="ngModel" required>
+                                <input matInput type="text" [(ngModel)]="studentInfo.studentMiddleName"
+                                    name="studentMiddleName" #studentMiddleName="ngModel" required>
                                 <mat-icon *ngIf="studentInfo.studentMiddleName" mat-button matSuffix mat-icon-button
                                     aria-label="Clear" (click)="studentInfo.studentMiddleName=''">
                                     close
@@ -55,17 +55,17 @@
                                 <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                             </mat-form-field>
                         </div>
-                
+
                     </div>
                 </div>
                 <div class="container">
                     <div class="row">
-                       
+
                         <div class="col">
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>LRN </mat-label>
-                                <input matInput type="number" [(ngModel)]="studentInfo.studentLRN"
-                                    name="studentLRN" #studentLRN="ngModel" required>
+                                <input matInput type="number" [(ngModel)]="studentInfo.studentLRN" name="studentLRN"
+                                    #studentLRN="ngModel" required>
                                 <mat-icon *ngIf="studentInfo.studentLRN" mat-button matSuffix mat-icon-button
                                     aria-label="Clear" (click)="studentInfo.studentLRN=''">
                                     close
@@ -106,12 +106,12 @@
                 </div>
                 <div class="container">
                     <div class="row">
-                        <div class= col>
+                        <div class=col>
                             <h4>ELIGIBILITY FOR ELEMENTARY ENROLMENT</h4>
                         </div>
                     </div>
                     <div class="row">
-                        <div class= col>
+                        <div class=col>
                             <h4>Credential Presented for Grade 1:</h4>
                         </div>
                     </div>
@@ -121,17 +121,21 @@
                         </div>
                         <div class="col">
                             <section>
-                                <mat-checkbox class="example-margin" (change)='addCredential("Kinder Progress Report")'> Kinder Progress Report </mat-checkbox>
+                                <mat-checkbox class="example-margin" (change)='addCredential("Kinder Progress Report")'>
+                                    Kinder Progress Report </mat-checkbox>
                             </section>
                         </div>
                         <div class="col">
                             <section>
-                                <mat-checkbox class="example-margin" (change)='addCredential("ECCD Checklist")'>ECCD Checklist</mat-checkbox>
+                                <mat-checkbox class="example-margin" (change)='addCredential("ECCD Checklist")'>ECCD
+                                    Checklist</mat-checkbox>
                             </section>
                         </div>
                         <div class="col">
                             <section>
-                                <mat-checkbox class="example-margin" (change)='addCredential("Kindergaten Certificate of Completion")'>Kindergaten Certificate of Copletion</mat-checkbox>
+                                <mat-checkbox class="example-margin"
+                                    (change)='addCredential("Kindergaten Certificate of Completion")'>Kindergaten
+                                    Certificate of Copletion</mat-checkbox>
                             </section>
                         </div>
                     </div>
@@ -142,9 +146,11 @@
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Name of school</mat-label>
                                 <input matInput type="text" [(ngModel)]="studentInfo.studentNameOfSchoolFromKinder"
-                                    name="studentNameOfSchoolFromKinder" #studentNameOfSchoolFromKinder="ngModel" required>
-                                <mat-icon *ngIf="studentInfo.studentNameOfSchoolFromKinder" mat-button matSuffix mat-icon-button
-                                    aria-label="Clear" (click)="studentInfo.studentNameOfSchoolFromKinder=''">
+                                    name="studentNameOfSchoolFromKinder" #studentNameOfSchoolFromKinder="ngModel"
+                                    required>
+                                <mat-icon *ngIf="studentInfo.studentNameOfSchoolFromKinder" mat-button matSuffix
+                                    mat-icon-button aria-label="Clear"
+                                    (click)="studentInfo.studentNameOfSchoolFromKinder=''">
                                     close
                                 </mat-icon>
                                 <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
@@ -153,8 +159,8 @@
                         <div class="col-3">
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>School ID</mat-label>
-                                <input matInput type="number" [(ngModel)]="studentInfo.studentSchoolId" name="studentSchoolId"
-                                    #studentSchoolId="ngModel" required>
+                                <input matInput type="number" [(ngModel)]="studentInfo.studentSchoolId"
+                                    name="studentSchoolId" #studentSchoolId="ngModel" required>
                                 <mat-icon *ngIf="studentInfo.studentSchoolId" mat-button matSuffix mat-icon-button
                                     aria-label="Clear" (click)="studentInfo.studentSchoolId=''">
                                     close
@@ -188,8 +194,8 @@
                                 <mat-label>Pept Passer Rating</mat-label>
                                 <input matInput type="number" [(ngModel)]="studentInfo.studentPeptPasserRating"
                                     name="studentPeptPasserRating" #studentPeptPasserRating="ngModel" required>
-                                <mat-icon *ngIf="studentInfo.studentPeptPasserRating" mat-button matSuffix mat-icon-button
-                                    aria-label="Clear" (click)="studentInfo.studentPeptPasserRating=''">
+                                <mat-icon *ngIf="studentInfo.studentPeptPasserRating" mat-button matSuffix
+                                    mat-icon-button aria-label="Clear" (click)="studentInfo.studentPeptPasserRating=''">
                                     close
                                 </mat-icon>
                                 <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
@@ -198,8 +204,9 @@
                         <div class="col">
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Date Of Examination </mat-label>
-                                <input matInput [(ngModel)]="studentInfo.studentDateOfxamination" name="studentDateOfxamination"
-                                    #studentDateOfxamination="ngModel" required [max]="maxDate" [matDatepicker]="picker1">
+                                <input matInput [(ngModel)]="studentInfo.studentDateOfxamination"
+                                    name="studentDateOfxamination" #studentDateOfxamination="ngModel" required
+                                    [max]="maxDate" [matDatepicker]="picker1">
                                 <mat-datepicker-toggle matSuffix [for]="picker1">
                                     <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                                 </mat-datepicker-toggle>
@@ -210,12 +217,12 @@
                         <div class="col">
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Others </mat-label>
-                                <input matInput type = 'text'[(ngModel)]="studentInfo.studentOthers" name="studentOthers"
-                                    #studentOthers="ngModel" required >
+                                <input matInput type='text' [(ngModel)]="studentInfo.studentOthers" name="studentOthers"
+                                    #studentOthers="ngModel" required>
                                 <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                             </mat-form-field>
                         </div>
-                    
+
                     </div>
                 </div>
                 <div class="container">
@@ -225,15 +232,15 @@
                                 <mat-label>Name and address of testing center</mat-label>
                                 <input matInput [(ngModel)]="studentInfo.studentNameAdressOfTestingCenter"
                                     name="studentNameAdressOfTestingCenter" #studentNameAdressOfTestingCenter="ngModel">
-                            
+
                                 <mat-datepicker #picker2></mat-datepicker>
                             </mat-form-field>
                         </div>
                         <div class="col-4">
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Remark</mat-label>
-                                <input matInput type="number" [(ngModel)]="studentInfo.studentRemark" name="studentRemark"
-                                    #studentRemark="ngModel" required>
+                                <input matInput type="number" [(ngModel)]="studentInfo.studentRemark"
+                                    name="studentRemark" #studentRemark="ngModel" required>
                                 <mat-icon *ngIf="studentInfo.studentRemark" mat-button matSuffix mat-icon-button
                                     aria-label="Clear" (click)="studentInfo.studentRemark=''">
                                     close
@@ -254,164 +261,225 @@
 </div>
 
 <div *ngIf="editStudentInfo == 'editStudentGrade' && !addGradesModal">
-    <mat-icon mat-dialog-close class = 'closeIcon'>close</mat-icon>
-    <mat-form-field  class = 'chooseQuarter' appearance="fill">
-    <mat-label>Select a Quarter: </mat-label>
-    <mat-select [disabled]="disableSelect.value" [(ngModel)]="quarter" >
-        <mat-option  value="Quarter 1" [disabled]='disabledQuarterButtons.quarter1'>Quarter 1</mat-option>
-        <mat-option value="Quarter 2"  [disabled]='disabledQuarterButtons.quarter2'>Quarter 2</mat-option>
-        <mat-option value="Quarter 3"  [disabled]='disabledQuarterButtons.quarter3'>Quarter 3</mat-option>
-        <mat-option value="Quarter 4"  [disabled]='disabledQuarterButtons.quarter4'>Quarter 4</mat-option>
-    </mat-select>
+    <mat-icon mat-dialog-close class='closeIcon'>close</mat-icon>
+    <mat-form-field class='chooseQuarter' appearance="fill">
+        <mat-label>Select a Quarter: </mat-label>
+        <mat-select [disabled]="disableSelect.value" [(ngModel)]="quarter">
+            <mat-option value="Quarter 1" [disabled]='disabledQuarterButtons.quarter1'>Quarter 1</mat-option>
+            <mat-option value="Quarter 2" [disabled]='disabledQuarterButtons.quarter2'>Quarter 2</mat-option>
+            <mat-option value="Quarter 3" [disabled]='disabledQuarterButtons.quarter3'>Quarter 3</mat-option>
+            <mat-option value="Quarter 4" [disabled]='disabledQuarterButtons.quarter4'>Quarter 4</mat-option>
+        </mat-select>
     </mat-form-field>
     <div>
-    <button mat-button class='nextButton'  (click)=" chooseQuarter()">Next</button>
+        <button mat-button class='nextButton' (click)=" chooseQuarter()">Next</button>
     </div>
 </div>
 <div *ngIf="addGradesModal">
-    <mat-icon mat-dialog-close class = 'closeIcon'>close</mat-icon>
-    <h2>{{studentInfo.studentLastName}}, {{studentInfo.studentFirstName}} {{studentInfo.studentMiddleName}}</h2>
-    <div class="row">
-        <div class="col-4">
-            <mat-form-field appearance="outline" class="inputField">
-                <mat-label>Mother Tongue: </mat-label>
-                <input type ='number' min="0" max="100" matInput  [(ngModel)]="studentSubject.motherTongue" name="motherTongue"
-                    #motherTongue="ngModel" required >
-                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
+    <div class="card">
+        <div class="card-header">
+            <h2>{{quarter}} || {{studentInfo.studentLastName}}, {{studentInfo.studentFirstName}}
+                {{studentInfo.studentMiddleName}}</h2>
         </div>
-        <div class="col-4">
-            <mat-form-field appearance="outline" class="inputField">
-                <mat-label>Filipino: </mat-label>
-                <input type ='number' min="0" max="100" matInput  [(ngModel)]="studentSubject.filipino" name="filipino"
-                    #filipino="ngModel" required >
-                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-4">
-            <mat-form-field appearance="outline" class="inputField">
-                <mat-label>English: </mat-label>
-                <input type ='number' min="0" max="100" matInput  [(ngModel)]="studentSubject.english" name="english"
-                    #english="ngModel" required >
-                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
+        <div class="card-body">
+            <mat-dialog-content class="mat-typography">
+                <div class="row">
+                    <div class="col">
+                        <table mdbTable bordered="true">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Subjects</th>
+                                    <th scope="col">Grades</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr mdbTableCol>
+                                    <td>Mother Tongue</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="inputField">
+                                            <input type='number' min="0" max="100" matInput
+                                                [(ngModel)]="studentSubject.motherTongue" name="motherTongue"
+                                                #motherTongue="ngModel" required>
+                                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr mdbTableCol>
+                                    <td>Filipino</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="inputField">
+                                            <input type='number' min="0" max="100" matInput
+                                                [(ngModel)]="studentSubject.filipino" name="filipino"
+                                                #filipino="ngModel" required>
+                                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr mdbTableCol>
+                                    <td>English</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="inputField">
+                                            <input type='number' min="0" max="100" matInput
+                                                [(ngModel)]="studentSubject.english" name="english" #english="ngModel"
+                                                required>
+                                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr mdbTableCol>
+                                    <td>Mathematics</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="inputField">
+                                            <input type='number' min="0" max="100" matInput
+                                                [(ngModel)]="studentSubject.mathematics" name="mathematics"
+                                                #mathematics="ngModel" required>
+                                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr mdbTableCol>
+                                    <td>Science</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="inputField">
+                                            <input type='number' min="0" max="100" matInput
+                                                [(ngModel)]="studentSubject.science" name="science" #science="ngModel"
+                                                required>
+                                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr mdbTableCol>
+                                    <td>Araling Panlipunan</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="inputField">
+                                            <input type='number' min="0" max="100" matInput
+                                                [(ngModel)]="studentSubject.aralingPanlipunan" name="aralingPanlipunan"
+                                                #aralingPanlipunan="ngModel" required>
+                                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr mdbTableCol>
+                                    <td>EPP / Tle</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="inputField">
+                                            <input type='number' min="0" max="100" matInput
+                                                [(ngModel)]="studentSubject.eppTle" name="eppTle" #eppTle="ngModel"
+                                                required>
+                                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <hr>
+                                    </td>
+                                    <td>
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr mdbTableCol>
+                                    <td>MAPEH</td>
+                                    <td>
+                                    </td>
+                                </tr>
+
+                                <tr mdbTableCol>
+                                    <td>Music</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="inputField">
+                                            <input type='number' min="0" max="100" matInput
+                                                [(ngModel)]="studentSubject.music" name="music" #music="ngModel"
+                                                required>
+                                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr mdbTableCol>
+                                    <td>Arts</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="inputField">
+                                            <input type='number' min="0" max="100" matInput
+                                                [(ngModel)]="studentSubject.arts" name="arts" #arts="ngModel" required>
+                                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr mdbTableCol>
+                                    <td>PE</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="inputField">
+                                            <input type='number' min="0" max="100" matInput
+                                                [(ngModel)]="studentSubject.pe" name="pe" #pe="ngModel" required>
+                                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr mdbTableCol>
+                                    <td>Health</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="inputField">
+                                            <input type='number' min="0" max="100" matInput
+                                                [(ngModel)]="studentSubject.health" name="health" #health="ngModel"
+                                                required>
+                                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <hr>
+                                    </td>
+                                    <td>
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr mdbTableCol>
+                                    <td>Edukasyon sa Pagpapakatao</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="inputField">
+                                            <input type='number' min="0" max="100" matInput
+                                                [(ngModel)]="studentSubject.edukasyonSaPagpapakatao"
+                                                name="edukasyonSaPagpapakatao" #edukasyonSaPagpapakatao="ngModel"
+                                                required>
+                                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr mdbTableCol>
+                                    <td>Arabic Language</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="inputField">
+                                            <input type='number' min="0" max="100" matInput
+                                                [(ngModel)]="studentSubject.arabicLanguage" name="arabicLanguage"
+                                                #arabicLanguage="ngModel" required>
+                                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr mdbTableCol>
+                                    <td>Islamic Language</td>
+                                    <td>
+                                        <mat-form-field appearance="outline" class="inputField">
+                                            <input type='number' min="0" max="100" matInput
+                                                [(ngModel)]="studentSubject.islamicLanguage" name="islamicLanguage"
+                                                #islamicLanguage="ngModel" required>
+                                            <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </mat-dialog-content>
         </div>
     </div>
-    <div class="row">
-        <div class="col-4">
-            <mat-form-field appearance="outline" class="inputField">
-                <mat-label>Mathematics: </mat-label>
-                <input type ='number' min="0" max="100" matInput  [(ngModel)]="studentSubject.mathematics" name="mathematics"
-                    #mathematics="ngModel" required >
-                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-4">
-            <mat-form-field appearance="outline" class="inputField">
-                <mat-label>Science: </mat-label>
-                <input type ='number' min="0" max="100" matInput  [(ngModel)]="studentSubject.science" name="science"
-                    #science="ngModel" required >
-                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-4">
-            <mat-form-field appearance="outline" class="inputField">
-                <mat-label>Araling Panlipunan: </mat-label>
-                <input type ='number' min="0" max="100" matInput  [(ngModel)]="studentSubject.aralingPanlipunan" name="aralingPanlipunan"
-                    #aralingPanlipunan="ngModel" required >
-                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <mat-form-field appearance="outline" class="inputField">
-                <mat-label>EPP / TLE: </mat-label>
-                <input type ='number' min="0" max="100" matInput  [(ngModel)]="studentSubject.eppTle" name="eppTle"
-                    #eppTle="ngModel" required >
-                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <hr>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h4>MAPEH:</h4>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            <mat-form-field appearance="outline" class="inputField">
-                <mat-label>Music: </mat-label>
-                <input type ='number' min="0" max="100" matInput  [(ngModel)]="studentSubject.music" name="music"
-                    #music="ngModel" required >
-                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-3">
-            <mat-form-field appearance="outline" class="inputField">
-                <mat-label>Arts: </mat-label>
-                <input type ='number' min="0" max="100" matInput  [(ngModel)]="studentSubject.arts" name="arts"
-                    #arts="ngModel" required >
-                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-3">
-            <mat-form-field appearance="outline" class="inputField">
-                <mat-label>PE: </mat-label>
-                <input type ='number' min="0" max="100" matInput  [(ngModel)]="studentSubject.pe" name="pe"
-                    #pe="ngModel" required >
-                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-3">
-            <mat-form-field appearance="outline" class="inputField">
-                <mat-label>Health: </mat-label>
-                <input type ='number' min="0" max="100" matInput  [(ngModel)]="studentSubject.health" name="health"
-                    #health="ngModel" required >
-                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <hr>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <mat-form-field appearance="outline" class="inputField">
-                <mat-label>Edukasyon Sa Pagpapakatao: </mat-label>
-                <input type ='number' min="0" max="100" matInput  [(ngModel)]="studentSubject.edukasyonSaPagpapakatao" name="edukasyonSaPagpapakatao"
-                    #edukasyonSaPagpapakatao="ngModel" required >
-                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-4">
-            <mat-form-field appearance="outline" class="inputField">
-                <mat-label>Arabic Language: </mat-label>
-                <input type ='number' min="0" max="100" matInput  [(ngModel)]="studentSubject.arabicLanguage" name="arabicLanguage"
-                    #arabicLanguage="ngModel" required >
-                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-4">
-            <mat-form-field appearance="outline" class="inputField">
-                <mat-label>Islamic Language: </mat-label>
-                <input type ='number' min="0" max="100" matInput  [(ngModel)]="studentSubject.islamicLanguage" name="islamicLanguage"
-                    #islamicLanguage="ngModel" required >
-                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-        </div>
-    </div>
-    
     <div>
-        <button mat-button *ngIf="!updateGradesButton" class='nextButton'  (click)="addStudentGrades()">Add Grades</button>
-        <button mat-button *ngIf="updateGradesButton"  (click)="addStudentGrades()">Update Grades</button>
+        <button mat-button *ngIf="!updateGradesButton" class='nextButton' (click)="addStudentGrades()">Add
+            Grades</button>
+        <button mat-button *ngIf="updateGradesButton" class='nextButton' (click)="addStudentGrades()">Update Grades</button>
+        <button mat-button mat-dialog-close class="cancel">Cancel</button>
     </div>
 </div>
-
