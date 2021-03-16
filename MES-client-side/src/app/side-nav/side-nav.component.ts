@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class SideNavComponent implements OnInit {
   navRoute = ['Dashboard', 'Students', 'Teachers', 'Classes', 'Setting'];
   // tslint:disable-next-line:max-line-length
-  navContent: any = [{ name: 'Dashboard', icon: 'dashboard' }, { name: 'Students', icon: 'people' }, { name: 'Teachers', icon: 'people' }, { name: 'Classes', icon: 'home' }, { name: 'Setting', icon: 'settings' }];
+  navContent: any = [{ name: 'Dashboard', icon: 'dashboard' }, { name: 'Students', icon: 'people' }, { name: 'Teachers', icon: 'people' }, { name: 'Classes', icon: 'home' }, { name: 'Settings', icon: 'settings' }];
   showSideNav = true;
   lateActive = this.router.url.substring(5, 6).toUpperCase() + this.router.url.substring(6);
   oldBgColor = '#e3e6e8';
@@ -20,7 +20,6 @@ export class SideNavComponent implements OnInit {
     if (!this.navRoute.includes(this.lateActive)) {
       this.lateActive = 'Classes';
     }
-    // alert( this.router.url.substring(5, 6).toUpperCase() +  this.router.url.substring(6));
   }
 
   childRoutes(content): void {
@@ -29,4 +28,5 @@ export class SideNavComponent implements OnInit {
     this.router.navigate([routes], { relativeTo: this.route });
     console.log();
   }
+
 }

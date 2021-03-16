@@ -30,7 +30,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 // import { ChartsModule } from 'ng2-charts';
 // import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
@@ -55,6 +55,7 @@ import { TeacherServiceService } from './services/teacher-service.service';
 import { AddSectionComponent } from './classes/add-section.component';
 import { ViewStudentsComponent } from './classes/view-students.component';
 import { AddStudentInfoComponent } from './classes/add-student-info.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { AddStudentInfoComponent } from './classes/add-student-info.component';
     AddSectionComponent,
     ViewStudentsComponent,
     ModalEditFormComponent,
-    AddStudentInfoComponent
+    AddStudentInfoComponent,
+    SettingsComponent
   ],
   imports: [
     HttpClientModule,

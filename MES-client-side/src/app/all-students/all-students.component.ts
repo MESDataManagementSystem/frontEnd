@@ -1,21 +1,12 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { StudentServiceService } from '../services/student-service.service';
+import { AbstractControl, FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { StudentServiceService } from '../services/student-service.service';
 import { AddFormDialogComponent } from './modal-add-form.component';
 import { ModalViewFormComponent } from './modal-view-form.component';
 import { ModalEditFormComponent } from './modal-edit-form.component';
-import { FormControl } from '@angular/forms';
-import { filter } from 'rxjs/operators';
-
-export interface OldFiles {
-  fullName: string;
-  lrn: string;
-  fileUrl: string;
-  date: string;
-}
-
 
 @Component({
   selector: 'app-all-students',
@@ -24,18 +15,7 @@ export interface OldFiles {
 })
 export class AllStudentsComponent implements OnInit {
 
-  lrnFilter = new FormControl();
-  nameFilter = new FormControl();
-  searchByYear = "";
-  filteredValues = {
-    lrn: "",
-    fullName: "",
-  }
-
-  searchLrn = '';
-  // name = '';
   lrn = true;
-  date = '';
   typeSearch: string;
   selectedFiles: File;
 
@@ -43,10 +23,12 @@ export class AllStudentsComponent implements OnInit {
   dataSource: MatTableDataSource<any>
   @ViewChild(MatPaginator) paginator: MatPaginator;
   columnsToDisplay: string[] = ['lrn', 'name', 'edit', 'view'];
+  readonly formControl: AbstractControl;
 
   constructor(
     private service: StudentServiceService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    formBuilder: FormBuilder
   ) {
     this.typeSearch = 'LRN';
     this.service.retrieveData().subscribe(data => {
@@ -54,54 +36,30 @@ export class AllStudentsComponent implements OnInit {
       this.dataSource = new MatTableDataSource<any>(this.students.data)
       setTimeout(() => {
         this.dataSource.paginator = this.paginator;
-      }, 0)
+      }, 0),
+        this.dataSource.filterPredicate = ((data, filter) => {
+          const lrnFilter = !filter.lrn || data.lrn.toLowerCase().includes(filter.lrn);
+          const fullNameFilter = !filter.fullName || data.fullName.toLowerCase().includes(filter.fullName);
+          const yearFilter = !filter.date || data.date.toLowerCase().includes(filter.date);
+          return lrnFilter && fullNameFilter && yearFilter;
+        }) as (data, string) => boolean;
     })
-  }
-
-  ngOnInit() {
-    this.lrnFilter.valueChanges.subscribe(lrnFilterValue => {
-      this.filteredValues["lrn"] = lrnFilterValue;
-      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    this.formControl = formBuilder.group({
+      lrn: "",
+      fullName: "",
+      date: ""
+    });
+    this.formControl.valueChanges.subscribe(value => {
+      const filter = {
+        ...value,
+        fullName: value.fullName.trim().toLowerCase()
+      } as string;
+      this.dataSource.filter = filter;
     })
-    this.nameFilter.valueChanges.subscribe(nameFilterValue => {
-      this.filteredValues["name"] = nameFilterValue;
-      this.dataSource.filter = JSON.stringify(this.filteredValues);
-      // console.log("unsa ni", this.dataSource.filter)
-
-    })
-      , () => {
-        this.dataSource.filterPredicate = this.customFilter()
-      }
 
   }
 
-  customFilter() {
-    let myFilterPredicate = function (data, filter: string): boolean {
-      let searchString = JSON.parse(filter)
-      searchString = data.includes(filter)
-      return (
-        data.lrn
-          .toString()
-          .trim()
-          .indexOf(searchString.lrn) !== -1
-        &&
-        data.fullName
-          .toString()
-          .trim()
-          .toLowerCase()
-          .indexOf(searchString.fullName.toLowerCase()) !== -1
-      )
-    }
-    return myFilterPredicate;
-  }
-
-  yearFilter(filter) {
-    this.searchByYear = filter;
-    this.dataSource.filter = filter.trim().toLocaleLowerCase();
-    this.dataSource.filterPredicate = function (data, filter: string): boolean {
-      return data.date.toLocaleLowerCase().includes(filter)
-    }
-  }
+  ngOnInit() { }
 
   openDialog(): void {
     this.dialog.open(AddFormDialogComponent, { disableClose: true });
@@ -130,38 +88,18 @@ export class AllStudentsComponent implements OnInit {
     });
   }
 
-  editFile(url, lrn, name) {
+  editFile(url, lrn, name, date) {
     const datas = []
     datas.push(url);
     datas.push(lrn);
     datas.push(name);
+    datas.push(date);
     this.dialog.open(ModalEditFormComponent, {
       disableClose: true,
       data: datas,
       width: '100vw !important',
       height: '100% !important'
     })
-  }
-
-  filterFullName(value: string): void {
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
-    this.dataSource.filterPredicate = function (data, filter: string): boolean {
-      return data.fullName.toLocaleLowerCase().includes(filter)
-    }
-  }
-
-  filterLrn(value: string): void {
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
-    this.dataSource.filterPredicate = function (data, filter: string): boolean {
-      return data.lrn.toLocaleLowerCase().includes(filter);
-    }
-  }
-
-  filterYear(value: string): void {
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
-    this.dataSource.filterPredicate = function (data, filter: string): boolean {
-      return data.date.toLocaleLowerCase().includes(filter)
-    }
   }
 
 }

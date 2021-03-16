@@ -122,7 +122,6 @@ export class DialogComponent implements OnInit {
   // Add Teacher
   addTeacher() {
     this.teachersForm.activeStatus =  this.teachersForm.activeStatus.toLowerCase()
-    alert(this.teachersForm.activeStatus)
     if ( this.teachersForm.activeStatus == 'yes' || this.teachersForm.activeStatus == 'no') {
       this.teacherService.addTeacher(this.teachersForm).subscribe((data) => {
         if (data) {
@@ -132,7 +131,7 @@ export class DialogComponent implements OnInit {
         }
       })
     } else {
-      alert("error")
+      this.swal.errorAlertForAllFieldsAreRequired()
     }
    
   }

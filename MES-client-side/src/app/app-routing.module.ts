@@ -3,6 +3,7 @@ import { AuthGuard } from './auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ClassesComponent } from './classes/classes.component';
@@ -10,10 +11,6 @@ import { AllTeachersComponent } from './all-teachers/all-teachers.component';
 import { AllStudentsComponent } from './all-students/all-students.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { ViewStudentsComponent } from './classes/view-students.component';
-
-
-
-
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -23,6 +20,7 @@ const routes: Routes = [
     component: SideNavComponent,
     canActivate: [AuthGuard],
     children: [
+      { path: 'settings', component: SettingsComponent },
       { path: 'students', component: AllStudentsComponent },
       { path: 'teachers', component: AllTeachersComponent },
       { path: 'classes', component: ClassesComponent },

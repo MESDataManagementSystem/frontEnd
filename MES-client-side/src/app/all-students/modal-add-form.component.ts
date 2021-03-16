@@ -115,7 +115,7 @@ export class AddFormDialogComponent implements OnInit {
     }
   }
 
-  chosenYearHandler(normalizedYear: Moment,datepicker: MatDatepicker<Moment>) {
+  chosenYearHandler(normalizedYear: Moment, datepicker: MatDatepicker<Moment>) {
     let ctrlValue = this.date.value;
     ctrlValue.year(normalizedYear.year());
     this.year = ctrlValue.year();
