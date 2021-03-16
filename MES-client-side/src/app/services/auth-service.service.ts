@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { SwalService } from '../services/swal.service';
 import jwt_decode from 'jwt-decode';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,10 @@ export class AuthServiceService {
 
   isLogin(): any {
     const token = window.localStorage.getItem('token');
-    // const decodedToken: any = jwt_decode(token);
-    // console.log(decodedToken);
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(token);
+    // const decodedToken = jwt_decode(token);
+    console.log(decodedToken);
     // console.log(decodedToken.exp);
     // console.log(new Date());
     return token != null;
@@ -59,7 +62,7 @@ export class AuthServiceService {
   //   return localStorage.getItem('token');
   // }
 
-  deleteToken() {
+  deleteToken(): void {
     localStorage.removeItem('token');
   }
 

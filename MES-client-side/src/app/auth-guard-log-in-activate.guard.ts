@@ -18,7 +18,7 @@ export class AuthGuardLogInActivateGuard implements CanActivate {
       this.router.navigate(['/MES']);
       return false;
     }
-    return false;
+    return true;
   }
 
 }
