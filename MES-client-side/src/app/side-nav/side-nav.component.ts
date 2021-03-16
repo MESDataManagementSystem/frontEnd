@@ -7,24 +7,29 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./side-nav.component.css']
 })
 export class SideNavComponent implements OnInit {
-  navContent: any = [{name: 'Dashboard', icon: 'dashboard' }, {name: 'Students', icon: 'people'}, {name: 'Teachers', icon: 'people'}, {name: 'Classes', icon: 'home'}, {name: 'Setting', icon: 'settings'}];
+  navContent: any = [
+    { name: 'Dashboard', icon: 'dashboard' },
+    { name: 'Students', icon: 'people' },
+    { name: 'Teachers', icon: 'people' },
+    { name: 'Classes', icon: 'home' },
+    { name: 'Settings', icon: 'settings' }
+  ];
   showSideNav = true;
-  lateActive = this.router.url.substring(5, 6).toUpperCase() +  this.router.url.substring(6);
+  lateActive = this.router.url.substring(5, 6).toUpperCase() + this.router.url.substring(6);
   oldBgColor = '#e3e6e8';
 
-  constructor( private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    if (!this.navContent.includes(this.lateActive)){
+    if (!this.navContent.includes(this.lateActive)) {
       this.lateActive = 'Classes';
     }
-    // alert( this.router.url.substring(5, 6).toUpperCase() +  this.router.url.substring(6));
   }
 
-  childRoutes(content): void{
+  childRoutes(content): void {
     this.lateActive = content;
     const routes = this.lateActive.toLowerCase();
-    this.router.navigate([routes], {relativeTo: this.route});
-    console.log();
+    this.router.navigate([routes], { relativeTo: this.route });
   }
+
 }

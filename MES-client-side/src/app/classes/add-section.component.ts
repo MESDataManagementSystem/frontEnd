@@ -6,51 +6,15 @@ import { SectionService } from '../services/section.service';
 import { TeacherServiceService } from '../services/teacher-service.service';
 import { SwalService } from '../services/swal.service';
 import { Observable } from 'rxjs';
-// import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
-// import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-// import { MatDatepicker } from '@angular/material/datepicker';
-
-// import * as _moment from 'moment';
-// import { default as _rollupMoment, Moment } from 'moment';
-// const moment = _rollupMoment || _moment;
-
-// export const YEAR_MODE_FORMATS = {
-//   parse: {
-//     dateInput: 'YYYY',
-//   },
-//   display: {
-//     dateInput: 'YYYY',
-//     monthYearLabel: 'MMM YYYY',
-//     dateA11yLabel: 'LL',
-//     monthYearA11yLabel: 'MMMM YYYY',
-//   },
-// };
 
 @Component({
   selector: 'app-add-section',
   templateUrl: './add-section.component.html',
-  styleUrls: ['./add-section.component.css'],
-  // providers: [
-  //   {
-  //     provide: DateAdapter,
-  //     useClass: MomentDateAdapter,
-  //     deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
-  //   },
-
-  //   { provide: MAT_DATE_FORMATS, useValue: YEAR_MODE_FORMATS },
-  // ],
+  styleUrls: ['./add-section.component.css']
 })
 export class AddSectionComponent implements OnInit {
 
-  // date = new FormControl(moment());
-  
-  // chosenYearHandler(normalizedYear: Moment, datepicker: MatDatepicker<Moment>) {
-  //   const ctrlValue = this.date.value;
-  //   ctrlValue.year(normalizedYear.year());
-  //   this.date.setValue(ctrlValue);
-  //   datepicker.close();
-  // }
-
+  hideOverlay = true;
   minDate = new Date()
   maxDate: Date;
   optionsControl = new FormControl();
@@ -80,7 +44,6 @@ export class AddSectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.classesForm.year = this.minDate.getFullYear()+ ' - '+this.maxDate.getFullYear()
-    // alert(this.minDate.getFullYear()+ ' sdafasdsdafsdfasdfafsd '+this.maxDate.getFullYear())
     this.getTeacher();
     this.filteredOptions = this.optionsControl.valueChanges.pipe(
       startWith(''),

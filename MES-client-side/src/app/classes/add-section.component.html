@@ -6,7 +6,7 @@
         <mat-dialog-content class="mat-typography">
             <form #teacherForm="ngForm">
                 <div class="container">
-                    <div class="row">
+                    <div class="row mainbox">
                         <div class="col-3">
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Grade Level</mat-label>
@@ -55,50 +55,13 @@
                             </mat-form-field>
                         </div>
                         <div class="col-3">
+                            <div class="cover" *ngIf="hideOverlay"></div>
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>School Year</mat-label>
-                                <input matInput [(ngModel)]="classesForm.year" name="year"
-                                    #year="ngModel" required value="classesForm.year" disabled>
+                                <input matInput [(ngModel)]="classesForm.year" name="year" #year="ngModel" required
+                                    value="classesForm.year" >
                                 <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                             </mat-form-field>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            <!-- <mat-form-field appearance="outline" class="inputField">
-                                <mat-label>School Year</mat-label>
-                                <mat-date-range-input [rangePicker]="pickeryear" [min]="minDate" [max]="maxDate" >
-                                    <input matStartDate [(ngModel)]="classesForm.startYear" name="startYear"
-                                        #startYear="ngModel">
-                                    <input matEndDate [(ngModel)]="classesForm.endYear" name="endYear"
-                                        #endYear="ngModel">
-                                </mat-date-range-input>
-                                <mat-datepicker-toggle matSuffix [for]="pickeryear"></mat-datepicker-toggle>
-                                <mat-date-range-picker #pickeryear startView="year">
-                                </mat-date-range-picker>
-                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
-                            </mat-form-field> -->
-
-                            <!-- <mat-form-field>
-                                <input matInput [matDatepicker]="pickeryear" placeholder="Month and Year"
-                                    [formControl]="date" [min]="minDate" [max]="maxDate">
-                                <mat-datepicker-toggle matSuffix [for]="pickeryear"></mat-datepicker-toggle>
-                                <mat-datepicker #pickeryear startView="multi-year"
-                                    (yearSelected)="chosenYearHandler($event, pickeryear)"
-                                    panelClass="example-month-picker">
-                                </mat-datepicker>
-                            </mat-form-field> -->
-
-
                         </div>
                     </div>
                 </div>

@@ -318,10 +318,6 @@
                                             {{option}}
                                         </mat-option>
                                     </mat-autocomplete>
-                                    <mat-icon *ngIf="data.activeStatus" mat-button matSuffix mat-icon-button
-                                        aria-label="Clear" (click)="data.activeStatus=''">
-                                        close
-                                    </mat-icon>
                                     <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                                 </mat-form-field>
                             </div>

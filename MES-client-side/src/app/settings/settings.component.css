@@ -1,12 +1,30 @@
+.card {
+    margin-top: 5%;
+}
+
 .card-header {
     background: #2080FF !important;
     text-align: center;
+    color: white;
 }
 
 .inputField {
-    min-width: 10px;
-    max-width: 1000px;
+    min-width: 100px;
+    max-width: 900px;
     width: 100%;
+}
+
+.mainbox {
+    position: relative !important;
+}
+
+.cover {
+    position: absolute !important;
+    right: 0;
+    left: 0;
+    height: 100%;
+    background-color: transparent;
+    z-index: 99999;
 }
 
 button{
@@ -39,15 +57,26 @@ button:hover {
     background-color: #f44336  !important;
 }
 
-.mainbox {
-    position: relative !important;
+.edit {
+    background-color: white;
+    color: black;
+    border: 2px solid #ffc107;
 }
 
-.cover {
-    position: absolute !important;
-    right: 0;
-    left: 0;
-    height: 100%;
-    background-color: transparent;
-    z-index: 99999;
+.edit:hover {
+    color: white;
+    background-color: #ffc107 !important;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+td, th {
+    width: 25%;
 }
