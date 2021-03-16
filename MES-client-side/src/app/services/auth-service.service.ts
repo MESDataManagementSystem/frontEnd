@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { SwalService } from '../services/swal.service';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -27,22 +28,36 @@ export class AuthServiceService {
     );
   }
 
-  login(credentials) {
+  isLogin(): any {
+    const token = window.localStorage.getItem('token');
+    // const decodedToken: any = jwt_decode(token);
+    // console.log(decodedToken);
+    // console.log(decodedToken.exp);
+    // console.log(new Date());
+    return token != null;
+
+  }
+
+  login(credentials): Observable<any> {
     return this.http.post(`${this.url}/api/login`, credentials).pipe(
+      map((response: any) => {
+        window.localStorage.setItem('token', response.token);
+        this.isLogin();
+      }),
       catchError(e => {
         this.swal.errorAlertForSomethingWentWrong();
         throw new Error(e);
       })
-    )
+    );
   }
 
-  setToken(token: string) {
-    localStorage.setItem('token', token);
-  }
+  // setToken(token: string) {
+  //   localStorage.setItem('token', token);
+  // }
 
-  getToken() {
-    return localStorage.getItem('token');
-  }
+  // getToken() {
+  //   return localStorage.getItem('token');
+  // }
 
   deleteToken() {
     localStorage.removeItem('token');

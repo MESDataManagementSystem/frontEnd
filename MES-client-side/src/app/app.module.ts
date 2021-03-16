@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -78,7 +77,6 @@ import { AddStudentInfoComponent } from './classes/add-student-info.component';
   ],
   imports: [
     HttpClientModule,
-    ReactiveFormsModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
