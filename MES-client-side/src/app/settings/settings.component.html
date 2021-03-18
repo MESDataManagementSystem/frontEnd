@@ -11,7 +11,8 @@
                         <form class="example-form">
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Username</mat-label>
-                                <input type="text" matInput>
+                                <input type="text" [(ngModel)]="addAccountControl.username" name="username"
+                                    #username="ngModel" matInput>
                             </mat-form-field>
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Password</mat-label>
@@ -24,8 +25,9 @@
                     <mat-dialog-actions align="end">
                         <button mat-button *ngIf="!hideOverlay" (click)="hideOverlay = !hideOverlay"
                             class="cancel">Cancel</button>
-                        <button mat-button *ngIf="!hideOverlay">Save</button>
-                        <button mat-button (click)="hideOverlay = !hideOverlay" class="edit" *ngIf="hideOverlay">
+                        <button mat-button *ngIf="!hideOverlay" (click)="updateAdmin()">Save</button>
+                        <button mat-button (click)="hideOverlay = !hideOverlay" class="edit" *ngIf="hideOverlay"
+                            (onchange)="getAdminCredential()">
                             {{buttonName}}
                         </button>
                     </mat-dialog-actions>
@@ -40,45 +42,53 @@
                 </div>
                 <div class="card-body">
                     <div class="mainbox">
-                        <form class="example-form">
-                            <!-- <div class="row">
+                        <form class="example-form" #addAccount="ngForm">
+                            <div class="row">
                                 <div class="col-6">
                                     <mat-form-field appearance="outline" class="inputField">
                                         <mat-label>Username</mat-label>
-                                        <input type="text" matInput>
+                                        <input type="text" matInput required name="username"
+                                            [(ngModel)]="addAccountControl1.username" #username="ngModel">
+                                        <mat-icon *ngIf="addAccountControl1.username" mat-button matSuffix
+                                            mat-icon-button aria-label="Clear" (click)="addAccountControl1.username=''">
+                                            close
+                                        </mat-icon>
+                                        <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-6">
                                     <mat-form-field appearance="outline" class="inputField">
-                                        <mat-label>Role</mat-label>
-                                        <input type="text" matInput>
+                                        <mat-label>Password</mat-label>
+                                        <input type="password" matInput [type]="hide1 ? 'password' : 'text'" required
+                                            name="password" [(ngModel)]="addAccountControl1.password"
+                                            #password="ngModel" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                                        <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' :
+                                            'visibility'}}
+                                        </mat-icon>
+                                        <mat-error *ngIf="error2.invalid">{{getErrorMessage2()}}</mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <mat-form-field appearance="outline" class="inputField">
-                                        <mat-label>Password</mat-label>
-                                        <input type="password" matInput [type]="hide ? 'password' : 'text'">
-                                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
-                                        </mat-icon>
+                                        <mat-label>Teacher's Name</mat-label>
+                                        <mat-select [(ngModel)]="addAccountControl1.adviser" name="adviser"
+                                            #adviser="ngModel" required>
+                                            <mat-option (click)="teacherId = option._id"
+                                                *ngFor="let option of otherList"
+                                                value="{{option.lastName}}, {{option.firstName}}, {{option.middleName}} ">
+                                                {{option.lastName}}, {{option.firstName}}, {{option.middleName}}
+                                            </mat-option>
+                                        </mat-select>
                                     </mat-form-field>
                                 </div>
-                            </div> -->
-                            <mat-form-field appearance="outline" class="inputField">
-                                <mat-label>Username</mat-label>
-                                <input type="text" matInput>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline" class="inputField">
-                                <mat-label>Password</mat-label>
-                                <input type="password" matInput [type]="hide ? 'password' : 'text'">
-                                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
-                                </mat-icon>
-                            </mat-form-field>
+                            </div>
                         </form>
                     </div>
                     <mat-dialog-actions align="end">
-                        <button mat-button>Save</button>
+                        <button mat-button [disabled]="!addAccount.form.valid"
+                            (click)="addAccountTeacher()">Save</button>
                     </mat-dialog-actions>
                 </div>
                 <br>

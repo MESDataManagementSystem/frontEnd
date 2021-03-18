@@ -7,9 +7,20 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./side-nav.component.css']
 })
 export class SideNavComponent implements OnInit {
-  navRoute = ['Dashboard', 'Students', 'Teachers', 'Classes', 'Setting'];
-  // tslint:disable-next-line:max-line-length
-  navContent: any = [{ name: 'Dashboard', icon: 'dashboard' }, { name: 'Students', icon: 'people' }, { name: 'Teachers', icon: 'people' }, { name: 'Classes', icon: 'home' }, { name: 'Settings', icon: 'settings' }];
+  navRoute = [
+    'Dashboard',
+    'Students',
+    'Teachers',
+    'Classes',
+    'Settings'
+  ];
+  navContent: any = [
+    { name: 'Dashboard', icon: 'dashboard' },
+    { name: 'Students', icon: 'people' },
+    { name: 'Teachers', icon: 'people' },
+    { name: 'Classes', icon: 'home' },
+    { name: 'Settings', icon: 'settings' }
+  ];
   showSideNav = true;
   lateActive = this.router.url.substring(5, 6).toUpperCase() + this.router.url.substring(6);
   oldBgColor = '#e3e6e8';

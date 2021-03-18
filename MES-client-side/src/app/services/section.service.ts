@@ -19,7 +19,7 @@ export class SectionService {
   ngOnit(): void { }
 
   // Add Teachers
-  addTeacher(classesForm): Observable<any>{
+  addTeacher(classesForm): Observable<any> {
     return this.http.post(`${this.url}/api/addSection`, classesForm).pipe(
       catchError(e => {
         this.errorAlert();
@@ -35,11 +35,11 @@ export class SectionService {
       text: 'Something Went Wrong! Try To Input Again'
     });
   }
-  viewSections(grade): Observable<any>{
+  viewSections(grade): Observable<any> {
     return this.http.get(`${this.url}/api/viewSection/${grade}`);
   }
 
-  getSection(section): Observable<any>{
+  getSection(section): Observable<any> {
     console.log(section + 'forToken');
     return this.http.get(`${this.url}/api/generateSection/${section}`);
   }

@@ -14,12 +14,6 @@
                                     <mat-label>Last Name</mat-label>
                                     <input matInput type="text" [(ngModel)]="data.lastName" name="lastName"
                                         #lastName="ngModel" required>
-                                    <!-- (click)="disabled=false"
-                                    (mouseout)="disabled=true" [attr.disabled]="disabled?'':null"  -->
-                                    <!-- <mat-icon *ngIf="data.lastName" mat-button matSuffix mat-icon-button
-                                        aria-label="Clear" (click)="data.lastName=''">
-                                        close
-                                    </mat-icon> -->
                                     <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                                 </mat-form-field>
                             </div>
@@ -106,26 +100,23 @@
                             <div class="col-3">
                                 <mat-form-field appearance="outline" class="inputField">
                                     <mat-label>Gender</mat-label>
-                                    <input matInput type="text" [(ngModel)]="data.gender" name="gender"
-                                        #gender="ngModel" [matAutocomplete]="auto" required>
-                                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                    <mat-select [(ngModel)]="data.gender" name="gender" #gender="ngModel" reuired>
                                         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                                             {{option}}
                                         </mat-option>
-                                    </mat-autocomplete>
+                                    </mat-select>
                                     <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                                 </mat-form-field>
                             </div>
                             <div class="col-4">
                                 <mat-form-field appearance="outline" class="inputField">
                                     <mat-label>Marital Status</mat-label>
-                                    <input matInput type="text" [(ngModel)]="data.maritalStatus" name="maritalStatus"
-                                        #maritalStatus="ngModel" required [matAutocomplete]="auto1">
-                                    <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete">
+                                    <mat-select [(ngModel)]="data.maritalStatus" name="maritalStatus"
+                                        #maritalStatus="ngModel" required>
                                         <mat-option *ngFor="let option of filteredOptions1 | async" [value]="option">
                                             {{option}}
                                         </mat-option>
-                                    </mat-autocomplete>
+                                    </mat-select>
                                     <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                                 </mat-form-field>
                             </div>
@@ -311,13 +302,12 @@
                             <div class="col-4">
                                 <mat-form-field appearance="outline" class="inputField">
                                     <mat-label>Is the teacher still teaching in this school?</mat-label>
-                                    <input matInput type="text" [(ngModel)]="data.activeStatus" name="activeStatus"
-                                        #activeStatus="ngModel" required [matAutocomplete]="auto2">
-                                    <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+                                    <mat-select [(ngModel)]="data.activeStatus" name="activeStatus"
+                                        #activeStatus="ngModel" required>
                                         <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
                                             {{option}}
                                         </mat-option>
-                                    </mat-autocomplete>
+                                    </mat-select>
                                     <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                                 </mat-form-field>
                             </div>

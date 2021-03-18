@@ -52,16 +52,27 @@ export class AuthServiceService {
     );
   }
 
-  // setToken(token: string) {
-  //   localStorage.setItem('token', token);
-  // }
-
-  // getToken() {
-  //   return localStorage.getItem('token');
-  // }
-
   deleteToken() {
     localStorage.removeItem('token');
   }
 
+  getAdminCredential(status) {
+    return this.http.get(`${this.url}/api/getAdminCredentials/${status}`)
+      .pipe(
+        catchError(e => {
+          this.swal.errorAlertForSomethingWentWrong()
+          throw new Error(e)
+        })
+      )
+  }
+
+  // updateAdminCredentials(status, role) {
+  //   return this.http.put(`${this.url}/api/updateAdminCredentials/${status}`,status, role)
+  //     .pipe(
+  //       catchError(e => {
+  //         this.swal.errorAlertForSomethingWentWrong()
+  //         throw new Error(e)
+  //       })
+  //     )
+  // }
 }

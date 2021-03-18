@@ -3,7 +3,7 @@
     <div>
         <mat-form-field>
             <mat-label>Search Teacher's Last Name</mat-label>
-            <input type="text" matInput autocomplete="off" (keyup)="filter($event.target.value)">
+            <input type="text" matInput autocomplete="off" (keyup)="filter($event.target.value)" #input>
         </mat-form-field>
     </div>
     <div>
@@ -38,6 +38,10 @@
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
             </table>
             <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
         </div>
