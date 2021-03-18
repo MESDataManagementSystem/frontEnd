@@ -1,0 +1,11 @@
+.header{
+  background-color:  #5cb85c;
+  height: 1%;
+  width: 100%;
+  color: #5cb85c;
+  /* position: sticky; */
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}

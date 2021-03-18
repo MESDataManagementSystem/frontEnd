@@ -1,0 +1,15 @@
+<div class="card">
+  <div class="card-header">
+    <h1>Student Form</h1>
+  </div>
+  <div class="card-body">
+    <mat-dialog-content>
+      <pdf-viewer [src]="pdfSource" [original-size]="false"></pdf-viewer>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close class='cancel'>Close</button>
+      <button mat-button (click)='printPdf()'>Print</button>
+      <button mat-button (click)='downloadPdf()'>Download</button>
+    </mat-dialog-actions>
+  </div>
+</div>

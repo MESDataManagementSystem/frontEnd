@@ -1,0 +1,46 @@
+/* .card {
+    width: 100%;
+    max-width: 230px;
+    margin-left: 3%;
+    margin-right: 3%;
+    padding-top: 5%;
+    padding-bottom: 3%;
+    background: #F08080 !important;
+    border-radius: 5%;
+    float: left;
+    margin-top: 5%;
+} */
+/* .gradeLevel {
+    font-size: 400%;
+    font-family: 'Lucida Sans Unicode';
+    margin-top: 15%;
+    margin-bottom: 17%;
+    margin-left: 5%;
+}
+
+.otherDetails {
+    font-size: 100%;
+    font-family: 'Lucida Sans Unicode';
+} */
+
+.addIcon{
+    margin-right: 5%;
+    float: right;
+    transform: scale(2);
+    color: #5CB85C
+}
+.mat-tab-label {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    color: green;
+}
+.box{
+    width: 150px;
+    height: 200px;
+    padding: 15px 20px 5px ;
+    float: left;
+    margin-top: 20px;
+    margin-left: 20px
+   }
