@@ -3,7 +3,11 @@
     <div>
         <mat-form-field>
             <mat-label>Search Teacher's Last Name</mat-label>
-            <input type="text" matInput autocomplete="off" (keyup)="filter($event.target.value)" #input>
+            <input type="text" matInput autocomplete="off" (keyup)="filter($event.target.value)" #input
+                [(ngModel)]="search">
+            <mat-icon *ngIf="search" mat-button matSuffix mat-icon-button aria-label="Clear" (click)="search=''">
+                close
+            </mat-icon>
         </mat-form-field>
     </div>
     <div>
@@ -39,6 +43,7 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
 
+                <!-- Row shown when there is no matching data. -->
                 <tr class="mat-row" *matNoDataRow>
                     <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
                 </tr>

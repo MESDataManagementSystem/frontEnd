@@ -5,6 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { SwalService } from '../services/swal.service';
 // import jwt_decode from 'jwt-decode';
 import * as jwt_decode from "jwt-decode";
+import { JwtHelperService } from "@auth0/angular-jwt"
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,9 @@ export class AuthServiceService {
     const token = window.localStorage.getItem('token');
     // const decodedToken: any = jwt_decode(token);
     // console.log(decodedToken);
-    // console.log(decodedToken.exp);
+    const helper = new JwtHelperService;
+    const decodedToken = helper.decodeToken(token);
+    console.log(decodedToken);
     // console.log(new Date());
     return token != null;
 
@@ -56,8 +59,8 @@ export class AuthServiceService {
     localStorage.removeItem('token');
   }
 
-  getAdminCredential(status) {
-    return this.http.get(`${this.url}/api/getAdminCredentials/${status}`)
+  getCredentials(status) {
+    return this.http.get(`${this.url}/api/getCredentials/${status}`)
       .pipe(
         catchError(e => {
           this.swal.errorAlertForSomethingWentWrong()
@@ -66,13 +69,37 @@ export class AuthServiceService {
       )
   }
 
-  // updateAdminCredentials(status, role) {
-  //   return this.http.put(`${this.url}/api/updateAdminCredentials/${status}`,status, role)
-  //     .pipe(
-  //       catchError(e => {
-  //         this.swal.errorAlertForSomethingWentWrong()
-  //         throw new Error(e)
-  //       })
-  //     )
-  // }
+  updateCredentials(status) {
+    return this.http.put(`${this.url}/api/updateCredentials/${status.role}`, status)
+      .pipe(
+        catchError(e => {
+          this.swal.errorAlertForSomethingWentWrong()
+          throw new Error(e)
+        })
+      )
+  }
+
+  updateTeacherAccount(status) {
+    return this.http.put(`${this.url}/api/updateTeacherCredent ials/${status.role}`, status)
+      .pipe(
+        catchError(e => {
+          this.swal.errorAlertForSomethingWentWrong()
+          throw new Error(e)
+        })
+      )
+  }
+
+  viewListOfTeachersAccount(status) {
+    return this.http.get(`${this.url}/api/viewTeacherAccount/${status}`)
+  }
+
+  findAccount(id): Observable<any> {
+    return this.http.get(`${this.url}/api/findAccount/${id}`);
+  }
+
+  deleteAccount(id): Observable<any> {
+    return this.http.delete(`${this.url}/api/removeAccount/${id}`)
+  }
+
+  
 }

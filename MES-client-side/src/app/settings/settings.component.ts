@@ -1,29 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import Swal from 'sweetalert2';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthServiceService } from '../services/auth-service.service';
 import { SwalService } from '../services/swal.service';
 import { TeacherServiceService } from '../services/teacher-service.service';
 
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
-}
-
-/** Constants used to fill up our data base. */
-const COLORS: string[] = [
-  'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-  'aqua', 'blue', 'navy', 'black', 'gray'
-];
-const NAMES: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
-];
 
 @Component({
   selector: 'app-settings',
@@ -41,9 +24,9 @@ export class SettingsComponent implements OnInit {
   otherList = [];
   teacherList: any;
   teacherId = '';
-
-
-
+  search: string;
+  display = "none";
+  display2 = "none";
 
   addAccountControl = {
     username: "",
@@ -58,39 +41,54 @@ export class SettingsComponent implements OnInit {
     role: "Teacher"
   }
 
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
-  dataSource: MatTableDataSource<UserData>;
+  updateAccountControl = {
+    username: "",
+    password: "",
+    adviser: "",
+    role: "Teacher"
+  }
+
+  account: any;
+  dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  displayedColumns: string[] = ['username', 'name', 'edit', 'delete'];
+
 
   constructor(
     private authService: AuthServiceService,
     private swal: SwalService,
     private teacherService: TeacherServiceService,
-
   ) {
-    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
-    this.dataSource = new MatTableDataSource(users);
-    setTimeout(() => {
-      this.dataSource.paginator = this.paginator;
-    }, 0)
+    this.search = ''
+    this.authService.viewListOfTeachersAccount('Teacher').subscribe(data => {
+      this.account = data
+      this.dataSource = new MatTableDataSource<any>(this.account.data)
+      setTimeout(() => {
+        this.dataSource.paginator = this.paginator;
+      }, 0)
+      this.dataSource.filterPredicate = function (data, filter: string): boolean {
+        return data.adviser.toLocaleLowerCase().includes(filter)
+      }
+    })
   }
 
   ngOnInit(): void {
-
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
     this.getAdminCredential();
     this.getTeacher();
-
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  openModal() {
+    this.display = "block";
+  }
+  onCloseHandled() {
+    this.display = "none";
+  }
+
+  openModal1() {
+    this.display2 = "block";
+  }
+  onCloseHandled1() {
+    this.display2 = "none";
   }
 
   // All Fields Are Required 
@@ -122,12 +120,17 @@ export class SettingsComponent implements OnInit {
 
   // Getting The Credentials Of The Admin 
   getAdminCredential() {
-    this.authService.getAdminCredential('Admin').subscribe((data: any) => {
+    this.authService.getCredentials('Admin').subscribe((data: any) => {
       const datum = data.data;
       if (data) {
         this.addAccountControl = datum
       }
     })
+  }
+
+  // Remove Account From The Table
+  removeAccount(data) {
+   
   }
 
   resetAddAccount() {
@@ -139,7 +142,15 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  // Get Teacher
+  resetAdminAccount() {
+    this.addAccountControl = {
+      username: "",
+      password: "",
+      role: "Admin",
+    }
+  }
+
+  // Get Teacher 
   getTeacher(): void {
     this.teacherService.getAllTheTeachersList('yes').subscribe(data => {
       if (data) {
@@ -153,23 +164,115 @@ export class SettingsComponent implements OnInit {
   }
 
   // Update Admin
-  // updateAdmin() {
-  //   this.authService.updateAdminCredentials(this.addAccountControl,'Admin').subscribe(data => {
-  //     if (data) {
-  //       console.log("Itz a prank")
-  //     }
-  //   })
-  // }
-  
-}
+  updateAdmin() {
+    this.authService.updateCredentials(this.addAccountControl).subscribe(data => {
+      if (data) {
+        // this.swal.succesAlert();
+        this.resetAdminAccount();
+      }
+    })
+  }
 
-function createNewUser(id: number): UserData {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
+
+
+  updateTeacherAccount() {
+    this.authService.updateTeacherAccount(this.updateAccountControl).subscribe(data => {
+      if (data) {
+        // this.swal.succesAlert();
+        this.resetAddAccount();
+      }
+    })
+  }
+
+  // For Confirmation Before Updating
+  warningAlert() {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      confirmButtonText: `Save`,
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Saved!', '', 'success')
+        // login should be here
+        this.updateAdmin();
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Search Specific Account
+  filter(value: string) {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
 }

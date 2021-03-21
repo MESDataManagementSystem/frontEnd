@@ -47,6 +47,15 @@ export class SwalService {
     })
   }
 
+  // Username And Password Did Not Match
+  credentialsDidNotMatch() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Username And Password Did Not Match'
+    })
+  }
+
   // Alert For Something Went Wrong
   errorAlertForSomethingWentWrong() {
     Swal.fire({

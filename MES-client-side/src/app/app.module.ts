@@ -56,6 +56,7 @@ import { AddSectionComponent } from './classes/add-section.component';
 import { ViewStudentsComponent } from './classes/view-students.component';
 import { AddStudentInfoComponent } from './classes/add-student-info.component';
 import { SettingsComponent } from './settings/settings.component';
+import { TeacherDashboardComponent } from './teacherSideUser/teacher-dashboard/teacher-dashboard.component';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { SettingsComponent } from './settings/settings.component';
     ViewStudentsComponent,
     ModalEditFormComponent,
     AddStudentInfoComponent,
-    SettingsComponent
+    SettingsComponent,
+    TeacherDashboardComponent
   ],
   imports: [
     HttpClientModule,

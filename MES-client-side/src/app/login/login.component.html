@@ -4,36 +4,46 @@
             <div class="user_card">
                 <div class="d-flex justify-content-center">
                     <div class="brand_logo_container">
-                        <img src="../../assets/images/mesDbmsLogo.png" class="brand_logo" alt="Logo">
+                        <img src="../../assets/images/nonEditedLogo.PNG" class="brand_logo" alt="Logo">
                     </div>
                 </div>
                 <div class="d-flex justify-content-center form_container">
-                    <form (ngSubmit)="login()" [formGroup]="credentials">
-                        <div class="input-group mb-3">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            </div>
-                            <input type="text" name="" formControlName="username" class="form-control input_user"
-                                value="" placeholder="username">
+
+                    <form #login="ngForm">
+                        <div class="col-6">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Username</mat-label>
+                                <input type="text" matInput required name="username" [(ngModel)]="loginCred.username"
+                                    #username="ngModel">
+                                <mat-icon *ngIf="loginCred.username" mat-button matSuffix mat-icon-button
+                                    aria-label="Clear" (click)="loginCred.username=''">
+                                    close
+                                </mat-icon>
+                                <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
                         </div>
-                        <div class="input-group mb-2">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            </div>
-                            <input type="password" name="" formControlName="password" class="form-control input_pass"
-                                value="" placeholder="password">
+                        <div class="col-6">
+                            <mat-form-field appearance="outline" class="inputField">
+                                <mat-label>Password</mat-label>
+                                <input type="password" matInput [type]="hide ? 'password' : 'text'" required
+                                    name="password" [(ngModel)]="loginCred.password" #password="ngModel">
+                                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
+                                    'visibility'}}
+                                </mat-icon>
+                                <mat-error *ngIf="error2.invalid">{{getErrorMessage2()}}</mat-error>
+                            </mat-form-field>
+                        </div><br>
+                        <div class="center">
+                            <button mat-button [disabled]="!login.form.valid" (click)="loginBtn()">Login</button>
                         </div>
-                        <div class="d-flex justify-content-center mt-3 login_container">
-                            <button type="submit" name="button" class="btn loginBtn">Login</button>
-                        </div>
+                        <br>
                     </form>
                 </div>
-
-                <div class="mt-4">
+                <!-- <div class="mt-4">
                     <div class="d-flex justify-content-center links">
                         <a href="#">Forgot your password?</a>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
