@@ -12,6 +12,8 @@ import { AllStudentsComponent } from './all-students/all-students.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { ViewStudentsComponent } from './classes/view-students.component';
 
+import { TeacherDashboardComponent } from './teacherSideUser/teacher-dashboard/teacher-dashboard.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardLogInActivateGuard] },
@@ -29,6 +31,9 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
+  {
+    path:'teacherDashboard', component: TeacherDashboardComponent
+  }
 ];
 
 @NgModule({
@@ -36,3 +41,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

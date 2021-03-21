@@ -22,9 +22,7 @@ export class TeacherServiceService {
 
   // Get All The List Of Teachers
   getAllTheTeachersList(status) {
-
     return this.http.get(`${this.url}/api/viewListOfTeacher/${status}`);
-
   }
 
   // View The Information Of A Specific Teacher

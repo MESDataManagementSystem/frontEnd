@@ -14,6 +14,7 @@ import { TeacherServiceService } from '../services/teacher-service.service';
 })
 export class AllTeachersComponent implements OnInit {
 
+  search: string;
   public showActive: boolean = false;
   teacherData: any = [];
   dataSource: MatTableDataSource<Teacher>;
@@ -24,11 +25,14 @@ export class AllTeachersComponent implements OnInit {
     private teacherService: TeacherServiceService,
     private dialog: MatDialog
   ) {
+    this.search = ''
     this.viewTeacher('yes');
   }
 
   ngOnInit() {
+    
   }
+
 
   // Dialog For Adding Teacher
   openDialog(): void {
