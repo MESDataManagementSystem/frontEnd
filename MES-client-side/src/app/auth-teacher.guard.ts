@@ -6,32 +6,20 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthTeacherGuard implements CanActivate {
   constructor(public authService: AuthServiceService, public router: Router) {
 
   }
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const isLogin = this.authService.isLoginAdmin();
+    const isLogin = this.authService.isLoginTeacher();
     if (!isLogin) {
       this.router.navigate(['/login']);
       return false;
     }
+    console.log(isLogin)  
     return isLogin;
   }
-
-  // canDeactivate(
-  //   route: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-  //   const isLogin = this.authService.isLogin();
-  //   alert("adsf")
-  //   // alert("here")
-  //   // if (isLogin) {
-  //   //   this.router.navigate(['/MES']);
-  //   //   return false;
-  //   // }
-
-  //   return false;
-  // }
 }

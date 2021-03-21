@@ -57,6 +57,11 @@ export class TeacherServiceService {
       )
   }
 
+  // TEACHER SIDE DASHBOARD
+  findAdviser(adviserId){
+    return this.http.get(`${this.url}/api/findAdviser/${adviserId}`)
+  }
+
 }
 
 

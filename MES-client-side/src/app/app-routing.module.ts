@@ -1,5 +1,6 @@
 import { AuthGuardLogInActivateGuard } from './auth-guard-log-in-activate.guard';
 import { AuthGuard } from './auth.guard';
+import { AuthTeacherGuard } from './auth-teacher.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -17,6 +18,16 @@ import { TeacherDashboardComponent } from './teacherSideUser/teacher-dashboard/t
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardLogInActivateGuard] },
+  
+  { path: 'teacher/dashboard/class/:grade/:section', component: ViewStudentsComponent, canActivate: [AuthTeacherGuard]},
+  {
+    path:'teacher/dashboard',
+    component: TeacherDashboardComponent,
+    canActivate: [AuthTeacherGuard], 
+    children: [
+     
+    ]
+  },
   {
     path: 'MES',
     component: SideNavComponent,
@@ -31,9 +42,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
-  {
-    path:'teacherDashboard', component: TeacherDashboardComponent
-  }
+  
 ];
 
 @NgModule({

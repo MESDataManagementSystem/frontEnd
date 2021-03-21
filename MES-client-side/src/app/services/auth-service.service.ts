@@ -12,7 +12,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthServiceService {
 
   url = 'http://localhost:5000'
-  user = null;
+  user: any;
   authenticationState = new BehaviorSubject(false);
 
   constructor(
@@ -29,23 +29,39 @@ export class AuthServiceService {
     );
   }
 
-  isLogin(): any {
+  isLoginAdmin(): any {
     const token = window.localStorage.getItem('token');
-    const helper = new JwtHelperService();
-    const decodedToken = helper.decodeToken(token);
-    // const decodedToken = jwt_decode(token);
-    console.log(decodedToken);
-    // console.log(decodedToken.exp);
-    // console.log(new Date());
-    return token != null;
-
+    if(token){
+      const helper = new JwtHelperService();
+      const decodedToken = helper.decodeToken(token);
+      // const decodedToken = jwt_decode(token);
+      console.log(decodedToken, 'decoded token');
+      this.user = decodedToken;
+      if (this.user.role === 'Admin'){
+        return true;
+      }
+    }
+    return false;
   }
-
+  isLoginTeacher(): any {
+    const token = window.localStorage.getItem('token');
+    if(token){
+      const helper = new JwtHelperService();
+      const decodedToken = helper.decodeToken(token);
+      this.user = decodedToken;
+      if (this.user.role === 'Teacher'){
+        return true;
+      }
+    }
+    return false;
+  }
   login(credentials): Observable<any> {
     return this.http.post(`${this.url}/api/login`, credentials).pipe(
       map((response: any) => {
         window.localStorage.setItem('token', response.token);
-        this.isLogin();
+        this.isLoginAdmin();
+        this.isLoginTeacher();
+        return response;
       }),
       catchError(e => {
         this.swal.errorAlertForSomethingWentWrong();
@@ -53,14 +69,6 @@ export class AuthServiceService {
       })
     );
   }
-
-  // setToken(token: string) {
-  //   localStorage.setItem('token', token);
-  // }
-
-  // getToken() {
-  //   return localStorage.getItem('token');
-  // }
 
   deleteToken(): void {
     localStorage.removeItem('token');

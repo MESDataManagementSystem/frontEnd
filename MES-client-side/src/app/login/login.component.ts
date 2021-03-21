@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SwalService } from '../services/swal.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -34,11 +35,16 @@ export class LoginComponent implements OnInit {
   }
 
   loginBtn() {
-    this.service.login(this.loginCred).subscribe(
+    this.service.login(this.loginCred)
+    .subscribe(
       data => {
         console.log("ASdfasd",data)
-        this.router.navigate(['/MES']);
-        
+        if(data.data.role === "Teacher"){
+           this.router.navigate(['/teacher/dashboard']);
+        }
+        if(data.data.role === "Admin"){
+          this.router.navigate(['/MES']);
+        }
       }, error => {
         this.swal.credentialsDidNotMatch()
       }
