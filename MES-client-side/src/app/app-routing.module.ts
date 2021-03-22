@@ -23,10 +23,7 @@ const routes: Routes = [
   {
     path:'teacher/dashboard',
     component: TeacherDashboardComponent,
-    canActivate: [AuthTeacherGuard], 
-    children: [
-     
-    ]
+    canActivate: [AuthTeacherGuard]
   },
   {
     path: 'MES',
@@ -51,3 +48,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
+  
