@@ -2,11 +2,12 @@ body {
     background: url('https://www.zoominsoftware.com/wp-content/uploads/2017/07/Documents-laptop-wide.jpg') no-repeat center fixed;     
     background-size: cover;
 }
+
 .user_card {
   height: 360px;
   width: 350px;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: 25%;
+  margin-bottom: 100%;
   position: relative;
   display: flex;
   background-color: white;

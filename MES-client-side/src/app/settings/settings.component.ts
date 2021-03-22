@@ -21,6 +21,9 @@ export class SettingsComponent implements OnInit {
   hideOverlay = true;
   hide = true;
   hide1 = true;
+  hide2 = true;
+  hide3 = true;
+
   otherList = [];
   teacherList: any;
   teacherId = '';
@@ -28,9 +31,16 @@ export class SettingsComponent implements OnInit {
   display = "none";
   display2 = "none";
 
+
+  loginControl = {
+    username: "",
+    password: ""
+  }
+
   addAccountControl = {
     username: "",
     password: "",
+    confirmPassword: "",
     role: "Admin"
   }
 
@@ -84,9 +94,6 @@ export class SettingsComponent implements OnInit {
     this.display = "none";
   }
 
-  openModal1() {
-    this.display2 = "block";
-  }
   onCloseHandled1() {
     this.display2 = "none";
   }
@@ -108,6 +115,7 @@ export class SettingsComponent implements OnInit {
   // Adding Account For Teacher
   addAccountTeacher() {
     const data = { ...this.addAccountControl1, adviser: this.teacherId };
+    console.log("hola ", data.adviser)
     this.authService.register(data).subscribe(data => {
       if (data) {
         this.swal.succesAlert();
@@ -122,6 +130,7 @@ export class SettingsComponent implements OnInit {
   getAdminCredential() {
     this.authService.getCredentials('Admin').subscribe((data: any) => {
       const datum = data.data;
+      console.log("datum", datum)
       if (data) {
         this.addAccountControl = datum
       }
@@ -130,7 +139,7 @@ export class SettingsComponent implements OnInit {
 
   // Remove Account From The Table
   removeAccount(data) {
-   
+
   }
 
   resetAddAccount() {
@@ -146,6 +155,7 @@ export class SettingsComponent implements OnInit {
     this.addAccountControl = {
       username: "",
       password: "",
+      confirmPassword: "",
       role: "Admin",
     }
   }
@@ -167,7 +177,6 @@ export class SettingsComponent implements OnInit {
   updateAdmin() {
     this.authService.updateCredentials(this.addAccountControl).subscribe(data => {
       if (data) {
-        // this.swal.succesAlert();
         this.resetAdminAccount();
       }
     })
@@ -184,6 +193,19 @@ export class SettingsComponent implements OnInit {
     })
   }
 
+  loginBtn() {
+    this.authService.login(this.loginControl).subscribe(
+      data => {
+        // console.log("ASdfasd", data)
+        this.updateAdmin()
+        this.swal.succesAlert()
+        this.display2 = "none"
+      }, error => {
+        this.swal.credentialsDidNotMatch()
+      }
+    );
+  }
+
   // For Confirmation Before Updating
   warningAlert() {
     Swal.fire({
@@ -194,14 +216,15 @@ export class SettingsComponent implements OnInit {
       denyButtonText: `Don't save`,
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire('Saved!', '', 'success')
-        // login should be here
-        this.updateAdmin();
+        this.display2 = "block"
+        // Swal.fire('Saved!', '', 'success')
       } else if (result.isDenied) {
         Swal.fire('Changes are not saved', '', 'info')
       }
     })
   }
+
+  
 
 
 

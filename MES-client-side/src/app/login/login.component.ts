@@ -26,8 +26,6 @@ export class LoginComponent implements OnInit {
     private service: AuthServiceService,
     private swal: SwalService,
   ) {
-    this.user = '',
-    this.pass = ''
   }
 
   ngOnInit(): void {

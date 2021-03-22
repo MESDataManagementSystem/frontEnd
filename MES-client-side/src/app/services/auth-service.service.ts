@@ -3,9 +3,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { SwalService } from '../services/swal.service';
-// import jwt_decode from 'jwt-decode';
-import * as jwt_decode from "jwt-decode";
+import { ValidatorFn, AbstractControl } from '@angular/forms';
 import { JwtHelperService } from "@auth0/angular-jwt"
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -80,7 +80,7 @@ export class AuthServiceService {
   }
 
   updateTeacherAccount(status) {
-    return this.http.put(`${this.url}/api/updateTeacherCredent ials/${status.role}`, status)
+    return this.http.put(`${this.url}/api/updateTeacherCredentials/${status.role}`, status)
       .pipe(
         catchError(e => {
           this.swal.errorAlertForSomethingWentWrong()
@@ -101,5 +101,4 @@ export class AuthServiceService {
     return this.http.delete(`${this.url}/api/removeAccount/${id}`)
   }
 
-  
 }
