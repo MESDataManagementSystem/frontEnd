@@ -3,9 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { SwalService } from '../services/swal.service';
-import { ValidatorFn, AbstractControl } from '@angular/forms';
-import { JwtHelperService } from "@auth0/angular-jwt"
-import { FormGroup } from '@angular/forms';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -32,12 +30,9 @@ export class AuthServiceService {
 
   isLogin(): any {
     const token = window.localStorage.getItem('token');
-    // const decodedToken: any = jwt_decode(token);
-    // console.log(decodedToken);
-    const helper = new JwtHelperService;
+    const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
     console.log(decodedToken);
-    // console.log(new Date());
     return token != null;
 
   }
@@ -55,7 +50,7 @@ export class AuthServiceService {
     );
   }
 
-  deleteToken() {
+  deleteToken(): void {
     localStorage.removeItem('token');
   }
 
