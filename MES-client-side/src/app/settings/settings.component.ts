@@ -25,6 +25,8 @@ export class SettingsComponent implements OnInit {
   hide3 = true;
 
   otherList = [];
+  teacherNoAccount: [];
+  teacherHasAccount:any[] = []
   teacherList: any;
   teacherId = '';
   search: string;
@@ -58,7 +60,7 @@ export class SettingsComponent implements OnInit {
     role: "Teacher"
   }
 
-  account: any;
+  account: any[] = [];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['username', 'name', 'edit', 'delete'];
@@ -70,9 +72,36 @@ export class SettingsComponent implements OnInit {
     private teacherService: TeacherServiceService,
   ) {
     this.search = ''
-    this.authService.viewListOfTeachersAccount('Teacher').subscribe(data => {
-      this.account = data
-      this.dataSource = new MatTableDataSource<any>(this.account.data)
+    this.authService.viewListOfTeachersAccount('Teacher').subscribe((data: any) => {
+      this.account = data.data
+      this.dataSource = new MatTableDataSource<any>(this.account)
+      console.log(this.account, 'dataaa');
+      
+      // this.account.forEach(teacher => {
+      //   console.log(teacher.adviser, 'dataaa sa account')
+      //   this.authService.findTeacher(teacher.adviser).subscribe((teacher:any) =>{
+      //     this.account.forEach(account => {
+      //       if(account.adviser.includes(teacher))
+      //     });
+      //     //  if(this.account.includes())
+      //     console.log(this.account,'accounts');
+          
+      //     this.teacherHasAccount.push(teacher.data)
+      //   })
+      // });
+      for(let i =0; i< this.account.length; i++){
+          this.authService.findTeacher(this.account[i].adviser).subscribe((teacher:any) =>{
+          this.account.forEach(account => {
+            // if(account.adviser.includes(teacher))
+            this.account[i] = {acc: account, adviser: teacher}
+          });
+          //  if(this.account.includes())
+          console.log(this.account,'accounts');
+          
+          this.teacherHasAccount.push(teacher.data)
+        })
+      }
+      // this.authService.findTeacher
       setTimeout(() => {
         this.dataSource.paginator = this.paginator;
       }, 0)
@@ -162,15 +191,22 @@ export class SettingsComponent implements OnInit {
 
   // Get Teacher 
   getTeacher(): void {
-    this.teacherService.getAllTheTeachersList('yes').subscribe(data => {
+    this.teacherService.getAllTheTeachersList('yes').subscribe((data:any) => {
       if (data) {
-        this.teacherList = data;
-        this.teacherList = this.teacherList.data;
+        this.teacherList = data.data;
         this.teacherList.forEach(data => {
           this.otherList.push(data);
         })
       }
     })
+  }
+  // 
+
+  // show Teacher Option
+  teacherNoAccounts(){
+    // otherList.forEach(element => {
+      
+    // });
   }
 
   // Update Admin
