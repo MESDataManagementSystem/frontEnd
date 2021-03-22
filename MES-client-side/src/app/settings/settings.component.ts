@@ -25,8 +25,8 @@ export class SettingsComponent implements OnInit {
   hide3 = true;
 
   otherList = [];
-  teacherNoAccount: [];
-  teacherHasAccount:any[] = []
+  updateTeacherAdvisory = [];
+  teacherHasAccount: any;
   teacherList: any;
   teacherId = '';
   search: string;
@@ -56,11 +56,18 @@ export class SettingsComponent implements OnInit {
   updateAccountControl = {
     username: "",
     password: "",
-    adviser: "",
+    adviser: "hahaha",
     role: "Teacher"
   }
+  isLoading = true;
+  updateTeacher = {
+    username: '',
+    password: ''
+  }
+  // dataSource = null;
 
-  account: any[] = [];
+  // account: any[] = [];
+  account: any = { acc: { adviser: '', role: '', username: '' }, adviser: [{ firstName: '', lastName: '', middleName: '' }] }
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['username', 'name', 'edit', 'delete'];
@@ -71,44 +78,38 @@ export class SettingsComponent implements OnInit {
     private swal: SwalService,
     private teacherService: TeacherServiceService,
   ) {
+    // this.account.username =''
+    // this.account.acc.username =''
     this.search = ''
     this.authService.viewListOfTeachersAccount('Teacher').subscribe((data: any) => {
+      var count = 0;
       this.account = data.data
       this.dataSource = new MatTableDataSource<any>(this.account)
-      console.log(this.account, 'dataaa');
-      
-      // this.account.forEach(teacher => {
-      //   console.log(teacher.adviser, 'dataaa sa account')
-      //   this.authService.findTeacher(teacher.adviser).subscribe((teacher:any) =>{
-      //     this.account.forEach(account => {
-      //       if(account.adviser.includes(teacher))
-      //     });
-      //     //  if(this.account.includes())
-      //     console.log(this.account,'accounts');
-          
-      //     this.teacherHasAccount.push(teacher.data)
-      //   })
-      // });
-      for(let i =0; i< this.account.length; i++){
-          this.authService.findTeacher(this.account[i].adviser).subscribe((teacher:any) =>{
-          this.account.forEach(account => {
-            // if(account.adviser.includes(teacher))
-            this.account[i] = {acc: account, adviser: teacher}
-          });
-          //  if(this.account.includes())
-          console.log(this.account,'accounts');
-          
-          this.teacherHasAccount.push(teacher.data)
+      for (let i = 0; i < this.account.length; i++) {
+        this.authService.findTeacher(this.account[i].adviser).subscribe((teacher: any) => {
+          this.teacherHasAccount = teacher;
+          this.account[i] = { acc: this.account[i], adviser: this.teacherHasAccount }
+          this.dataSource = new MatTableDataSource<any>(this.account)
+          // this.isLoading = false;
+          count = i;
+          if (count == this.account.length - 1) {
+            this.isLoading = false;
+          }
         })
+
+
+        // 
       }
-      // this.authService.findTeacher
+      console.log(this.account, 'accountss');
+
       setTimeout(() => {
         this.dataSource.paginator = this.paginator;
       }, 0)
       this.dataSource.filterPredicate = function (data, filter: string): boolean {
         return data.adviser.toLocaleLowerCase().includes(filter)
       }
-    })
+    }),
+      error => this.isLoading = false
   }
 
   ngOnInit(): void {
@@ -116,8 +117,36 @@ export class SettingsComponent implements OnInit {
     this.getTeacher();
   }
 
-  openModal() {
-    this.display = "block";
+  //   firstName: "Jessa"
+  // lastName: "Rivas"
+  // middleName: "Rufo"
+  // _id: "604c19c80d4300313877d1d4"
+
+  openModal(account) {
+    this.updateAccountControl.adviser = account.adviser[0].firstName + account.adviser[0].middleName +account.adviser[0].lastName
+    console.log( this.updateAccountControl.adviser)
+    this.updateTeacherAdvisory=[]
+    var count = 1;
+    // const countList = this.
+    let list = []
+    this.otherList.forEach(data => {
+      this.updateTeacherAdvisory.push(data)
+      count++;
+      if (count === this.otherList.length) {
+        console.log(count, this.otherList.length , 'counttttt')
+        this.updateAccountControl.username = account.acc.username
+        this.updateAccountControl.password = account.acc.password
+        const oldTeacher = { _id: account.acc.adviser, firstName: account.adviser[0].firstName, middleName: account.adviser[0].middleName, lastName: account.adviser[0].lastName }
+        this.updateTeacherAdvisory.push(oldTeacher)
+        this.display = "block";
+      }
+    });
+    // list = this.otherList;
+    // this.updateTeacherAdvisory = list;
+    console.log(account)
+
+    console.log(this.updateTeacherAdvisory, 'updateTeacherAdvisory')
+    console.log(this.otherList, 'otherList')
   }
   onCloseHandled() {
     this.display = "none";
@@ -126,6 +155,7 @@ export class SettingsComponent implements OnInit {
   onCloseHandled1() {
     this.display2 = "none";
   }
+
 
   // All Fields Are Required 
   getErrorMessage() {
@@ -144,7 +174,6 @@ export class SettingsComponent implements OnInit {
   // Adding Account For Teacher
   addAccountTeacher() {
     const data = { ...this.addAccountControl1, adviser: this.teacherId };
-    console.log("hola ", data.adviser)
     this.authService.register(data).subscribe(data => {
       if (data) {
         this.swal.succesAlert();
@@ -159,7 +188,6 @@ export class SettingsComponent implements OnInit {
   getAdminCredential() {
     this.authService.getCredentials('Admin').subscribe((data: any) => {
       const datum = data.data;
-      console.log("datum", datum)
       if (data) {
         this.addAccountControl = datum
       }
@@ -191,23 +219,14 @@ export class SettingsComponent implements OnInit {
 
   // Get Teacher 
   getTeacher(): void {
-    this.teacherService.getAllTheTeachersList('yes').subscribe((data:any) => {
-      if (data) {
-        this.teacherList = data.data;
-        this.teacherList.forEach(data => {
-          this.otherList.push(data);
-        })
-      }
+    this.authService.findAdviser().subscribe((data: any) => {
+      this.otherList = data
+      console.log(data);
     })
   }
   // 
 
-  // show Teacher Option
-  teacherNoAccounts(){
-    // otherList.forEach(element => {
-      
-    // });
-  }
+
 
   // Update Admin
   updateAdmin() {
@@ -232,7 +251,6 @@ export class SettingsComponent implements OnInit {
   loginBtn() {
     this.authService.login(this.loginControl).subscribe(
       data => {
-        // console.log("ASdfasd", data)
         this.updateAdmin()
         this.swal.succesAlert()
         this.display2 = "none"
@@ -260,7 +278,7 @@ export class SettingsComponent implements OnInit {
     })
   }
 
-  
+
 
 
 
