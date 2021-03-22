@@ -1,1 +1,26 @@
-<p>teacher-dashboard works!</p>
+<div>
+    <div style="padding-left: 5%; padding-top: 1em;" >
+        <h2>Mantalongon Elementary School Grades And Sections
+        </h2>
+        <button mat-button (click)='logout()'>logout</button>
+
+    </div>
+    <!-- <div style="padding-top: 2em; margin-left: 5%;  margin-right: 5%;"> -->
+    <div (click)='selectedGrade($event)'>
+        <div *ngFor='let section of sections '>
+            <mat-card class="card box">
+                <h3>{{section.gradeLevel}}</h3>
+                <mat-card-content>
+                    <h2>{{section.sectionName}}</h2>
+                    <h2>210 students</h2>
+                    <button mat-button (click) = 'viewStudents(section.gradeLevel, section.sectionName)'>view students</button>
+                </mat-card-content>
+            </mat-card>
+            <!-- <router-outlet></router-outlet> -->
+        </div>
+    </div>
+</div>
+<div >
+
+</div>
+<!-- </div> -->

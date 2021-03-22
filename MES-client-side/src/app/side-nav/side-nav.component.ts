@@ -40,4 +40,8 @@ export class SideNavComponent implements OnInit {
     console.log();
   }
 
+logout(){
+  window.localStorage.clear();
+  this.router.navigate(['/login'])
+}
 }
