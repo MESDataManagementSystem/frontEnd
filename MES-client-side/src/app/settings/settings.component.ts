@@ -132,7 +132,7 @@ export class SettingsComponent implements OnInit {
     this.otherList.forEach(data => {
       this.updateTeacherAdvisory.push(data)
       count++;
-      if (count === this.otherList.length) {
+      if (count === this.otherList.length || this.otherList.length ===1 || this.otherList.length === 0) {
         console.log(count, this.otherList.length , 'counttttt')
         this.updateAccountControl.username = account.acc.username
         this.updateAccountControl.password = account.acc.password
