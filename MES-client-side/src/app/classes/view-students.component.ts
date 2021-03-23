@@ -1,13 +1,12 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { StudentServiceService } from '../services/student-service.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { Location } from '@angular/common';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatMenuModule } from '@angular/material/menu';
 import { AddStudentInfoComponent } from './add-student-info.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AbstractControl, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -15,60 +14,80 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './view-students.component.html',
   styleUrls: ['./view-students.component.css']
 })
-export class ViewStudentsComponent implements AfterViewInit {
-  dataSource: any;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+export class ViewStudentsComponent implements OnInit {
+
   viewFile = false;
-  typeSearch: string;
   value: string;
-  students: any;
   selectedFiles: File;
-  columnsToDisplay: string[] = ['name', 'lrn', 'edit', 'view'];
-  searchLrn = '';
-  name = '';
-  lrn = true;
-  // constructor(private service: StudentServiceService, private dialog: MatDialog, private location: Location) {
-  //   this.value = '';
-  //   this.typeSearch = 'LRN';
-  //   this.dataSource = new MatTableDataSource<any>(this.students);
-  //   this.service.retrieveData().subscribe(student => {
-  //     this.students = student.data;
-  //     this.dataSource = new MatTableDataSource<any>(this.students);
-  //     setTimeout(() => {
-  //       this.dataSource.paginator = this.paginator;
-  //     }, 0);
-  //   });
+
   section: string;
   grade: string;
-  // tslint:disable-next-line:max-line-length
-  constructor(private service: StudentServiceService, private dialog: MatDialog, private location: Location, private route: ActivatedRoute, private router: Router) {
+
+  typeSearch: string;
+  lrn = true;
+
+  students: any;
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  columnsToDisplay: string[] = ['lrn', 'name', 'edit', 'view'];
+  
+  readonly formControl: AbstractControl;
+
+
+  constructor(
+    private service: StudentServiceService,
+    private dialog: MatDialog,
+    private location: Location,
+    private route: ActivatedRoute,
+    private router: Router,
+    formBuilder: FormBuilder
+  ) {
     this.value = '';
     this.typeSearch = 'LRN';
-    this.dataSource = new MatTableDataSource<any>(this.students);
     this.section = '';
-  }
-
-  ngAfterViewInit(): void {
     this.route.paramMap.subscribe(params => {
       this.section = params.get('section');
       this.grade = params.get('grade');
-      if (this.section){
-        this.service.viewStudents(this.section).subscribe(student => {
-          this.students = student.data;
-          this.dataSource = new MatTableDataSource<any>(this.students);
+      if (this.section) {
+        this.service.viewStudents(this.section).subscribe(data => {
+          this.students = data;
+          this.dataSource = new MatTableDataSource<any>(this.students.data);
           setTimeout(() => {
             this.dataSource.paginator = this.paginator;
-          }, 0);
-          // tslint:disable-next-line:only-arrow-functions
-        });
+          }, 0),
+          console.log("arigato", this.students.data)
+          this.dataSource.filterPredicate = ((data, filter) => {
+            const lrnFilter = !filter.studentLRN || data.studentLRN.toString().toLowerCase().includes(filter.studentLRN);
+            const name = !filter.studentLastName || data.studentLastName.toLowerCase().includes(filter.studentLastName);
+            return lrnFilter && name;
+          }) as (data, string) => boolean;
+        })
       }
-    });
+    })
+    this.formControl = formBuilder.group({
+      studentLRN: "",
+      studentLastName: ""
+    })
+    this.formControl.valueChanges.subscribe(value => {
+      const filter = {
+        ...value,
+        studentLastName: value.studentLastName.trim().toLowerCase()
+      } as string;
+      this.dataSource.filter = filter;
+    })
+    
+
   }
+
+  ngOnInit(): void {
+
+  }
+
   // Dialog For Adding Student
   openDialog(data, datas): void {
-    console.log(datas , '::: datasss');
+    console.log(datas, '::: datasss');
     let idf = '';
-    if (datas === 'fake'){
+    if (datas === 'fake') {
       datas = this.section;
       idf = 'fake';
     }
@@ -81,12 +100,18 @@ export class ViewStudentsComponent implements AfterViewInit {
     this.location.back();
   }
 
-  alert(): void{
-    alert('nice!');
-  }
+  // filteredLrn(value: string) {
+  //   this.dataSource.filter = value.trim().toLocaleLowerCase();
+  //   this.dataSource.filterPredicate = function (data, filter: string): boolean {
+  //     return data.lrn.toLocaleLowerCase().includes(filter)
+  //   }
+  // }
 
-  // itemSelected(e): void {
-  //   alert(e);
+  // filteredName(value: string) {
+  //   this.dataSource.filter = value.trim().toLocaleLowerCase();
+  //   this.dataSource.filterPredicate = function (data, filter: string): boolean {
+  //     return data.name.toLocaleLowerCase().includes(filter)
+  //   }
   // }
 
 }

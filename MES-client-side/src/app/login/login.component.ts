@@ -1,9 +1,8 @@
 import { AuthServiceService } from './../services/auth-service.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { SwalService } from '../services/swal.service';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -48,7 +47,6 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
 
   // All Fields Are Required 
   getErrorMessage() {

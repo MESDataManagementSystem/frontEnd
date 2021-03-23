@@ -12,14 +12,10 @@
                                 <mat-label>Grade Level</mat-label>
                                 <mat-select [(ngModel)]="classesForm.gradeLevel" name="gradeLevel" #gradeLevel="ngModel"
                                     required>
-                                    <!-- <input matInput type="text" [(ngModel)]="classesForm.gradeLevel" name="gradeLevel"
-                                    #gradeLevel="ngModel" required [matAutocomplete]="auto"> -->
-                                    <!-- <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"> -->
                                     <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                                         {{option}}
                                     </mat-option>
                                 </mat-select>
-                                <!-- </mat-autocomplete> -->
                                 <mat-icon *ngIf="classesForm.gradeLevel" mat-button matSuffix mat-icon-button
                                     aria-label="Clear" (click)="classesForm.gradeLevel=''">
                                     close
@@ -42,16 +38,12 @@
                         <div class="col-3">
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Adviser</mat-label>
-                                <!-- <input matInput type="text" [(ngModel)]="classesForm.adviser" name="adviser"
-                                    #adviser="ngModel" required [matAutocomplete]="list"> -->
                                 <mat-select [(ngModel)]="classesForm.adviser" name="adviser" #adviser="ngModel"
                                     required>
-                                    <!-- <mat-autocomplete autoActiveFirstOption #list="matAutocomplete"> -->
                                     <mat-option (click)="teacherId = option._id" *ngFor="let option of otherList"
                                         value="{{option.lastName}}, {{option.firstName}}, {{option.middleName}} ">
                                         {{option.lastName}}, {{option.firstName}}, {{option.middleName}}
                                     </mat-option>
-                                    <!-- </mat-autocomplete> -->
                                 </mat-select>
                                 <mat-icon *ngIf="classesForm.adviser" mat-button matSuffix mat-icon-button
                                     aria-label="Clear" (click)="classesForm.adviser=''">

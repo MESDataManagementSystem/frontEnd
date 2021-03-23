@@ -1,40 +1,58 @@
 <div class="content">
-    <h2>Section :  {{section}}</h2>
-    <div class="medal">
-      <img src="https://previews.123rf.com/images/nalinn/nalinn1504/nalinn150400921/38748334-gold-silver-and-bronze-medal-with-red-blue-and-green-ribbons.jpg" alt="" width="auto" height="80"  (click)="alert()"  matTooltip="View top students" >
+    <div>
+        <h2>Section : {{section}}</h2>
     </div>
-    <div class="spinner-container" *ngIf="dataSource.loading$ | async">
-        <mat-spinner></mat-spinner>
-    </div>
+    <form [formGroup]="formControl">
+        <mat-form-field>
+            <mat-label>Search by {{typeSearch}}</mat-label>
+            <input type="number" matInput formControlName="studentLRN" min="0" *ngIf='lrn === true'
+                (click)='lrn = true'>
+            <input type="text" matInput formControlName="studentLastName" *ngIf='lrn === false'>
+            <mat-hint align="end">Search using LRN or Name</mat-hint>
+        </mat-form-field>
+
+        <button mat-button [matMenuTriggerFor]="menu" class='menuIcon'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)=' typeSearch = "LRN"; lrn= true '>LRN</button>
+            <button mat-menu-item (click)=' typeSearch = "Last Name"; lrn= false '>Name</button>
+        </mat-menu>
+    </form>
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="lrn">
-                <th mat-header-cell *matHeaderCellDef   mat-sort-header> Name </th>
-                <td mat-cell *matCellDef="let student"> {{student.studentLastName}}, {{student.studentFirstName}} {{student.studentNameExtn}} {{student.studentMiddleName}}  </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> LRN </th>
+                <td mat-cell *matCellDef="let student"> {{student.studentLRN}} </td>
             </ng-container>
             <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> LRN </th>
-                <td mat-cell *matCellDef="let student"> {{student.studentLRN}} </td> 
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td mat-cell *matCellDef="let student"> {{student.studentLastName}}, {{student.studentFirstName}}
+                    {{student.studentMiddleName}} </td>
             </ng-container>
-            <ng-container matColumnDef="edit" class ='editIcon'> 
-                <th mat-header-cell *matHeaderCellDef  mat-sort-header >  Edit </th>
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
                 <td mat-cell *matCellDef="let student">
                     <div class="dropdown">
-                        <mat-icon class='dropdown-toggle'  id="dropdownMenuButton">edit </mat-icon>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" aria-haspopup="true" >
-                            <a class="dropdown-item"  (click)='openDialog("editStudentInfo",student._id)'>Student Information</a>
-                            <a class="dropdown-item" (click)='openDialog("editStudentGrade",student._id)'>Student Grade</a>
+                        <mat-icon class='editIcon' id="dropdownMenuButton"> edit </mat-icon>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" aria-haspopup="true">
+                            <a class="dropdown-item" (click)='openDialog("editStudentInfo",student._id)'>Student
+                                Information</a>
+                            <a class="dropdown-item" (click)='openDialog("editStudentGrade",student._id)'>Student
+                                Grade</a>
                         </div>
                     </div>
-                 </td>
+                </td>
             </ng-container>
-            <ng-container matColumnDef="view" class= 'infoIcon'> 
-                <th mat-header-cell *matHeaderCellDef  mat-sort-header >  View </th>
-                <td mat-cell *matCellDef="let student">  
+            <ng-container matColumnDef="view">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> View </th>
+                <td mat-cell *matCellDef="let student">
                     <div class="dropdown">
-                        <mat-icon class='dropdown-toggle'  id="dropdownMenuButton"> info </mat-icon>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" aria-haspopup="true" >
-                            <a class="dropdown-item"  (click)='openDialog("viewStudentInfo",student._id)'>Student Information</a>
+                        <mat-icon color="primary" id="dropdownMenuButton"> visibility </mat-icon>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" aria-haspopup="true">
+                            <a class="dropdown-item" (click)='openDialog("viewStudentInfo",student._id)'>Student
+                                Information</a>
                             <a class="dropdown-item" (click)='openDialog("viewStudentGrade",student._id)'>Form10</a>
                         </div>
                     </div>
@@ -42,19 +60,16 @@
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
             <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+
         </table>
         <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
     </div>
     <div>
+        <button mat-icon-button class="backIcon" matTooltip="Go Back" (click)="backClicked()">
+            <i class="fas fa-caret-left"></i>
+        </button>
         <button mat-icon-button class="addIcon" matTooltip="Add Student Form 10" (click)="openDialog('','fake')">
             <mat-icon class='menuIcon'>add_circle</mat-icon>
         </button>
     </div>
 </div>
-<button mat-button (click)='backClicked()'>Go back</button>
-
-<!-- <event-emitting-child-component (selected)="itemSelected($event)">
-</event-emitting-child-component> -->
-
-
-

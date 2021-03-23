@@ -68,7 +68,7 @@ export class ClassesComponent implements OnInit {
   }
 
   viewStudents(section): void {
-    alert(section);
+    // alert(section);
     this.section = section;
     const datum = [section];
     this.sectionService.getSection(datum).subscribe(data => { console.log(data, 'section'); });
