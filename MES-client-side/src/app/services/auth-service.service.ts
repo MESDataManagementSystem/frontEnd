@@ -115,4 +115,13 @@ export class AuthServiceService {
     return this.http.delete(`${this.url}/api/removeAccount/${id}`)
   }
 
+  // Find teacher in setting
+  findTeacher(id): Observable<any> {
+    console.log(id,'id sa service')
+    return this.http.get(`${this.url}/api/findTeacher/${id}`)
+  }
+  // findAdviser find no account adviser
+  findAdviser(): Observable<any> {
+    return this.http.get(`${this.url}/api/findAdviser`)
+  }
 }

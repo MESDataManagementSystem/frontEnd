@@ -31,6 +31,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 // import { ChartsModule } from 'ng2-charts';
 // import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
@@ -110,7 +111,8 @@ import { TeacherDashboardComponent } from './teacherSideUser/teacher-dashboard/t
     PdfViewerModule,
     MaterialFileInputModule,
     MatSlideToggleModule,
-    MatCheckboxModule,
+    MatCheckboxModule, 
+    MatProgressSpinnerModule,
     // MDBBootstrapModule
     // ChartsModule
   ],
