@@ -1,15 +1,9 @@
 <header>
-    <!-- <p>Mantalongon Elementary School</p> -->
-    <mat-icon>reorder</mat-icon>
-    <span class="copyright">mantalongonelementaryschooldalaguetecebu_2021</span>
-    <mat-icon class="copyright1">copyright</mat-icon>
-
-    
 </header>
 <mat-sidenav-container>
     <mat-sidenav mode="side" [(opened)]='showSideNav'>
         <div class="box1">
-            <mat-icon aria-hidden="false" aria-label="Example home icon" (click)='showSideNav = !showSideNav'>close
+            <mat-icon aria-hidden="false" aria-label="Example home icon" (click)='showSideNav = !showSideNav'>arrow_back_ios
             </mat-icon>
             <img class="image" src="../../assets/images/mesDbmsLogo.png">
 
@@ -25,8 +19,8 @@
           
         </mat-list>
         <mat-list>
-            <mat-list-item (click)="logout()">
-                <mat-icon></mat-icon>
+            <mat-list-item class="logout" (click)="logout()">
+                <mat-icon>power_settings_new</mat-icon>
                 &nbsp;&nbsp;&nbsp;logout
             </mat-list-item>
         </mat-list>
@@ -42,6 +36,6 @@
     </mat-sidenav-content>
 </mat-sidenav-container>
 <footer>
-    <!-- <h3 class="copyright">mantalongonelementaryschooldalaguetecebu_2021</h3>
-    <mat-icon class="copyright1">copyright</mat-icon> -->
+    <h3 class="copyright">mantalongonelementaryschooldalaguetecebu_2021</h3>
+    <mat-icon class="copyright1">copyright</mat-icon>
 </footer>

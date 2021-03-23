@@ -89,6 +89,7 @@ export class AllStudentsComponent implements OnInit {
   }
 
   editFile(url, lrn, name, date) {
+
     const datas = []
     datas.push(url);
     datas.push(lrn);

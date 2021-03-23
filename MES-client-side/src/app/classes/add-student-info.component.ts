@@ -112,6 +112,7 @@ export class AddStudentInfoComponent implements OnInit {
       )
     );
   }
+
   getErrorMessage(): string {
     if (this.error.hasError('required')) {
       return 'You must enter a value';
@@ -134,11 +135,12 @@ export class AddStudentInfoComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
+
   addStudent(): void {
     this.service.addStudent(this.studentInfo).subscribe(data => {
       // tslint:disable-next-line:no-conditional-assignment
       if (data.error) {
-        this.succesAlert('Fill in all the fields!', 'error', '');
+        this.succesAlert('Fill in all the required fields!', 'error', '');
       }
 
       if (data.msg === 'LRN already exists!') {
@@ -149,12 +151,10 @@ export class AddStudentInfoComponent implements OnInit {
         this.succesAlert('Added New Student Successfully', 'success', 1500);
         this.dialog.closeAll();
       }
-      // if (data[0] === 'error'){
-
-      // }
       console.log(data);
     });
   }
+
   updateStudent(): void {
     this.service.updateStudent(this.studentInfo).subscribe(data => {
       if (data.status === true) {
@@ -167,6 +167,7 @@ export class AddStudentInfoComponent implements OnInit {
       console.log(data, 'return ni siya');
     });
   }
+
   addCredential(data): void {
     if (this.studentInfo.studentCredentialPresentedForGrade.includes(data)) {
       const index = this.studentInfo.studentCredentialPresentedForGrade.indexOf(data);
@@ -188,6 +189,7 @@ export class AddStudentInfoComponent implements OnInit {
     }
 
   }
+
   findStudentGrades(): void {
     const datum = { id: this.data[0], quarter: this.quarter };
     this.service.findStudentGrades(datum).subscribe(data => {
@@ -198,6 +200,7 @@ export class AddStudentInfoComponent implements OnInit {
       console.log(data, 'addGrades');
     });
   }
+
   addStudentGrades(): void {
     this.studentSubject.studentId = this.data[0];
     this.studentSubject.quarter = this.quarter;
@@ -224,6 +227,7 @@ export class AddStudentInfoComponent implements OnInit {
       });
     }
   }
+
   findQuarter(): void {
     this.service.findQuarter(this.data[0]).subscribe(data => {
       console.log(data.data, 'return sa find quarter');
@@ -246,6 +250,7 @@ export class AddStudentInfoComponent implements OnInit {
     });
   }
 }
+
 export interface Section {
   section: string;
   fake: false;
