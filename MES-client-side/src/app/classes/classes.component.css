@@ -22,20 +22,34 @@
     float: left;
     margin-left: 5%;
     margin-top: 3%;
-    border:1px solid #703d06;
-    background-color: white;
+    border:1px solid #f58f0a;
+    font-size: 50px !important;
+    border-radius: 5px;
+    /* background-color: white; */
 }
 
 .icon {
     color: #000000;
 }
+.card-footer{
+    max-width: 300px;
+    max-height: 60px;
+    height: 100%;
+    width:100%;
+    padding: 0.75rem 1.25rem;
+    background-color: rgba(0, 0, 0, 0);
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
 
 .card-header {
-    background: #51749b !important;
-    text-align: center;
+    /* background: #c94c08 !important; */
+    /* text-align: center; */
     color: #FFFFFF;
     font-size: 30px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
+    max-height: 60px;
+    height:100%;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlqWR4PFzYAozbYjItbLJuhZTO57V7WhkLzA&usqp=CAU');
 }
 
 .viewStuBtn {
@@ -47,12 +61,25 @@
     margin: 4px 40px;
     transition-duration: 0.4s;
     cursor: pointer;
-    background-color: white; 
+    /* background-color: white;  */
     color: black; 
     border: 2px solid #2080FF ;
+    /* margin-top: 15px; */
+    transition: transform .2s
 }
 
 .viewStuBtn:hover {
     background: #2080FF !important;
     color: white;
+    transform: scale(1.08)
+}
+/* .card{ */
+  
+    
+    /* background-color: w */
+/* } */
+
+.mat-tab-body-content {
+    overflow: auto;
+    height:500px;
 }

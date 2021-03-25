@@ -7,6 +7,8 @@ import { Location } from '@angular/common';
 import { AddStudentInfoComponent } from './add-student-info.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractControl, FormBuilder } from '@angular/forms';
+import { ModalViewFormComponent } from '../all-students/modal-view-form.component';
+
 
 
 @Component({
@@ -30,7 +32,7 @@ export class ViewStudentsComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   columnsToDisplay: string[] = ['lrn', 'name', 'edit', 'view'];
-  
+
   readonly formControl: AbstractControl;
 
 
@@ -55,7 +57,7 @@ export class ViewStudentsComponent implements OnInit {
           setTimeout(() => {
             this.dataSource.paginator = this.paginator;
           }, 0),
-          console.log("arigato", this.students.data)
+            console.log("arigato", this.students.data)
           this.dataSource.filterPredicate = ((data, filter) => {
             const lrnFilter = !filter.studentLRN || data.studentLRN.toString().toLowerCase().includes(filter.studentLRN);
             const name = !filter.studentLastName || data.studentLastName.toLowerCase().includes(filter.studentLastName);
@@ -75,7 +77,7 @@ export class ViewStudentsComponent implements OnInit {
       } as string;
       this.dataSource.filter = filter;
     })
-    
+
 
   }
 
@@ -98,6 +100,17 @@ export class ViewStudentsComponent implements OnInit {
 
   backClicked(): void {
     this.location.back();
+  }
+  showFile(): void {
+    const url = 'http://localhost:4200/assets/images/form10_pdf.pdf';
+    const datas = [];
+    datas.push(url);
+    this.dialog.open(ModalViewFormComponent, {
+      disableClose: true,
+      data: datas,
+      width: '100vw !important',
+      height: '100% !important'
+    });
   }
 
   // filteredLrn(value: string) {

@@ -3,7 +3,8 @@
 <mat-sidenav-container>
     <mat-sidenav mode="side" [(opened)]='showSideNav'>
         <div class="box1">
-            <mat-icon aria-hidden="false" aria-label="Example home icon" (click)='showSideNav = !showSideNav'>arrow_back_ios
+            <mat-icon aria-hidden="false" aria-label="Example home icon" (click)='showSideNav = !showSideNav'>
+                arrow_back_ios
             </mat-icon>
             <img class="image" src="../../assets/images/mesDbmsLogo.png">
 
@@ -16,7 +17,7 @@
                 <mat-icon>{{content.icon}}</mat-icon>
                 &nbsp;&nbsp;&nbsp;{{content.name}}
             </mat-list-item>
-          
+
         </mat-list>
         <mat-list>
             <mat-list-item class="logout" (click)="logout()">
