@@ -20,7 +20,12 @@
             <button mat-menu-item (click)=' typeSearch = "Last Name"; lrn= false '>Name</button>
         </mat-menu>
     </form>
-    <div class="mat-elevation-z8">
+
+    <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+    </div>
+    <div class="mat-elevation-z8" *ngIf="!isLoading">
         <table mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="lrn">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> LRN </th>

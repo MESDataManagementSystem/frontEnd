@@ -78,8 +78,6 @@ export class SettingsComponent implements OnInit {
     private swal: SwalService,
     private teacherService: TeacherServiceService,
   ) {
-    // this.account.username =''
-    // this.account.acc.username =''
     this.search = ''
     this.authService.viewListOfTeachersAccount('Teacher').subscribe((data: any) => {
       var count = 0;
@@ -96,9 +94,6 @@ export class SettingsComponent implements OnInit {
             this.isLoading = false;
           }
         })
-
-
-        // 
       }
       console.log(this.account, 'accountss');
 
@@ -106,7 +101,7 @@ export class SettingsComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       }, 0)
       this.dataSource.filterPredicate = function (data, filter: string): boolean {
-        return data.adviser.toLocaleLowerCase().includes(filter)
+        return data.username.toLocaleLowerCase().includes(filter)
       }
     }),
       error => this.isLoading = false
@@ -117,18 +112,11 @@ export class SettingsComponent implements OnInit {
     this.getTeacher();
   }
 
-  //   firstName: "Jessa"
-  // lastName: "Rivas"
-  // middleName: "Rufo"
-  // _id: "604c19c80d4300313877d1d4"
-
   openModal(account) {
     this.updateAccountControl.adviser = account.adviser[0].firstName + account.adviser[0].middleName +account.adviser[0].lastName
     console.log( this.updateAccountControl.adviser)
     this.updateTeacherAdvisory=[]
     var count = 1;
-    // const countList = this.
-    let list = []
     this.otherList.forEach(data => {
       this.updateTeacherAdvisory.push(data)
       count++;
@@ -141,10 +129,7 @@ export class SettingsComponent implements OnInit {
         this.display = "block";
       }
     });
-    // list = this.otherList;
-    // this.updateTeacherAdvisory = list;
     console.log(account)
-
     console.log(this.updateTeacherAdvisory, 'updateTeacherAdvisory')
     console.log(this.otherList, 'otherList')
   }
@@ -271,11 +256,11 @@ export class SettingsComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.display2 = "block"
-        // Swal.fire('Saved!', '', 'success')
       } else if (result.isDenied) {
         Swal.fire('Changes are not saved', '', 'info')
       }
     })
+
   }
 
 

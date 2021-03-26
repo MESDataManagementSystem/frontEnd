@@ -34,7 +34,8 @@ mat-form-field {
 }
 
 .mat-header-cell{
-  color: #5CB85C;
+  background: #51749b !important;
+    color: #FFFFFF;
   text-align: justify;
   position: sticky;
   position: -webkit-sticky;
@@ -49,7 +50,6 @@ mat-form-field {
   margin-left: auto;
   display: block;
 }
-
 
 .addIcon{
   margin-right: 15%;
@@ -79,6 +79,12 @@ mat-form-field {
     pointer-events: none;
 }
 
+h2 {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 25px;
+}
 
 
 

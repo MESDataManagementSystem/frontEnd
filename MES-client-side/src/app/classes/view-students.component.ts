@@ -19,7 +19,7 @@ export class ViewStudentsComponent implements OnInit {
   viewFile = false;
   value: string;
   selectedFiles: File;
-
+  isLoading = true;
   section: string;
   grade: string;
 
@@ -30,16 +30,14 @@ export class ViewStudentsComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   columnsToDisplay: string[] = ['lrn', 'name', 'edit', 'view'];
-  
-  readonly formControl: AbstractControl;
 
+  readonly formControl: AbstractControl;
 
   constructor(
     private service: StudentServiceService,
     private dialog: MatDialog,
     private location: Location,
     private route: ActivatedRoute,
-    private router: Router,
     formBuilder: FormBuilder
   ) {
     this.value = '';
@@ -52,10 +50,17 @@ export class ViewStudentsComponent implements OnInit {
         this.service.viewStudents(this.section).subscribe(data => {
           this.students = data;
           this.dataSource = new MatTableDataSource<any>(this.students.data);
+          var count = 0;
+          for (let i = 0; i < this.students.data.length; i++) {
+            count = i;
+            if (count == this.students.data.length - 1) {
+              this.isLoading = false;
+            }
+          }
           setTimeout(() => {
             this.dataSource.paginator = this.paginator;
           }, 0),
-          console.log("arigato", this.students.data)
+            console.log("arigato", this.students.data)
           this.dataSource.filterPredicate = ((data, filter) => {
             const lrnFilter = !filter.studentLRN || data.studentLRN.toString().toLowerCase().includes(filter.studentLRN);
             const name = !filter.studentLastName || data.studentLastName.toLowerCase().includes(filter.studentLastName);
@@ -64,6 +69,7 @@ export class ViewStudentsComponent implements OnInit {
         })
       }
     })
+    error => this.isLoading = false
     this.formControl = formBuilder.group({
       studentLRN: "",
       studentLastName: ""
@@ -75,7 +81,7 @@ export class ViewStudentsComponent implements OnInit {
       } as string;
       this.dataSource.filter = filter;
     })
-    
+
 
   }
 
@@ -95,23 +101,8 @@ export class ViewStudentsComponent implements OnInit {
     this.dialog.open(AddStudentInfoComponent, { disableClose: true, data: datum });
   }
 
-
   backClicked(): void {
     this.location.back();
   }
-
-  // filteredLrn(value: string) {
-  //   this.dataSource.filter = value.trim().toLocaleLowerCase();
-  //   this.dataSource.filterPredicate = function (data, filter: string): boolean {
-  //     return data.lrn.toLocaleLowerCase().includes(filter)
-  //   }
-  // }
-
-  // filteredName(value: string) {
-  //   this.dataSource.filter = value.trim().toLocaleLowerCase();
-  //   this.dataSource.filterPredicate = function (data, filter: string): boolean {
-  //     return data.name.toLocaleLowerCase().includes(filter)
-  //   }
-  // }
 
 }

@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     white-space: nowrap;
-    color: green;
+    color: #51749b !important
 }
 
 .box {
@@ -55,4 +55,11 @@
 .viewStuBtn:hover {
     background: #2080FF !important;
     color: white;
+}
+
+h2 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 25px;
 }

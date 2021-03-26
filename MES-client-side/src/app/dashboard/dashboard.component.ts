@@ -1,4 +1,5 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StudentServiceService } from '../services/student-service.service';
 
 @Component({
@@ -6,7 +7,7 @@ import { StudentServiceService } from '../services/student-service.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements OnInit {
 
   teachers = 15;
   students = 675;
@@ -50,15 +51,16 @@ export class DashboardComponent implements AfterViewInit {
   };
   grade: any;
 
-  constructor(private studentService: StudentServiceService) {
+  constructor(private studentService: StudentServiceService, private router: Router) {
     this.grade = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
     this.load = false;
   }
 
-  ngAfterViewInit(): void {
-    // this.alert().then((value) => console.log(value));
+  ngOnInit(
+  ): void {
 
   }
+
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
 
@@ -78,4 +80,22 @@ export class DashboardComponent implements AfterViewInit {
   //     // this.load = true;
   //   }
   // }
+
+  icon1() {
+    alert("display the list of all the advisory teachers")
+  }
+
+  icon2() {
+    alert("display the list of all the non advisory teachers")
+  }
+
+  icon3() {
+    alert("display the list of all section per grade level with total students")
+  }
+
+  icon4() {
+    this.router.navigate(['/MES/teachers']);
+  }
+
+
 }

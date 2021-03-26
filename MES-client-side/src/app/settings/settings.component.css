@@ -6,6 +6,7 @@
     background: #51749b !important;
     text-align: center;
     color: white;
+    height: 50px;
 }
 
 .inputField {
@@ -103,13 +104,15 @@ button:hover {
 }
   
 .mat-header-cell{
-    color: #5CB85C;
+    background: #51749b !important;
+    color: #FFFFFF;
     text-align: justify;
     position: sticky;
     position: -webkit-sticky;
     top: 0;
     background-color: white;
     font-size: medium;
+    height: 50px
 }
 
 .mat-elevation-z8{

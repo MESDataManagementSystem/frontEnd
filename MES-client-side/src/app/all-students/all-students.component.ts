@@ -18,6 +18,7 @@ export class AllStudentsComponent implements OnInit {
   lrn = true;
   typeSearch: string;
   selectedFiles: File;
+  isLoading = true;
 
   students: any;
   dataSource: MatTableDataSource<any>
@@ -34,6 +35,13 @@ export class AllStudentsComponent implements OnInit {
     this.service.retrieveData().subscribe(data => {
       this.students = data
       this.dataSource = new MatTableDataSource<any>(this.students.data)
+      var count = 0;
+      for (let i = 0; i < this.students.data.length; i++) {
+        count = i;
+        if (count == this.students.data.length - 1) {
+          this.isLoading = false;
+        }
+      }
       setTimeout(() => {
         this.dataSource.paginator = this.paginator;
       }, 0),
@@ -44,6 +52,8 @@ export class AllStudentsComponent implements OnInit {
           return lrnFilter && fullNameFilter && yearFilter;
         }) as (data, string) => boolean;
     })
+    error => this.isLoading = false
+
     this.formControl = formBuilder.group({
       lrn: "",
       fullName: "",
