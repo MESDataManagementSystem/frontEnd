@@ -1,8 +1,54 @@
-.box{
-    width: 150px;
-    height: 250px;
-    padding: 15px 20px 5px ;
+.box {
+    width: 100%;
+    max-width: 300px;
+    max-height: 270px;
+    height: 100%;
     float: left;
-    margin-top: 20px;
-    margin-left: 20px
-   }
+    margin-left: 5%;
+    margin-top: 3%;
+    border:1px solid #f58f0a;
+    font-size: 50px !important;
+    border-radius: 5px;
+}
+
+.viewStuBtn {
+    padding: 2px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 40px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    color: black; 
+    border: 2px solid #2080FF ;
+    transition: transform .2s
+}
+
+.viewStuBtn:hover {
+    background: #2080FF !important;
+    color: white;
+    transform: scale(1.08)
+}
+
+.card-header {
+    color: #FFFFFF;
+    font-size: 30px;
+    text-transform: uppercase;
+    max-height: 50px;
+    height:100%;
+    background-color: #f58f0a;
+    /* background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlqWR4PFzYAozbYjItbLJuhZTO57V7WhkLzA&usqp=CAU'); */
+}
+
+mat-icon{
+    float: right;
+    font-size: 25px;
+    margin-right: 11%;
+    transform: scale(2);
+}
+
+.image{
+    width: 50px;
+    height: 50px;
+}

@@ -7,6 +7,8 @@ import { Location } from '@angular/common';
 import { AddStudentInfoComponent } from './add-student-info.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractControl, FormBuilder } from '@angular/forms';
+import { ModalViewFormComponent } from '../all-students/modal-view-form.component';
+
 
 
 @Component({
@@ -51,6 +53,9 @@ export class ViewStudentsComponent implements OnInit {
           this.students = data;
           this.dataSource = new MatTableDataSource<any>(this.students.data);
           var count = 0;
+          if(this.students.data.length === 0){
+            this.isLoading = false;
+          } 
           for (let i = 0; i < this.students.data.length; i++) {
             count = i;
             if (count == this.students.data.length - 1) {
@@ -103,6 +108,17 @@ export class ViewStudentsComponent implements OnInit {
 
   backClicked(): void {
     this.location.back();
+  }
+  showFile(): void {
+    const url = 'http://localhost:4200/assets/images/form10_pdf.pdf';
+    const datas = [];
+    datas.push(url);
+    this.dialog.open(ModalViewFormComponent, {
+      disableClose: true,
+      data: datas,
+      width: '100vw !important',
+      height: '100% !important'
+    });
   }
 
 }

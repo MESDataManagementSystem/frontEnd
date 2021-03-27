@@ -1,102 +1,3 @@
-/* mat-card {
-   width: 233px;
-   height: 250px;
-   margin-left: 5%;
-   margin-top: 3%;
-  }
-  
-  img {
-    height: 150px;
-    width: 233px;
-  } */
-
-/* testing 2 */
-
-/* .content{
-    padding-left: 20px;
-}
-
-h2 {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
-    font-weight: bold;
-    font-style: normal;
-    font-size: 25px;
-}
-
-.fas {
-  margin-left: 17%;
-  margin-top: 35%;
-  margin-bottom: 40%;
-}
-
-.icon1 {
-  background: #51749b !important;
-  border: 1px solid #51749b;
-  color: #FFFFFF;
-  font-size: 25px;   
-}
-
-.icon2 {
-  background: #4da64d !important;
-  border: 1px solid #4da64d;
-  color: #FFFFFF;
-  font-size: 25px;   
-}
-
-.icon3 {
-  background: #FF0000 !important;
-  border: 1px solid #FF0000;
-  color: #FFFFFF;
-  font-size: 25px;   
-}
-
-.icon4 {
-  background: #daa520  !important;
-  border: 1px solid #daa520;
-  color: #FFFFFF;
-  font-size: 25px;   
-}
-
-.iconBox {
-  position: relative;
-  width: 10%;
-  min-width: 20px;
-  max-width: 50px;
-  height: 100%;
-  margin-left: 10%;
-  top: 50%;
-  z-index: 99999;
-}
-
-.mainBox {
-  position: absolute;
-  width: 85%;
-  min-width: 150px;
-  border: 1px solid black;
-  background-color: white;
-  margin-left: 5%;
-}
-
-button {
-  width: 100%;
-  min-width: 100px;
-}
-
-button:hover {
-  background: #2080FF !important;
-}
-
-h3 {
-  margin-left: 8%;
-  font-size: 20px;
-}
-
-h1 {
-  margin-left: 40%;
-  font-size: 40px;
-  margin-top: 4%;
-} */
-
 /* 
 .content{
   margin-left: 20px;
@@ -176,6 +77,9 @@ h3 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
  */
+ i:hover{
+color:blue
+ }
 
  
 .content{
@@ -217,9 +121,6 @@ h3 {
   color: #2080FF;
   margin-right: 10px;
   margin-top: 40px;
-  /* margin-right: 3%;
-  margin-top: 2%; */
-  /* padding: 10px; */
 }
 
 .user {
@@ -258,17 +159,6 @@ h3 {
   height: 100px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-/* .row1{
-  float:left
-} */
-
-/* mat-card{
-  width: 400px; */
-  /* min-width: 230px;
-  max-width: 600px; */
-  /* height: 100px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-} */
 
 mat-card {
   transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -282,6 +172,15 @@ mat-card {
   float: left;
   margin-right: 20px;
 }
+
+mat-card-content {
+  width: auto;
+  min-width: 230px;
+  max-width: 600px;
+  height: 100px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 @media only screen and (max-width: 400px) {
   mat-card {
     width: 300px;
@@ -291,21 +190,11 @@ mat-card {
     
   }
 }
+
 .box{
   margin-right: auto;
   margin-left: auto;
   display: block;
-  /* text-align: center; */
-  /* margin: auto; */
   max-width: 850px;
-      /* width: 100%;
-    max-width: 300px;
-    max-height: 270px;
-    height: 100%;
-    float: left;
-    margin-left: 5%;
-    margin-top: 3%; */
-    border: 0;
-    /* background-color: white; */
+  border: 0;
 }
-

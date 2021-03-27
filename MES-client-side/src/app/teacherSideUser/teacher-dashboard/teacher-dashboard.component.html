@@ -1,14 +1,36 @@
-<div>
-    <div style="padding-left: 5%; padding-top: 1em;" >
-        <h2>Mantalongon Elementary School Grades And Sections
-        </h2>
-        <button mat-button (click)='logout()'>logout</button>
+<div style="padding-left: 5%; padding-top: 1em;">
+    <h2>Mantalongon Elementary School Grades And Sections
+        <span>
+            <mat-icon matTooltip="Logout" (click)='logout()' color="primary"> account_circle </mat-icon>
+        </span>
+    </h2>
+    <hr>
+</div>
 
+
+<div (click)='selectedGrade($event)'>
+    <div class="box" *ngFor="let section of sections">
+        <div class="card-header">
+            <h3>{{section.gradeLevel}} | {{section.sectionName}}</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                </div>
+                <div class="col-8">
+                    <h3> 210 Students </h3>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="viewStuBtn" mat-button
+                    (click)="viewStudents(section.gradeLevel, section.sectionName)">view
+                    students</button>
+            </div>
+        </div>
     </div>
-    <!-- <div style="padding-top: 2em; margin-left: 5%;  margin-right: 5%;"> -->
-    <div (click)='selectedGrade($event)'>
-        <div *ngFor='let section of sections '>
-            <mat-card class="card box">
+
+    <!-- <div class='box' *ngFor='let section of sections '>
+            <mat-card>
                 <h3>{{section.gradeLevel}}</h3>
                 <mat-card-content>
                     <h2>{{section.sectionName}}</h2>
@@ -16,11 +38,10 @@
                     <button mat-button (click) = 'viewStudents(section.gradeLevel, section.sectionName)'>view students</button>
                 </mat-card-content>
             </mat-card>
-            <!-- <router-outlet></router-outlet> -->
-        </div>
-    </div>
+        </div> -->
 </div>
-<div >
+
+<div>
 
 </div>
 <!-- </div> -->

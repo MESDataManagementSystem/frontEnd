@@ -1,258 +1,268 @@
-
-<div style="padding-left: 5%; padding-top: 1em;" >
-    <h2>Mantalongon Elementary School Grades And Sections
-        <button mat-icon-button class="addIcon" matTooltip="Add Section" (click)="openDialog()">
-            <mat-icon class='menuIcon'>add_circle</mat-icon>
-        </button>
-    </h2>
+<div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
 </div>
+<div *ngIf="!isLoading">
+    <div style="padding-left: 5%; padding-top: 1em;">
+        <h2>Grades And Sections 
+            <button mat-icon-button class="addIcon" matTooltip="Add Section" (click)="openDialog()">
+                <mat-icon class='menuIcon'>add_circle</mat-icon>
+            </button>
+        </h2>
+    </div>
+    <div style="padding-top: 2em; margin-left: 5%;  margin-right: 5%;">
+        <mat-tab-group (selectedTabChange)="selectedGrade($event)">
+            <mat-tab [label]="'Kindergarten'">
 
-<div style="padding-top: 2em; margin-left: 5%;  margin-right: 5%;">
-    <mat-tab-group (selectedTabChange)="selectedGrade($event)" mat-stretch-tabs>
-        <mat-tab [label]="'Kindegarten'">
-
-            <div class="box" *ngFor="let section of sections">
-                <div class="card-header">
-                    <div class="icon">
-                        <i class="fas fa-school mb-2"></i><br>
+                <div class="box" *ngFor="let section of sections">
+                    <div class="card-header">
+                        <!-- <div class="icon">
+                            <i class="fas fa-school mb-2"></i><br>
+                        </div> -->
+                        {{section.sectionName}}
                     </div>
-                    {{section.sectionName}}
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-8">
-                            <h3> Total Students: </h3>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h3> Total Students: </h3>
+                            </div>
+                            <div class="col-2">
+                                <h3> 78 </h3>
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <h3> 78 </h3>
+                        <div class="row">
+                            <div class="col-4">
+                                <h3> Adviser: </h3>
+                            </div>
+                            <div class="col-8">
+                                <h3> {{section.adviser.lastName}}, {{section.adviser.firstName}}
+                                    {{section.adviser.middleName}} </h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <h3> Adviser: </h3>
+                        <div class="card-footer">
+                            <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
+                                students</button>
                         </div>
-                        <div class="col-8">
-                            <h3> Rufo, Irish Jean </h3>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
-                            students</button>
-                    </div>
-                </div>
-            </div>
-
-        </mat-tab>
-
-
-        <mat-tab [label]="'Grade 1'">
-
-            <div class="box" *ngFor="let section of sections">
-                <div class="card-header">
-                    <div class="icon">
-                        <i class="fas fa-school mb-2"></i><br>
-                    </div>
-                    {{section.sectionName}}
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-8">
-                            <h3> Total Students: </h3>
-                        </div>
-                        <div class="col-4">
-                            <h3> 78 </h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <h3> Adviser: </h3>
-                        </div>
-                        <div class="col-8">
-                            <h3> Rufo, Irish Jean </h3>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
-                            students</button>
                     </div>
                 </div>
-            </div>
+            </mat-tab>
 
-        </mat-tab>
 
-        <mat-tab [label]="'Grade 2'">
+            <mat-tab [label]="'Grade 1'">
 
-            <div class="box" *ngFor="let section of sections">
-                <div class="card-header">
-                    <div class="icon">
-                        <i class="fas fa-school mb-2"></i><br>
+                <div class="box" *ngFor="let section of sections">
+                    <div class="card-header">
+                        <!-- <div class="icon">
+                            <i class="fas fa-school mb-2"></i><br>
+                        </div> -->
+                        {{section.sectionName}}
                     </div>
-                    {{section.sectionName}}
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-8">
-                            <h3> Total Students: </h3>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h3> Total Students: </h3>
+                            </div>
+                            <div class="col-2">
+                                <h3> 78 </h3>
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <h3> 78 </h3>
+                        <div class="row">
+                            <div class="col-4">
+                                <h3> Adviser: </h3>
+                            </div>
+                            <div class="col-8">
+                                <h3>{{section.adviser.lastName}}, {{section.adviser.firstName}}
+                                    {{section.adviser.middleName}} </h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <h3> Adviser: </h3>
+                        <div class="card-footer">
+                            <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
+                                students</button>
                         </div>
-                        <div class="col-8">
-                            <h3> Rufo, Irish Jean </h3>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
-                            students</button>
-                    </div>
-                </div>
-            </div>
-
-        </mat-tab>
-
-        <mat-tab [label]="'Grade 3'">
-
-            <div class="box" *ngFor="let section of sections">
-                <div class="card-header">
-                    <div class="icon">
-                        <i class="fas fa-school mb-2"></i><br>
-                    </div>
-                    {{section.sectionName}}
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-8">
-                            <h3> Total Students: </h3>
-                        </div>
-                        <div class="col-4">
-                            <h3> 78 </h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <h3> Adviser: </h3>
-                        </div>
-                        <div class="col-8">
-                            <h3> Rufo, Irish Jean </h3>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
-                            students</button>
                     </div>
                 </div>
-            </div>
 
-        </mat-tab>
+            </mat-tab>
 
-        <mat-tab [label]="'Grade 4'">
+            <mat-tab [label]="'Grade 2'">
 
-            <div class="box" *ngFor="let section of sections">
-                <div class="card-header">
-                    <div class="icon">
-                        <i class="fas fa-school mb-2"></i><br>
+                <div class="box" *ngFor="let section of sections">
+                    <div class="card-header">
+                        <!-- <div class="icon">
+                            <i class="fas fa-school mb-2"></i><br>
+                        </div> -->
+                        {{section.sectionName}}
                     </div>
-                    {{section.sectionName}}
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-8">
-                            <h3> Total Students: </h3>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h3> Total Students: </h3>
+                            </div>
+                            <div class="col-2">
+                                <h3> 78 </h3>
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <h3> 78 </h3>
+                        <div class="row">
+                            <div class="col-4">
+                                <h3> Adviser: </h3>
+                            </div>
+                            <div class="col-8">
+                                <h3> {{section.adviser.lastName}}, {{section.adviser.firstName}}
+                                    {{section.adviser.middleName}} </h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <h3> Adviser: </h3>
+                        <div class="card-footer">
+                            <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
+                                students</button>
                         </div>
-                        <div class="col-8">
-                            <h3> Rufo, Irish Jean </h3>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
-                            students</button>
-                    </div>
-                </div>
-            </div>
-
-        </mat-tab>
-
-        <mat-tab [label]="'Grade 5'">
-
-            <div class="box" *ngFor="let section of sections">
-                <div class="card-header">
-                    <div class="icon">
-                        <i class="fas fa-school mb-2"></i><br>
-                    </div>
-                    {{section.sectionName}}
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-8">
-                            <h3> Total Students: </h3>
-                        </div>
-                        <div class="col-4">
-                            <h3> 78 </h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <h3> Adviser: </h3>
-                        </div>
-                        <div class="col-8">
-                            <h3> Rufo, Irish Jean </h3>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
-                            students</button>
                     </div>
                 </div>
-            </div>
 
-        </mat-tab>
+            </mat-tab>
 
-        <mat-tab [label]="'Grade 6'">
+            <mat-tab [label]="'Grade 3'">
 
-            <div class="box" *ngFor="let section of sections">
-                <div class="card-header">
-                    <div class="icon">
-                        <i class="fas fa-school mb-2"></i><br>
+                <div class="box" *ngFor="let section of sections">
+                    <div class="card-header">
+                        <!-- <div class="icon">
+                            <i class="fas fa-school mb-2"></i><br>
+                        </div> -->
+                        {{section.sectionName}}
                     </div>
-                    {{section.sectionName}}
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h3> Total Students: </h3>
+                            </div>
+                            <div class="col-2">
+                                <h3> 78 </h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <h3> Adviser: </h3>
+                            </div>
+                            <div class="col-8">
+                                <h3> {{section.adviser.lastName}}, {{section.adviser.firstName}}
+                                    {{section.adviser.middleName}} </h3>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
+                                students</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-8">
-                            <h3> Total Students: </h3>
-                        </div>
-                        <div class="col-4">
-                            <h3> 78 </h3>
-                        </div>
+
+            </mat-tab>
+
+            <mat-tab [label]="'Grade 4'">
+
+                <div class="box" *ngFor="let section of sections">
+                    <div class="card-header">
+                        <!-- <div class="icon">
+                            <i class="fas fa-school mb-2"></i><br>
+                        </div> -->
+                        {{section.sectionName}}
                     </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <h3> Adviser: </h3>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h3> Total Students: </h3>
+                            </div>
+                            <div class="col-2">
+                                <h3> 78 </h3>
+                            </div>
                         </div>
-                        <div class="col-8">
-                            <h3> Rufo, Irish Jean </h3>
+                        <div class="row">
+                            <div class="col-4">
+                                <h3> Adviser: </h3>
+                            </div>
+                            <div class="col-8">
+                                <h3> {{section.adviser.lastName}}, {{section.adviser.firstName}}
+                                    {{section.adviser.middleName}} </h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
-                            students</button>
+                        <div class="card-footer">
+                            <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
+                                students</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </mat-tab>
-    </mat-tab-group>
+            </mat-tab>
+
+            <mat-tab [label]="'Grade 5'">
+
+                <div class="box" *ngFor="let section of sections">
+                    <div class="card-header">
+                        <!-- <div class="icon">
+                            <i class="fas fa-school mb-2"></i><br>
+                        </div> -->
+                        {{section.sectionName}}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h3> Total Students: </h3>
+                            </div>
+                            <div class="col-2">
+                                <h3> 78 </h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <h3> Adviser: </h3>
+                            </div>
+                            <div class="col-8">
+                                <h3> {{section.adviser.lastName}}, {{section.adviser.firstName}}
+                                    {{section.adviser.middleName}} </h3>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
+                                students</button>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-tab>
+
+            <mat-tab [label]="'Grade 6'">
+
+                <div class="box" *ngFor="let section of sections">
+                    <div class="card-header">
+                        <!-- <div class="icon">
+                            <i class="fas fa-school mb-2"></i><br>
+                        </div> -->
+                        {{section.sectionName}}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h3> Total Students: </h3>
+                            </div>
+                            <div class="col-2">
+                                <h3> 78 </h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <h3> Adviser: </h3>
+                            </div>
+                            <div class="col-8">
+                                <h3> {{section.adviser.lastName}}, {{section.adviser.firstName}}
+                                    {{section.adviser.middleName}} </h3>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
+                                students</button>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-tab>
+        </mat-tab-group>
+    </div>
 </div>

@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~11.1.2",
     "@angular/router": "~11.1.2",
     "@auth0/angular-jwt": "^5.0.2",
+    "angular-bootstrap-md": "^11.0.0",
     "bootstrap": "^4.6.0",
     "bootstrap4": "0.0.1-security",
     "chart.js": "^2.9.4",

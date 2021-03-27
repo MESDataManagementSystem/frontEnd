@@ -32,8 +32,8 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-// import { ChartsModule } from 'ng2-charts';
-// import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
+import { ChartsModule } from 'ng2-charts';
 
 
 import { AllStudentsComponent } from './all-students/all-students.component';
@@ -58,6 +58,7 @@ import { ViewStudentsComponent } from './classes/view-students.component';
 import { AddStudentInfoComponent } from './classes/add-student-info.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TeacherDashboardComponent } from './teacherSideUser/teacher-dashboard/teacher-dashboard.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -113,8 +114,8 @@ import { TeacherDashboardComponent } from './teacherSideUser/teacher-dashboard/t
     MatSlideToggleModule,
     MatCheckboxModule, 
     MatProgressSpinnerModule,
-    // MDBBootstrapModule
-    // ChartsModule
+    MDBBootstrapModule,
+    ChartsModule
   ],
   providers: [
     HttpClient,
