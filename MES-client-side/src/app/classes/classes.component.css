@@ -14,26 +14,18 @@
     color: #51749b !important
 }
 
-
 .box {
-    width: 100%;
-    max-width: 300px;
-    max-height: 270px;
-    height: 100%;
+    justify-content: center;
+    width: auto;
+    height: auto;
     float: left;
     margin-left: 5%;
     margin-top: 3%;
-    border:1px solid #f58f0a;
+    border: 1px solid #f58f0a;
     font-size: 50px !important;
     border-radius: 5px;
-    /* background-color: white; */
 }
-mat-card{
-    width: 100%;
-    max-width: 300px;
-    max-height: 270px;
-    height: 100%;
-}
+
 h2 {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
     font-weight: bold;
@@ -42,17 +34,9 @@ h2 {
     
 }
 
-
-
-
-.icon {
-    color: #000000;
-}
 .card-footer{
-    max-width: 300px;
-    max-height: 60px;
     height: 100%;
-    width:100%;
+    width: 100%;
     padding: 0.75rem 1.25rem;
     background-color: rgba(0, 0, 0, 0);
     border-top: 1px solid rgba(0, 0, 0, 0.125);
@@ -77,10 +61,8 @@ h2 {
     margin: 4px 40px;
     transition-duration: 0.4s;
     cursor: pointer;
-    /* background-color: white;  */
     color: black; 
     border: 2px solid #2080FF ;
-    /* margin-top: 15px; */
     transition: transform .2s
 }
 
@@ -90,14 +72,7 @@ h2 {
     transform: scale(1.08)
 }
 
-h2 {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
-    font-weight: bold;
-    font-style: normal;
-    font-size: 25px;
+mat-tab-group {
+    margin-bottom: 2%;
 }
 
-.mat-tab-body-content {
-    overflow: scroll;
-    height:600px;
-}

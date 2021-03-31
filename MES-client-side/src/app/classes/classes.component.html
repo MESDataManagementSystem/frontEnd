@@ -2,6 +2,7 @@
     <mat-progress-spinner color="primary" mode="indeterminate">
     </mat-progress-spinner>
 </div>
+
 <div *ngIf="!isLoading">
     <div style="padding-left: 5%; padding-top: 1em;">
         <h2>Grades And Sections 
@@ -10,15 +11,13 @@
             </button>
         </h2>
     </div>
+
     <div style="padding-top: 2em; margin-left: 5%;  margin-right: 5%;">
         <mat-tab-group (selectedTabChange)="selectedGrade($event)">
             <mat-tab [label]="'Kindergarten'">
 
                 <div class="box" *ngFor="let section of sections">
                     <div class="card-header">
-                        <!-- <div class="icon">
-                            <i class="fas fa-school mb-2"></i><br>
-                        </div> -->
                         {{section.sectionName}}
                     </div>
                     <div class="card-body">
@@ -47,14 +46,10 @@
                 </div>
             </mat-tab>
 
-
             <mat-tab [label]="'Grade 1'">
 
                 <div class="box" *ngFor="let section of sections">
                     <div class="card-header">
-                        <!-- <div class="icon">
-                            <i class="fas fa-school mb-2"></i><br>
-                        </div> -->
                         {{section.sectionName}}
                     </div>
                     <div class="card-body">
@@ -88,9 +83,6 @@
 
                 <div class="box" *ngFor="let section of sections">
                     <div class="card-header">
-                        <!-- <div class="icon">
-                            <i class="fas fa-school mb-2"></i><br>
-                        </div> -->
                         {{section.sectionName}}
                     </div>
                     <div class="card-body">
@@ -124,9 +116,6 @@
 
                 <div class="box" *ngFor="let section of sections">
                     <div class="card-header">
-                        <!-- <div class="icon">
-                            <i class="fas fa-school mb-2"></i><br>
-                        </div> -->
                         {{section.sectionName}}
                     </div>
                     <div class="card-body">
@@ -160,9 +149,6 @@
 
                 <div class="box" *ngFor="let section of sections">
                     <div class="card-header">
-                        <!-- <div class="icon">
-                            <i class="fas fa-school mb-2"></i><br>
-                        </div> -->
                         {{section.sectionName}}
                     </div>
                     <div class="card-body">
@@ -196,9 +182,6 @@
 
                 <div class="box" *ngFor="let section of sections">
                     <div class="card-header">
-                        <!-- <div class="icon">
-                            <i class="fas fa-school mb-2"></i><br>
-                        </div> -->
                         {{section.sectionName}}
                     </div>
                     <div class="card-body">
@@ -232,9 +215,6 @@
 
                 <div class="box" *ngFor="let section of sections">
                     <div class="card-header">
-                        <!-- <div class="icon">
-                            <i class="fas fa-school mb-2"></i><br>
-                        </div> -->
                         {{section.sectionName}}
                     </div>
                     <div class="card-body">
@@ -265,4 +245,5 @@
             </mat-tab>
         </mat-tab-group>
     </div>
+
 </div>

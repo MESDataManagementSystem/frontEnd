@@ -33,8 +33,6 @@ export class AuthServiceService {
     if(token){
       const helper = new JwtHelperService();
       const decodedToken = helper.decodeToken(token);
-      // const decodedToken = jwt_decode(token);
-      console.log(decodedToken, 'decoded token');
       this.user = decodedToken;
       if (this.user.role === 'Admin'){
         return true;
@@ -42,6 +40,7 @@ export class AuthServiceService {
     }
     return false;
   }
+
   isLoginTeacher(): any {
     const token = window.localStorage.getItem('token');
     if(token){
@@ -54,6 +53,7 @@ export class AuthServiceService {
     }
     return false;
   }
+  
   login(credentials): Observable<any> {
     return this.http.post(`${this.url}/api/login`, credentials).pipe(
       map((response: any) => {
@@ -68,6 +68,17 @@ export class AuthServiceService {
       })
     );
   }
+
+  loginAdminForConfirmation(credentials):Observable<any>{
+    return this.http.post(`${this.url}/api/loginAdminForConfirmation`,credentials).pipe(
+      catchError(e => {
+        this.swal.credentialsDidNotMatch();
+        throw new Error(e);
+      })
+    );
+  }
+
+
 
   deleteToken(): void {
     localStorage.removeItem('token');

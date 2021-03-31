@@ -6,14 +6,13 @@ import Swal from 'sweetalert2';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthServiceService } from '../services/auth-service.service';
 import { SwalService } from '../services/swal.service';
-import { TeacherServiceService } from '../services/teacher-service.service';
-
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
+
 export class SettingsComponent implements OnInit {
 
   error = new FormControl('', [Validators.required]);
@@ -24,6 +23,8 @@ export class SettingsComponent implements OnInit {
   hide1 = true;
   hide2 = true;
   hide3 = true;
+  hide4 = true;
+  
 
   otherList = [];
   updateTeacherAdvisory = [];
@@ -33,11 +34,12 @@ export class SettingsComponent implements OnInit {
   search: string;
   display = 'none';
   display2 = 'none';
+  display3 = 'none';
 
 
   loginControl = {
     username: '',
-    password: ''
+    password: '',
   };
 
   addAccountControl = {
@@ -57,59 +59,51 @@ export class SettingsComponent implements OnInit {
   updateAccountControl = {
     username: '',
     password: '',
-    adviser: 'hahaha',
+    confirmPassword: '',
     role: 'Teacher'
   };
-  isLoading = true;
-  updateTeacher = {
-    username: '',
-    password: ''
-  };
-  // dataSource = null;
 
+  idDelete: string
+  isLoading = true;
+  // updateTeacher = {
+  //   username: '',
+  //   password: ''
+  // };
   account: any[] = [];
-  // account: any = { acc: { adviser: '', role: '', username: '' }, adviser: [{ firstName: '', lastName: '', middleName: '' }] };
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['username', 'name', 'edit', 'delete'];
 
-
   constructor(
     private authService: AuthServiceService,
     private swal: SwalService,
-    private teacherService: TeacherServiceService,
     private router: Router
   ) {
-    // this.account.username =''
-    // this.account.acc.username =''
     this.search = '';
     this.authService.viewListOfTeachersAccount('Teacher').subscribe((data: any) => {
       let count = 0;
       this.account = data.data;
-      this.dataSource = new MatTableDataSource<any>(this.account);
-      for (let i = 0; i <= this.account.length; i++) {
+      for (let i = 0; i <= this.account.length - 1; i++) {
         this.authService.findTeacher(this.account[i].adviser).subscribe((teacher: any) => {
           this.teacherHasAccount = teacher;
           this.account[i] = { acc: this.account[i], adviser: this.teacherHasAccount };
           this.dataSource = new MatTableDataSource<any>(this.account);
-          // this.isLoading = false;
           count = i;
           if (count === this.account.length - 1) {
             this.isLoading = false;
           }
+          setTimeout(() => {
+            this.dataSource.paginator = this.paginator;
+          }, 0);
+          this.dataSource.filterPredicate = function (data, filter: string): boolean {
+            return data.acc.username.toLocaleLowerCase().includes(filter)
+          }
         });
       }
-      // if (this.account.length === 0) {
-      //   this.isLoading = false;
-      // }
-      setTimeout(() => {
-        this.dataSource.paginator = this.paginator;
-      }, 0);
-      this.dataSource.filterPredicate = function (data, filter: string): boolean {
-        return data.adviser.toLocaleLowerCase().includes(filter);
-      };
+      if (this.account.length === 0) {
+        this.isLoading = false
+      }
     }),
-      // tslint:disable-next-line:no-unused-expression
       error => this.isLoading = false;
   }
 
@@ -118,12 +112,17 @@ export class SettingsComponent implements OnInit {
     this.getTeacher();
   }
 
+  // Search Specific Teacher
+  filter(value: string) {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
   openModal(account) {
-    this.updateAccountControl.adviser = account.adviser[0].firstName + account.adviser[0].middleName + account.adviser[0].lastName;
-    console.log(this.updateAccountControl.adviser);
+    this.display = "block"
+    // this.updateAccountControl.adviser = account.adviser[0].firstName + account.adviser[0].middleName + account.adviser[0].lastName;
+    // console.log(this.updateAccountControl.adviser);
     this.updateTeacherAdvisory = [];
     let count = 1;
-    // const countList = this.
     const list = [];
     this.otherList.forEach(data => {
       this.updateTeacherAdvisory.push(data);
@@ -132,28 +131,21 @@ export class SettingsComponent implements OnInit {
         console.log(count, this.otherList.length, 'counttttt');
         this.updateAccountControl.username = account.acc.username;
         this.updateAccountControl.password = account.acc.password;
-        // tslint:disable-next-line:max-line-length
-        const oldTeacher = { _id: account.acc.adviser, firstName: account.adviser[0].firstName, middleName: account.adviser[0].middleName, lastName: account.adviser[0].lastName };
-        this.updateTeacherAdvisory.push(oldTeacher);
-        this.display = 'block';
+        // const oldTeacher = { _id: account.acc.adviser, firstName: account.adviser[0].firstName, middleName: account.adviser[0].middleName, lastName: account.adviser[0].lastName };
+        // this.updateTeacherAdvisory.push(oldTeacher);
       }
 
     });
-    // list = this.otherList;
-    // this.updateTeacherAdvisory = list;
     console.log(account);
-
     console.log(this.updateTeacherAdvisory, 'updateTeacherAdvisory');
     console.log(this.otherList, 'otherList');
   }
+
   onCloseHandled() {
     this.display = 'none';
-  }
-
-  onCloseHandled1() {
     this.display2 = 'none';
+    this.display3 = 'none';
   }
-
 
   // All Fields Are Required
   getErrorMessage() {
@@ -169,6 +161,77 @@ export class SettingsComponent implements OnInit {
     }
   }
 
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  updateTeacherAccount() {
+    this.authService.updateTeacherAccount(this.updateAccountControl).subscribe(data => {
+      if (data) {
+        console.log("heheehe")
+      }
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Get Teacher with no account and display in the input field for making an account for teacher
+  getTeacher(): void {
+    this.authService.findAdviser().subscribe((data: any) => {
+      this.otherList = data;
+    });
+  }
+
   // Adding Account For Teacher
   addAccountTeacher() {
     const data = { ...this.addAccountControl1, adviser: this.teacherId };
@@ -176,7 +239,6 @@ export class SettingsComponent implements OnInit {
       if (data) {
         this.swal.succesAlert();
         this.reloadComponent();
-        // this.resetAddAccount();
       } else {
         this.swal.errorAlertForSomethingWentWrong();
       }
@@ -193,73 +255,15 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  // Remove Account From The Table
-  removeAccount(data) {
-
-  }
-
-  resetAddAccount() {
-    this.addAccountControl1 = {
-      username: '',
-      password: '',
-      adviser: '',
-      role: 'Teacher',
-    };
-  }
-
-  resetAdminAccount() {
-    this.addAccountControl = {
-      username: '',
-      password: '',
-      confirmPassword: '',
-      role: 'Admin',
-    };
-  }
-
-  // Get Teacher
-  getTeacher(): void {
-    this.authService.findAdviser().subscribe((data: any) => {
-      this.otherList = data;
-      console.log(data);
-    });
-  }
-  //
-
-
-
-  // Update Admin
+  // *******************      Updating the admin password with admin login for confirmation      *******************
   updateAdmin() {
     this.authService.updateCredentials(this.addAccountControl).subscribe(data => {
       if (data) {
-        this.resetAdminAccount();
+        console.log("skemperloww")
       }
     });
   }
 
-
-
-  updateTeacherAccount() {
-    this.authService.updateTeacherAccount(this.updateAccountControl).subscribe(data => {
-      if (data) {
-        // this.swal.succesAlert();
-        this.resetAddAccount();
-      }
-    });
-  }
-
-  loginBtn() {
-    this.authService.login(this.loginControl).subscribe(
-      data => {
-        this.updateAdmin();
-        this.swal.succesAlert();
-        this.display2 = 'none';
-      }, error => {
-        this.swal.credentialsDidNotMatch();
-      }
-    );
-  }
-
-  // For Confirmation Before Updating
   warningAlert() {
     Swal.fire({
       icon: 'warning',
@@ -270,12 +274,60 @@ export class SettingsComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.display2 = 'block';
-        // Swal.fire('Saved!', '', 'success')
       } else if (result.isDenied) {
         Swal.fire('Changes are not saved', '', 'info');
       }
     });
   }
+
+  loginBtn() {
+    if (this.loginControl.username == 'Administrator') {
+      this.authService.loginAdminForConfirmation(this.loginControl).subscribe(data => {
+        if (data) {
+          this.updateAdmin()
+          this.swal.succesAlert();
+          this.display2 = 'none'
+        }
+      });
+    } else {
+      this.swal.credentialsDidNotMatch()
+    }
+  }
+  // *******************      -----------------------------------------------------------------------      *******************
+
+  // *******************      Removing the account of specific teacher with admin login for confirmation      *******************
+  removeAccount(id) {
+    this.idDelete = id
+    Swal.fire({
+      icon: 'question',
+      title: 'Are you sure?',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+      confirmButtonColor: 'red',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.display3 = 'block'
+      }
+    })
+  }
+
+  loginBtnForDelete() {
+    if (this.loginControl.username == 'Administrator') {
+      this.authService.loginAdminForConfirmation(this.loginControl).subscribe(data => {
+        this.authService.deleteAccount(this.idDelete).subscribe(data => {
+          if (data) {
+            console.log("delete daw ni")
+            this.swal.succesAlert();
+            this.display3 = 'none'
+          }
+        })
+      });
+    } else {
+      this.swal.credentialsDidNotMatch()
+    }
+  }
+
+  // *******************      -----------------------------------------------------------------------      *******************
 
   reloadComponent(): void {
     const currentUrl = this.router.url;
@@ -289,73 +341,79 @@ export class SettingsComponent implements OnInit {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // Search Specific Account
-  filter(value: string) {
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  resetAdminAccount() {
+    this.addAccountControl = {
+      username: '',
+      password: '',
+      confirmPassword: '',
+      role: 'Admin',
+    };
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

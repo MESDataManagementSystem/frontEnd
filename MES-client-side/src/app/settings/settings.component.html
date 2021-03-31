@@ -11,6 +11,7 @@
                         <form class="example-form" #updateForm="ngForm">
                             <div class="row">
                                 <div class="col-12">
+                                    <div class="cover"></div>
                                     <mat-form-field appearance="outline" class="inputField">
                                         <mat-label>Username</mat-label>
                                         <input type="text" [(ngModel)]="addAccountControl.username" name="username"
@@ -23,8 +24,8 @@
                                     <mat-form-field appearance="outline" class="inputField">
                                         <mat-label>Password</mat-label>
                                         <input type="password" matInput [type]="hide ? 'password' : 'text'"
-                                            [(ngModel)]="addAccountControl.password" name="password"
-                                            #password="ngModel">
+                                            [(ngModel)]="addAccountControl.password" name="password" #password="ngModel"
+                                            required>
                                         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
                                             'visibility'}}
                                         </mat-icon>
@@ -33,10 +34,10 @@
                                 <div class="col-6">
                                     <mat-form-field appearance="outline" class="inputField">
                                         <mat-label>Confirm Password</mat-label>
-                                        <input type="password" matInput [type]="hide3 ? 'password' : 'text'"
+                                        <input type="password" matInput [type]="hide1 ? 'password' : 'text'"
                                             [(ngModel)]="addAccountControl.confirmPassword" name="confirmPassword"
                                             #confirmPassword="ngModel" ngValidateEqual="password" required>
-                                        <mat-icon matSuffix (click)="hide3 = !hide3">{{hide3 ? 'visibility_off' :
+                                        <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' :
                                             'visibility'}}
                                         </mat-icon>
                                     </mat-form-field>
@@ -92,10 +93,10 @@
                                 <div class="col-6">
                                     <mat-form-field appearance="outline" class="inputField">
                                         <mat-label>Password</mat-label>
-                                        <input type="password" matInput [type]="hide1 ? 'password' : 'text'" required
+                                        <input type="password" matInput [type]="hide2 ? 'password' : 'text'" required
                                             name="password" [(ngModel)]="addAccountControl1.password"
                                             #password="ngModel" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-                                        <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' :
+                                        <mat-icon matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility_off' :
                                             'visibility'}}
                                         </mat-icon>
                                         <mat-error *ngIf="error2.invalid">{{getErrorMessage2()}}</mat-error>
@@ -177,7 +178,8 @@
                             <ng-container matColumnDef="delete">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Remove </th>
                                 <td mat-cell *matCellDef="let account">
-                                    <mat-icon class="deleteIcon" (click)="removeAccount(data)">delete</mat-icon>
+                                    <mat-icon class="deleteIcon" (click)="removeAccount(account.acc._id)">delete
+                                    </mat-icon>
                                 </td>
                             </ng-container>
 
@@ -249,7 +251,7 @@
                 <div class="mainbox">
                     <form class="example-form" #addAccount="ngForm">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <mat-form-field appearance="outline" class="inputField">
                                     <mat-label>Username</mat-label>
                                     <input type="text" matInput required name="username"
@@ -261,30 +263,110 @@
                                     <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                                 </mat-form-field>
                             </div>
+
+                        </div>
+                        <div class="row">
                             <div class="col-6">
                                 <mat-form-field appearance="outline" class="inputField">
                                     <mat-label>Password</mat-label>
-                                    <input type="password" matInput [type]="hide1 ? 'password' : 'text'" required
+                                    <input type="password" matInput [type]="hide3 ? 'password' : 'text'" required
                                         name="password" [(ngModel)]="updateAccountControl.password" #password="ngModel"
                                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-                                    <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' :
+                                    <mat-icon matSuffix (click)="hide3 = !hide3">{{hide3 ? 'visibility_off' :
                                         'visibility'}}
                                     </mat-icon>
                                     <mat-error *ngIf="error2.invalid">{{getErrorMessage2()}}</mat-error>
                                 </mat-form-field>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
+                            <div class="col-6">
                                 <mat-form-field appearance="outline" class="inputField">
-                                    <mat-label>Teacher's Name</mat-label>
-                                    <mat-select [(ngModel)]="updateAccountControl.adviser" name="adviser"
-                                        #adviser="ngModel" required>
-                                        <mat-option (click)="teacherId = option._id" *ngFor="let option of updateTeacherAdvisory"
-                                            value="{{option.lastName}}, {{option.firstName}}, {{option.middleName}} " >
-                                            {{option.lastName}}, {{option.firstName}}, {{option.middleName}}
-                                        </mat-option>
-                                    </mat-select>
+                                    <mat-label>Confirm Password</mat-label>
+                                    <input type="password" matInput [type]="hide4 ? 'password' : 'text'"
+                                        [(ngModel)]="addAccountControl.confirmPassword" name="confirmPassword"
+                                        #confirmPassword="ngModel" ngValidateEqual="password" required>
+                                    <mat-icon matSuffix (click)="hide4 = !hide4">{{hide4 ? 'visibility_off' :
+                                        'visibility'}}
+                                    </mat-icon>
+                                </mat-form-field>
+                                <div
+                                    *ngIf="(confirmPassword.dirty || confirmPassword.touched) && confirmPassword.invalid">
+                                    <p class="text-danger"
+                                        *ngIf="confirmPassword.hasError('notEqual') && password.valid">
+                                        Passwords Don't Match
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <mat-dialog-actions>
+                    <button mat-button (click)="onCloseHandled()" class="cancel">Cancel</button>
+                    <button mat-button [disabled]="!addAccount.form.valid"
+                        (click)="updateTeacherAccount()">Save</button>
+                </mat-dialog-actions>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- for login confirmation -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display3}">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="card-header">
+                <h2>Login</h2>
+            </div>
+            <div class="card-body">
+                <div class="mainbox">
+                    <form class="example-form" #login="ngForm">
+                        <div class="row">
+                            <div class="col-6">
+                                <mat-form-field appearance="outline" class="inputField">
+                                    <mat-label>Username</mat-label>
+                                    <input type="text" matInput required name="username"
+                                        [(ngModel)]="loginControl.username" #username="ngModel">
+                                    <mat-icon *ngIf="loginControl.username" mat-button matSuffix mat-icon-button
+                                        aria-label="Clear" (click)="loginControl.username=''">
+                                        close
+                                    </mat-icon>
+                                    <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <mat-form-field appearance="outline" class="inputField">
+                                    <mat-label>Password</mat-label>
+                                    <input type="password" matInput [type]="hide4 ? 'password' : 'text'" required
+                                        name="password" [(ngModel)]="loginControl.password" #password="ngModel"
+                                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                                    <mat-icon matSuffix (click)="hide4 = !hide4">{{hide4 ? 'visibility_off' :
+                                        'visibility'}}
+                                    </mat-icon>
+                                    <mat-error *ngIf="error2.invalid">{{getErrorMessage2()}}</mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -293,8 +375,7 @@
             </div>
             <div class="modal-footer">
                 <mat-dialog-actions>
-                    <button mat-button [disabled]="!addAccount.form.valid"
-                        (click)="updateTeacherAccount()">Save</button>
+                    <button mat-button [disabled]="!login.form.valid" (click)="loginBtnForDelete()">Login</button>
                     <button mat-button (click)="onCloseHandled()" class="cancel">Cancel</button>
                 </mat-dialog-actions>
             </div>
@@ -302,7 +383,6 @@
     </div>
 </div>
 
-<!-- for login confirmation -->
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -328,10 +408,10 @@
                             <div class="col-6">
                                 <mat-form-field appearance="outline" class="inputField">
                                     <mat-label>Password</mat-label>
-                                    <input type="password" matInput [type]="hide1 ? 'password' : 'text'" required
+                                    <input type="password" matInput [type]="hide4 ? 'password' : 'text'" required
                                         name="password" [(ngModel)]="loginControl.password" #password="ngModel"
                                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-                                    <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' :
+                                    <mat-icon matSuffix (click)="hide4 = !hide4">{{hide4 ? 'visibility_off' :
                                         'visibility'}}
                                     </mat-icon>
                                     <mat-error *ngIf="error2.invalid">{{getErrorMessage2()}}</mat-error>
@@ -344,7 +424,7 @@
             <div class="modal-footer">
                 <mat-dialog-actions>
                     <button mat-button [disabled]="!login.form.valid" (click)="loginBtn()">Login</button>
-                    <button mat-button (click)="onCloseHandled1()" class="cancel">Cancel</button>
+                    <button mat-button (click)="onCloseHandled()" class="cancel">Cancel</button>
                 </mat-dialog-actions>
             </div>
         </div>

@@ -26,7 +26,7 @@ export class ClassesComponent implements OnInit {
   sections: any;
   gradeLevel: any;
   section: string;
-  isLoading = true;
+  isLoading = false;
   // @Output()
   // selected: EventEmitter<string> = new EventEmitter<string>();
 
@@ -49,7 +49,7 @@ export class ClassesComponent implements OnInit {
   }
 
   selectedGrade(grade): void {
-    this.viewSections();
+    // this.viewSections();
     this.sections = [];
     console.log(grade.index);
     this.grade = grade.index;
@@ -67,9 +67,9 @@ export class ClassesComponent implements OnInit {
       this.sections = data.data;
       console.log(this.sections, 'service data');
       console.log(this.sections[0], 'section zero')
-      if (this.sections.length === data.data.length) {
-        this.isLoading = false;
-      }
+      // if (this.sections.length === data.data.length) {
+      //   this.isLoading = false;
+      // }
     });
   }
 
