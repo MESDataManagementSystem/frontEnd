@@ -13,9 +13,15 @@ export class AuthGuardLogInActivateGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const isLogin = this.authService.isLogin();
-    if (isLogin) {
+     const isLoginAdmin = this.authService.isLoginAdmin();
+     const isLoginTeacher = this.authService.isLoginTeacher();
+    const user = this.authService.user;
+    if (isLoginAdmin) {
       this.router.navigate(['/MES']);
+      return false;
+    }
+    if(isLoginTeacher){
+      this.router.navigate(['/teacher/dashboard']);
       return false;
     }
     return true;

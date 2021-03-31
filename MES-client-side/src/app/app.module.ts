@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-
+import { ValidateEqualModule } from 'ng-validate-equal';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,8 +31,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-// import { ChartsModule } from 'ng2-charts';
-// import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
+import { ChartsModule } from 'ng2-charts';
 
 
 import { AllStudentsComponent } from './all-students/all-students.component';
@@ -56,7 +57,8 @@ import { AddSectionComponent } from './classes/add-section.component';
 import { ViewStudentsComponent } from './classes/view-students.component';
 import { AddStudentInfoComponent } from './classes/add-student-info.component';
 import { SettingsComponent } from './settings/settings.component';
-
+import { TeacherDashboardComponent } from './teacherSideUser/teacher-dashboard/teacher-dashboard.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -75,9 +77,11 @@ import { SettingsComponent } from './settings/settings.component';
     ViewStudentsComponent,
     ModalEditFormComponent,
     AddStudentInfoComponent,
-    SettingsComponent
+    SettingsComponent,
+    TeacherDashboardComponent
   ],
   imports: [
+    ValidateEqualModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -108,9 +112,10 @@ import { SettingsComponent } from './settings/settings.component';
     PdfViewerModule,
     MaterialFileInputModule,
     MatSlideToggleModule,
-    MatCheckboxModule,
-    // MDBBootstrapModule
-    // ChartsModule
+    MatCheckboxModule, 
+    MatProgressSpinnerModule,
+    MDBBootstrapModule,
+    ChartsModule
   ],
   providers: [
     HttpClient,

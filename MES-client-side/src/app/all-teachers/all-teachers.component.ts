@@ -14,6 +14,8 @@ import { TeacherServiceService } from '../services/teacher-service.service';
 })
 export class AllTeachersComponent implements OnInit {
 
+  isLoading = true;
+  search: string;
   public showActive: boolean = false;
   teacherData: any = [];
   dataSource: MatTableDataSource<Teacher>;
@@ -24,11 +26,14 @@ export class AllTeachersComponent implements OnInit {
     private teacherService: TeacherServiceService,
     private dialog: MatDialog
   ) {
+    this.search = ''
     this.viewTeacher('yes');
   }
 
   ngOnInit() {
+    
   }
+
 
   // Dialog For Adding Teacher
   openDialog(): void {
@@ -54,11 +59,18 @@ export class AllTeachersComponent implements OnInit {
   }
 
   hideShow() {
+    var count = 0;
     if (this.showActive) {
       this.showActive = false
       this.teacherService.getAllTheTeachersList('no').subscribe(data => {
         this.teacherData = data;
         this.dataSource = new MatTableDataSource<Teacher>(this.teacherData.data);
+        for (let i = 0; i < this.teacherData.data.length; i++) {
+          count = i;
+          if (count == this.teacherData.data.length - 1) {
+            this.isLoading = false;
+          }
+        }
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;
         }, 0)
@@ -66,11 +78,18 @@ export class AllTeachersComponent implements OnInit {
           return data.lastName.toLocaleLowerCase().includes(filter)
         }
       })
+      error => this.isLoading = false
     } else {
       this.showActive = true
       this.teacherService.getAllTheTeachersList('yes').subscribe(data => {
         this.teacherData = data;
         this.dataSource = new MatTableDataSource<Teacher>(this.teacherData.data);
+        for (let i = 0; i < this.teacherData.data.length; i++) {
+          count = i;
+          if (count == this.teacherData.data.length - 1) {
+            this.isLoading = false;
+          }
+        }
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;
         }, 0)
@@ -78,6 +97,8 @@ export class AllTeachersComponent implements OnInit {
           return data.lastName.toLocaleLowerCase().includes(filter)
         }
       })
+      error => this.isLoading = false
     }
   }
+
 }

@@ -1,52 +1,62 @@
-<div class="container">
+<div class="content">
+    <h2>Dashboard</h2>
+    <hr>
     <div class="row">
-        <div class="col" >
+        <div class="box">
             <mat-card>
-                <img mat-card-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMc0dOyYim6ji63xzyofMl77e5HYNPH13MIg&usqp=CAU" alt="">
                 <mat-card-content>
-                <h2>{{teachers}}</h2>
-                <h3>Advisory Teachers</h3>
+                    <div class="iconBox icon1">
+                        <i class="fas fa-user-tie user fass"></i>
+                    </div>
+                    <h3>Advisory Teachers
+                        <i class="fas fa-arrow-right fas1"></i>
+                    </h3>
+                    <h1>25</h1>
                 </mat-card-content>
             </mat-card>
-        </div>
-        <div class="col">
-            <mat-card >
-                <img mat-card-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ-Hmok7gJrX4_AU60LCr4DeyDy_vGM9aLtg&usqp=CAU" alt="">
+            <mat-card>
                 <mat-card-content>
-                <h2>{{students}}</h2>
-                <h3>Students</h3>
+                    <div class="iconBox icon2">
+                        <i class="fas fa-user-friends fass"></i>
+                    </div>
+                    <h3>Non-Advisory Teachers
+                        <i class="fas fa-arrow-right fas1"></i>
+                    </h3>
+                    <h1>10</h1>
                 </mat-card-content>
             </mat-card>
-        </div>
-        <div class="col">
-            <mat-card >
-                <img mat-card-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMc0dOyYim6ji63xzyofMl77e5HYNPH13MIg&usqp=CAU" alt="">
+            <mat-card>
                 <mat-card-content>
-                <h2>{{students}}</h2>
-                <h3>Non-Advisory Teachers</h3>
+                    <div class="iconBox icon3">
+                        <i class="fas fa-chalkboard-teacher fass"></i>
+                    </div>
+                    <h3>Total Number of Teachers
+                    </h3>
+                    <h1>89</h1>
+                </mat-card-content>
+            </mat-card>
+            <mat-card>
+                <mat-card-content>
+                    <div class="iconBox icon4">
+                        <i class="fas fa-users fass"></i>
+                    </div>
+                    <h3>Total Number of Students
+                    </h3>
+                    <h1>1350</h1>
                 </mat-card-content>
             </mat-card>
         </div>
     </div>
+    <br><br><br><br>
     <div class="row">
-        <div class="col"><hr></div>
-    </div>
-    <!-- <div class="row" >
         <div class="col">
         </div>
-        <div class="col-8">
-            <canvas mdbChart 
-            [chartType]="chartType"
-            [datasets]="chartDatasets"
-            [labels]="chartLabels"
-            [colors]="chartColors"
-            [options]="chartOptions"
-            [legend]="true"
-            (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"
-            size="50">
-        </canvas>
+        <div class="col-8" style="display: block">
+            <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets" [labels]="chartLabels"
+                [colors]="chartColors" [options]="chartOptions" [legend]="true" (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)" size="50">
+            </canvas>
         </div>
         <div class="col"></div>
-    </div> -->
+    </div>
 </div>

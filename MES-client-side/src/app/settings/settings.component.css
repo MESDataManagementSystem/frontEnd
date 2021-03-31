@@ -3,14 +3,21 @@
 }
 
 .card-header {
-    background: #2080FF !important;
+    background: #51749b !important;
     text-align: center;
     color: white;
+    height:  50px;
 }
 
 .inputField {
     min-width: 100px;
     max-width: 900px;
+    width: 100%;
+}
+
+.searchFilter {
+    min-width: 100px;
+    max-width: 350px;
     width: 100%;
 }
 
@@ -68,15 +75,55 @@ button:hover {
     background-color: #ffc107 !important;
 }
 
-table {
-    width: 100%;
+.editIcon {
+    color: #f0ad4e;
 }
 
-.mat-form-field {
-    font-size: 14px;
-    width: 100%;
+.deleteIcon {
+    color: #d9534f;
 }
 
-td, th {
-    width: 25%;
+.mat-table {
+    margin-top: 3%;
+    width: 100%;
+}
+  
+.mat-cell,
+.mat-header-cell {
+    word-wrap: initial;
+    display: table-cell;
+    line-break: unset;
+    width: 45%;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+  
+.mat-row:hover {
+    background-color: #dcdedc;
+    color: black;
+}
+  
+.mat-header-cell{
+    background: #51749b !important;
+    color: #FFFFFF;
+    text-align: justify;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    background-color: white;
+    font-size: medium;
+    height: 50px
+}
+
+.mat-elevation-z8{
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+.modal-content {
+    margin: auto;
+    border: 3px solid #f0ad4e;
+    padding: 5px;
 }

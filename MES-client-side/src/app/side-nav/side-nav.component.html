@@ -1,10 +1,10 @@
 <header>
-    <!-- <p>Mantalongon Elementary School</p> -->
 </header>
 <mat-sidenav-container>
     <mat-sidenav mode="side" [(opened)]='showSideNav'>
         <div class="box1">
-            <mat-icon aria-hidden="false" aria-label="Example home icon" (click)='showSideNav = !showSideNav'>close
+            <mat-icon aria-hidden="false" aria-label="Example home icon" (click)='showSideNav = !showSideNav'>
+                arrow_back_ios
             </mat-icon>
             <img class="image" src="../../assets/images/mesDbmsLogo.png">
 
@@ -16,6 +16,13 @@
                 (click)=" childRoutes(content.name)" role="listitem">
                 <mat-icon>{{content.icon}}</mat-icon>
                 &nbsp;&nbsp;&nbsp;{{content.name}}
+            </mat-list-item>
+
+        </mat-list>
+        <mat-list>
+            <mat-list-item class="logout" (click)="logout()">
+                <mat-icon>power_settings_new</mat-icon>
+                &nbsp;&nbsp;&nbsp;logout
             </mat-list-item>
         </mat-list>
     </mat-sidenav>

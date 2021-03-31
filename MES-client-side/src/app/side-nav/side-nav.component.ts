@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-side-nav',
@@ -38,6 +39,26 @@ export class SideNavComponent implements OnInit {
     const routes = this.lateActive.toLowerCase();
     this.router.navigate([routes], { relativeTo: this.route });
     console.log();
+  }
+
+  logout() {
+    window.localStorage.clear();
+    this.router.navigate(['/login'])
+  }
+
+  // Confirmation Before LogOut
+  warningAlert() {
+    Swal.fire({
+      icon: 'question',
+      title: 'Are You Sure You Want To LogOut',
+      showCancelButton: true,
+      cancelButtonColor: '#FF0000',
+      confirmButtonText: 'Ok',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.logout();
+      }
+    })
   }
 
 }
