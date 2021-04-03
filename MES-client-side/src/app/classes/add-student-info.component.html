@@ -147,8 +147,7 @@
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Name of school</mat-label>
                                 <input matInput type="text" [(ngModel)]="studentInfo.studentNameOfSchoolFromKinder"
-                                    name="studentNameOfSchoolFromKinder" #studentNameOfSchoolFromKinder="ngModel"
-                                >
+                                    name="studentNameOfSchoolFromKinder" #studentNameOfSchoolFromKinder="ngModel">
                                 <mat-icon *ngIf="studentInfo.studentNameOfSchoolFromKinder" mat-button matSuffix
                                     mat-icon-button aria-label="Clear"
                                     (click)="studentInfo.studentNameOfSchoolFromKinder=''">
@@ -195,7 +194,7 @@
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Pept Passer Rating</mat-label>
                                 <input matInput type="number" [(ngModel)]="studentInfo.studentPeptPasserRating"
-                                    name="studentPeptPasserRating" #studentPeptPasserRating="ngModel" >
+                                    name="studentPeptPasserRating" #studentPeptPasserRating="ngModel">
                                 <mat-icon *ngIf="studentInfo.studentPeptPasserRating" mat-button matSuffix
                                     mat-icon-button aria-label="Clear" (click)="studentInfo.studentPeptPasserRating=''">
                                     close
@@ -207,8 +206,8 @@
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Date Of Examination </mat-label>
                                 <input matInput [(ngModel)]="studentInfo.studentDateOfxamination"
-                                    name="studentDateOfxamination" #studentDateOfxamination="ngModel" 
-                                    [max]="maxDate" [matDatepicker]="picker1">
+                                    name="studentDateOfxamination" #studentDateOfxamination="ngModel" [max]="maxDate"
+                                    [matDatepicker]="picker1">
                                 <mat-datepicker-toggle matSuffix [for]="picker1">
                                     <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                                 </mat-datepicker-toggle>
@@ -220,7 +219,7 @@
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Others </mat-label>
                                 <input matInput type='text' [(ngModel)]="studentInfo.studentOthers" name="studentOthers"
-                                    #studentOthers="ngModel" >
+                                    #studentOthers="ngModel">
                                 <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                             </mat-form-field>
                         </div>
@@ -241,7 +240,7 @@
                             <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Remark</mat-label>
                                 <input min="0" matInput type="number" [(ngModel)]="studentInfo.studentRemark"
-                                    name="studentRemark" #studentRemark="ngModel" >
+                                    name="studentRemark" #studentRemark="ngModel">
                                 <mat-icon *ngIf="studentInfo.studentRemark" mat-button matSuffix mat-icon-button
                                     aria-label="Clear" (click)="studentInfo.studentRemark=''">
                                     close
@@ -279,6 +278,35 @@
     </div>
 </div>
 
+<!-- Form For Updating grade level  -->
+<div *ngIf="editStudentInfo == 'selectGradelevel' && !selectGradeSection">
+    <mat-icon mat-dialog-close class='closeIcon'>close</mat-icon>
+    <mat-form-field class='chooseQuarter' appearance="fill">
+        <mat-label>Select a Grade: </mat-label>
+        <mat-select [disabled]="disableSelect.value" [(ngModel)]="updatedGrade">
+            <mat-option value="{{updatedGrade}}">{{updatedGrade}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div *ngIf="graduating">
+        <button mat-button class='nextButton' (click)=" choosenSection()">Finish</button>
+    </div>
+    <div *ngIf="!graduating">
+        <button mat-button class='nextButton' (click)=" chooseSection()">Next</button>
+    </div>
+</div>
+<!-- for choosing sections -->
+<div *ngIf="selectGradeSection">
+    <mat-icon mat-dialog-close class='closeIcon'>close</mat-icon>
+    <mat-form-field class='chooseQuarter' appearance="fill">
+        <mat-label>Select a Section: </mat-label>
+        <mat-select [disabled]="disableSelect.value" [(ngModel)]="section">
+            <mat-option value="{{section}}" *ngFor="let section of sections">{{section}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div>
+        <button mat-button class='nextButton' (click)="choosenSection()">Next</button>
+    </div>
+</div>
 <!-- Form For Adding Grades -->
 <div *ngIf="addGradesModal">
     <div class="card">

@@ -63,6 +63,22 @@
                     </div>
                 </td>
             </ng-container>
+            <ng-container matColumnDef="proceed">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Proceed to next Grade </th>
+                <td mat-cell *matCellDef="let student">
+                    <!-- <div class="dropdown">
+                        <mat-icon color="primary" id="dropdownMenuButton"> home </mat-icon>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" aria-haspopup="true">
+                            <a class="dropdown-item" (click)='openDialog("viewStudentInfo",student._id)'>Student
+                                Information</a>
+                            <a class="dropdown-item" (click)='showFile()'>Form10</a>
+                        </div>
+                    </div> -->
+                    <mat-icon (click)='openDialog("selectGradelevel",student._id)' matTooltip='Proceed to next grade.'>
+                        grade</mat-icon>
+                    <!-- <button (click)='proceedNextGrade(student._id)'>proceed</button> -->
+                </td>
+            </ng-container>
             <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
             <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
 

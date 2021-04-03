@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { Location } from '@angular/common';
-import { AddStudentInfoComponent } from './add-student-info.component';
+import { AddStudentInfoComponent, Section } from './add-student-info.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractControl, FormBuilder } from '@angular/forms';
 import { ModalViewFormComponent } from '../all-students/modal-view-form.component';
@@ -31,7 +31,7 @@ export class ViewStudentsComponent implements OnInit {
   students: any;
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  columnsToDisplay: string[] = ['lrn', 'name', 'edit', 'view'];
+  columnsToDisplay: string[] = ['lrn', 'name', 'edit', 'view', 'proceed'];
 
   readonly formControl: AbstractControl;
 
@@ -49,13 +49,13 @@ export class ViewStudentsComponent implements OnInit {
       this.section = params.get('section');
       this.grade = params.get('grade');
       if (this.section) {
-        this.service.viewStudents(this.section).subscribe(data => {
+        this.service.viewStudents(this.section, this.grade).subscribe(data => {
           this.students = data;
           this.dataSource = new MatTableDataSource<any>(this.students.data);
           var count = 0;
-          if(this.students.data.length === 0){
+          if (this.students.data.length === 0) {
             this.isLoading = false;
-          } 
+          }
           for (let i = 0; i < this.students.data.length; i++) {
             count = i;
             if (count == this.students.data.length - 1) {
@@ -98,11 +98,13 @@ export class ViewStudentsComponent implements OnInit {
   openDialog(data, datas): void {
     console.log(datas, '::: datasss');
     let idf = '';
+    // datas = this.section
+    const section = this.section;
     if (datas === 'fake') {
       datas = this.section;
       idf = 'fake';
     }
-    const datum = [datas, idf, this.grade, data];
+    const datum = [datas, idf, this.grade, data, section];
     this.dialog.open(AddStudentInfoComponent, { disableClose: true, data: datum });
   }
 
@@ -120,5 +122,6 @@ export class ViewStudentsComponent implements OnInit {
       height: '100% !important'
     });
   }
+
 
 }

@@ -1,10 +1,12 @@
+import { SectionService } from './../services/section.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { StudentServiceService } from '../services/student-service.service';
-import { MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+
 
 
 
@@ -60,10 +62,17 @@ export class AddStudentInfoComponent implements OnInit {
     edukasyonSaPagpapakatao: '',
     arabicLanguage: '',
     islamicLanguage: '',
-    quarter: ''
+    quarter: '',
+    section: '',
+    grade: '',
+    currentGrade: ''
   };
+  graduating = false;
+  datas: any;
+  sections = [];
   section: any;
   grade: any;
+  updatedGrade: string;
   update = false;
   returnData: any;
   disableSelect = new FormControl(false);
@@ -72,9 +81,11 @@ export class AddStudentInfoComponent implements OnInit {
   addGrades = false;
   updateGradesButton = false;
   activeQuarters = [];
+  selectGradeSection = false;
   disabledQuarterButtons = { quarter1: false, quarter2: true, quarter3: true, quarter4: true };
-  constructor(private service: StudentServiceService, @Inject(MAT_DIALOG_DATA) public data: Section, public dialog: MatDialog) {
-
+  // tslint:disable-next-line:max-line-length
+  constructor(private service: StudentServiceService, @Inject(MAT_DIALOG_DATA) public data: Section, public dialog: MatDialog, public sectionService: SectionService) {
+    this.grade = this.data[2];
     console.log(this.data, '::dataaaa ni siya;;');
     this.studentId = this.data[0];
     if (this.data[3] === 'editStudentInfo') {
@@ -84,14 +95,40 @@ export class AddStudentInfoComponent implements OnInit {
       this.editStudentInfo = 'editStudentGrade';
     } else if (this.data[3] === '') {
       this.editStudentInfo = 'editStudentInfo';
+    } else if (this.data[3] === 'selectGradelevel') {
+      this.editStudentInfo = 'selectGradelevel';
+      if (this.grade === 'Kindergarten') {
+        this.updatedGrade = 'Grade 1';
+      }
+      if (this.grade === 'Grade 1') {
+        this.updatedGrade = 'Grade 2';
+      }
+      if (this.grade === 'Grade 2') {
+        this.updatedGrade = 'Grade 3';
+      }
+      if (this.grade === 'Grade 3') {
+        this.updatedGrade = 'Grade 4';
+      }
+      if (this.grade === 'Grade 4') {
+        this.updatedGrade = 'Grade 5';
+      }
+      if (this.grade === 'Grade 5') {
+        this.updatedGrade = 'Grade 6';
+      }
+      if (this.grade === 'Grade 6') {
+        this.updatedGrade = 'Graduated!';
+        this.graduating = true;
+      }
     }
     this.returnData = data;
     this.section = this.data[0];
-    this.grade = this.data[2];
     // this.studentInfo.studentGrade = this.returnData.data[2];
     this.studentInfo.studentSection = this.section;
     this.studentInfo.studentGrade = this.grade;
     this.quarter = '';
+    this.studentSubject.grade = this.grade;
+    this.studentSubject.section = this.data[4];
+    this.studentSubject.currentGrade = this.grade;
   }
 
   ngOnInit(): void {
@@ -161,7 +198,7 @@ export class AddStudentInfoComponent implements OnInit {
         this.succesAlert('Updated Student In  formation Successfully!', 'success', 1500);
         this.dialog.closeAll();
       }
-      if (data.status === false){
+      if (data.status === false) {
         this.succesAlert(`Can't Update Student Information. Please check fields!`, 'error', 2000);
       }
       console.log(data, 'return ni siya');
@@ -184,14 +221,16 @@ export class AddStudentInfoComponent implements OnInit {
       console.log(this.studentId);
       this.addGrades = true;
       this.addGradesModal = true;
-    }else{
+    } else {
       this.succesAlert('Please choose a quarter.', 'info', 1500);
     }
 
   }
 
   findStudentGrades(): void {
-    const datum = { id: this.data[0], quarter: this.quarter };
+
+    const datum = { id: this.data[0], quarter: this.quarter, grade: this.grade, section: this.data[4] };
+    console.log(datum, 'datummsski');
     this.service.findStudentGrades(datum).subscribe(data => {
       if (data.data) {
         this.updateGradesButton = true;
@@ -204,13 +243,14 @@ export class AddStudentInfoComponent implements OnInit {
   addStudentGrades(): void {
     this.studentSubject.studentId = this.data[0];
     this.studentSubject.quarter = this.quarter;
+    console.log(this.studentSubject, 'added')
     if (!this.updateGradesButton) {
       this.service.addStudentGrades(this.studentSubject).subscribe(data => {
-        console.log(data.data);
-        if (data.status === false){
+        console.log(data.data, 'grades added');
+        if (data.status === false) {
           this.succesAlert('All fields are required!', 'info', 2000);
         }
-        if (data.data){
+        if (data.data) {
           this.succesAlert(this.studentInfo.studentLastName + '\'s grades for' + this.quarter + ' added!', 'success', 1500);
           this.dialog.closeAll();
         }
@@ -218,9 +258,9 @@ export class AddStudentInfoComponent implements OnInit {
     } else {
       this.service.updateStudentGrades(this.studentSubject).subscribe(data => {
         console.log(data);
-        if (data.status === false){
+        if (data.status === false) {
           this.succesAlert('Can\'t Update Student Information. Please check fields!', 'error', 2000);
-        }else if (data.status === true){
+        } else if (data.status === true) {
           this.succesAlert(this.studentInfo.studentLastName + '\'s Grades Updated!', 'success', 1500);
           this.dialog.closeAll();
         }
@@ -229,7 +269,9 @@ export class AddStudentInfoComponent implements OnInit {
   }
 
   findQuarter(): void {
-    this.service.findQuarter(this.data[0]).subscribe(data => {
+    const datas = { id: this.data[0], grade: this.grade, section: this.data[4] };
+    console.log(datas, 'datasss')
+    this.service.findQuarter(datas).subscribe(data => {
       console.log(data.data, 'return sa find quarter');
       const dataLength = data.data.length;
       for (let i = 0; i < dataLength; i++) {
@@ -249,6 +291,45 @@ export class AddStudentInfoComponent implements OnInit {
       }
     });
   }
+
+  chooseSection(): void {
+    this.sectionService.viewSections(this.updatedGrade).subscribe((data: any) => {
+      console.log(data.data, 'sections');
+      data.data.forEach(section => {
+        this.sections.push(section.sectionName);
+      });
+      if (this.sections.length === data.data.length) {
+        this.selectGradeSection = true;
+
+      }
+      // this.sections = data.data;
+      // console.log(this.sections, 'service data');
+      // console.log(this.sections[0], 'section zero');
+      // if (this.sections.length === data.data.length) {
+      //   this.isLoading = false;
+      // }
+    });
+  }
+  // proceedNextGrade(id): void{
+
+  // }
+  choosenSection(): void {
+    // if(!this.graduating){
+      console.log(this.data[0], this.grade, this.section, '::: gradessss');
+      this.datas = { id: this.data[0], grade: this.grade, currentGrade: this.updatedGrade, section: this.section };
+      this.service.nextGrade(this.datas).subscribe(data => {
+        if (data.status) {
+          this.succesAlert('Successfully added to section ' + this.section + ' ' + this.updatedGrade, 'success', 1500);
+          this.dialog.closeAll();
+        } else {
+          this.succesAlert(data.error, 'error', 2000);
+          this.dialog.closeAll();
+        }
+        console.log(data, 'response sa server update grade level');
+      });
+
+  }
+
 }
 
 export interface Section {
