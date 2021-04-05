@@ -1,4 +1,8 @@
-<div class="content">
+<div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+</div>
+<div class="content" *ngIf="!isLoading">
     <h2>Dashboard</h2>
     <hr>
     <div class="row">

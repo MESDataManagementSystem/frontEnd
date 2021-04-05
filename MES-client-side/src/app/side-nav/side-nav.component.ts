@@ -17,7 +17,7 @@ export class SideNavComponent implements OnInit {
   ];
   navContent: any = [
     { name: 'Dashboard', icon: 'dashboard' },
-    { name: 'Students', icon: 'people' },
+    { name: 'Graduated Students', icon: 'people' },
     { name: 'Teachers', icon: 'people' },
     { name: 'Classes', icon: 'home' },
     { name: 'Settings', icon: 'settings' }
@@ -36,6 +36,9 @@ export class SideNavComponent implements OnInit {
 
   childRoutes(content): void {
     this.lateActive = content;
+    if (content === 'Graduated Students') {
+      this.lateActive = 'Students';
+    }
     const routes = this.lateActive.toLowerCase();
     this.router.navigate([routes], { relativeTo: this.route });
     console.log();

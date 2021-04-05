@@ -75,6 +75,9 @@ export class StudentServiceService {
     console.log(data, 'data');
     return this.httpClient.post(`http://localhost:5000/api/nextgrade`, data);
   }
+  populationStudents(): Observable<any> {
+    return this.httpClient.get(`http://localhost:5000/api/populationStudents`);
+  }
 
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudentServiceService } from '../services/student-service.service';
+import { DateRange } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,11 +15,8 @@ export class DashboardComponent implements OnInit {
   public chartType = 'bar';
   // datas = [];
   load: boolean;
-  datas = [10, 5, 59, 80, 81, 56, 55, 40];
-  public chartDatasets: Array<any> = [
-    { data: this.datas, label: 'Population of Students in each grade Level' }
-
-  ];
+  datas: any;
+  public chartDatasets: Array<any>;
   public chartLabels: Array<any> = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
 
   public chartColors: Array<any> = [
@@ -49,17 +47,27 @@ export class DashboardComponent implements OnInit {
     responsive: true
   };
   grade: any;
-
+  isLoading = true;
   constructor(private studentService: StudentServiceService, private router: Router) {
     this.grade = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
     this.load = false;
+    this.studentService.populationStudents().subscribe(data => {
+      this.datas = data.population;
+      console.log(this.datas, 'datass');
+      this.chartDatasets = [
+        { data: this.datas, label: 'Population of Students in each grade Level' }
+
+      ];
+      this.isLoading = false;
+    },
+      error => {
+        console.log('error');
+      });
+
+
   }
 
-  
-
-  ngOnInit(
-  ): void {
-
+  ngOnInit(): void {
   }
 
   public chartClicked(e: any): void { }
@@ -82,18 +90,22 @@ export class DashboardComponent implements OnInit {
   //   }
   // }
 
+  // tslint:disable-next-line:typedef
   icon1() {
-    alert("display the list of all the advisory teachers")
+    alert('display the list of all the advisory teachers');
   }
 
+  // tslint:disable-next-line:typedef
   icon2() {
-    alert("display the list of all the non advisory teachers")
+    alert('display the list of all the non advisory teachers');
   }
 
+  // tslint:disable-next-line:typedef
   icon3() {
-    alert("display the list of all section per grade level with total students")
+    alert('display the list of all section per grade level with total students');
   }
 
+  // tslint:disable-next-line:typedef
   icon4() {
     this.router.navigate(['/MES/teachers']);
   }
