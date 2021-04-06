@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudentServiceService } from '../services/student-service.service';
+import { TeacherServiceService } from '../services/teacher-service.service';
 import { DateRange } from '@angular/material/datepicker';
 
 @Component({
@@ -13,6 +14,10 @@ export class DashboardComponent implements OnInit {
   teachers = 15;
   students = 675;
   public chartType = 'bar';
+  totalNumberofStudents = 0;
+  totalNumberofNonAdvisory = 0;
+  totalNumberofAdvisory = 0;
+  totalNumberofTeachers = 0;
   // datas = [];
   load: boolean;
   datas: any;
@@ -39,16 +44,14 @@ export class DashboardComponent implements OnInit {
         'rgba(255, 159, 64, 1)',
         'black'
       ],
-      borderWidth: 2,
+      borderWidth: 1,
     }
   ];
 
-  public chartOptions: any = {
-    responsive: true
-  };
+  public chartOptions: any;
   grade: any;
   isLoading = true;
-  constructor(private studentService: StudentServiceService, private router: Router) {
+  constructor(private studentService: StudentServiceService, private router: Router, private teacherService: TeacherServiceService) {
     this.grade = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
     this.load = false;
     this.studentService.populationStudents().subscribe(data => {
@@ -56,9 +59,21 @@ export class DashboardComponent implements OnInit {
       console.log(this.datas, 'datass');
       this.chartDatasets = [
         { data: this.datas, label: 'Population of Students in each grade Level' }
-
       ];
-      this.isLoading = false;
+      this.chartOptions = {
+        responsive: true,
+        scales: {
+          yAxes: [{ id: 'y-axis-1', type: 'linear', position: 'left', ticks: { min: 0, max: Math.max(...this.datas) } }]
+        }
+      };
+      this.totalNumberofStudents = this.datas.reduce((a, b) => a + b, 0);
+      this.teacherService.teacherPopulation().subscribe((teachers: any) => {
+        console.log(teachers.data);
+        this.totalNumberofAdvisory = teachers.data[0].advisory;
+        this.totalNumberofTeachers = teachers.data[1].allTeachers;
+        this.totalNumberofNonAdvisory = teachers.data[2].nonAdvisory;
+        this.isLoading = false;
+      });
     },
       error => {
         console.log('error');

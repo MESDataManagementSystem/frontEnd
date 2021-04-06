@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 export class SideNavComponent implements OnInit {
   navRoute = [
     'Dashboard',
-    'Students',
+    'Graduated Students',
     'Teachers',
     'Classes',
     'Settings'
@@ -35,11 +35,12 @@ export class SideNavComponent implements OnInit {
   }
 
   childRoutes(content): void {
+    let colorBlue = content;
     this.lateActive = content;
     if (content === 'Graduated Students') {
-      this.lateActive = 'Students';
+      colorBlue = 'Students';
     }
-    const routes = this.lateActive.toLowerCase();
+    const routes = colorBlue.toLowerCase();
     this.router.navigate([routes], { relativeTo: this.route });
     console.log();
   }

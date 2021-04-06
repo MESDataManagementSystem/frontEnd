@@ -62,6 +62,11 @@ export class TeacherServiceService {
     return this.http.get(`${this.url}/api/findAdviser/${adviserId}`)
   }
 
+  // find teacher population for dashboard
+  teacherPopulation(){
+    return this.http.get(`${this.url}/api/teacherPopulation`);
+  }
+
 }
 
 
