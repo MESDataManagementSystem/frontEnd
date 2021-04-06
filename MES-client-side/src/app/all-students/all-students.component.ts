@@ -1,5 +1,5 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder } from '@angular/forms';
+import { Component, ViewChild, OnInit, VERSION } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,6 +14,13 @@ import { ModalEditFormComponent } from './modal-edit-form.component';
   styleUrls: ['./all-students.component.css']
 })
 export class AllStudentsComponent implements OnInit {
+
+  version = VERSION;
+  date = new Date();
+  chosenYearDate: Date;
+  maxDate = new Date();
+
+  visible = true;
 
   lrn = true;
   typeSearch: string;
