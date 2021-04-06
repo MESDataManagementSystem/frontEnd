@@ -43,4 +43,11 @@ h1 {
     background-color: #f44336  !important;
   }
   
-  
+  ::ng-deep .year-picker {
+    .mat-calendar-period-button {
+      pointer-events: none;
+    }
+    .mat-calendar-arrow {
+      display: none;
+    } 
+  }

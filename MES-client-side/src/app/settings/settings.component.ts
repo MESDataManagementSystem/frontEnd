@@ -24,7 +24,7 @@ export class SettingsComponent implements OnInit {
   hide2 = true;
   hide3 = true;
   hide4 = true;
-  
+  hide5 = true;
 
   otherList = [];
   updateTeacherAdvisory = [];
@@ -35,7 +35,7 @@ export class SettingsComponent implements OnInit {
   display = 'none';
   display2 = 'none';
   display3 = 'none';
-
+  display4 = 'none';
 
   loginControl = {
     username: '',
@@ -57,18 +57,18 @@ export class SettingsComponent implements OnInit {
   };
 
   updateAccountControl = {
+    _id: '',
     username: '',
     password: '',
-    confirmPassword: '',
+    confirmPassword1: '',
     role: 'Teacher'
   };
 
+  isUpdate: string
   idDelete: string
   isLoading = true;
-  // updateTeacher = {
-  //   username: '',
-  //   password: ''
-  // };
+  count = 0;
+
   account: any[] = [];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -80,16 +80,26 @@ export class SettingsComponent implements OnInit {
     private router: Router
   ) {
     this.search = '';
+    this.teacherWithAccount();
+  }
+
+  ngOnInit(): void {
+    this.getAdminCredential();
+    this.getTeacher();
+  }
+
+  // display list of teachers has account
+  teacherWithAccount(){
     this.authService.viewListOfTeachersAccount('Teacher').subscribe((data: any) => {
-      let count = 0;
+      // let count = 0;
       this.account = data.data;
       for (let i = 0; i <= this.account.length - 1; i++) {
         this.authService.findTeacher(this.account[i].adviser).subscribe((teacher: any) => {
           this.teacherHasAccount = teacher;
           this.account[i] = { acc: this.account[i], adviser: this.teacherHasAccount };
           this.dataSource = new MatTableDataSource<any>(this.account);
-          count = i;
-          if (count === this.account.length - 1) {
+          this.count = i;
+          if (this.count === this.account.length - 1) {
             this.isLoading = false;
           }
           setTimeout(() => {
@@ -107,40 +117,12 @@ export class SettingsComponent implements OnInit {
       error => this.isLoading = false;
   }
 
-  ngOnInit(): void {
-    this.getAdminCredential();
-    this.getTeacher();
-  }
-
-  // Search Specific Teacher
+  // Search Specific Teacher 
   filter(value: string) {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
-  openModal(account) {
-    this.display = "block"
-    // this.updateAccountControl.adviser = account.adviser[0].firstName + account.adviser[0].middleName + account.adviser[0].lastName;
-    // console.log(this.updateAccountControl.adviser);
-    this.updateTeacherAdvisory = [];
-    let count = 1;
-    const list = [];
-    this.otherList.forEach(data => {
-      this.updateTeacherAdvisory.push(data);
-      count++;
-      if (count === this.otherList.length || this.otherList.length === 1 || (this.otherList.length === 0)) {
-        console.log(count, this.otherList.length, 'counttttt');
-        this.updateAccountControl.username = account.acc.username;
-        this.updateAccountControl.password = account.acc.password;
-        // const oldTeacher = { _id: account.acc.adviser, firstName: account.adviser[0].firstName, middleName: account.adviser[0].middleName, lastName: account.adviser[0].lastName };
-        // this.updateTeacherAdvisory.push(oldTeacher);
-      }
-
-    });
-    console.log(account);
-    console.log(this.updateTeacherAdvisory, 'updateTeacherAdvisory');
-    console.log(this.otherList, 'otherList');
-  }
-
+  // To Close The Modal
   onCloseHandled() {
     this.display = 'none';
     this.display2 = 'none';
@@ -161,99 +143,63 @@ export class SettingsComponent implements OnInit {
     }
   }
 
+  // *******************      Updating the teacher account with admin login for confirmation      *******************
+  updateTeacherAccountBtn(id, username, password) {
+    this.isUpdate = id
+    this.authService.findAccount(id).subscribe(data => {
+      if (data) {
+        this.display = 'block';
+        const datas = []
+        datas.push(username)
+        datas.push(password)
+        this.updateAccountControl.username = username
+        this.updateAccountControl.password = password
+      }
+    })
+  }
 
+  AlertBeforeUpdateTeacherAccount() {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      confirmButtonText: `Save`,
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.display = 'none';
+        this.display4 = 'block';
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info');
+      }
+    });
+  }
 
-
-
-
-  
-
-  
-
-
-
-
+  loginBtnForUpdate() {
+    if (this.loginControl.username == 'Administrator') {
+      this.authService.loginAdminForConfirmation(this.loginControl).subscribe(data => {
+        if (data) {
+          this.updateTeacherAccount();
+          this.swal.succesAlert();
+          this.display4 = 'none';
+        }
+      });
+    } else {
+      this.swal.credentialsDidNotMatch()
+    }
+  }
 
   updateTeacherAccount() {
+    this.updateAccountControl._id = this.isUpdate
     this.authService.updateTeacherAccount(this.updateAccountControl).subscribe(data => {
       if (data) {
-        console.log("heheehe")
-      }
-    });
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // Get Teacher with no account and display in the input field for making an account for teacher
-  getTeacher(): void {
-    this.authService.findAdviser().subscribe((data: any) => {
-      this.otherList = data;
-    });
-  }
-
-  // Adding Account For Teacher
-  addAccountTeacher() {
-    const data = { ...this.addAccountControl1, adviser: this.teacherId };
-    this.authService.register(data).subscribe(data => {
-      if (data) {
-        this.swal.succesAlert();
+        console.log(data, 'arigatoooo')
         this.reloadComponent();
-      } else {
-        this.swal.errorAlertForSomethingWentWrong();
+        // this.teacherWithAccount();
       }
-    });
+    })
   }
-
-  // Getting The Credentials Of The Admin
-  getAdminCredential() {
-    this.authService.getCredentials('Admin').subscribe((data: any) => {
-      const datum = data.data;
-      if (data) {
-        this.addAccountControl = datum;
-      }
-    });
-  }
+  // *******************      -----------------------------------------------------------------------      *******************
 
   // *******************      Updating the admin password with admin login for confirmation      *******************
   updateAdmin() {
@@ -326,8 +272,37 @@ export class SettingsComponent implements OnInit {
       this.swal.credentialsDidNotMatch()
     }
   }
-
   // *******************      -----------------------------------------------------------------------      *******************
+
+  // Get Teacher with no account and display in the input field for making an account for teacher
+  getTeacher(): void {
+    this.authService.findAdviser().subscribe((data: any) => {
+      this.otherList = data;
+    });
+  }
+
+  // Adding Account For Teacher
+  addAccountTeacher() {
+    const data = { ...this.addAccountControl1, adviser: this.teacherId };
+    this.authService.register(data).subscribe(data => {
+      if (data) {
+        this.swal.succesAlert();
+        this.reloadComponent();
+      } else {
+        this.swal.errorAlertForSomethingWentWrong();
+      }
+    });
+  }
+
+  // Getting The Credentials Of The Admin
+  getAdminCredential() {
+    this.authService.getCredentials('Admin').subscribe((data: any) => {
+      const datum = data.data;
+      if (data) {
+        this.addAccountControl = datum;
+      }
+    });
+  }
 
   reloadComponent(): void {
     const currentUrl = this.router.url;
@@ -336,19 +311,6 @@ export class SettingsComponent implements OnInit {
     this.router.navigate([currentUrl]);
   }
 
-
-
-
-
-
-  resetAdminAccount() {
-    this.addAccountControl = {
-      username: '',
-      password: '',
-      confirmPassword: '',
-      role: 'Admin',
-    };
-  }
 
 
 

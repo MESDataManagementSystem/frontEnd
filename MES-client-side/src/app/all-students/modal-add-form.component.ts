@@ -27,7 +27,7 @@ export const MY_FORMATS = {
     dateInput: 'YYYY',
     monthYearLabel: 'MMM YYYY',
     dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'YYYY',
+    monthYearA11yLabel: 'MMMM YYYY',
   },
 };
 
@@ -35,7 +35,7 @@ export const MY_FORMATS = {
 @Component({
   selector: 'app-modal-add-form',
   templateUrl: './modal-add-form.component.html',
-  styleUrls: ['./modal-add-form.component.css'],
+  styleUrls: ['./modal-add-form.component.scss'],
   providers: [
     // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
     // application's root module. We provide it at the component level here, due to limitations of
@@ -51,7 +51,10 @@ export const MY_FORMATS = {
 })
 export class AddFormDialogComponent implements OnInit {
 
-  date = new FormControl(moment());
+  displayDate = true
+  date1: any
+  date:any =new FormControl()
+  chosenDate: number = null
   maxDate = new Date();
   fullName: string;
   lrn: string;
@@ -75,7 +78,12 @@ export class AddFormDialogComponent implements OnInit {
   }
 
   addStudent(file) {
-    if (this.fullName.trim() && this.lrn.trim()) {
+    // this.year = Date()
+    alert(this.year);
+    var parts = this.year.toString().split(' ')
+    console.log(parts)
+    this.year = parts[3]
+    if (this.fullName.trim() && this.lrn){
       if (file) {
         const formData = new FormData();
         formData.append('files', this.fileToUpload, this.fileToUpload.name);
@@ -83,7 +91,12 @@ export class AddFormDialogComponent implements OnInit {
         formData.append('lrn', this.lrn);
         formData.append('date', this.year);
         formData.append('fileUrl', this.fileUrl);
+        console.log(formData, 'formdataaa')
+        // formData.forEach(element => {
+          
+        // });
         formData.forEach(data => {
+          console.log(data, 'dataaa');
           return data
         });
         if (this.fileToUpload.name.split('.').pop() == 'pdf') {
@@ -116,12 +129,16 @@ export class AddFormDialogComponent implements OnInit {
   }
 
   chosenYearHandler(normalizedYear: Moment, datepicker: MatDatepicker<Moment>) {
+    this.displayDate = false;
+    this.chosenDate = normalizedYear.year()
+    this.date = new FormControl(moment())
     let ctrlValue = this.date.value;
-    ctrlValue.year(normalizedYear.year());
-    this.year = ctrlValue.year();
-    console.log(ctrlValue.year(), 'year ni siya')
-    this.date.setValue(ctrlValue);
-    datepicker.close();
+      ctrlValue.year(normalizedYear.year());
+      this.year = ctrlValue.year();
+      this.chosenDate = ctrlValue 
+      console.log(ctrlValue.year(), 'year ni siya')
+      this.date.setValue(ctrlValue);
+      datepicker.close();
   }
 
 }

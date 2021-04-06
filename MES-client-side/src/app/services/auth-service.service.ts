@@ -30,11 +30,11 @@ export class AuthServiceService {
 
   isLoginAdmin(): any {
     const token = window.localStorage.getItem('token');
-    if(token){
+    if (token) {
       const helper = new JwtHelperService();
       const decodedToken = helper.decodeToken(token);
       this.user = decodedToken;
-      if (this.user.role === 'Admin'){
+      if (this.user.role === 'Admin') {
         return true;
       }
     }
@@ -43,17 +43,17 @@ export class AuthServiceService {
 
   isLoginTeacher(): any {
     const token = window.localStorage.getItem('token');
-    if(token){
+    if (token) {
       const helper = new JwtHelperService();
       const decodedToken = helper.decodeToken(token);
       this.user = decodedToken;
-      if (this.user.role === 'Teacher'){
+      if (this.user.role === 'Teacher') {
         return true;
       }
     }
     return false;
   }
-  
+
   login(credentials): Observable<any> {
     return this.http.post(`${this.url}/api/login`, credentials).pipe(
       map((response: any) => {
@@ -69,8 +69,8 @@ export class AuthServiceService {
     );
   }
 
-  loginAdminForConfirmation(credentials):Observable<any>{
-    return this.http.post(`${this.url}/api/loginAdminForConfirmation`,credentials).pipe(
+  loginAdminForConfirmation(credentials): Observable<any> {
+    return this.http.post(`${this.url}/api/loginAdminForConfirmation`, credentials).pipe(
       catchError(e => {
         this.swal.credentialsDidNotMatch();
         throw new Error(e);
@@ -105,7 +105,7 @@ export class AuthServiceService {
   }
 
   updateTeacherAccount(status) {
-    return this.http.put(`${this.url}/api/updateTeacherCredentials/${status.role}`, status)
+    return this.http.put(`${this.url}/api/updateTeacherCredentials/${status._id}`, status)
       .pipe(
         catchError(e => {
           this.swal.errorAlertForSomethingWentWrong()
@@ -128,11 +128,13 @@ export class AuthServiceService {
 
   // Find teacher in setting
   findTeacher(id): Observable<any> {
-    console.log(id,'id sa service')
+    console.log(id, 'id sa service')
     return this.http.get(`${this.url}/api/findTeacher/${id}`)
   }
+
   // findAdviser find no account adviser
   findAdviser(): Observable<any> {
     return this.http.get(`${this.url}/api/findAdviser`)
   }
+  
 }

@@ -1,3 +1,63 @@
+// import { Component, OnInit, Inject, VERSION } from '@angular/core';
+// import { FormControl, Validators } from '@angular/forms';
+// import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+// import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+// import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+// import { MatDatepicker } from '@angular/material/datepicker';
+
+// @Component({
+//   selector: 'app-modal-edit-form',
+//   templateUrl: './modal-edit-form.component.html',
+//   styleUrls: ['./modal-edit-form.component.css']
+// })
+// export class ModalEditFormComponent implements OnInit {
+//   version = VERSION;
+//   date = new Date();
+//   maxDate = new Date();
+
+//   visible = true;
+
+//   fullName: string;
+//   lrn: string;
+//   // year: any;
+//   fileUrl: string;
+//   error = new FormControl('', [Validators.required]);
+
+//   constructor(
+//     @Inject(MAT_DIALOG_DATA) public data: EditFiles,
+
+//   ) {
+//     // this.year = '';
+//   }
+
+//   ngOnInit(): void {
+//     if (this.data) {
+//       console.log(this.data)
+//       this.date = this.data[3]
+//       this.fullName = this.data[2]
+//       this.lrn = this.data[1]
+//       this.fileUrl = this.data[0]
+//     }
+//   }
+
+//   // All Fields Are Required 
+//   getErrorMessage() {
+//     if (this.error.hasError('required')) {
+//       return 'You must enter a value';
+//     }
+//   }
+
+// }
+
+// export interface EditFiles {
+//   fileUrl: string,
+//   lrn: string,
+//   fullName: string, 
+//   date: string
+// }
+
+
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -25,7 +85,7 @@ export const MY_FORMATS = {
     dateInput: 'YYYY',
     monthYearLabel: 'MMM YYYY',
     dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'YYYY',
+    monthYearA11yLabel: 'MMMM YYYY',
   },
 };
 
@@ -33,7 +93,7 @@ export const MY_FORMATS = {
 @Component({
   selector: 'app-modal-edit-form',
   templateUrl: './modal-edit-form.component.html',
-  styleUrls: ['./modal-edit-form.component.css'],
+  styleUrls: ['./modal-edit-form.component.scss'],
   providers: [
     // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
     // application's root module. We provide it at the component level here, due to limitations of
@@ -47,8 +107,13 @@ export const MY_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
+
 export class ModalEditFormComponent implements OnInit {
-  date = new FormControl(moment());
+
+  displayDate = true
+  date1: any
+  date: any = new FormControl()
+  chosenDate: number = null
   maxDate = new Date();
   fullName: string;
   lrn: string;
@@ -66,7 +131,7 @@ export class ModalEditFormComponent implements OnInit {
   ngOnInit(): void {
     if (this.data) {
       console.log(this.data)
-      this.date = this.data[3]
+      this.date1 = this.data[3]
       this.fullName = this.data[2]
       this.lrn = this.data[1]
       this.fileUrl = this.data[0]
@@ -79,10 +144,15 @@ export class ModalEditFormComponent implements OnInit {
       return 'You must enter a value';
     }
   }
+
   chosenYearHandler(normalizedYear: Moment, datepicker: MatDatepicker<Moment>) {
+    this.displayDate = false
+    this.chosenDate = normalizedYear.year()
+    this.date = new FormControl(moment())
     let ctrlValue = this.date.value;
     ctrlValue.year(normalizedYear.year());
     this.year = ctrlValue.year();
+    this.chosenDate = ctrlValue
     console.log(ctrlValue.year(), 'year ni siya')
     this.date.setValue(ctrlValue);
     datepicker.close();
@@ -93,6 +163,6 @@ export class ModalEditFormComponent implements OnInit {
 export interface EditFiles {
   fileUrl: string,
   lrn: string,
-  fullName: string, 
+  fullName: string,
   date: string
 }

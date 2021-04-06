@@ -67,19 +67,5 @@ mat-form-field {
 }
 
 td {
-  /* font-family: OCR A Std, monospace; */
   font-size: 15px;
 }
-
-
-/* mat-paginator {
-  background: #51749b !important;
-} */
-
-/* .mat-row:nth-child(odd) {
-  background: #FFFFFF !important;
-}
-
-.mat-row:nth-child(even) {
-  background: #51749b !important;
-} */
