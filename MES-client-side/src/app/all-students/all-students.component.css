@@ -1,18 +1,24 @@
-mat-form-field {
-  width: 200px;
-  padding-left: 20px;
-  float: left;
-}
-button{
-  float: left;
-}
 .content{
   padding-left: 20px;
 }
 
+h2 {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 25px;
+}
+
+mat-form-field {
+  min-width: 150px;
+  max-width: 300px;
+  width: 100%;
+  padding-left: 20px;
+}
 
 .mat-table {
-  margin-top: 12%;
+  margin-top: 3%;
+  width: 100%;
 }
 
 .mat-cell,
@@ -20,7 +26,7 @@ button{
   word-wrap: initial;
   display: table-cell;
   line-break: unset;
-  width: 47%;
+  width: 45%;
   white-space: nowrap;
   vertical-align: middle;
 }
@@ -29,8 +35,10 @@ button{
   background-color: #dcdedc;
   color: black;
 }
+
 .mat-header-cell{
-  color: green;
+  background: #51749b !important;
+  color: #FFFFFF;
   text-align: justify;
   position: sticky;
   position: -webkit-sticky;
@@ -38,37 +46,40 @@ button{
   background-color: white;
   font-size: medium;
 }
+
 .mat-elevation-z8{
-  width: 80%;
+  width: 90%;
   margin-right: auto;
   margin-left: auto;
   display: block;
 }
+
 .addIcon{
-  margin-left: 85%;
-  /* height: 100px;
-  width: */
+  margin-right: 5%;
+  float: right;
   transform: scale(2);
-  margin-top: 3%;
-  color: green
+  margin-top: 1%;
+  color: #5CB85C
 }
-.menuIcon{
-  margin-left:0;
-  float: left;
+
+.editIcon {
+  color: #f0ad4e;
 }
-/* ::ng-deep .mat-input-underline { display: none; }  */
-/* mat-select  {
-  display: none;
-} */
-/* .searchIcon{
-  margin-left: 20%;
+
+td {
+  /* font-family: OCR A Std, monospace; */
+  font-size: 15px;
+}
+
+
+/* mat-paginator {
+  background: #51749b !important;
 } */
 
-/* mat-header-cell{
-  position: fixed;
-} */
+/* .mat-row:nth-child(odd) {
+  background: #FFFFFF !important;
+}
 
-/* .mat-row,
-.mat-header-row {
-  display: table-row;
+.mat-row:nth-child(even) {
+  background: #51749b !important;
 } */

@@ -1,15 +1,200 @@
+/* 
+.content{
+  margin-left: 20px;
+  padding-right: 20px;
+}
+
+h2 {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 25px;
+}
+
+h1 {
+  margin-right: 5%;
+  margin-top: 2%;
+  float: right;
+  font-weight: bold;
+  font-size: 50px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
+}
+
+h3 {
+  margin-left: 35%;
+  margin-top: -18%;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
+}
+
+.fass {
+  font-size: 35px;
+  margin-left: 26%;
+  margin-top: 28%;
+}
+
+.fas1 {
+  font-size: 30px; 
+  float: right;
+  color: #2080FF;
+  margin-right: 3%;
+  margin-top: 2%;
+}
+
+.user {
+  margin-left: 30%;
+}
+
+.icon1 {
+  background: #00BFFF !important;
+  border: 1px solid #00BFFF;  
+}
+
+.icon2 {
+  background: #4da64d !important;
+  border: 1px solid #4da64d;
+}
+
+.icon3 {
+  background: #CB2521 !important;
+  border: 1px solid #CB2521;
+}
+
+.icon4 {
+  background: #daa520  !important;
+  border: 1px solid #daa520;
+}
+
+.iconBox {
+  width: 100px;
+  height: 100px;
+}
+
+.mainBox {
+  width: auto;
+  min-width: 230px;
+  max-width: 600px;
+  height: 100px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+ */
+ i:hover{
+color:blue
+ }
+
+ 
+.content{
+  margin-left: 20px;
+  padding-right: 20px;
+}
+
+h2 {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 25px;
+}
+
+h1 {
+  margin-right: 5%;
+  margin-top: 2%;
+  float: right;
+  font-weight: bold;
+  font-size: 50px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
+}
+
+h3 {
+  margin-left: 35%;
+  margin-top: -18%;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
+}
+
+.fass {
+  font-size: 35px;
+  margin-left: 26%;
+  margin-top: 28%;
+}
+
+.fas1 {
+  font-size: 20px; 
+  float: right;
+  color: #2080FF;
+  margin-right: 10px;
+  margin-top: 40px;
+}
+
+.user {
+  margin-left: 30%;
+}
+
+.icon1 {
+  background: #00BFFF !important;
+  border: 1px solid #00BFFF;  
+}
+
+.icon2 {
+  background: #4da64d !important;
+  border: 1px solid #4da64d;
+}
+
+.icon3 {
+  background: #CB2521 !important;
+  border: 1px solid #CB2521;
+}
+
+.icon4 {
+  background: #daa520  !important;
+  border: 1px solid #daa520;
+}
+
+.iconBox {
+  width: 100px;
+  height: 100px;
+}
+
+.mainBox {
+  width: auto;
+  min-width: 230px;
+  max-width: 600px;
+  height: 100px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 mat-card {
-   width: 200px;
-   height: 230px;
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+  position: relative;
+  padding: 0;
+  border-radius: 4px;
+  width: 400px;
+  height: 100px;
+  margin-top: 20px;
+  float: left;
+  margin-right: 20px;
+}
+
+mat-card-content {
+  width: auto;
+  min-width: 230px;
+  max-width: 600px;
+  height: 100px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media only screen and (max-width: 400px) {
+  mat-card {
+    width: 300px;
   }
-  
-  img {
-    height: 150px;
-    width: 233px;
+  .fas1{
+    margin-top: 30px;
+    
   }
-  div{
-      float: left;
-      /* padding: 20px 50px; */
-      padding-left: 5%;
-      padding-top: 20px;
-  }
+}
+
+.box{
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  max-width: 850px;
+  border: 0;
+}

@@ -9,71 +9,69 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class StudentServiceService {
   // tslint:disable-next-line:max-line-length
-  studentData = [{ name: 'Irish Rufo', lrn: '18106242' }, { name: 'Ma. Theresa Amaquin', lrn: '123456' }, { name: 'Yubert Mariscal', lrn: '456788' }, { name: 'Annabelle Belcina', lrn: '45678' }];
+  studentData = [];
   returnSearch: Array<any> = [];
   constructor(
     private httpClient: HttpClient
-    ) { }
+  ) { }
 
+  // return list of old files in all-students component
   retrieveData(): Observable<any> {
-    return of(this.studentData);
+    return this.httpClient.get('http://localhost:5000/api/viewListOfOldFiles');
+
   }
 
-  searchbyLRN(data): Observable<any> {
-    this.returnSearch = [];
-    console.log(data);
-    if (data !== '') {
-      this.studentData.forEach(student => {
-        if (student.lrn.includes(data.trim())) {
-          this.returnSearch.push(student);
-          console.log('okii naa sya');
-        } else {
-          console.log('no no');
-        }
-      });
-    } else {
-      this.returnSearch = this.studentData;
-    }
-    console.log(this.returnSearch);
-    return of(this.returnSearch);
-  }
-
-  searchbyFamilyName(data): Observable<any> {
-    this.returnSearch = [];
-    console.log(data);
-    if (data !== '') {
-      this.studentData.forEach(student => {
-        if (student.name.toLowerCase().includes(data.trim())) {
-          this.returnSearch.push(student);
-          console.log('okii naa sya');
-        } else {
-          console.log('no no');
-        }
-      });
-    } else {
-      this.returnSearch = this.studentData;
-    }
-    console.log(this.returnSearch);
-    return of(this.returnSearch);
-  }
-
-  handleError(e): any{
+  handleError(e): any {
     return e;
   }
 
   studentForm(fileToUpload: FormData): Observable<any> {
-    // console.log('nisulod', fileToUpload);
-    // tslint:disable-next-line:prefer-const
-    // const formData = new FormData();
-    // formData.append('image', fileToUpload, fileToUpload.name);
-    // formData.append('test', 'testing yeah');
-    // console.log('image', fileToUpload);
-    // tslint:disable-next-line:max-line-length
-    console.log('adto nis services : ', fileToUpload);
-    // tslint:disable-next-line:max-line-length
     return this.httpClient.post('http://localhost:5000/uploadSingleFile', fileToUpload);
-    // .pipe(map(() => true), catchError((e) => this.handleError(e)));
-    // return of(formData);
   }
+
+  viewFile(url): Observable<any> {
+    console.log(url);
+    return this.httpClient.post('http://localhost:5000/api/viewFile', url);
+  }
+
+  addStudent(student): Observable<any> {
+    return this.httpClient.post('http://localhost:5000/api/addStudent', student);
+  }
+
+  viewStudents(section): Observable<any> {
+    return this.httpClient.get(`http://localhost:5000/api/viewStudents/${section}`);
+  }
+
+  findStudent(id): Observable<any> {
+    console.log(id, 'sa service ni');
+    return this.httpClient.get(`http://localhost:5000/api/findStudent/${id}`);
+  }
+
+  updateStudent(student): Observable<any> {
+    console.log(student._id, 'id sa student service nga iupdate');
+    return this.httpClient.post(`http://localhost:5000/api/updateStudent/${student._id}`, student);
+  }
+  findGrade(grade): Observable<any>{
+    console.log(grade, 'grade in service');
+    return this.httpClient.get(`http://localhost:5000/api/findGrade/${grade}`);
+  }
+  // subjects grade
+  findStudentGrades(subject): Observable<any> {
+    console.log(subject);
+    return this.httpClient.post(`http://localhost:5000/api/findStudentGrades/${subject.id}`, subject);
+  }
+  updateStudentGrades(subject): Observable<any> {
+    console.log(subject);
+    return this.httpClient.post(`http://localhost:5000/api/updateStudentGrades/${subject.id}`, subject);
+  }
+  addStudentGrades(grades): Observable<any>{
+    return this.httpClient.post('http://localhost:5000/api/addStudentGrades', grades);
+  }
+  findQuarter(id): Observable<any>{
+    console.log(id);
+    return this.httpClient.get(`http://localhost:5000/api/findQuarter/ ${id}`);
+  }
+
+
 
 }

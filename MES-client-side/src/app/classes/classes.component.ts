@@ -1,90 +1,94 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { SectionService } from '../services/section.service';
+import { StudentServiceService } from '../services/student-service.service';
+
+import { Router } from '@angular/router';
+import { AddSectionComponent } from './add-section.component';
+
+
+
+export interface Card {
+  totalSections, totalStudents: number;
+  gradeLevel: string;
+}
 
 @Component({
   selector: 'app-classes',
   templateUrl: './classes.component.html',
-  styleUrls: ['./classes.component.css']
+  styleUrls: ['./classes.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 
 export class ClassesComponent implements OnInit {
-  // for grade1
-  grade1Sections =  '5';
-  grade1Students = '100';
-  // for grade2
-  grade2Sections =  '50';
-  grade2Students = '1000';
-  // for grade3
-  grade3Sections =  '500';
-  grade3Students = '10000';
-  // for grade4
-  grade4Sections =  '500';
-  grade4Students = '10000';
-  // for grade5
-  grade5Sections =  '500';
-  grade5Students = '10000';
-  // for grade6
-  grade6Sections =  '500';
-  grade6Students = '10000';
+  grade: string;
+  sections: any;
+  gradeLevel: any;
+  section: string;
+  isLoading = true;
+  // @Output()
+  // selected: EventEmitter<string> = new EventEmitter<string>();
 
-
-  grade1: ColumnsForGrades[] = [
-    {text: '1', cols: 1, rows: 3, color: 'white', fontsize: '50px'},
-    {text: 'Total sections : ' + this.grade1Sections, cols: 3, rows: 1, color: 'white', fontsize: '20px' },
-    {text: 'Total Students : ' + this.grade1Students, cols: 3, rows: 1, color: 'white', fontsize: '20px' },
-    {text: 'View Sections', cols: 3, rows: 1, color: 'white', fontsize: '20px' },
-  ];
-  grade2: ColumnsForGrades[] = [
-    {text: '2', cols: 1, rows: 3, color: 'white', fontsize: '50px' },
-    {text: 'Total sections : ' + this.grade2Sections, cols: 3, rows: 1, color: 'white', fontsize: '20px' },
-    {text: 'Total Students : ' + this.grade2Students, cols: 3, rows: 1, color: 'white', fontsize: '20px' },
-    {text: 'View Sections', cols: 3, rows: 1, color: 'white', fontsize: '20px' },
-  ];
-  grade3: ColumnsForGrades[] = [
-    {text: '3', cols: 1, rows: 3, color: 'white', fontsize: '50px' },
-    {text: 'Total sections : ' + this.grade3Sections, cols: 3, rows: 1, color: 'white', fontsize: '20px' },
-    {text: 'Total Students : ' + this.grade3Students, cols: 3, rows: 1, color: 'white', fontsize: '20px' },
-    {text: 'View Sections', cols: 3, rows: 1, color: 'white', fontsize: '20px' },
-  ];
-  grade4: ColumnsForGrades[] = [
-    {text: '4', cols: 1, rows: 3, color: 'white', fontsize: '50px' },
-    {text: 'Total sections : ' + this.grade4Sections, cols: 3, rows: 1, color: 'white', fontsize: '20px' },
-    {text: 'Total Students : ' + this.grade4Students, cols: 3, rows: 1, color: 'white', fontsize: '20px' },
-    {text: 'View Sections', cols: 3, rows: 1, color: 'white', fontsize: '20px' },
-  ];
-  grade5: ColumnsForGrades[] = [
-    {text: '5', cols: 1, rows: 3, color: 'white', fontsize: '50px' },
-    {text: 'Total sections : ' + this.grade5Sections, cols: 3, rows: 1, color: 'white', fontsize: '20px' },
-    {text: 'Total Students : ' + this.grade5Students, cols: 3, rows: 1, color: 'white', fontsize: '20px' },
-    {text: 'View Sections', cols: 3, rows: 1, color: 'white', fontsize: '20px' },
-  ];
-  grade6: ColumnsForGrades[] = [
-    {text: '6', cols: 1, rows: 3, color: 'white', fontsize: '50px'},
-    {text: 'Total sections : ' + this.grade6Sections, cols: 3, rows: 1, color: 'white', fontsize: '17px'},
-    {text: 'Total Students : ' + this.grade6Students, cols: 3, rows: 1, color: 'white', fontsize: '17px'},
-    {text: 'View Sections', cols: 3, rows: 1, color: 'white', fontsize: '20px'},
-  ];
-
-  grades = [this.grade1, this.grade2, this.grade3, this.grade4, this.grade5, this.grade6];
-  gradesIndex = [0, 1, 2, 3, 4, 5];
-  constructor() { }
-
-  ngOnInit(): void {
-    this.grades.forEach(grade => {
-      this.gradesIndex.forEach(index => {
-      console.log(this.grades[0][0]);
-      });
-    });
-    // console.log(this.grades[1][0].text);
+  constructor(
+    private dialog: MatDialog, private sectionService: SectionService, private studentService: StudentServiceService, private router: Router
+  ) {
+    this.grade = 'Kindergarten';
+    this.gradeLevel = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
+    this.section = '';
   }
 
+  ngOnInit(): void {
+    this.viewSections();
+  }
+
+
+  // Dialog For Adding section
+  openDialog(): void {
+    this.dialog.open(AddSectionComponent, { disableClose: true });
+  }
+
+  selectedGrade(grade): void {
+    this.viewSections();
+    this.sections = [];
+    console.log(grade.index);
+    this.grade = grade.index;
+    if (grade.index === 0) {
+      this.grade = 'Kindergarten';
+    } else {
+      this.grade = 'Grade ' + grade.index;
+    }
+    this.viewSections();
+    console.log(this.grade);
+  }
+
+  viewSections(): void {
+    this.sectionService.viewSections(this.grade).subscribe((data: any) => {
+      this.sections = data.data;
+      console.log(this.sections, 'service data');
+      console.log(this.sections[0], 'section zero')
+      if (this.sections.length === data.data.length) {
+        this.isLoading = false;
+      }
+    });
+  }
+
+  viewStudents(section): void {
+    // alert(section);
+    this.section = section;
+    const datum = [section];
+    this.sectionService.getSection(datum).subscribe(data => { console.log(data, 'section'); });
+    // this.router.navigateByUrl('/MES/classes/student');
+    this.router.navigate(['/MES/classes', this.grade, section]);
+  }
+
+  // send section to child component (students in specific section)
+  // select(section): void {
+  //   this.selected.emit(section);
+  // }
+
+
 }
 
-export interface ColumnsForGrades {
-  color: string;
-  cols: number;
-  rows: number;
-  text: string;
-  fontsize: string;
-}
+
 
