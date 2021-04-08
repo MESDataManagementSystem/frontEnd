@@ -43,6 +43,10 @@ export class AllStudentsComponent implements OnInit {
       this.students = data
       this.dataSource = new MatTableDataSource<any>(this.students.data)
       var count = 0;
+      if (this.students.data.length == 0) {
+        this.isLoading = false;
+        
+      }
       for (let i = 0; i < this.students.data.length; i++) {
         count = i;
         if (count == this.students.data.length - 1) {

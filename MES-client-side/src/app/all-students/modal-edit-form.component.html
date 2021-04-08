@@ -17,7 +17,7 @@
                             </mat-datepicker>
                             <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                         </mat-form-field>
-                        <mat-form-field appearance="outline" class="inputField"  *ngIf='!displayDate'>
+                        <mat-form-field appearance="outline" class="inputField" *ngIf='!displayDate'>
                             <mat-label>Year Graduated</mat-label>
                             <input matInput [matDatepicker]="dp" [formControl]="date" [max]="maxDate" required
                                 autocomplete="off">
@@ -51,15 +51,15 @@
                         </mat-form-field>
                     </div>
                     <div class="col-3">
-                        <mat-form-field appearance="outline" class="inputField">
-                            <mat-label>Attach File</mat-label>
-                            <ngx-mat-file-input #fileInput type="file" required accept=".pdf">
+                        <mat-form-field appearance="outline" class="inputField" >
+                            <mat-label>Attached File</mat-label>
+                            <!-- <input matInput *ngIf = 'displayFile === true' [(ngModel)]="fileUrl" required > -->
+                            <ngx-mat-file-input #fileInput type="file" (change)="log()" [(ngModel)]="fileUrl" [value]="fileUrl" accept=".pdf">
                             </ngx-mat-file-input>
                             <mat-icon matSuffix>folder</mat-icon>
                             <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
                         </mat-form-field>
                     </div>
-
                 </div>
             </div>
         </mat-dialog-content>

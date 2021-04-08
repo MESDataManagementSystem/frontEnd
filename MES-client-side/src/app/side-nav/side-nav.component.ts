@@ -10,14 +10,14 @@ import Swal from 'sweetalert2';
 export class SideNavComponent implements OnInit {
   navRoute = [
     'Dashboard',
-    'Students',
+    'Graduated Students',
     'Teachers',
     'Classes',
     'Settings'
   ];
   navContent: any = [
     { name: 'Dashboard', icon: 'dashboard' },
-    { name: 'Students', icon: 'people' },
+    { name: 'Graduated Students', icon: 'people' },
     { name: 'Teachers', icon: 'people' },
     { name: 'Classes', icon: 'home' },
     { name: 'Settings', icon: 'settings' }
@@ -35,8 +35,12 @@ export class SideNavComponent implements OnInit {
   }
 
   childRoutes(content): void {
+    let colorBlue = content;
     this.lateActive = content;
-    const routes = this.lateActive.toLowerCase();
+    if (content === 'Graduated Students') {
+      colorBlue = 'Students';
+    }
+    const routes = colorBlue.toLowerCase();
     this.router.navigate([routes], { relativeTo: this.route });
     console.log();
   }

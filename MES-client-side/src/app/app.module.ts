@@ -59,8 +59,6 @@ import { AddStudentInfoComponent } from './classes/add-student-info.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TeacherDashboardComponent } from './teacherSideUser/teacher-dashboard/teacher-dashboard.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { MultidatepickerComponent } from './multidatepicker/multidatepicker.component';
-import { YearPickerComponent } from './multidatepicker/year-picker/year-picker.component';
 
 @NgModule({
   declarations: [
@@ -80,9 +78,7 @@ import { YearPickerComponent } from './multidatepicker/year-picker/year-picker.c
     ModalEditFormComponent,
     AddStudentInfoComponent,
     SettingsComponent,
-    TeacherDashboardComponent,
-    MultidatepickerComponent,
-    YearPickerComponent
+    TeacherDashboardComponent
   ],
   imports: [
     ValidateEqualModule,
