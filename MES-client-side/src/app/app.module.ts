@@ -61,6 +61,7 @@ import { TeacherDashboardComponent } from './teacherSideUser/teacher-dashboard/t
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MultidatepickerComponent } from './multidatepicker/multidatepicker.component';
 import { YearPickerComponent } from './multidatepicker/year-picker/year-picker.component';
+import { DashboardDialogComponent } from './dashboard/dashboard-dialog.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { YearPickerComponent } from './multidatepicker/year-picker/year-picker.c
     SettingsComponent,
     TeacherDashboardComponent,
     MultidatepickerComponent,
-    YearPickerComponent
+    YearPickerComponent,
+    DashboardDialogComponent
   ],
   imports: [
     ValidateEqualModule,
@@ -116,7 +118,7 @@ import { YearPickerComponent } from './multidatepicker/year-picker/year-picker.c
     PdfViewerModule,
     MaterialFileInputModule,
     MatSlideToggleModule,
-    MatCheckboxModule, 
+    MatCheckboxModule,
     MatProgressSpinnerModule,
     MDBBootstrapModule,
     ChartsModule

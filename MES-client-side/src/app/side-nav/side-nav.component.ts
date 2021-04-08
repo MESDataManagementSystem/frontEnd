@@ -39,6 +39,8 @@ export class SideNavComponent implements OnInit {
     this.lateActive = content;
     if (content === 'Graduated Students') {
       colorBlue = 'Students';
+      const route = colorBlue.toLowerCase();
+      this.router.navigate([route ], { relativeTo: this.route });
     }
     const routes = colorBlue.toLowerCase();
     this.router.navigate([routes], { relativeTo: this.route });
@@ -47,7 +49,7 @@ export class SideNavComponent implements OnInit {
 
   logout() {
     window.localStorage.clear();
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 
   // Confirmation Before LogOut

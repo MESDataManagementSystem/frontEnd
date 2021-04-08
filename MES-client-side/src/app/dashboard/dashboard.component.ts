@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { StudentServiceService } from '../services/student-service.service';
 import { TeacherServiceService } from '../services/teacher-service.service';
 import { DateRange } from '@angular/material/datepicker';
+import { DashboardDialogComponent } from './dashboard-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -21,6 +25,8 @@ export class DashboardComponent implements OnInit {
   // datas = [];
   load: boolean;
   datas: any;
+  teachersAdvisory: any;
+  teachersNonAdvisory: any;
   public chartDatasets: Array<any>;
   public chartLabels: Array<any> = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
 
@@ -51,7 +57,9 @@ export class DashboardComponent implements OnInit {
   public chartOptions: any;
   grade: any;
   isLoading = true;
-  constructor(private studentService: StudentServiceService, private router: Router, private teacherService: TeacherServiceService) {
+  schoolYear: string;
+  // tslint:disable-next-line:max-line-length
+  constructor(private studentService: StudentServiceService, private dialog: MatDialog, private router: Router, private teacherService: TeacherServiceService) {
     this.grade = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
     this.load = false;
     this.studentService.populationStudents().subscribe(data => {
@@ -68,10 +76,13 @@ export class DashboardComponent implements OnInit {
       };
       this.totalNumberofStudents = this.datas.reduce((a, b) => a + b, 0);
       this.teacherService.teacherPopulation().subscribe((teachers: any) => {
-        console.log(teachers.data);
+        console.log(teachers);
         this.totalNumberofAdvisory = teachers.data[0].advisory;
         this.totalNumberofTeachers = teachers.data[1].allTeachers;
         this.totalNumberofNonAdvisory = teachers.data[2].nonAdvisory;
+        this.schoolYear = teachers.schoolYear;
+        this.teachersAdvisory = teachers.advisory;
+        this.teachersNonAdvisory = teachers.nonAdvisory;
         this.isLoading = false;
       });
     },
@@ -88,22 +99,6 @@ export class DashboardComponent implements OnInit {
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
 
-  // tslint:disable-next-line:arrow-return-shorthand
-  // let hello = async () => { return "Hello" };
-
-  // alert = async () => {
-  //   return this.datas;
-  //   this.chartLabels.forEach(element => {
-  //     console.log('element', element);
-  //     this.studentService.findGrade(element).subscribe(data => {
-  //       this.datas.push(data.data.length + '');
-  //       console.log('' + data.data.length + '');
-  //     });
-  //   });
-  //   if (this.datas.length === 7) {
-  //     // this.load = true;
-  //   }
-  // }
 
   // tslint:disable-next-line:typedef
   icon1() {
@@ -123,6 +118,15 @@ export class DashboardComponent implements OnInit {
   // tslint:disable-next-line:typedef
   icon4() {
     this.router.navigate(['/MES/teachers']);
+  }
+  openDialog(type): void {
+    const datas = [{ Advisory: this.teachersAdvisory, nonAdvisory: this.teachersNonAdvisory }, type];
+    this.dialog.open(DashboardDialogComponent, {
+      disableClose: true,
+      data: datas,
+      width: '100vw !important',
+      height: '100% !important'
+    });
   }
 
 

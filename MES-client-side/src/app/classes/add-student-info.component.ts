@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { StudentServiceService } from '../services/student-service.service';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog'; 
 
 
 

@@ -92,7 +92,7 @@ export class ViewStudentsComponent implements OnInit {
 
   ngOnInit(): void {
 
-  }
+  } 
 
   // Dialog For Adding Student
   openDialog(data, datas): void {

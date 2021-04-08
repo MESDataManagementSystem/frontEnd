@@ -1,0 +1,72 @@
+<div class="content">
+    <mat-icon class='close' aria-hidden="false" aria-label="Example home icon" (click)='closeDialog()'>
+        close
+    </mat-icon>
+    <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+    </div>
+    <div *ngIf="!advisory">
+        <h2>Non-Advisory Teachers</h2>
+        <div>
+            <div class="mat-elevation-z8" *ngIf="!isLoading">
+                <table mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="employeeNumber">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Employee Number </th>
+                        <td mat-cell *matCellDef="let teacher"> {{ teacher.employeeNumber }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="fullName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Adviser </th>
+                        <td mat-cell *matCellDef="let teacher"> {{ teacher.lastName }}, {{ teacher.firstName }}
+                            {{ teacher.middleName }}</td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
+
+                </table>
+                <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
+        <div>
+        </div>
+        <app-view style="display: none;"></app-view>
+    </div>
+    <div *ngIf="advisory">
+        <h2>Advisory Teachers</h2>
+        <div>
+            <div class="mat-elevation-z8" *ngIf="!isLoading">
+                <table mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="employeeNumber">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Employee Number </th>
+                        <td mat-cell *matCellDef="let teacher"> {{ teacher.adviserName.employeeNumber }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="fullName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Adviser </th>
+                        <td mat-cell *matCellDef="let teacher"> {{ teacher.adviserName.lastName }},
+                            {{ teacher.adviserName.firstName }}
+                            {{ teacher.adviserName.middleName }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="classes">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Classes </th>
+                        <td mat-cell *matCellDef="let teacher">
+                            <ul *ngFor="let section of teacher.sections">
+                                <li>
+                                    {{section.gradeLevel}} - {{section.sectionName}}
+                                </li>
+                            </ul>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
+                    <tr class="mat-row" *matNoDataRow>
+                    </tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
+        <div>
+        </div>
+        <app-view style="display: none;"></app-view>
+    </div>
+</div>

@@ -6,6 +6,9 @@
     <h2>Dashboard</h2>
     <hr>
     <div class="row">
+        <h1>S.Y. {{schoolYear}}</h1>
+    </div>
+    <div class="row">
         <div class="box">
             <mat-card>
                 <mat-card-content>
@@ -13,7 +16,7 @@
                         <i class="fas fa-user-tie user fass"></i>
                     </div>
                     <h3>Advisory Teachers
-                        <i class="fas fa-arrow-right fas1"></i>
+                        <i class="fas fa-arrow-right fas1" (click)='openDialog("advisory")'></i>
                     </h3>
                     <h1>{{totalNumberofAdvisory}}</h1>
                 </mat-card-content>
@@ -24,7 +27,7 @@
                         <i class="fas fa-user-friends fass"></i>
                     </div>
                     <h3>Non-Advisory Teachers
-                        <i class="fas fa-arrow-right fas1"></i>
+                        <i class="fas fa-arrow-right fas1" (click)='openDialog("nonAdvisory")'></i>
                     </h3>
                     <h1>{{totalNumberofNonAdvisory}}</h1>
                 </mat-card-content>
