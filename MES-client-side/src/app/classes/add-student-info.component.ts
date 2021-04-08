@@ -2,10 +2,13 @@ import { SectionService } from './../services/section.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { StudentServiceService } from '../services/student-service.service';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { StudentServiceService } from '../services/student-service.service';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog'; 
 
 
 
@@ -33,13 +36,13 @@ export class AddStudentInfoComponent implements OnInit {
     studentLRN: '',
     studentBirthdate: '',
     studentSex: '',
-    studentCredentialPresentedForGrade: [],
+    studentCredentialPresentedForGrade1: [],
     studentNameOfSchoolFromKinder: '',
     studentSchoolId: '',
     studentSchoolAddress: '',
     studentPeptPasserRating: '',
     studentDateOfxamination: '',
-    studentOthers: '',
+    studentOthers: [],
     studentNameAdressOfTestingCenter: '',
     studentRemark: '',
     studentSection: '',
@@ -83,6 +86,13 @@ export class AddStudentInfoComponent implements OnInit {
   activeQuarters = [];
   selectGradeSection = false;
   disabledQuarterButtons = { quarter1: false, quarter2: true, quarter3: true, quarter4: true };
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
   // tslint:disable-next-line:max-line-length
   constructor(private service: StudentServiceService, @Inject(MAT_DIALOG_DATA) public data: Section, public dialog: MatDialog, public sectionService: SectionService) {
     this.grade = this.data[2];
@@ -173,7 +183,21 @@ export class AddStudentInfoComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
+  updateStudent(): void {
+    this.service.updateStudent(this.studentInfo).subscribe(data => {
+      if (data.status === true) {
+        this.succesAlert('Updated Student In  formation Successfully!', 'success', 1500);
+        this.dialog.closeAll();
+      }
+      if (data.status === false) {
+        this.succesAlert(`Can't Update Student Information. Please check fields!`, 'error', 2000);
+      }
+      console.log(data, 'return ni siya');
+    });
+  }
+
   addStudent(): void {
+    console.log(this.studentInfo);
     this.service.addStudent(this.studentInfo).subscribe(data => {
       // tslint:disable-next-line:no-conditional-assignment
       if (data.error) {
@@ -192,27 +216,15 @@ export class AddStudentInfoComponent implements OnInit {
     });
   }
 
-  updateStudent(): void {
-    this.service.updateStudent(this.studentInfo).subscribe(data => {
-      if (data.status === true) {
-        this.succesAlert('Updated Student In  formation Successfully!', 'success', 1500);
-        this.dialog.closeAll();
-      }
-      if (data.status === false) {
-        this.succesAlert(`Can't Update Student Information. Please check fields!`, 'error', 2000);
-      }
-      console.log(data, 'return ni siya');
-    });
-  }
 
   addCredential(data): void {
-    if (this.studentInfo.studentCredentialPresentedForGrade.includes(data)) {
-      const index = this.studentInfo.studentCredentialPresentedForGrade.indexOf(data);
-      this.studentInfo.studentCredentialPresentedForGrade.splice(index, 1);
+    if (this.studentInfo.studentCredentialPresentedForGrade1.includes(data)) {
+      const index = this.studentInfo.studentCredentialPresentedForGrade1.indexOf(data);
+      this.studentInfo.studentCredentialPresentedForGrade1.splice(index, 1);
     } else {
-      this.studentInfo.studentCredentialPresentedForGrade.push(data);
+      this.studentInfo.studentCredentialPresentedForGrade1.push(data);
     }
-    console.log(this.studentInfo.studentCredentialPresentedForGrade, 'list ni sya');
+    console.log(this.studentInfo.studentCredentialPresentedForGrade1, 'list ni sya');
   }
 
   chooseQuarter(): void {
@@ -315,19 +327,42 @@ export class AddStudentInfoComponent implements OnInit {
   // }
   choosenSection(): void {
     // if(!this.graduating){
-      console.log(this.data[0], this.grade, this.section, '::: gradessss');
-      this.datas = { id: this.data[0], grade: this.grade, currentGrade: this.updatedGrade, section: this.section };
-      this.service.nextGrade(this.datas).subscribe(data => {
-        if (data.status) {
-          this.succesAlert('Successfully added to section ' + this.section + ' ' + this.updatedGrade, 'success', 1500);
-          this.dialog.closeAll();
-        } else {
-          this.succesAlert(data.error, 'error', 2000);
-          this.dialog.closeAll();
-        }
-        console.log(data, 'response sa server update grade level');
-      });
+    console.log(this.data[0], this.grade, this.section, '::: gradessss');
+    this.datas = { id: this.data[0], grade: this.grade, currentGrade: this.updatedGrade, section: this.section };
+    this.service.nextGrade(this.datas).subscribe(data => {
+      if (data.status) {
+        this.succesAlert('Successfully added to section ' + this.section + ' ' + this.updatedGrade, 'success', 1500);
+        this.dialog.closeAll();
+      } else {
+        this.succesAlert(data.error, 'error', 2000);
+        this.dialog.closeAll();
+      }
+      console.log(data, 'response sa server update grade level');
+    });
 
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add others for student
+    if ((value || '').trim()) {
+      this.studentInfo.studentOthers.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(others: any): void {
+    const index = this.studentInfo.studentOthers.indexOf(others);
+
+    if (index >= 0) {
+      this.studentInfo.studentOthers.splice(index, 1);
+    }
   }
 
 }

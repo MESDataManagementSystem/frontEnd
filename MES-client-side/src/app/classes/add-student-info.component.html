@@ -216,11 +216,24 @@
                             </mat-form-field>
                         </div>
                         <div class="col-4">
-                            <mat-form-field appearance="outline" class="inputField">
+                            <!-- <mat-form-field appearance="outline" class="inputField">
                                 <mat-label>Others </mat-label>
                                 <input matInput type='text' [(ngModel)]="studentInfo.studentOthers" name="studentOthers"
                                     #studentOthers="ngModel">
                                 <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field> -->
+                            <mat-form-field class="example-chip-list">
+                                <mat-label>Others: </mat-label>
+                                <mat-chip-list #chipList aria-label="Others selection">
+                                    <mat-chip *ngFor="let other of studentInfo.studentOthers" [selectable]="selectable"
+                                        [removable]="removable" (removed)="remove(other)">
+                                        {{other}}
+                                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                    </mat-chip>
+                                    <input placeholder="Others..." [matChipInputFor]="chipList"
+                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                        [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                                </mat-chip-list>
                             </mat-form-field>
                         </div>
                     </div>

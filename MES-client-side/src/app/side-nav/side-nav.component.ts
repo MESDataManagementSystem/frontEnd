@@ -8,12 +8,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./side-nav.component.css']
 })
 export class SideNavComponent implements OnInit {
+  loading = true;
   navRoute = [
     'Dashboard',
     'Graduated Students',
     'Teachers',
     'Classes',
-    'Settings'
+    'Settings',
+    'Students'
   ];
   navContent: any = [
     { name: 'Dashboard', icon: 'dashboard' },
@@ -31,7 +33,16 @@ export class SideNavComponent implements OnInit {
   ngOnInit(): void {
     if (!this.navRoute.includes(this.lateActive)) {
       this.lateActive = 'Classes';
+      this.loading = false;
+    } else if (this.lateActive === 'Students') {
+      this.lateActive = 'Graduated Students';
+      this.loading = false;
+      console.log(this.lateActive, 'lateActive');
+    } else {
+      this.loading = false;
+      console.log(this.lateActive, 'not equal');
     }
+    // console.log(this.lateActive)
   }
 
   childRoutes(content): void {
@@ -40,7 +51,7 @@ export class SideNavComponent implements OnInit {
     if (content === 'Graduated Students') {
       colorBlue = 'Students';
       const route = colorBlue.toLowerCase();
-      this.router.navigate([route ], { relativeTo: this.route });
+      this.router.navigate([route], { relativeTo: this.route });
     }
     const routes = colorBlue.toLowerCase();
     this.router.navigate([routes], { relativeTo: this.route });
@@ -64,7 +75,7 @@ export class SideNavComponent implements OnInit {
       if (result.isConfirmed) {
         this.logout();
       }
-    })
+    });
   }
 
 }

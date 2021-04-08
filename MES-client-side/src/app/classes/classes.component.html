@@ -5,7 +5,7 @@
 
 <div *ngIf="!isLoading">
     <div style="padding-left: 5%; padding-top: 1em;">
-        <h2>Grades And Sections 
+        <h2>Grades And Sections
             <button mat-icon-button class="addIcon" matTooltip="Add Section" (click)="openDialog()">
                 <mat-icon class='menuIcon'>add_circle</mat-icon>
             </button>
@@ -18,7 +18,7 @@
 
                 <div class="box" *ngFor="let section of sections">
                     <div class="card-header">
-                        {{section.sectionName}}
+                        {{section.section.sectionName}}
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -26,7 +26,7 @@
                                 <h3> Total Students: </h3>
                             </div>
                             <div class="col-2">
-                                <h3> 78 </h3>
+                                <h3>{{section.population}}</h3>
                             </div>
                         </div>
                         <div class="row">
@@ -34,14 +34,20 @@
                                 <h3> Adviser: </h3>
                             </div>
                             <div class="col-8">
-                                <h3> {{section.adviser.lastName}}, {{section.adviser.firstName}}
-                                    {{section.adviser.middleName}} </h3>
+                                <h3> {{section.section.adviser.lastName}}, {{section.section.adviser.firstName}}
+                                    {{section.section.adviser.middleName}} </h3>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
+                            <button class="viewStuBtn" mat-button
+                                (click)="viewStudents(section.section.sectionName)">view
                                 students</button>
+                            <div>
+                                <mat-icon class='editIcon' (click)='editAdviser(section.section.adviser._id)'>edit
+                                </mat-icon>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </mat-tab>
@@ -50,7 +56,7 @@
 
                 <div class="box" *ngFor="let section of sections">
                     <div class="card-header">
-                        {{section.sectionName}}
+                        {{section.section.sectionName}}
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -58,7 +64,9 @@
                                 <h3> Total Students: </h3>
                             </div>
                             <div class="col-2">
-                                <h3> 78 </h3>
+                                <h3 class='populationSection'>
+                                    <h3>{{section.population}}</h3>
+                                </h3>
                             </div>
                         </div>
                         <div class="row">
@@ -66,12 +74,13 @@
                                 <h3> Adviser: </h3>
                             </div>
                             <div class="col-8">
-                                <h3>{{section.adviser.lastName}}, {{section.adviser.firstName}}
-                                    {{section.adviser.middleName}} </h3>
+                                <h3>{{section.section.adviser.lastName}}, {{section.section.adviser.firstName}}
+                                    {{section.section.adviser.middleName}} </h3>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
+                            <button class="viewStuBtn" mat-button
+                                (click)="viewStudents(section.section.sectionName)">view
                                 students</button>
                         </div>
                     </div>
@@ -83,7 +92,7 @@
 
                 <div class="box" *ngFor="let section of sections">
                     <div class="card-header">
-                        {{section.sectionName}}
+                        {{section.section.sectionName}}
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -91,7 +100,7 @@
                                 <h3> Total Students: </h3>
                             </div>
                             <div class="col-2">
-                                <h3> 78 </h3>
+                                <h3>{{section.population}}</h3>
                             </div>
                         </div>
                         <div class="row">
@@ -99,12 +108,13 @@
                                 <h3> Adviser: </h3>
                             </div>
                             <div class="col-8">
-                                <h3> {{section.adviser.lastName}}, {{section.adviser.firstName}}
-                                    {{section.adviser.middleName}} </h3>
+                                <h3> {{section.section.adviser.lastName}}, {{section.section.adviser.firstName}}
+                                    {{section.section.adviser.middleName}} </h3>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
+                            <button class="viewStuBtn" mat-button
+                                (click)="viewStudents(section.section.sectionName)">view
                                 students</button>
                         </div>
                     </div>
@@ -116,7 +126,7 @@
 
                 <div class="box" *ngFor="let section of sections">
                     <div class="card-header">
-                        {{section.sectionName}}
+                        {{section.section.sectionName}}
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -124,7 +134,7 @@
                                 <h3> Total Students: </h3>
                             </div>
                             <div class="col-2">
-                                <h3> 78 </h3>
+                                <h3>{{section.population}}</h3>
                             </div>
                         </div>
                         <div class="row">
@@ -132,12 +142,13 @@
                                 <h3> Adviser: </h3>
                             </div>
                             <div class="col-8">
-                                <h3> {{section.adviser.lastName}}, {{section.adviser.firstName}}
-                                    {{section.adviser.middleName}} </h3>
+                                <h3> {{section.section.adviser.lastName}}, {{section.section.adviser.firstName}}
+                                    {{section.section.adviser.middleName}} </h3>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
+                            <button class="viewStuBtn" mat-button
+                                (click)="viewStudents(section.section.sectionName)">view
                                 students</button>
                         </div>
                     </div>
@@ -149,7 +160,7 @@
 
                 <div class="box" *ngFor="let section of sections">
                     <div class="card-header">
-                        {{section.sectionName}}
+                        {{section.section.sectionName}}
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -157,7 +168,7 @@
                                 <h3> Total Students: </h3>
                             </div>
                             <div class="col-2">
-                                <h3> 78 </h3>
+                                <h3>{{section.population}}</h3>
                             </div>
                         </div>
                         <div class="row">
@@ -165,12 +176,13 @@
                                 <h3> Adviser: </h3>
                             </div>
                             <div class="col-8">
-                                <h3> {{section.adviser.lastName}}, {{section.adviser.firstName}}
-                                    {{section.adviser.middleName}} </h3>
+                                <h3> {{section.section.adviser.lastName}}, {{section.section.adviser.firstName}}
+                                    {{section.section.adviser.middleName}} </h3>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
+                            <button class="viewStuBtn" mat-button
+                                (click)="viewStudents(section.section.sectionName)">view
                                 students</button>
                         </div>
                     </div>
@@ -182,7 +194,7 @@
 
                 <div class="box" *ngFor="let section of sections">
                     <div class="card-header">
-                        {{section.sectionName}}
+                        {{section.section.sectionName}}
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -190,7 +202,7 @@
                                 <h3> Total Students: </h3>
                             </div>
                             <div class="col-2">
-                                <h3> 78 </h3>
+                                <h3>{{section.population}}</h3>
                             </div>
                         </div>
                         <div class="row">
@@ -198,12 +210,13 @@
                                 <h3> Adviser: </h3>
                             </div>
                             <div class="col-8">
-                                <h3> {{section.adviser.lastName}}, {{section.adviser.firstName}}
-                                    {{section.adviser.middleName}} </h3>
+                                <h3> {{section.section.adviser.lastName}}, {{section.section.adviser.firstName}}
+                                    {{section.section.adviser.middleName}} </h3>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
+                            <button class="viewStuBtn" mat-button
+                                (click)="viewStudents(section.section.sectionName)">view
                                 students</button>
                         </div>
                     </div>
@@ -215,7 +228,7 @@
 
                 <div class="box" *ngFor="let section of sections">
                     <div class="card-header">
-                        {{section.sectionName}}
+                        {{section.section.sectionName}}
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -223,7 +236,7 @@
                                 <h3> Total Students: </h3>
                             </div>
                             <div class="col-2">
-                                <h3> 78 </h3>
+                                <h3>{{section.population}}</h3>
                             </div>
                         </div>
                         <div class="row">
@@ -231,12 +244,13 @@
                                 <h3> Adviser: </h3>
                             </div>
                             <div class="col-8">
-                                <h3> {{section.adviser.lastName}}, {{section.adviser.firstName}}
-                                    {{section.adviser.middleName}} </h3>
+                                <h3> {{section.section.adviser.lastName}}, {{section.section.adviser.firstName}}
+                                    {{section.section.adviser.middleName}} </h3>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="viewStuBtn" mat-button (click)="viewStudents(section.sectionName)">view
+                            <button class="viewStuBtn" mat-button
+                                (click)="viewStudents(section.section.sectionName)">view
                                 students</button>
                         </div>
                     </div>
@@ -245,5 +259,7 @@
             </mat-tab>
         </mat-tab-group>
     </div>
+</div>
+<div class="updateAdviser">
 
 </div>

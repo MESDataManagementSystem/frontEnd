@@ -31,7 +31,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { ChartsModule } from 'ng2-charts';
 
@@ -62,6 +63,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MultidatepickerComponent } from './multidatepicker/multidatepicker.component';
 import { YearPickerComponent } from './multidatepicker/year-picker/year-picker.component';
 import { DashboardDialogComponent } from './dashboard/dashboard-dialog.component';
+// import { UpdateTeacherModalComponent } from './classes/update-teacher-modal.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +123,8 @@ import { DashboardDialogComponent } from './dashboard/dashboard-dialog.component
     MatCheckboxModule,
     MatProgressSpinnerModule,
     MDBBootstrapModule,
-    ChartsModule
+    ChartsModule,
+    MatChipsModule
   ],
   providers: [
     HttpClient,

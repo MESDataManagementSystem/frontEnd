@@ -1,6 +1,6 @@
 <header>
 </header>
-<mat-sidenav-container>
+<mat-sidenav-container *ngIf="!loading">
     <mat-sidenav mode="side" [(opened)]='showSideNav'>
         <div class="box1">
             <mat-icon aria-hidden="false" aria-label="Example home icon" (click)='showSideNav = !showSideNav'>
