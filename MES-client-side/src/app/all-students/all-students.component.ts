@@ -77,7 +77,6 @@ export class AllStudentsComponent implements OnInit {
       } as string;
       this.dataSource.filter = filter;
     })
-
   }
 
   ngOnInit() { }
@@ -86,17 +85,17 @@ export class AllStudentsComponent implements OnInit {
     this.dialog.open(AddFormDialogComponent, { disableClose: true });
   }
 
-  selectFile(event): void {
-    this.selectedFiles = event.target.files;
-  }
+  // selectFile(event): void {
+  //   this.selectedFiles = event.target.files;
+  // }
 
-  csvInputChange(fileInputEvent: any): void {
-    console.log(fileInputEvent.target.files[0]);
-  }
+  // csvInputChange(fileInputEvent: any): void {
+  //   console.log(fileInputEvent.target.files[0]);
+  // }
 
-  myFunction(event): void {
-    alert(event);
-  }
+  // myFunction(event): void {
+  //   alert(event);
+  // }
 
   showFile(url): void {
     const datas = [];
