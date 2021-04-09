@@ -44,7 +44,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
                     <td mat-cell *matCellDef="let student">
                         <mat-icon class="editIcon"
-                            (click)="editFile(student.fileUrl, student.lrn, student.fullName, student.date)">edit
+                            (click)="editFile(student.fileUrl, student.lrn, student.fullName, student.date, student._id)">edit 
                         </mat-icon>
                     </td>
                 </ng-container>
@@ -72,3 +72,5 @@
         </button>
     </div>
 </div>
+
+

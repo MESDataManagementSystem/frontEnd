@@ -43,6 +43,11 @@ export class AllStudentsComponent implements OnInit {
       this.students = data
       this.dataSource = new MatTableDataSource<any>(this.students.data)
       var count = 0;
+      console.log(this.students.data, 'datasource')
+      if (this.students.data.length == 0) {
+        this.isLoading = false;
+        
+      }
       for (let i = 0; i < this.students.data.length; i++) {
         count = i;
         if (count == this.students.data.length - 1) {
@@ -73,7 +78,6 @@ export class AllStudentsComponent implements OnInit {
       } as string;
       this.dataSource.filter = filter;
     })
-
   }
 
   ngOnInit() { }
@@ -82,17 +86,17 @@ export class AllStudentsComponent implements OnInit {
     this.dialog.open(AddFormDialogComponent, { disableClose: true });
   }
 
-  selectFile(event): void {
-    this.selectedFiles = event.target.files;
-  }
+  // selectFile(event): void { 
+  //   this.selectedFiles = event.target.files;
+  // }
 
-  csvInputChange(fileInputEvent: any): void {
-    console.log(fileInputEvent.target.files[0]);
-  }
+  // csvInputChange(fileInputEvent: any): void {
+  //   console.log(fileInputEvent.target.files[0]);
+  // }
 
-  myFunction(event): void {
-    alert(event);
-  }
+  // myFunction(event): void {
+  //   alert(event);
+  // }
 
   showFile(url): void {
     const datas = [];
@@ -105,13 +109,14 @@ export class AllStudentsComponent implements OnInit {
     });
   }
 
-  editFile(url, lrn, name, date) {
+  editFile(url, lrn, name, date, id) {
 
     const datas = []
     datas.push(url);
     datas.push(lrn);
     datas.push(name);
     datas.push(date);
+    datas.push(id);
     this.dialog.open(ModalEditFormComponent, {
       disableClose: true,
       data: datas,

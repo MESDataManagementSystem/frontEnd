@@ -52,8 +52,7 @@ export const MY_FORMATS = {
 export class AddFormDialogComponent implements OnInit {
 
   displayDate = true
-  date1: any
-  date:any =new FormControl()
+  date: any = new FormControl()
   chosenDate: number = null
   maxDate = new Date();
   fullName: string;
@@ -78,12 +77,11 @@ export class AddFormDialogComponent implements OnInit {
   }
 
   addStudent(file) {
-    // this.year = Date()
-    alert(this.year);
-    var parts = this.year.toString().split(' ')
-    console.log(parts)
-    this.year = parts[3]
-    if (this.fullName.trim() && this.lrn){
+    if (!(typeof this.year == 'number')) {
+      var parts = this.year.toString().split(' ')
+      this.year = parts[3]
+    }
+    if (this.fullName.trim() && this.lrn) {
       if (file) {
         const formData = new FormData();
         formData.append('files', this.fileToUpload, this.fileToUpload.name);
@@ -92,9 +90,6 @@ export class AddFormDialogComponent implements OnInit {
         formData.append('date', this.year);
         formData.append('fileUrl', this.fileUrl);
         console.log(formData, 'formdataaa')
-        // formData.forEach(element => {
-          
-        // });
         formData.forEach(data => {
           console.log(data, 'dataaa');
           return data
@@ -133,12 +128,12 @@ export class AddFormDialogComponent implements OnInit {
     this.chosenDate = normalizedYear.year()
     this.date = new FormControl(moment())
     let ctrlValue = this.date.value;
-      ctrlValue.year(normalizedYear.year());
-      this.year = ctrlValue.year();
-      this.chosenDate = ctrlValue 
-      console.log(ctrlValue.year(), 'year ni siya')
-      this.date.setValue(ctrlValue);
-      datepicker.close();
+    ctrlValue.year(normalizedYear.year());
+    this.year = ctrlValue.year();
+    this.chosenDate = ctrlValue
+    console.log(ctrlValue.year(), 'year ni siya')
+    this.date.setValue(ctrlValue);
+    datepicker.close();
   }
 
 }

@@ -1,69 +1,12 @@
-// import { Component, OnInit, Inject, VERSION } from '@angular/core';
-// import { FormControl, Validators } from '@angular/forms';
-// import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-// import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
-// import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-// import { MatDatepicker } from '@angular/material/datepicker';
-
-// @Component({
-//   selector: 'app-modal-edit-form',
-//   templateUrl: './modal-edit-form.component.html',
-//   styleUrls: ['./modal-edit-form.component.css']
-// })
-// export class ModalEditFormComponent implements OnInit {
-//   version = VERSION;
-//   date = new Date();
-//   maxDate = new Date();
-
-//   visible = true;
-
-//   fullName: string;
-//   lrn: string;
-//   // year: any;
-//   fileUrl: string;
-//   error = new FormControl('', [Validators.required]);
-
-//   constructor(
-//     @Inject(MAT_DIALOG_DATA) public data: EditFiles,
-
-//   ) {
-//     // this.year = '';
-//   }
-
-//   ngOnInit(): void {
-//     if (this.data) {
-//       console.log(this.data)
-//       this.date = this.data[3]
-//       this.fullName = this.data[2]
-//       this.lrn = this.data[1]
-//       this.fileUrl = this.data[0]
-//     }
-//   }
-
-//   // All Fields Are Required 
-//   getErrorMessage() {
-//     if (this.error.hasError('required')) {
-//       return 'You must enter a value';
-//     }
-//   }
-
-// }
-
-// export interface EditFiles {
-//   fileUrl: string,
-//   lrn: string,
-//   fullName: string, 
-//   date: string
-// }
-
-
-
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
+import { StudentServiceService } from '../services/student-service.service';
+import { SwalService } from '../services/swal.service';
+
 
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
@@ -72,6 +15,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { default as _rollupMoment, Moment } from 'moment';
+import { FileInput } from 'ngx-material-file-input';
 
 const moment = _rollupMoment || _moment;
 
@@ -88,7 +32,6 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
-
 
 @Component({
   selector: 'app-modal-edit-form',
@@ -109,7 +52,9 @@ export const MY_FORMATS = {
 })
 
 export class ModalEditFormComponent implements OnInit {
-
+  focused = false
+  srcResult: any
+  displayFile = true
   displayDate = true
   date1: any
   date: any = new FormControl()
@@ -118,24 +63,48 @@ export class ModalEditFormComponent implements OnInit {
   fullName: string;
   lrn: string;
   year: any;
-  fileUrl: string;
+  fileUrl: any;
+  studentId: any;
+  notEditedUrl: any;
   error = new FormControl('', [Validators.required]);
-
+  fileToUpload: File = null;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: EditFiles,
-
+    private service: StudentServiceService,
+    private swal: SwalService
   ) {
-    this.year = '';
+    // this.year = '';
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
     if (this.data) {
-      console.log(this.data)
-      this.date1 = this.data[3]
+      console.log(this.data, 'arigato');
+
+      this.notEditedUrl = this.data[0]
+      this.year = this.data[3]
       this.fullName = this.data[2]
       this.lrn = this.data[1]
       this.fileUrl = this.data[0]
+      var f = this.fileUrl.split('/')
+      console.log(this.fileUrl, 'filename');
+      this.fileUrl = new FileInput([f[4]])
+      this.data[0] = f[4]
+      this.fileUrl = this.data[0]
+      this.studentId = this.data[4]
+      var x = this.year;
+      var y: number = +x;
+      // this.year = y
     }
+    
+  }
+
+  log() {
+
+    console.log(this.fileUrl)
+  }
+
+  showFolder() {
+    this.displayFile = false
   }
 
   // All Fields Are Required 
@@ -157,6 +126,75 @@ export class ModalEditFormComponent implements OnInit {
     this.date.setValue(ctrlValue);
     datepicker.close();
   }
+
+  // updateStudent(){
+  //   // if()
+  // }
+
+  updateStudent(file) {
+    // if(this.year != this.date1){
+      //  this.year = this.date1
+      
+      this.fileUrl = 'http://localhost:5000/uploads/';
+      if (!(typeof this.year == 'number')) {
+        var parts = this.year.toString().split(' ')
+        this.year = parts[3]
+      }
+    // }else{
+     
+    // }
+    // alert(this.year +" : "+ )
+    if(this.year == undefined){
+      this.year = this.data[3]
+    }
+      
+    if (this.fullName.trim() && this.lrn && this.year) {
+      // if(this.fileToUpload != null){
+        if (file) {
+          const formData = new FormData();
+          formData.append('files', this.fileToUpload, this.fileToUpload.name);
+          formData.append('fullName', this.fullName);
+          formData.append('lrn', this.lrn);
+          formData.append('date', this.year);
+          formData.append('fileUrl', this.fileUrl);
+          formData.append('id', this.studentId);
+          console.log(formData, 'formdataaa')
+          formData.forEach(data => {
+            console.log(data, 'dataaa');
+            return data
+          });
+          if (this.fileToUpload.name.split('.').pop() == 'pdf') {
+            this.service.updateStudentFormFile(formData).subscribe(data => {
+              if (data) {
+                this.swal.succesAlert()
+                // this.dialogRef.close()
+                console.log(data, 'result')
+              }
+            })
+          } else {
+            this.swal.errorAlertForPDFFile()
+          }
+        } else {
+          this.fileUrl = this.notEditedUrl;
+          var datas = {fullName: this.fullName, lrn: this.lrn, date: this.year, fileUrl: this.fileUrl, id: this.studentId}
+          this.service.updateStudentForm(datas).subscribe(data => {
+            if (data) {
+              this.swal.succesAlert()
+              //  this.dialogRef.close()
+              console.log(data, 'result')
+            }
+          })
+          // this.swal.errorAlertForAllFieldsAreRequired()
+        }
+      // }
+    } else {
+      this.swal.errorAlertForAllFieldsAreRequired()
+    }
+  }
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    console.log(this.fileToUpload, 'file');
+  } 
 
 }
 

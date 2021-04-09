@@ -92,15 +92,19 @@ export class SettingsComponent implements OnInit {
   teacherWithAccount(){
     this.authService.viewListOfTeachersAccount('Teacher').subscribe((data: any) => {
       // let count = 0;
+      var datasAccount = []
       this.account = data.data;
-      for (let i = 0; i <= this.account.length - 1; i++) {
-        this.authService.findTeacher(this.account[i].adviser).subscribe((teacher: any) => {
+      this.account.forEach(acct => {
+        this.authService.findTeacher(acct.adviser).subscribe((teacher: any) => {
           this.teacherHasAccount = teacher;
-          this.account[i] = { acc: this.account[i], adviser: this.teacherHasAccount };
-          this.dataSource = new MatTableDataSource<any>(this.account);
-          this.count = i;
-          if (this.count === this.account.length - 1) {
+          acct = { acc: acct, adviser: this.teacherHasAccount };
+          datasAccount.push(acct);
+          this.dataSource = new MatTableDataSource<any>(datasAccount);
+          this.count++
+          console.log( this.count + ' ' + this.account.length)
+          if (this.count === this.account.length) {
             this.isLoading = false;
+            console.log(datasAccount)
           }
           setTimeout(() => {
             this.dataSource.paginator = this.paginator;
@@ -109,12 +113,12 @@ export class SettingsComponent implements OnInit {
             return data.acc.username.toLocaleLowerCase().includes(filter)
           }
         });
-      }
-      if (this.account.length === 0) {
+      });
+       if (this.account.length === 0) {
         this.isLoading = false
       }
-    }),
-      error => this.isLoading = false;
+    })
+      // error => this.isLoading = false;
   }
 
   // Search Specific Teacher 

@@ -55,7 +55,7 @@ export class SideNavComponent implements OnInit {
     }
     const routes = colorBlue.toLowerCase();
     this.router.navigate([routes], { relativeTo: this.route });
-    console.log();
+    console.log(colorBlue,'arigato');
   }
 
   logout() {

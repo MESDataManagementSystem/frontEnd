@@ -78,7 +78,14 @@ export class StudentServiceService {
   populationStudents(): Observable<any> {
     return this.httpClient.get(`http://localhost:5000/api/populationStudents`);
   }
+// for update student form with file
+  updateStudentFormFile(fileToUpload: FormData): Observable<any> {
+    return this.httpClient.post('http://localhost:5000/uploadSingleFileUpdate', fileToUpload);
+  }
 
-
+// for update student form without file
+  updateStudentForm(data): Observable<any> {
+    return this.httpClient.post('http://localhost:5000/editGraduatedStudent', data);
+  }
 
 }

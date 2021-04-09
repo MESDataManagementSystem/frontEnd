@@ -21,7 +21,7 @@
     float: left;
     margin-left: 5%;
     margin-top: 3%;
-    border: 1px solid #f58f0a;
+    border: 1px solid #51749b;
     font-size: 50px !important;
     border-radius: 5px;
 }
@@ -48,12 +48,13 @@ h2 {
     text-transform: uppercase;
     max-height: 50px;
     height:100%;
-    background-color: #f58f0a;
+    background: #51749b !important;
+    /* background-color: #f58f0a; */
     /* background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlqWR4PFzYAozbYjItbLJuhZTO57V7WhkLzA&usqp=CAU'); */
 }
 
 .viewStuBtn {
-    padding: 2px 20px;
+    padding: 2px 20px;  
     text-align: center;
     text-decoration: none;
     display: inline-block;

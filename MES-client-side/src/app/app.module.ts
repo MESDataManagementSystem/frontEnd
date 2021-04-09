@@ -60,8 +60,8 @@ import { AddStudentInfoComponent } from './classes/add-student-info.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TeacherDashboardComponent } from './teacherSideUser/teacher-dashboard/teacher-dashboard.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { MultidatepickerComponent } from './multidatepicker/multidatepicker.component';
-import { YearPickerComponent } from './multidatepicker/year-picker/year-picker.component';
+// import { MultidatepickerComponent } from './multidatepicker/multidatepicker.component';
+// import { YearPickerComponent } from './multidatepicker/year-picker/year-picker.component';
 import { DashboardDialogComponent } from './dashboard/dashboard-dialog.component';
 // import { UpdateTeacherModalComponent } from './classes/update-teacher-modal.component';
 
@@ -84,8 +84,8 @@ import { DashboardDialogComponent } from './dashboard/dashboard-dialog.component
     AddStudentInfoComponent,
     SettingsComponent,
     TeacherDashboardComponent,
-    MultidatepickerComponent,
-    YearPickerComponent,
+    // MultidatepickerComponent,
+    // YearPickerComponent,
     DashboardDialogComponent
   ],
   imports: [
