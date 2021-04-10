@@ -88,6 +88,8 @@ export class AllTeachersComponent implements OnInit {
           count = i;
           if (count == this.teacherData.data.length - 1) {
             this.isLoading = false;
+          console.log(this.teacherData)
+
           }
         }
         setTimeout(() => {

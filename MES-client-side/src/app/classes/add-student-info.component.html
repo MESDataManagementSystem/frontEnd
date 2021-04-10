@@ -427,6 +427,7 @@
                                 <tr mdbTableCol>
                                     <td>MAPEH</td>
                                     <td>
+                                        {{studentSubject.mapeh}}
                                     </td>
                                 </tr>
 
@@ -493,27 +494,21 @@
                                     </td>
                                 </tr>
                                 <tr mdbTableCol>
-                                    <td>Arabic Language</td>
+                                    <td>Average </td>
                                     <td>
-                                        <mat-form-field appearance="outline" class="inputField">
-                                            <input type='number' min="0" max="100" matInput
-                                                [(ngModel)]="studentSubject.arabicLanguage" name="arabicLanguage"
-                                                #arabicLanguage="ngModel">
-                                            <!-- <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error> -->
-                                        </mat-form-field>
+                                        {{studentSubject.average}}
                                     </td>
                                 </tr>
-                                <tr mdbTableCol>
+                                <!-- <tr mdbTableCol>
                                     <td>Islamic Language</td>
                                     <td>
                                         <mat-form-field appearance="outline" class="inputField">
                                             <input type='number' min="0" max="100" matInput
                                                 [(ngModel)]="studentSubject.islamicLanguage" name="islamicLanguage"
                                                 #islamicLanguage="ngModel">
-                                            <!-- <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error> -->
                                         </mat-form-field>
                                     </td>
-                                </tr>
+                                </tr> -->
 
                             </tbody>
                         </table>

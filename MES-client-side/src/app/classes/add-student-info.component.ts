@@ -50,21 +50,22 @@ export class AddStudentInfoComponent implements OnInit {
   };
   studentSubject = {
     studentId: '',
-    motherTongue: '',
-    filipino: '',
-    english: '',
-    mathematics: '',
-    science: '',
-    aralingPanlipunan: '',
-    eppTle: '',
-    Mapeh: '',
-    music: '',
-    pe: '',
-    arts: '',
-    health: '',
-    edukasyonSaPagpapakatao: '',
-    arabicLanguage: '',
-    islamicLanguage: '',
+    motherTongue: 0,
+    filipino: 0,
+    english: 0,
+    mathematics: 0,
+    science: 0,
+    aralingPanlipunan: 0,
+    eppTle: 0,
+    mapeh: 0,
+    music: 0,
+    pe: 0,
+    arts: 0,
+    health: 0,
+    edukasyonSaPagpapakatao: 0,
+    arabicLanguage: 0,
+    islamicLanguage: 0,
+    average: 0,
     quarter: '',
     section: '',
     grade: '',
@@ -139,6 +140,8 @@ export class AddStudentInfoComponent implements OnInit {
     this.studentSubject.grade = this.grade;
     this.studentSubject.section = this.data[4];
     this.studentSubject.currentGrade = this.grade;
+    this.average();
+
   }
 
   ngOnInit(): void {
@@ -163,6 +166,22 @@ export class AddStudentInfoComponent implements OnInit {
   getErrorMessage(): string {
     if (this.error.hasError('required')) {
       return 'You must enter a value';
+    }
+  }
+  // motherTongue: 0,
+  //   filipino: 0,
+  //   english: 0,
+  //   mathematics: 0,
+  //   science: 0,
+  //   aralingPanlipunan: 0,
+  //   eppTle: 0,
+  // Compute average
+  average(){
+    this.studentSubject.mapeh = (this.studentSubject.arts + this.studentSubject.music + this.studentSubject.pe + this.studentSubject.health)/4;
+    if(this.studentSubject.grade === 'Grade 4' ||this.studentSubject.grade === 'Grade 5' || this.studentSubject.grade === 'Grade 6'  ){
+      this.studentSubject.average = ( this.studentSubject.filipino + this.studentSubject.english + this.studentSubject.science + this.studentSubject.mathematics + this.studentSubject.aralingPanlipunan + this.studentSubject.eppTle + this.studentSubject.mapeh + this.studentSubject.edukasyonSaPagpapakatao)/9
+    }else if(this.studentSubject.grade === 'Grade 1' ||this.studentSubject.grade === 'Grade 2' || this.studentSubject.grade === 'Grade 3' ||this.studentSubject.grade === 'Kindergarten'){
+      this.studentSubject.average = ( this.studentSubject.motherTongue + this.studentSubject.english + this.studentSubject.science + this.studentSubject.mathematics + this.studentSubject.aralingPanlipunan +  this.studentSubject.mapeh + this.studentSubject.edukasyonSaPagpapakatao)/7
     }
   }
 
@@ -253,6 +272,7 @@ export class AddStudentInfoComponent implements OnInit {
   }
 
   addStudentGrades(): void {
+    this.average();
     this.studentSubject.studentId = this.data[0];
     this.studentSubject.quarter = this.quarter;
     console.log(this.studentSubject, 'added')

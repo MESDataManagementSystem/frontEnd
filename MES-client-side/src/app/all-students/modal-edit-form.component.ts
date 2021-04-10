@@ -183,7 +183,8 @@ export class ModalEditFormComponent implements OnInit {
           var datas = {fullName: this.fullName, lrn: this.lrn, date: this.year, fileUrl: this.fileUrl, id: this.studentId}
           this.service.updateStudentForm(datas).subscribe(data => {
             if (data) {
-              this.reloadComponent();
+              // this.reloadComponent();
+              // this.
               this.swal.succesAlert()
               //  this.dialogRef.close()
               console.log(data, 'result')

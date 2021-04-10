@@ -100,7 +100,7 @@ export class AddFormDialogComponent implements OnInit {
         if (this.fileToUpload.name.split('.').pop() == 'pdf') {
           this.service.studentForm(formData).subscribe(data => {
             if (data) {
-              this.reloadComponent();
+              // this.reloadComponent();
               this.swal.succesAlert()
               this.dialogRef.close()
             }

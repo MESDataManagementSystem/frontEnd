@@ -54,9 +54,9 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> View </th>
                 <td mat-cell *matCellDef="let student">
                     <div class="dropdown">
-                        <mat-icon color="primary" (click)='showFile()' id="dropdownMenuButton"> visibility </mat-icon>
+                        <mat-icon color="primary" (click)='showFile(student._id)' id="dropdownMenuButton"> visibility </mat-icon>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" aria-haspopup="true">
-                            <a class="dropdown-item" (click)='showFile()'>Form10</a>
+                            <a class="dropdown-item" (click)='showFile(student._id)'>Form10</a>
                         </div>
                     </div>
                 </td>

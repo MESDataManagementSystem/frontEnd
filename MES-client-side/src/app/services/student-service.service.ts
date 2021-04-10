@@ -88,4 +88,9 @@ export class StudentServiceService {
     return this.httpClient.post('http://localhost:5000/editGraduatedStudent', data);
   }
 
+  // for viewing form10 of current student
+  viewForm10(id): Observable<any> {
+    return this.httpClient.get(`http://localhost:5000/api/form10/${id}`);
+  }
+
 }
