@@ -36,6 +36,17 @@ export class TeacherServiceService {
       )
   }
 
+  // For Updating Teacher Status
+  findAdviserActive(id) {
+    return this.http.get(`${this.url}/api/findAdviser/${id}`)
+      .pipe(
+        catchError(e => {
+          this.swal.errorAlertForSomethingWentWrong()
+          throw new Error(e)
+        })
+      )
+  }
+
   // Add Teachers
   addTeacher(teachersForm) {
     return this.http.post(`${this.url}/api/addTeachersInfo`, teachersForm).pipe(

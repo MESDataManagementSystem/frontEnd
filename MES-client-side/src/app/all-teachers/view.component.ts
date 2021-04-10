@@ -136,7 +136,7 @@ export class ViewComponent implements OnInit {
       denyButtonText: `Don't save`,
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire('Saved!', '', 'success')
+        // Swal.fire('Saved!', '', 'success')
         this.updateTeacherInfo();
       } else if (result.isDenied) {
         Swal.fire('Changes are not saved', '', 'info')
@@ -180,17 +180,55 @@ export class ViewComponent implements OnInit {
       this.data.philHealthNumber !== null && this.data.philHealthNumber !== '' &&
       this.data.gsisBPNumber !== null && this.data.gsisBPNumber !== '' &&
       this.data.pagIbigNumber !== null && this.data.pagIbigNumber !== '' &&
-      this.data.availableServiceCredits !== null && this.data.availableServiceCredits !== '' && 
+      this.data.availableServiceCredits !== null && this.data.availableServiceCredits !== '' &&
       this.data.activeStatus !== null && this.data.activeStatus !== ''
     ) {
-      this.teacherService.updateTeacher(this.data).subscribe(data => {
-        if (data) {
-          this.dialog.closeAll();
+
+      this.teacherService.findAdviserActive(this.data._id).subscribe((dat: any) => {
+        console.log(dat, "arigato");
+
+        if (dat.status === true) {
+          this.teacherService.updateTeacher(this.data).subscribe(data => {
+            if (data) {
+              this.swal.succesAlert()
+              this.dialog.closeAll();
+            }
+          })
+        } else {
+          var teacherAdviser = ''
+          var count = 0
+          dat.data.forEach(adviser => {
+            teacherAdviser += adviser.gradeLevel + ' : ' + adviser.sectionName + '<br>'
+            if (count === dat.data.length - 1) {
+              // this.succesAlert('Please change the advisory class before changing the status ' + teacherAdviser, 'error', '');
+              Swal.fire({
+                html: '<pre>' + 
+                '<p>' + 'Please change the advisory class <br>before changing the status ' + '<p>' 
+                + '<br>' + teacherAdviser + '</pre>',
+                customClass: {
+                  popup: 'format-pre'
+                }
+              });
+            }
+            count++
+          });
+
         }
       })
     } else {
       this.swal.errorAlertForTeacherFieldsRequired();
     }
   }
+
+  succesAlert(Text, Icon, Timer): void {
+    Swal.fire({
+      icon: Icon,
+      title: 'Message',
+      text: Text,
+      showConfirmButton: false,
+      timer: Timer
+    });
+  }
+
 
 }
