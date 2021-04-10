@@ -7,6 +7,8 @@ import { StudentServiceService } from '../services/student-service.service';
 import { AddFormDialogComponent } from './modal-add-form.component';
 import { ModalViewFormComponent } from './modal-view-form.component';
 import { ModalEditFormComponent } from './modal-edit-form.component';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-all-students',
@@ -36,7 +38,8 @@ export class AllStudentsComponent implements OnInit {
   constructor(
     private service: StudentServiceService,
     private dialog: MatDialog,
-    formBuilder: FormBuilder
+    formBuilder: FormBuilder,
+    public router: Router
   ) {
     this.typeSearch = 'LRN';
     this.service.retrieveData().subscribe(data => {
@@ -123,6 +126,12 @@ export class AllStudentsComponent implements OnInit {
       width: '100vw !important',
       height: '100% !important'
     })
+  }
+  reloadComponent(): void {
+    const currentUrl = this.router.url;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([currentUrl]);
   }
 
 }

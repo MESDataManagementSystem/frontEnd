@@ -44,4 +44,9 @@ export class SectionService {
     return this.http.get(`${this.url}/api/generateSection/${section}`);
   }
 
+  updateSection(datas): Observable<any> {
+    console.log(datas)
+    return this.http.put(`${this.url}/api/updateSection/${datas._id}`, datas);
+  }
+
 }

@@ -5,7 +5,8 @@ import { TeacherServiceService } from '../services/teacher-service.service';
 import { DateRange } from '@angular/material/datepicker';
 import { DashboardDialogComponent } from './dashboard-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-
+declare var require: any;
+const FileSaver = require('file-saver');
 
 
 @Component({
@@ -14,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+// download empty form 10 url  http://localhost:5000/uploads/new.xlsx
   teachers = 15;
   students = 675;
   public chartType = 'bar';
@@ -73,8 +74,11 @@ export class DashboardComponent implements OnInit {
         scales: {
           yAxes: [{ id: 'y-axis-1', type: 'linear', position: 'left', ticks: { min: 0, max: Math.max(...this.datas) } }]
         }
+        
       };
+      
       this.totalNumberofStudents = this.datas.reduce((a, b) => a + b, 0);
+      // this.isLoading = false;
       this.teacherService.teacherPopulation().subscribe((teachers: any) => {
         console.log(teachers);
         this.totalNumberofAdvisory = teachers.data[0].advisory;
@@ -84,7 +88,7 @@ export class DashboardComponent implements OnInit {
         this.teachersAdvisory = teachers.advisory;
         this.teachersNonAdvisory = teachers.nonAdvisory;
         this.isLoading = false;
-      });
+      }); 
     },
       error => {
         console.log('error');
@@ -129,6 +133,11 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  downloadEmptyForm(){
+      const pdfUrl =  'http://localhost:5000/uploads/emptyForm10.xlsx';
+      const pdfName = 'emptyForm10.xlsx';
+      FileSaver.saveAs(pdfUrl, pdfName);
+  }
 
 
 }

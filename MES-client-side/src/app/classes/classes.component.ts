@@ -46,7 +46,7 @@ export class ClassesComponent implements OnInit {
 
   // Dialog For Adding section
   openDialog(): void {
-    this.dialog.open(AddSectionComponent, { disableClose: true });
+    this.dialog.open(AddSectionComponent, { disableClose: true, data: 'addSection' });
   }
 
   selectedGrade(grade): void {
@@ -100,8 +100,15 @@ export class ClassesComponent implements OnInit {
     this.router.navigate(['/MES/classes', this.grade, section]);
   }
 
-  editAdviser(id): void {
-    alert(id);
+  editAdviser(sectionId, ln, fn, mn, adviserId): void {
+    // alert(id);
+    let datas = {data:{_id: sectionId,
+      lastName: ln,
+      firstName: fn,
+      middleName: mn},
+      adviserId: adviserId
+    }
+    this.dialog.open(AddSectionComponent, { disableClose: true, data: datas });
   }
 
   // send section to child component (students in specific section)

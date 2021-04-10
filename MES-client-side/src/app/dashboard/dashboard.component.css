@@ -1,6 +1,4 @@
-i:hover{
-  color:blue
-}
+
  
 .content{
   margin-left: 20px;
@@ -42,6 +40,9 @@ h3 {
   margin-right: 10px;
   margin-top: 40px;
 }
+.fas1:hover{
+  color:blue
+}
 
 .user {
   margin-left: 30%;
@@ -49,7 +50,8 @@ h3 {
 
 .icon1 {
   background: #00BFFF !important;
-  border: 1px solid #00BFFF;  
+  border: 1px solid #00BFFF; 
+  
 }
 
 .icon2 {
@@ -70,6 +72,7 @@ h3 {
 .iconBox {
   width: 100px;
   height: 100px;
+  color: rgba(0, 0, 0, .7) !important;
 }
 
 /* .mainBox {
@@ -118,4 +121,9 @@ mat-card-content {
   display: block;
   max-width: 850px;
   border: 0;
+}
+
+.emptyForm{
+  float: right;
+  margin-top: 3px
 }

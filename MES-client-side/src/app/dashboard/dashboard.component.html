@@ -4,10 +4,14 @@
 </div>
 <div class="content" *ngIf="!isLoading">
     <h2>Dashboard</h2>
+    <div class = 'emptyForm'>
+        <button mat-button color="primary" (click) ='downloadEmptyForm()'>Download empty Form10 <mat-icon>south</mat-icon></button>
+    </div>
     <hr>
     <div class="row">
         <h1>S.Y. {{schoolYear}}</h1>
     </div>
+    
     <div class="row">
         <div class="box">
             <mat-card>

@@ -6,6 +6,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
+import { Router } from '@angular/router';
+
 
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
@@ -65,7 +67,8 @@ export class AddFormDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<AddFormDialogComponent>,
     private service: StudentServiceService,
-    private swal: SwalService
+    private swal: SwalService,
+    public router: Router
   ) {
     this.fullName = '';
     this.lrn = '';
@@ -97,6 +100,7 @@ export class AddFormDialogComponent implements OnInit {
         if (this.fileToUpload.name.split('.').pop() == 'pdf') {
           this.service.studentForm(formData).subscribe(data => {
             if (data) {
+              this.reloadComponent();
               this.swal.succesAlert()
               this.dialogRef.close()
             }
@@ -134,6 +138,12 @@ export class AddFormDialogComponent implements OnInit {
     console.log(ctrlValue.year(), 'year ni siya')
     this.date.setValue(ctrlValue);
     datepicker.close();
+  }
+  reloadComponent(): void {
+    const currentUrl = this.router.url;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([currentUrl]);
   }
 
 }

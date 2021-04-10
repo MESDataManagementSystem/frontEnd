@@ -90,7 +90,7 @@ export class AddStudentInfoComponent implements OnInit {
   visible = true;
   selectable = true;
   removable = true;
-  addOnBlur = true;
+  addOnBlur = true; 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   // tslint:disable-next-line:max-line-length

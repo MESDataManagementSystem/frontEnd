@@ -35,7 +35,7 @@
                             </div>
                             <div class="col-8">
                                 <h3> {{section.section.adviser.lastName}}, {{section.section.adviser.firstName}}
-                                    {{section.section.adviser.middleName}} </h3>
+                                    {{section.section.adviser.middleName}}</h3>
                             </div>
                         </div>
                         <div class="card-footer">
@@ -43,7 +43,7 @@
                                 (click)="viewStudents(section.section.sectionName)">view
                                 students</button>
                             <div>
-                                <mat-icon class='editIcon' (click)='editAdviser(section.section.adviser._id)'>edit
+                                <mat-icon class='editIcon' (click)='editAdviser(section.section._id, section.section.adviser.lastName, section.section.adviser.firstName, section.section.adviser.middleName, section.section.adviser._id)'>edit
                                 </mat-icon>
                             </div>
                         </div>

@@ -6,6 +6,8 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MatDatepicker } from '@angular/material/datepicker';
 import { StudentServiceService } from '../services/student-service.service';
 import { SwalService } from '../services/swal.service';
+import { Router } from '@angular/router';
+
 
 
 // Depending on whether rollup is used, moment needs to be imported differently.
@@ -71,7 +73,8 @@ export class ModalEditFormComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: EditFiles,
     private service: StudentServiceService,
-    private swal: SwalService
+    private swal: SwalService,
+    public router: Router
   ) {
     // this.year = '';
   }
@@ -166,6 +169,7 @@ export class ModalEditFormComponent implements OnInit {
           if (this.fileToUpload.name.split('.').pop() == 'pdf') {
             this.service.updateStudentFormFile(formData).subscribe(data => {
               if (data) {
+                this.reloadComponent();
                 this.swal.succesAlert()
                 // this.dialogRef.close()
                 console.log(data, 'result')
@@ -179,6 +183,7 @@ export class ModalEditFormComponent implements OnInit {
           var datas = {fullName: this.fullName, lrn: this.lrn, date: this.year, fileUrl: this.fileUrl, id: this.studentId}
           this.service.updateStudentForm(datas).subscribe(data => {
             if (data) {
+              this.reloadComponent();
               this.swal.succesAlert()
               //  this.dialogRef.close()
               console.log(data, 'result')
@@ -195,6 +200,13 @@ export class ModalEditFormComponent implements OnInit {
     this.fileToUpload = files.item(0);
     console.log(this.fileToUpload, 'file');
   } 
+
+  reloadComponent(): void {
+    const currentUrl = this.router.url;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([currentUrl]);
+  }
 
 }
 
