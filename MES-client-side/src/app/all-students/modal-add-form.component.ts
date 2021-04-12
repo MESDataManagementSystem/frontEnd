@@ -6,6 +6,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
+import { Router } from '@angular/router';
+
 
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
@@ -27,7 +29,7 @@ export const MY_FORMATS = {
     dateInput: 'YYYY',
     monthYearLabel: 'MMM YYYY',
     dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'YYYY',
+    monthYearA11yLabel: 'MMMM YYYY',
   },
 };
 
@@ -35,7 +37,7 @@ export const MY_FORMATS = {
 @Component({
   selector: 'app-modal-add-form',
   templateUrl: './modal-add-form.component.html',
-  styleUrls: ['./modal-add-form.component.css'],
+  styleUrls: ['./modal-add-form.component.scss'],
   providers: [
     // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
     // application's root module. We provide it at the component level here, due to limitations of
@@ -51,7 +53,9 @@ export const MY_FORMATS = {
 })
 export class AddFormDialogComponent implements OnInit {
 
-  date = new FormControl(moment());
+  displayDate = true
+  date: any = new FormControl()
+  chosenDate: number = null
   maxDate = new Date();
   fullName: string;
   lrn: string;
@@ -63,7 +67,8 @@ export class AddFormDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<AddFormDialogComponent>,
     private service: StudentServiceService,
-    private swal: SwalService
+    private swal: SwalService,
+    public router: Router
   ) {
     this.fullName = '';
     this.lrn = '';
@@ -75,7 +80,11 @@ export class AddFormDialogComponent implements OnInit {
   }
 
   addStudent(file) {
-    if (this.fullName.trim() && this.lrn.trim()) {
+    if (!(typeof this.year == 'number')) {
+      var parts = this.year.toString().split(' ')
+      this.year = parts[3]
+    }
+    if (this.fullName.trim() && this.lrn) {
       if (file) {
         const formData = new FormData();
         formData.append('files', this.fileToUpload, this.fileToUpload.name);
@@ -83,12 +92,15 @@ export class AddFormDialogComponent implements OnInit {
         formData.append('lrn', this.lrn);
         formData.append('date', this.year);
         formData.append('fileUrl', this.fileUrl);
+        console.log(formData, 'formdataaa')
         formData.forEach(data => {
+          console.log(data, 'dataaa');
           return data
         });
         if (this.fileToUpload.name.split('.').pop() == 'pdf') {
           this.service.studentForm(formData).subscribe(data => {
             if (data) {
+              // this.reloadComponent();
               this.swal.succesAlert()
               this.dialogRef.close()
             }
@@ -116,12 +128,22 @@ export class AddFormDialogComponent implements OnInit {
   }
 
   chosenYearHandler(normalizedYear: Moment, datepicker: MatDatepicker<Moment>) {
+    this.displayDate = false;
+    this.chosenDate = normalizedYear.year()
+    this.date = new FormControl(moment())
     let ctrlValue = this.date.value;
     ctrlValue.year(normalizedYear.year());
     this.year = ctrlValue.year();
+    this.chosenDate = ctrlValue
     console.log(ctrlValue.year(), 'year ni siya')
     this.date.setValue(ctrlValue);
     datepicker.close();
+  }
+  reloadComponent(): void {
+    const currentUrl = this.router.url;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([currentUrl]);
   }
 
 }

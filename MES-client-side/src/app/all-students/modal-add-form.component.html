@@ -6,28 +6,40 @@
     <mat-dialog-content class="mat-typography">
       <div class="container">
         <div class="row">
-          <div class="col-3">
-            <mat-form-field appearance="outline" class="inputField">
+          <div class="col-6">
+            <mat-form-field appearance="outline" class="inputField" *ngIf='displayDate'>
+              <mat-label>Year Graduated</mat-label>
+              <input matInput [matDatepicker]="dp" [(ngModel)]="year" [max]="maxDate" required autocomplete="off">
+              <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+              <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event, dp)"
+                panelClass="year-picker">
+              </mat-datepicker>
+              <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="inputField" *ngIf='!displayDate'>
               <mat-label>Year Graduated</mat-label>
               <input matInput [matDatepicker]="dp" [formControl]="date" [max]="maxDate" required autocomplete="off">
               <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
               <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event, dp)"
-                panelClass="example-month-picker">
+                panelClass="year-picker">
               </mat-datepicker>
               <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </div>
-          <div class="col-3">
+          <div class="col-6">
             <mat-form-field appearance="outline" class="inputField">
               <mat-label>LRN</mat-label>
-              <input matInput type="text" [(ngModel)]="lrn" required>
+              <input matInput type="number" [(ngModel)]="lrn" required>
               <mat-icon *ngIf="lrn" mat-button matSuffix mat-icon-button aria-label="Clear" (click)="lrn=''">
                 close
               </mat-icon>
               <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </div>
-          <div class="col-3">
+        </div>
+        <div class="row">
+          <div class="col-6">
             <mat-form-field appearance="outline" class="inputField">
               <mat-label>Full Name</mat-label>
               <input matInput type="text" [(ngModel)]="fullName" required>
@@ -37,7 +49,7 @@
               <mat-error *ngIf="error.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </div>
-          <div class="col-3">
+          <div class="col-6">
             <mat-form-field appearance="outline" class="inputField">
               <mat-label>Attach File</mat-label>
               <ngx-mat-file-input #fileInput type="file" (change)="handleFileInput($event.target.files)" required

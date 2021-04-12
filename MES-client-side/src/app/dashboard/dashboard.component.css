@@ -1,12 +1,129 @@
-mat-card {
-   width: 233px;
-   height: 250px;
-   margin-left: 5%;
-   margin-top: 3%;
-  }
-  
-  img {
-    height: 150px;
-    width: 233px;
-  }
 
+ 
+.content{
+  margin-left: 20px;
+  padding-right: 20px;
+}
+
+h2 {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 25px;
+}
+
+h1 {
+  float: left;
+  margin-left: 40%;
+  font-weight: bold;
+  font-size: 40px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
+}
+
+h3 {
+  margin-left: 35%;
+  margin-top: -23%;
+  font-size: 19px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
+}
+
+.fass {
+  font-size: 35px;
+  margin-left: 26%;
+  margin-top: 28%;
+}
+
+.fas1 {
+  font-size: 20px; 
+  float: right;
+  color: #2080FF;
+  margin-right: 10px;
+  margin-top: 40px;
+}
+.fas1:hover{
+  color:blue
+}
+
+.user {
+  margin-left: 30%;
+}
+
+.icon1 {
+  background: #00BFFF !important;
+  border: 1px solid #00BFFF; 
+  
+}
+
+.icon2 {
+  background: #4da64d !important;
+  border: 1px solid #4da64d;
+}
+
+.icon3 {
+  background: #CB2521 !important;
+  border: 1px solid #CB2521;
+}
+
+.icon4 {
+  background: #daa520  !important;
+  border: 1px solid #daa520;
+}
+
+.iconBox {
+  width: 100px;
+  height: 100px;
+  color: rgba(0, 0, 0, .7) !important;
+}
+
+/* .mainBox {
+  width: auto;
+  min-width: 230px;
+  max-width: 600px;
+  height: 100px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+} */
+
+mat-card {
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+  position: relative;
+  padding: 0;
+  border-radius: 4px;
+  width: 400px;
+  height: 100px;
+  margin-top: 20px;
+  float: left;
+  margin-right: 20px;
+}
+
+
+mat-card-content {
+  width: auto;
+  min-width: 230px;
+  max-width: 600px;
+  height: 100px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media only screen and (max-width: 400px) {
+  mat-card {
+    width: 300px;
+  }
+  .fas1{
+    margin-top: 30px;
+    
+  }
+}
+
+.box{
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  max-width: 850px;
+  border: 0;
+}
+
+.emptyForm{
+  float: right;
+  margin-top: 3px
+}

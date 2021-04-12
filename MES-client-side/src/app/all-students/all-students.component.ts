@@ -1,5 +1,5 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder } from '@angular/forms';
+import { Component, ViewChild, OnInit, VERSION } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,6 +7,8 @@ import { StudentServiceService } from '../services/student-service.service';
 import { AddFormDialogComponent } from './modal-add-form.component';
 import { ModalViewFormComponent } from './modal-view-form.component';
 import { ModalEditFormComponent } from './modal-edit-form.component';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-all-students',
@@ -15,9 +17,17 @@ import { ModalEditFormComponent } from './modal-edit-form.component';
 })
 export class AllStudentsComponent implements OnInit {
 
+  version = VERSION;
+  date = new Date();
+  chosenYearDate: Date;
+  maxDate = new Date();
+
+  visible = true;
+
   lrn = true;
   typeSearch: string;
   selectedFiles: File;
+  isLoading = true;
 
   students: any;
   dataSource: MatTableDataSource<any>
@@ -28,12 +38,25 @@ export class AllStudentsComponent implements OnInit {
   constructor(
     private service: StudentServiceService,
     private dialog: MatDialog,
-    formBuilder: FormBuilder
+    formBuilder: FormBuilder,
+    public router: Router
   ) {
     this.typeSearch = 'LRN';
     this.service.retrieveData().subscribe(data => {
       this.students = data
       this.dataSource = new MatTableDataSource<any>(this.students.data)
+      var count = 0;
+      console.log(this.students.data, 'datasource')
+      if (this.students.data.length == 0) {
+        this.isLoading = false;
+        
+      }
+      for (let i = 0; i < this.students.data.length; i++) {
+        count = i;
+        if (count == this.students.data.length - 1) {
+          this.isLoading = false;
+        }
+      }
       setTimeout(() => {
         this.dataSource.paginator = this.paginator;
       }, 0),
@@ -44,6 +67,8 @@ export class AllStudentsComponent implements OnInit {
           return lrnFilter && fullNameFilter && yearFilter;
         }) as (data, string) => boolean;
     })
+    error => this.isLoading = false
+
     this.formControl = formBuilder.group({
       lrn: "",
       fullName: "",
@@ -56,7 +81,6 @@ export class AllStudentsComponent implements OnInit {
       } as string;
       this.dataSource.filter = filter;
     })
-
   }
 
   ngOnInit() { }
@@ -65,17 +89,17 @@ export class AllStudentsComponent implements OnInit {
     this.dialog.open(AddFormDialogComponent, { disableClose: true });
   }
 
-  selectFile(event): void {
-    this.selectedFiles = event.target.files;
-  }
+  // selectFile(event): void { 
+  //   this.selectedFiles = event.target.files;
+  // }
 
-  csvInputChange(fileInputEvent: any): void {
-    console.log(fileInputEvent.target.files[0]);
-  }
+  // csvInputChange(fileInputEvent: any): void {
+  //   console.log(fileInputEvent.target.files[0]);
+  // }
 
-  myFunction(event): void {
-    alert(event);
-  }
+  // myFunction(event): void {
+  //   alert(event);
+  // }
 
   showFile(url): void {
     const datas = [];
@@ -88,18 +112,26 @@ export class AllStudentsComponent implements OnInit {
     });
   }
 
-  editFile(url, lrn, name, date) {
+  editFile(url, lrn, name, date, id) {
+
     const datas = []
     datas.push(url);
     datas.push(lrn);
     datas.push(name);
     datas.push(date);
+    datas.push(id);
     this.dialog.open(ModalEditFormComponent, {
       disableClose: true,
       data: datas,
       width: '100vw !important',
       height: '100% !important'
     })
+  }
+  reloadComponent(): void {
+    const currentUrl = this.router.url;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([currentUrl]);
   }
 
 }

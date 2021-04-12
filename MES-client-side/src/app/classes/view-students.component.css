@@ -1,101 +1,93 @@
-mat-form-field {
-    width: 200px;
-    padding-left: 20px;
-    float: left;
-  }
-  
-  button{
-    float: left;
-  }
-  
-  .content{
-    padding-left: 20px;
-  }
-  
-  .mat-table {
-    margin-top: 12%;
-  }
-  
-  .mat-cell,
-  .mat-header-cell {
-    word-wrap: initial;
-    display: table-cell;
-    line-break: unset;
-    width: 47%;
-    white-space: nowrap;
-    vertical-align: middle;
-  }
-  
-  .mat-row:hover {
-    background-color: #dcdedc;
-    color: black;
-  }
-  
-  .mat-header-cell{
-    color: green;
-    text-align: justify;
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-    background-color: white;
-    font-size: medium;
-  }
-  
-  .mat-elevation-z8{
-    width: 80%;
-    margin-right: auto;
-    margin-left: auto;
-    display: block;
-  }
-  
-  .addIcon{
-    margin-left: 85%;
-    transform: scale(2);
-    margin-top: 3%;
-    color: green
-  }
-  
-  .menuIcon{
-    margin-left:0;
-    float: left;
-  }
-  .form{
-    margin-right: auto;
-    margin-left: auto;
-    display: block;
-  }
-  .dropdown:hover>.dropdown-menu {
-    display: block;
-  }
-  
-  .dropdown>.dropdown-toggle:active {
-    /*Without this, clicking will make it sticky*/
-      pointer-events: none;
-  }
-  .editIcon{
-    margin-left: 50px;
-  }
-  .infoIcon{
-    margin-left: 50px;
-  }
-  .medal{
-    float: right;
-    margin-right: 5%;
-    cursor: pointer;
-  }
-  /* editIcon{
+.content{
+  padding-left: 20px;
+}
 
-  } */
-  /* ::ng-deep .mat-input-underline { display: none; }  */
-  /* mat-select  {
-    display: none;
-  } */
-  /* .searchIcon{
-    margin-left: 20%;
-  } */
-  
-  /* mat-header-cell{
-    position: fixed;
-  } */
-  
-  
+h2 {
+  font-size: 25px;
+}
+
+mat-form-field {
+  min-width: 150px;
+  max-width: 300px;
+  width: 100%;
+  padding-left: 20px;
+}
+
+.mat-table {
+  margin-top: 3%;
+  width: 100%;
+}
+
+.mat-cell,
+.mat-header-cell {
+  word-wrap: initial;
+  display: table-cell;
+  line-break: unset;
+  width: 45%;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.mat-row:hover {
+  background-color: #dcdedc;
+  color: black;
+}
+
+.mat-header-cell{
+  background: #51749b !important;
+    color: #FFFFFF;
+  text-align: justify;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  background-color: white;
+  font-size: medium;
+}
+
+.mat-elevation-z8{
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
+
+.addIcon{
+  margin-right: 15%;
+  float: right;
+  transform: scale(2);
+  margin-top: 1%;
+  color: #5CB85C
+}
+
+.editIcon {
+  color: #f0ad4e;
+}
+
+.backIcon {
+  margin-left: 15%;
+  float: left;
+  transform: scale(3);
+  color: #5CB85C;
+  margin-top: 1%;
+} 
+
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+.dropdown>.dropdown-toggle:active {
+    pointer-events: none;
+}
+
+h2 {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 25px;
+}
+
+
+
+
+
+

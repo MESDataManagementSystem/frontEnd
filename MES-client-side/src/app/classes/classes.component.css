@@ -1,46 +1,90 @@
-/* .card {
-    width: 100%;
-    max-width: 230px;
-    margin-left: 3%;
-    margin-right: 3%;
-    padding-top: 5%;
-    padding-bottom: 3%;
-    background: #F08080 !important;
-    border-radius: 5%;
-    float: left;
-    margin-top: 5%;
-} */
-/* .gradeLevel {
-    font-size: 400%;
-    font-family: 'Lucida Sans Unicode';
-    margin-top: 15%;
-    margin-bottom: 17%;
-    margin-left: 5%;
-}
-
-.otherDetails {
-    font-size: 100%;
-    font-family: 'Lucida Sans Unicode';
-} */
-
 .addIcon{
     margin-right: 5%;
     float: right;
     transform: scale(2);
+    margin-top: 1%;
     color: #5CB85C
 }
+
 .mat-tab-label {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     white-space: nowrap;
-    color: green;
+    color: #51749b !important
 }
-.box{
-    width: 150px;
-    height: 200px;
-    padding: 15px 20px 5px ;
+
+.box {
+    justify-content: center;
+    width: auto;
+    height: auto;
     float: left;
-    margin-top: 20px;
-    margin-left: 20px
-   }
+    margin-left: 5%;
+    margin-top: 3%;
+    border: 1px solid #51749b;
+    font-size: 50px !important;
+    border-radius: 5px;
+}
+
+h2 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 25px;
+    
+}
+
+.card-footer{
+    height: 50%;
+    width: 100%;
+    /* padding: 0.75rem 1.25rem; */
+    background-color: rgba(0, 0, 0, 0);
+    /* border-top: 1px solid rgba(0, 0, 0, 0.125); */
+}
+
+.card-header {
+    color: #FFFFFF;
+    font-size: 20px;
+    text-transform: uppercase;
+    max-height: 50px;
+    height:100%;
+    background: #51749b !important;
+    /* background-color: #f58f0a; */
+    /* background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlqWR4PFzYAozbYjItbLJuhZTO57V7WhkLzA&usqp=CAU'); */
+}
+
+.viewStuBtn {
+    padding: 2px 20px;  
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 40px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    color: black; 
+    border: 2px solid #2080FF ;
+    transition: transform .2s
+}
+
+.viewStuBtn:hover {
+    background: #2080FF !important;
+    color: white;
+    transform: scale(1.08)
+}
+
+mat-tab-group {
+    margin-bottom: 2%;
+}
+.populationSection{
+    text-align: center !important;
+}
+.editIcon{
+    margin-left: 95%
+}
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.01rem;
+}
+

@@ -1,10 +1,15 @@
+import { SectionService } from './../services/section.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { StudentServiceService } from '../services/student-service.service';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { StudentServiceService } from '../services/student-service.service';
-import { MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+
 
 
 
@@ -31,13 +36,13 @@ export class AddStudentInfoComponent implements OnInit {
     studentLRN: '',
     studentBirthdate: '',
     studentSex: '',
-    studentCredentialPresentedForGrade: [],
+    studentCredentialPresentedForGrade1: [],
     studentNameOfSchoolFromKinder: '',
     studentSchoolId: '',
     studentSchoolAddress: '',
     studentPeptPasserRating: '',
     studentDateOfxamination: '',
-    studentOthers: '',
+    studentOthers: [],
     studentNameAdressOfTestingCenter: '',
     studentRemark: '',
     studentSection: '',
@@ -45,25 +50,33 @@ export class AddStudentInfoComponent implements OnInit {
   };
   studentSubject = {
     studentId: '',
-    motherTongue: '',
-    filipino: '',
-    english: '',
-    mathematics: '',
-    science: '',
-    aralingPanlipunan: '',
-    eppTle: '',
-    Mapeh: '',
-    music: '',
-    pe: '',
-    arts: '',
-    health: '',
-    edukasyonSaPagpapakatao: '',
-    arabicLanguage: '',
-    islamicLanguage: '',
-    quarter: ''
+    motherTongue: 0,
+    filipino: 0,
+    english: 0,
+    mathematics: 0,
+    science: 0,
+    aralingPanlipunan: 0,
+    eppTle: 0,
+    mapeh: 0,
+    music: 0,
+    pe: 0,
+    arts: 0,
+    health: 0,
+    edukasyonSaPagpapakatao: 0,
+    arabicLanguage: 0,
+    islamicLanguage: 0,
+    average: 0,
+    quarter: '',
+    section: '',
+    grade: '',
+    currentGrade: ''
   };
+  graduating = false;
+  datas: any;
+  sections = [];
   section: any;
   grade: any;
+  updatedGrade: string;
   update = false;
   returnData: any;
   disableSelect = new FormControl(false);
@@ -72,9 +85,18 @@ export class AddStudentInfoComponent implements OnInit {
   addGrades = false;
   updateGradesButton = false;
   activeQuarters = [];
+  selectGradeSection = false;
   disabledQuarterButtons = { quarter1: false, quarter2: true, quarter3: true, quarter4: true };
-  constructor(private service: StudentServiceService, @Inject(MAT_DIALOG_DATA) public data: Section, public dialog: MatDialog) {
 
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true; 
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
+  // tslint:disable-next-line:max-line-length
+  constructor(private service: StudentServiceService, @Inject(MAT_DIALOG_DATA) public data: Section, public dialog: MatDialog, public sectionService: SectionService) {
+    this.grade = this.data[2];
     console.log(this.data, '::dataaaa ni siya;;');
     this.studentId = this.data[0];
     if (this.data[3] === 'editStudentInfo') {
@@ -84,14 +106,42 @@ export class AddStudentInfoComponent implements OnInit {
       this.editStudentInfo = 'editStudentGrade';
     } else if (this.data[3] === '') {
       this.editStudentInfo = 'editStudentInfo';
+    } else if (this.data[3] === 'selectGradelevel') {
+      this.editStudentInfo = 'selectGradelevel';
+      if (this.grade === 'Kindergarten') {
+        this.updatedGrade = 'Grade 1';
+      }
+      if (this.grade === 'Grade 1') {
+        this.updatedGrade = 'Grade 2';
+      }
+      if (this.grade === 'Grade 2') {
+        this.updatedGrade = 'Grade 3';
+      }
+      if (this.grade === 'Grade 3') {
+        this.updatedGrade = 'Grade 4';
+      }
+      if (this.grade === 'Grade 4') {
+        this.updatedGrade = 'Grade 5';
+      }
+      if (this.grade === 'Grade 5') {
+        this.updatedGrade = 'Grade 6';
+      }
+      if (this.grade === 'Grade 6') {
+        this.updatedGrade = 'Graduated!';
+        this.graduating = true;
+      }
     }
     this.returnData = data;
     this.section = this.data[0];
-    this.grade = this.data[2];
     // this.studentInfo.studentGrade = this.returnData.data[2];
     this.studentInfo.studentSection = this.section;
     this.studentInfo.studentGrade = this.grade;
     this.quarter = '';
+    this.studentSubject.grade = this.grade;
+    this.studentSubject.section = this.data[4];
+    this.studentSubject.currentGrade = this.grade;
+    this.average();
+
   }
 
   ngOnInit(): void {
@@ -112,9 +162,26 @@ export class AddStudentInfoComponent implements OnInit {
       )
     );
   }
+
   getErrorMessage(): string {
     if (this.error.hasError('required')) {
       return 'You must enter a value';
+    }
+  }
+  // motherTongue: 0,
+  //   filipino: 0,
+  //   english: 0,
+  //   mathematics: 0,
+  //   science: 0,
+  //   aralingPanlipunan: 0,
+  //   eppTle: 0,
+  // Compute average
+  average(){
+    this.studentSubject.mapeh = (this.studentSubject.arts + this.studentSubject.music + this.studentSubject.pe + this.studentSubject.health)/4;
+    if(this.studentSubject.grade === 'Grade 4' ||this.studentSubject.grade === 'Grade 5' || this.studentSubject.grade === 'Grade 6'  ){
+      this.studentSubject.average = ( this.studentSubject.filipino + this.studentSubject.english + this.studentSubject.science + this.studentSubject.mathematics + this.studentSubject.aralingPanlipunan + this.studentSubject.eppTle + this.studentSubject.mapeh + this.studentSubject.edukasyonSaPagpapakatao)/9
+    }else if(this.studentSubject.grade === 'Grade 1' ||this.studentSubject.grade === 'Grade 2' || this.studentSubject.grade === 'Grade 3' ||this.studentSubject.grade === 'Kindergarten'){
+      this.studentSubject.average = ( this.studentSubject.motherTongue + this.studentSubject.english + this.studentSubject.science + this.studentSubject.mathematics + this.studentSubject.aralingPanlipunan +  this.studentSubject.mapeh + this.studentSubject.edukasyonSaPagpapakatao)/7
     }
   }
 
@@ -134,11 +201,26 @@ export class AddStudentInfoComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
+
+  updateStudent(): void {
+    this.service.updateStudent(this.studentInfo).subscribe(data => {
+      if (data.status === true) {
+        this.succesAlert('Updated Student In  formation Successfully!', 'success', 1500);
+        this.dialog.closeAll();
+      }
+      if (data.status === false) {
+        this.succesAlert(`Can't Update Student Information. Please check fields!`, 'error', 2000);
+      }
+      console.log(data, 'return ni siya');
+    });
+  }
+
   addStudent(): void {
+    console.log(this.studentInfo);
     this.service.addStudent(this.studentInfo).subscribe(data => {
       // tslint:disable-next-line:no-conditional-assignment
       if (data.error) {
-        this.succesAlert('Fill in all the fields!', 'error', '');
+        this.succesAlert('Fill in all the required fields!', 'error', '');
       }
 
       if (data.msg === 'LRN already exists!') {
@@ -149,32 +231,19 @@ export class AddStudentInfoComponent implements OnInit {
         this.succesAlert('Added New Student Successfully', 'success', 1500);
         this.dialog.closeAll();
       }
-      // if (data[0] === 'error'){
-
-      // }
       console.log(data);
     });
   }
-  updateStudent(): void {
-    this.service.updateStudent(this.studentInfo).subscribe(data => {
-      if (data.status === true) {
-        this.succesAlert('Updated Student In  formation Successfully!', 'success', 1500);
-        this.dialog.closeAll();
-      }
-      if (data.status === false){
-        this.succesAlert(`Can't Update Student Information. Please check fields!`, 'error', 2000);
-      }
-      console.log(data, 'return ni siya');
-    });
-  }
+
+
   addCredential(data): void {
-    if (this.studentInfo.studentCredentialPresentedForGrade.includes(data)) {
-      const index = this.studentInfo.studentCredentialPresentedForGrade.indexOf(data);
-      this.studentInfo.studentCredentialPresentedForGrade.splice(index, 1);
+    if (this.studentInfo.studentCredentialPresentedForGrade1.includes(data)) {
+      const index = this.studentInfo.studentCredentialPresentedForGrade1.indexOf(data);
+      this.studentInfo.studentCredentialPresentedForGrade1.splice(index, 1);
     } else {
-      this.studentInfo.studentCredentialPresentedForGrade.push(data);
+      this.studentInfo.studentCredentialPresentedForGrade1.push(data);
     }
-    console.log(this.studentInfo.studentCredentialPresentedForGrade, 'list ni sya');
+    console.log(this.studentInfo.studentCredentialPresentedForGrade1, 'list ni sya');
   }
 
   chooseQuarter(): void {
@@ -183,13 +252,16 @@ export class AddStudentInfoComponent implements OnInit {
       console.log(this.studentId);
       this.addGrades = true;
       this.addGradesModal = true;
-    }else{
+    } else {
       this.succesAlert('Please choose a quarter.', 'info', 1500);
     }
 
   }
+
   findStudentGrades(): void {
-    const datum = { id: this.data[0], quarter: this.quarter };
+
+    const datum = { id: this.data[0], quarter: this.quarter, grade: this.grade, section: this.data[4] };
+    console.log(datum, 'datummsski');
     this.service.findStudentGrades(datum).subscribe(data => {
       if (data.data) {
         this.updateGradesButton = true;
@@ -198,16 +270,19 @@ export class AddStudentInfoComponent implements OnInit {
       console.log(data, 'addGrades');
     });
   }
+
   addStudentGrades(): void {
+    this.average();
     this.studentSubject.studentId = this.data[0];
     this.studentSubject.quarter = this.quarter;
+    console.log(this.studentSubject, 'added')
     if (!this.updateGradesButton) {
       this.service.addStudentGrades(this.studentSubject).subscribe(data => {
-        console.log(data.data);
-        if (data.status === false){
+        console.log(data.data, 'grades added');
+        if (data.status === false) {
           this.succesAlert('All fields are required!', 'info', 2000);
         }
-        if (data.data){
+        if (data.data) {
           this.succesAlert(this.studentInfo.studentLastName + '\'s grades for' + this.quarter + ' added!', 'success', 1500);
           this.dialog.closeAll();
         }
@@ -215,17 +290,20 @@ export class AddStudentInfoComponent implements OnInit {
     } else {
       this.service.updateStudentGrades(this.studentSubject).subscribe(data => {
         console.log(data);
-        if (data.status === false){
+        if (data.status === false) {
           this.succesAlert('Can\'t Update Student Information. Please check fields!', 'error', 2000);
-        }else if (data.status === true){
+        } else if (data.status === true) {
           this.succesAlert(this.studentInfo.studentLastName + '\'s Grades Updated!', 'success', 1500);
           this.dialog.closeAll();
         }
       });
     }
   }
+
   findQuarter(): void {
-    this.service.findQuarter(this.data[0]).subscribe(data => {
+    const datas = { id: this.data[0], grade: this.grade, section: this.data[4] };
+    console.log(datas, 'datasss')
+    this.service.findQuarter(datas).subscribe(data => {
       console.log(data.data, 'return sa find quarter');
       const dataLength = data.data.length;
       for (let i = 0; i < dataLength; i++) {
@@ -245,7 +323,70 @@ export class AddStudentInfoComponent implements OnInit {
       }
     });
   }
+
+  chooseSection(): void {
+    this.sectionService.viewSections(this.updatedGrade).subscribe((data: any) => {
+      console.log(data.data, 'sections');
+      data.data.forEach(section => {
+        this.sections.push(section.sectionName);
+      });
+      if (this.sections.length === data.data.length) {
+        this.selectGradeSection = true;
+
+      }
+      // this.sections = data.data;
+      // console.log(this.sections, 'service data');
+      // console.log(this.sections[0], 'section zero');
+      // if (this.sections.length === data.data.length) {
+      //   this.isLoading = false;
+      // }
+    });
+  }
+  // proceedNextGrade(id): void{
+
+  // }
+  choosenSection(): void {
+    // if(!this.graduating){
+    console.log(this.data[0], this.grade, this.section, '::: gradessss');
+    this.datas = { id: this.data[0], grade: this.grade, currentGrade: this.updatedGrade, section: this.section };
+    this.service.nextGrade(this.datas).subscribe(data => {
+      if (data.status) {
+        this.succesAlert('Successfully added to section ' + this.section + ' ' + this.updatedGrade, 'success', 1500);
+        this.dialog.closeAll();
+      } else {
+        this.succesAlert(data.error, 'error', 2000);
+        this.dialog.closeAll();
+      }
+      console.log(data, 'response sa server update grade level');
+    });
+
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add others for student
+    if ((value || '').trim()) {
+      this.studentInfo.studentOthers.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(others: any): void {
+    const index = this.studentInfo.studentOthers.indexOf(others);
+
+    if (index >= 0) {
+      this.studentInfo.studentOthers.splice(index, 1);
+    }
+  }
+
 }
+
 export interface Section {
   section: string;
   fake: false;

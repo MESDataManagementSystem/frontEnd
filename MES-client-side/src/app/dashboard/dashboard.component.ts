@@ -1,24 +1,34 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StudentServiceService } from '../services/student-service.service';
+import { TeacherServiceService } from '../services/teacher-service.service';
+import { DateRange } from '@angular/material/datepicker';
+import { DashboardDialogComponent } from './dashboard-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+declare var require: any;
+const FileSaver = require('file-saver');
+
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements AfterViewInit {
-
+export class DashboardComponent implements OnInit {
+// download empty form 10 url  http://localhost:5000/uploads/new.xlsx
   teachers = 15;
   students = 675;
   public chartType = 'bar';
+  totalNumberofStudents = 0;
+  totalNumberofNonAdvisory = 0;
+  totalNumberofAdvisory = 0;
+  totalNumberofTeachers = 0;
   // datas = [];
   load: boolean;
-  datas = ['60', '51', '58', '56', '52', '58', '55'];
-
-  public chartDatasets: Array<any> = [
-    { data: this.datas, label: 'Population of Students in each grade Level' }
-  ];
-
+  datas: any;
+  teachersAdvisory: any;
+  teachersNonAdvisory: any;
+  public chartDatasets: Array<any>;
   public chartLabels: Array<any> = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
 
   public chartColors: Array<any> = [
@@ -41,41 +51,93 @@ export class DashboardComponent implements AfterViewInit {
         'rgba(255, 159, 64, 1)',
         'black'
       ],
-      borderWidth: 2,
+      borderWidth: 1,
     }
   ];
 
-  public chartOptions: any = {
-    responsive: true
-  };
+  public chartOptions: any;
   grade: any;
-
-  constructor(private studentService: StudentServiceService) {
+  isLoading = true;
+  schoolYear: string;
+  // tslint:disable-next-line:max-line-length
+  constructor(private studentService: StudentServiceService, private dialog: MatDialog, private router: Router, private teacherService: TeacherServiceService) {
     this.grade = ['Kindergarten', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
     this.load = false;
+    this.studentService.populationStudents().subscribe(data => {
+      this.datas = data.population;
+      console.log(this.datas, 'datass');
+      this.chartDatasets = [
+        { data: this.datas, label: 'Population of Students in each grade Level' }
+      ];
+      this.chartOptions = {
+        responsive: true,
+        scales: {
+          yAxes: [{ id: 'y-axis-1', type: 'linear', position: 'left', ticks: { min: 0, max: Math.max(...this.datas) } }]
+        }
+        
+      };
+      
+      this.totalNumberofStudents = this.datas.reduce((a, b) => a + b, 0);
+      // this.isLoading = false;
+      this.teacherService.teacherPopulation().subscribe((teachers: any) => {
+        console.log(teachers);
+        this.totalNumberofAdvisory = teachers.data[0].advisory;
+        this.totalNumberofTeachers = teachers.data[1].allTeachers;
+        this.totalNumberofNonAdvisory = teachers.data[2].nonAdvisory;
+        this.schoolYear = teachers.schoolYear;
+        this.teachersAdvisory = teachers.advisory;
+        this.teachersNonAdvisory = teachers.nonAdvisory;
+        this.isLoading = false;
+      }); 
+    },
+      error => {
+        console.log('error');
+      });
+
+
   }
 
-  ngAfterViewInit(): void {
-    // this.alert().then((value) => console.log(value));
-
+  ngOnInit(): void {
   }
+
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
 
-  // tslint:disable-next-line:arrow-return-shorthand
-  // let hello = async () => { return "Hello" };
 
-  // alert = async () => {
-  //   return this.datas;
-  //   this.chartLabels.forEach(element => {
-  //     console.log('element', element);
-  //     this.studentService.findGrade(element).subscribe(data => {
-  //       this.datas.push(data.data.length + '');
-  //       console.log('' + data.data.length + '');
-  //     });
-  //   });
-  //   if (this.datas.length === 7) {
-  //     // this.load = true;
-  //   }
-  // }
+  // tslint:disable-next-line:typedef
+  icon1() {
+    alert('display the list of all the advisory teachers');
+  }
+
+  // tslint:disable-next-line:typedef
+  icon2() {
+    alert('display the list of all the non advisory teachers');
+  }
+
+  // tslint:disable-next-line:typedef
+  icon3() {
+    alert('display the list of all section per grade level with total students');
+  }
+
+  // tslint:disable-next-line:typedef
+  icon4() {
+    this.router.navigate(['/MES/teachers']);
+  }
+  openDialog(type): void {
+    const datas = [{ Advisory: this.teachersAdvisory, nonAdvisory: this.teachersNonAdvisory }, type];
+    this.dialog.open(DashboardDialogComponent, {
+      disableClose: true,
+      data: datas,
+      width: '100vw !important',
+      height: '100% !important'
+    });
+  }
+
+  downloadEmptyForm(){
+      const pdfUrl =  'http://localhost:5000/uploads/emptyForm10.xlsx';
+      const pdfName = 'emptyForm10.xlsx';
+      FileSaver.saveAs(pdfUrl, pdfName);
+  }
+
+
 }

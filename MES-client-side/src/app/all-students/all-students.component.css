@@ -2,6 +2,13 @@
   padding-left: 20px;
 }
 
+h2 {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, fantasy;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 25px;
+}
+
 mat-form-field {
   min-width: 150px;
   max-width: 300px;
@@ -30,7 +37,8 @@ mat-form-field {
 }
 
 .mat-header-cell{
-  color: #5CB85C;
+  background: #51749b !important;
+  color: #FFFFFF;
   text-align: justify;
   position: sticky;
   position: -webkit-sticky;
@@ -52,4 +60,12 @@ mat-form-field {
   transform: scale(2);
   margin-top: 1%;
   color: #5CB85C
+}
+
+.editIcon {
+  color: #f0ad4e;
+}
+
+td {
+  font-size: 15px;
 }

@@ -22,14 +22,23 @@ export class TeacherServiceService {
 
   // Get All The List Of Teachers
   getAllTheTeachersList(status) {
-
     return this.http.get(`${this.url}/api/viewListOfTeacher/${status}`);
-
   }
 
   // View The Information Of A Specific Teacher
   viewTeacher(id) {
     return this.http.get(`${this.url}/api/viewTeachersInfo/${id}`)
+      .pipe(
+        catchError(e => {
+          this.swal.errorAlertForSomethingWentWrong()
+          throw new Error(e)
+        })
+      )
+  }
+
+  // For Updating Teacher Status
+  findAdviserActive(id) {
+    return this.http.get(`${this.url}/api/findAdviser/${id}`)
       .pipe(
         catchError(e => {
           this.swal.errorAlertForSomethingWentWrong()
@@ -57,6 +66,16 @@ export class TeacherServiceService {
           throw new Error(e)
         })
       )
+  }
+
+  // TEACHER SIDE DASHBOARD
+  findAdviser(adviserId){
+    return this.http.get(`${this.url}/api/findAdviser/${adviserId}`)
+  }
+
+  // find teacher population for dashboard
+  teacherPopulation(){
+    return this.http.get(`${this.url}/api/teacherPopulation`);
   }
 
 }

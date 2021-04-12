@@ -1,88 +1,265 @@
-<div style="padding-left: 5%; padding-top: 1em;">
-    <h2>Mantalongon Elementary School Grades And Sections
-        <button mat-icon-button class="addIcon" matTooltip="Add Section" (click)="openDialog()">
-            <mat-icon class='menuIcon'>add_circle</mat-icon>
-        </button>
-    </h2>
+<div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
 </div>
-<div style="padding-top: 2em; margin-left: 5%;  margin-right: 5%;">
-    <mat-tab-group (selectedTabChange)="selectedGrade($event)" mat-stretch-tabs>
-        <mat-tab [label]="'Kindegarten'">
-            <div>
-                <mat-card class="card box" *ngFor="let section of sections">
-                    <mat-card-content>
-                    <h2>{{section.sectionName}}</h2>
-                    <h2>210 students</h2>
-                    <button  mat-button  (click)="viewStudents(section.sectionName)">view students</button>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-        </mat-tab>
-        <mat-tab [label]="'Grade 1'">
-            <div>
-                <mat-card class="card box" *ngFor="let section of sections" >
-                    <mat-card-content>
-                    <h2>{{section.sectionName}}</h2>
-                    <h2>210 students</h2>
-                    <button  mat-button  (click)="viewStudents(section.sectionName)">view students</button>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-        </mat-tab>
-        <mat-tab [label]="'Grade 2'">
-            <div>
-                <mat-card class="card box" *ngFor="let section of sections" >
-                    <mat-card-content>
-                    <h2>{{section.sectionName}}</h2>
-                    <h2>210 students</h2>
-                    <button  mat-button  (click)="viewStudents(section.sectionName)">view students</button>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-        </mat-tab>
-        <mat-tab [label]="'Grade 3'">
-            <div>
-                <mat-card class="card box" *ngFor="let section of sections" >
-                    <mat-card-content>
-                    <h2>{{section.sectionName}}</h2>
-                    <h2>210 students</h2>
-                    <button  mat-button  (click)="viewStudents(section.sectionName)">view students</button>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-        </mat-tab>
-        <mat-tab [label]="'Grade 4'">
-            <div>
-                <mat-card class="card box" *ngFor="let section of sections" >
-                    <mat-card-content>
-                    <h2>{{section.sectionName}}</h2>
-                    <h2>210 students</h2>
-                    <button  mat-button  (click)="viewStudents(section.sectionName)">view students</button>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-        </mat-tab>
-        <mat-tab [label]="'Grade 5'">
-            <div>
-                <mat-card class="card box" *ngFor="let section of sections" >
-                    <mat-card-content>
-                    <h2>{{section.sectionName}}</h2>
-                    <h2>210 students</h2>
-                    <button  mat-button  (click)="viewStudents(section.sectionName)">view students</button>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-        </mat-tab>
-        <mat-tab [label]="'Grade 6'">
-            <div>
-                <mat-card class="card box" *ngFor="let section of sections" >
-                    <mat-card-content>
-                    <h2>{{section.sectionName}}</h2>
-                    <h2>210 students</h2>
-                    <button  mat-button  (click)="viewStudents(section.sectionName)">view students</button>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-        </mat-tab>
-    </mat-tab-group>
+
+<div *ngIf="!isLoading">
+    <div style="padding-left: 5%; padding-top: 1em;">
+        <h2>Grades And Sections
+            <button mat-icon-button class="addIcon" matTooltip="Add Section" (click)="openDialog()">
+                <mat-icon class='menuIcon'>add_circle</mat-icon>
+            </button>
+        </h2>
+    </div>
+
+    <div style="padding-top: 2em; margin-left: 5%;  margin-right: 5%;">
+        <mat-tab-group (selectedTabChange)="selectedGrade($event)">
+            <mat-tab [label]="'Kindergarten'">
+
+                <div class="box" *ngFor="let section of sections">
+                    <div class="card-header">
+                        {{section.section.sectionName}}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h3> Total Students: </h3>
+                            </div>
+                            <div class="col-2">
+                                <h3>{{section.population}}</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <h3> Adviser: </h3>
+                            </div>
+                            <div class="col-8">
+                                <h3> {{section.section.adviser.lastName}}, {{section.section.adviser.firstName}}
+                                    {{section.section.adviser.middleName}}</h3>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="viewStuBtn" mat-button
+                                (click)="viewStudents(section.section.sectionName)">view
+                                students</button>
+                            <div>
+                                <mat-icon class='editIcon' (click)='editAdviser(section.section._id, section.section.adviser.lastName, section.section.adviser.firstName, section.section.adviser.middleName, section.section.adviser._id)'>edit
+                                </mat-icon>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-tab>
+
+            <mat-tab [label]="'Grade 1'">
+
+                <div class="box" *ngFor="let section of sections">
+                    <div class="card-header">
+                        {{section.section.sectionName}}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h3> Total Students: </h3>
+                            </div>
+                            <div class="col-2">
+                                <h3 class='populationSection'>
+                                    <h3>{{section.population}}</h3>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <h3> Adviser: </h3>
+                            </div>
+                            <div class="col-8">
+                                <h3>{{section.section.adviser.lastName}}, {{section.section.adviser.firstName}}
+                                    {{section.section.adviser.middleName}} </h3>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="viewStuBtn" mat-button
+                                (click)="viewStudents(section.section.sectionName)">view
+                                students</button>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-tab>
+
+            <mat-tab [label]="'Grade 2'">
+
+                <div class="box" *ngFor="let section of sections">
+                    <div class="card-header">
+                        {{section.section.sectionName}}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h3> Total Students: </h3>
+                            </div>
+                            <div class="col-2">
+                                <h3>{{section.population}}</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <h3> Adviser: </h3>
+                            </div>
+                            <div class="col-8">
+                                <h3> {{section.section.adviser.lastName}}, {{section.section.adviser.firstName}}
+                                    {{section.section.adviser.middleName}} </h3>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="viewStuBtn" mat-button
+                                (click)="viewStudents(section.section.sectionName)">view
+                                students</button>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-tab>
+
+            <mat-tab [label]="'Grade 3'">
+
+                <div class="box" *ngFor="let section of sections">
+                    <div class="card-header">
+                        {{section.section.sectionName}}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h3> Total Students: </h3>
+                            </div>
+                            <div class="col-2">
+                                <h3>{{section.population}}</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <h3> Adviser: </h3>
+                            </div>
+                            <div class="col-8">
+                                <h3> {{section.section.adviser.lastName}}, {{section.section.adviser.firstName}}
+                                    {{section.section.adviser.middleName}} </h3>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="viewStuBtn" mat-button
+                                (click)="viewStudents(section.section.sectionName)">view
+                                students</button>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-tab>
+
+            <mat-tab [label]="'Grade 4'">
+
+                <div class="box" *ngFor="let section of sections">
+                    <div class="card-header">
+                        {{section.section.sectionName}}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h3> Total Students: </h3>
+                            </div>
+                            <div class="col-2">
+                                <h3>{{section.population}}</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <h3> Adviser: </h3>
+                            </div>
+                            <div class="col-8">
+                                <h3> {{section.section.adviser.lastName}}, {{section.section.adviser.firstName}}
+                                    {{section.section.adviser.middleName}} </h3>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="viewStuBtn" mat-button
+                                (click)="viewStudents(section.section.sectionName)">view
+                                students</button>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-tab>
+
+            <mat-tab [label]="'Grade 5'">
+
+                <div class="box" *ngFor="let section of sections">
+                    <div class="card-header">
+                        {{section.section.sectionName}}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h3> Total Students: </h3>
+                            </div>
+                            <div class="col-2">
+                                <h3>{{section.population}}</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <h3> Adviser: </h3>
+                            </div>
+                            <div class="col-8">
+                                <h3> {{section.section.adviser.lastName}}, {{section.section.adviser.firstName}}
+                                    {{section.section.adviser.middleName}} </h3>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="viewStuBtn" mat-button
+                                (click)="viewStudents(section.section.sectionName)">view
+                                students</button>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-tab>
+
+            <mat-tab [label]="'Grade 6'">
+
+                <div class="box" *ngFor="let section of sections">
+                    <div class="card-header">
+                        {{section.section.sectionName}}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h3> Total Students: </h3>
+                            </div>
+                            <div class="col-2">
+                                <h3>{{section.population}}</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <h3> Adviser: </h3>
+                            </div>
+                            <div class="col-8">
+                                <h3> {{section.section.adviser.lastName}}, {{section.section.adviser.firstName}}
+                                    {{section.section.adviser.middleName}} </h3>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="viewStuBtn" mat-button
+                                (click)="viewStudents(section.section.sectionName)">view
+                                students</button>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
+<div class="updateAdviser">
+
 </div>

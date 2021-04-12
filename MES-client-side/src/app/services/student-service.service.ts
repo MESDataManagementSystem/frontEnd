@@ -38,8 +38,8 @@ export class StudentServiceService {
     return this.httpClient.post('http://localhost:5000/api/addStudent', student);
   }
 
-  viewStudents(section): Observable<any> {
-    return this.httpClient.get(`http://localhost:5000/api/viewStudents/${section}`);
+  viewStudents(section, grade): Observable<any> {
+    return this.httpClient.get(`http://localhost:5000/api/viewStudents/${section}/${grade}`);
   }
 
   findStudent(id): Observable<any> {
@@ -51,7 +51,7 @@ export class StudentServiceService {
     console.log(student._id, 'id sa student service nga iupdate');
     return this.httpClient.post(`http://localhost:5000/api/updateStudent/${student._id}`, student);
   }
-  findGrade(grade): Observable<any>{
+  findGrade(grade): Observable<any> {
     console.log(grade, 'grade in service');
     return this.httpClient.get(`http://localhost:5000/api/findGrade/${grade}`);
   }
@@ -64,14 +64,33 @@ export class StudentServiceService {
     console.log(subject);
     return this.httpClient.post(`http://localhost:5000/api/updateStudentGrades/${subject.id}`, subject);
   }
-  addStudentGrades(grades): Observable<any>{
+  addStudentGrades(grades): Observable<any> {
     return this.httpClient.post('http://localhost:5000/api/addStudentGrades', grades);
   }
-  findQuarter(id): Observable<any>{
-    console.log(id);
-    return this.httpClient.get(`http://localhost:5000/api/findQuarter/ ${id}`);
+  findQuarter(datas): Observable<any> {
+    console.log(datas, 'sa service na ni nga quarter');
+    return this.httpClient.post(`http://localhost:5000/api/findQuarter`, datas);
+  }
+  nextGrade(data): Observable<any> {
+    console.log(data, 'data');
+    return this.httpClient.post(`http://localhost:5000/api/nextgrade`, data);
+  }
+  populationStudents(): Observable<any> {
+    return this.httpClient.get(`http://localhost:5000/api/populationStudents`);
+  }
+// for update student form with file
+  updateStudentFormFile(fileToUpload: FormData): Observable<any> {
+    return this.httpClient.post('http://localhost:5000/uploadSingleFileUpdate', fileToUpload);
   }
 
+// for update student form without file
+  updateStudentForm(data): Observable<any> {
+    return this.httpClient.post('http://localhost:5000/editGraduatedStudent', data);
+  }
 
+  // for viewing form10 of current student
+  viewForm10(id): Observable<any> {
+    return this.httpClient.get(`http://localhost:5000/api/form10/${id}`);
+  }
 
 }

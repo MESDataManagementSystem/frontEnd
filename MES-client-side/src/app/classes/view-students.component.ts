@@ -1,13 +1,16 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { StudentServiceService } from '../services/student-service.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { Location } from '@angular/common';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatMenuModule } from '@angular/material/menu';
-import { AddStudentInfoComponent } from './add-student-info.component';
+import { AddStudentInfoComponent, Section } from './add-student-info.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AbstractControl, FormBuilder } from '@angular/forms';
+import { ModalViewFormComponent } from '../all-students/modal-view-form.component';
+declare var require: any;
+const FileSaver = require('file-saver');
+
 
 
 @Component({
@@ -15,78 +18,114 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './view-students.component.html',
   styleUrls: ['./view-students.component.css']
 })
-export class ViewStudentsComponent implements AfterViewInit {
-  dataSource: any;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+export class ViewStudentsComponent implements OnInit {
+
   viewFile = false;
-  typeSearch: string;
   value: string;
-  students: any;
   selectedFiles: File;
-  columnsToDisplay: string[] = ['name', 'lrn', 'edit', 'view'];
-  searchLrn = '';
-  name = '';
-  lrn = true;
-  // constructor(private service: StudentServiceService, private dialog: MatDialog, private location: Location) {
-  //   this.value = '';
-  //   this.typeSearch = 'LRN';
-  //   this.dataSource = new MatTableDataSource<any>(this.students);
-  //   this.service.retrieveData().subscribe(student => {
-  //     this.students = student.data;
-  //     this.dataSource = new MatTableDataSource<any>(this.students);
-  //     setTimeout(() => {
-  //       this.dataSource.paginator = this.paginator;
-  //     }, 0);
-  //   });
+  isLoading = true;
   section: string;
   grade: string;
-  // tslint:disable-next-line:max-line-length
-  constructor(private service: StudentServiceService, private dialog: MatDialog, private location: Location, private route: ActivatedRoute, private router: Router) {
+
+  typeSearch: string;
+  lrn = true;
+
+  students: any;
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  columnsToDisplay: string[] = ['lrn', 'name', 'edit', 'view', 'proceed'];
+
+  readonly formControl: AbstractControl;
+
+  constructor(
+    private service: StudentServiceService,
+    private dialog: MatDialog,
+    private location: Location,
+    private route: ActivatedRoute,
+    formBuilder: FormBuilder
+  ) {
     this.value = '';
     this.typeSearch = 'LRN';
-    this.dataSource = new MatTableDataSource<any>(this.students);
     this.section = '';
-  }
-
-  ngAfterViewInit(): void {
     this.route.paramMap.subscribe(params => {
       this.section = params.get('section');
       this.grade = params.get('grade');
-      if (this.section){
-        this.service.viewStudents(this.section).subscribe(student => {
-          this.students = student.data;
-          this.dataSource = new MatTableDataSource<any>(this.students);
+      if (this.section) {
+        this.service.viewStudents(this.section, this.grade).subscribe(data => {
+          this.students = data;
+          this.dataSource = new MatTableDataSource<any>(this.students.data);
+          var count = 0;
+          if (this.students.data.length === 0) {
+            this.isLoading = false;
+          }
+          for (let i = 0; i < this.students.data.length; i++) {
+            count = i;
+            if (count == this.students.data.length - 1) {
+              this.isLoading = false;
+            }
+          }
           setTimeout(() => {
             this.dataSource.paginator = this.paginator;
-          }, 0);
-          // tslint:disable-next-line:only-arrow-functions
-        });
+          }, 0),
+            console.log("arigato", this.students.data)
+          this.dataSource.filterPredicate = ((data, filter) => {
+            const lrnFilter = !filter.studentLRN || data.studentLRN.toString().toLowerCase().includes(filter.studentLRN);
+            const name = !filter.studentLastName || data.studentLastName.toLowerCase().includes(filter.studentLastName);
+            return lrnFilter && name;
+          }) as (data, string) => boolean;
+        })
       }
-    });
+    })
+    error => this.isLoading = false
+    this.formControl = formBuilder.group({
+      studentLRN: "",
+      studentLastName: ""
+    })
+    this.formControl.valueChanges.subscribe(value => {
+      const filter = {
+        ...value,
+        studentLastName: value.studentLastName.trim().toLowerCase()
+      } as string;
+      this.dataSource.filter = filter;
+    })
+
+
   }
+
+  ngOnInit(): void {
+
+  } 
+
   // Dialog For Adding Student
   openDialog(data, datas): void {
-    console.log(datas , '::: datasss');
+    console.log(datas, '::: datasss');
     let idf = '';
-    if (datas === 'fake'){
+    // datas = this.section
+    const section = this.section;
+    if (datas === 'fake') {
       datas = this.section;
       idf = 'fake';
     }
-    const datum = [datas, idf, this.grade, data];
+    const datum = [datas, idf, this.grade, data, section];
     this.dialog.open(AddStudentInfoComponent, { disableClose: true, data: datum });
   }
-
 
   backClicked(): void {
     this.location.back();
   }
 
-  alert(): void{
-    alert('nice!');
+  showFile(id): void {
+    this.service.viewForm10(id).subscribe(data => {
+      console.log(data);
+      if(data.status){
+        const pdfUrl = data.url;
+        const pdfName = data.name;
+        FileSaver.saveAs(pdfUrl, pdfName);
+      }else{
+        alert('error!')
+      }
+    })
   }
 
-  // itemSelected(e): void {
-  //   alert(e);
-  // }
 
 }

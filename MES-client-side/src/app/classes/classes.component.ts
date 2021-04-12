@@ -9,7 +9,7 @@ import { AddSectionComponent } from './add-section.component';
 
 
 export interface Card {
-  totalSections, totalStudents: number;
+  totalSections; totalStudents: number;
   gradeLevel: string;
 }
 
@@ -26,6 +26,8 @@ export class ClassesComponent implements OnInit {
   sections: any;
   gradeLevel: any;
   section: string;
+  isLoading = false;
+  sectionPopulation: [];
   // @Output()
   // selected: EventEmitter<string> = new EventEmitter<string>();
 
@@ -44,10 +46,11 @@ export class ClassesComponent implements OnInit {
 
   // Dialog For Adding section
   openDialog(): void {
-    this.dialog.open(AddSectionComponent, { disableClose: true });
+    this.dialog.open(AddSectionComponent, { disableClose: true, data: 'addSection' });
   }
 
   selectedGrade(grade): void {
+    // this.viewSections();
     this.sections = [];
     console.log(grade.index);
     this.grade = grade.index;
@@ -61,14 +64,35 @@ export class ClassesComponent implements OnInit {
   }
 
   viewSections(): void {
-    this.sectionService.viewSections(this.grade).subscribe(data => {
-      this.sections = data; this.sections = this.sections.data;
-      console.log(this.sections, 'service data');
+    this.sectionService.viewSections(this.grade).subscribe((data: any) => {
+      const datas = [];
+      let count = 0;
+      this.sections = data.data;
+      this.sectionPopulation = data.population;
+      console.log(data, 'service data');
+      console.log(this.sections[0], 'section zero');
+      this.sections.forEach(element => {
+        // if(this.section.sectionName)
+        this.sectionPopulation.forEach((pop: any) => {
+          if (element.sectionName === pop.section) {
+            datas.push({ section: element, population: pop.population });
+            count++;
+            if (count === this.sections.length) {
+              console.log(datas, 'datas');
+              this.sections = datas;
+            }
+          }
+        });
+
+      });
+      // if (this.sections.length === data.data.length) {
+      //   this.isLoading = false;
+      // }
     });
   }
 
   viewStudents(section): void {
-    alert(section);
+    // alert(section);
     this.section = section;
     const datum = [section];
     this.sectionService.getSection(datum).subscribe(data => { console.log(data, 'section'); });
@@ -76,10 +100,22 @@ export class ClassesComponent implements OnInit {
     this.router.navigate(['/MES/classes', this.grade, section]);
   }
 
+  editAdviser(sectionId, ln, fn, mn, adviserId): void {
+    // alert(id);
+    let datas = {data:{_id: sectionId,
+      lastName: ln,
+      firstName: fn,
+      middleName: mn},
+      adviserId: adviserId
+    }
+    this.dialog.open(AddSectionComponent, { disableClose: true, data: datas });
+  }
+
   // send section to child component (students in specific section)
   // select(section): void {
   //   this.selected.emit(section);
   // }
+
 
 }
 
